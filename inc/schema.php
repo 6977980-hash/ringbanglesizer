@@ -1,7 +1,7 @@
 <?php
 /**
  * JSON-LD for tool pages (WebApplication + HowTo).
- * Rank Math handles Article/FAQ/Breadcrumb; this only adds what it cannot.
+ * Organization, Breadcrumb and Article (guides) are in inc/site.php; FAQ comes with the page content.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
