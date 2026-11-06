@@ -321,16 +321,19 @@ add_action( 'wp_head', function () {
 		'og:url'         => get_permalink( $id ),
 		'og:locale'      => 'en_US',
 	);
-	$img = get_site_icon_url( 512 );
-	if ( $img ) {
-		$tags['og:image'] = $img;
-	}
+	$img  = rbs_og_image( $id );
+	$tags = array_merge( $tags, array(
+		'og:image'        => $img['url'],
+		'og:image:width'  => $img['w'],
+		'og:image:height' => $img['h'],
+		'og:image:alt'    => get_the_title( $id ),
+	) );
 	foreach ( $tags as $p => $v ) {
 		if ( $v ) {
 			echo '<meta property="' . esc_attr( $p ) . '" content="' . esc_attr( $v ) . '">' . "\n";
 		}
 	}
-	echo '<meta name="twitter:card" content="summary">' . "\n";
+	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
 }, 2 );
 
 /**

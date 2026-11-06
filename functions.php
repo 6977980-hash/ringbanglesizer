@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_VERSION', '0.4.1' );
+define( 'RBS_VERSION', '0.5.0' );
 define( 'RBS_DIR', get_stylesheet_directory() );
 define( 'RBS_URI', get_stylesheet_directory_uri() );
 
@@ -22,6 +22,7 @@ require_once RBS_DIR . '/inc/tools.php';
 require_once RBS_DIR . '/inc/authority.php';
 require_once RBS_DIR . '/inc/schema.php';
 require_once RBS_DIR . '/inc/site.php';
+require_once RBS_DIR . '/inc/growth.php';
 require_once RBS_DIR . '/inc/pages.php';
 
 /**
