@@ -300,3 +300,71 @@ add_filter( 'wp_robots', function ( $robots ) {
 	}
 	return $robots;
 } );
+
+/* --------------------------------------------- no-plugin SEO extras */
+
+/**
+ * Open Graph / Twitter tags (Rank Math is not used on this site).
+ */
+add_action( 'wp_head', function () {
+	if ( rbs_rank_math_active() || ! is_singular( 'page' ) ) {
+		return;
+	}
+	$id    = get_queried_object_id();
+	$title = get_post_meta( $id, 'rank_math_title', true );
+	$desc  = get_post_meta( $id, 'rank_math_description', true );
+	$tags  = array(
+		'og:type'        => is_front_page() ? 'website' : 'article',
+		'og:site_name'   => RBS_SITE_NAME,
+		'og:title'       => $title ? $title : get_the_title( $id ),
+		'og:description' => $desc,
+		'og:url'         => get_permalink( $id ),
+		'og:locale'      => 'en_US',
+	);
+	$img = get_site_icon_url( 512 );
+	if ( $img ) {
+		$tags['og:image'] = $img;
+	}
+	foreach ( $tags as $p => $v ) {
+		if ( $v ) {
+			echo '<meta property="' . esc_attr( $p ) . '" content="' . esc_attr( $v ) . '">' . "\n";
+		}
+	}
+	echo '<meta name="twitter:card" content="summary">' . "\n";
+}, 2 );
+
+/**
+ * Core sitemap (/wp-sitemap.xml): pages only, without noindex pages, and no
+ * users sitemap (it would expose the admin login name).
+ */
+add_filter( 'wp_sitemaps_add_provider', function ( $provider, $name ) {
+	return 'users' === $name ? false : $provider;
+}, 10, 2 );
+
+add_filter( 'wp_sitemaps_post_types', function ( $types ) {
+	return array_intersect_key( $types, array( 'page' => true ) );
+} );
+
+add_filter( 'wp_sitemaps_taxonomies', '__return_empty_array' );
+
+add_filter( 'wp_sitemaps_posts_query_args', function ( $args, $post_type ) {
+	if ( 'page' !== $post_type ) {
+		return $args;
+	}
+	$args['meta_query'] = array(
+		'relation' => 'OR',
+		array( 'key' => 'rbs_noindex', 'compare' => 'NOT EXISTS' ),
+		array( 'key' => 'rbs_noindex', 'value' => '1', 'compare' => '!=' ),
+	);
+	return $args;
+}, 10, 2 );
+
+/**
+ * Author archives are thin and expose the login name: send them home.
+ */
+add_action( 'template_redirect', function () {
+	if ( is_author() ) {
+		wp_safe_redirect( home_url( '/' ), 301 );
+		exit;
+	}
+} );

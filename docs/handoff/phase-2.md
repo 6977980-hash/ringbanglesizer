@@ -13,6 +13,7 @@ All in PR #3 (`RBS_PAGES_VERSION` 1 → 2, theme 0.2.0). 31 new pages, 36 publis
 | Editorial box on content pages: "Ring Bangle Sizer Editorial Team", founder Ali Ahmad (LinkedIn), updated date | `inc/site.php` |
 | Organization (+ founder Person, LinkedIn sameAs) + WebSite schema; Rank Math filter adds founder/sameAs and credits pages to the team | `inc/site.php` |
 | SEO fallback while Rank Math is missing: `<title>`, meta description, noindex via `wp_robots` | `inc/site.php` |
+| No-plugin SEO (Ali decided **no Rank Math**, to keep the site fast): Open Graph tags, core sitemap `/wp-sitemap.xml` limited to indexable pages (32 URLs, no users/taxonomies), author archives → 301 home | `inc/site.php` |
 | No-sidebar layout, custom copyright line, footer nav | `inc/site.php`, `style.css` |
 | `[rbs_contact]` (CF7/WPForms auto-detect, else e-mail), `[rbs_email]` | `inc/site.php` |
 | New shortcodes `[rbs_bangle_size]`, `[rbs_ring_size]`, `[rbs_bangle_cm_table]`, `[rbs_mm_lookup]` | `inc/shortcodes.php` |
@@ -24,7 +25,8 @@ All in PR #3 (`RBS_PAGES_VERSION` 1 → 2, theme 0.2.0). 31 new pages, 36 publis
 ## State / gotchas
 
 - **Tested** on a local WordPress 6.x + GeneratePress + SQLite: sync creates all 36 pages with correct parents, re-running the sync makes no duplicates, menus built (15 primary items, 7 footer), every page returns 200 with no unrendered shortcodes and no PHP warnings, every internal link resolves, privacy page outputs `noindex, follow`, FAQPage + Organization + BreadcrumbList JSON-LD render.
-- **Not yet seen live** by Claude after merge. Live site before merge: the 5 phase-1 pages returned 200; **Rank Math was not installed**, so the SEO fallback in `inc/site.php` is what outputs titles/descriptions now. When Ali installs Rank Math the fallback switches itself off (`rbs_rank_math_active()`), the stored `rank_math_title/description/robots` meta is picked up, and breadcrumbs are switched on in Rank Math's options automatically.
+- **Not yet seen live** by Claude after merge. Live site before merge: the 5 phase-1 pages returned 200.
+- **No SEO plugin, by Ali's decision (2026-11-06): do everything in theme code.** `inc/site.php` outputs title, meta description, robots, canonical (core), OG tags, Organization/WebSite/BreadcrumbList JSON-LD and the core sitemap. Page SEO values are still stored in `rank_math_*` meta keys (just names); the Rank Math branches only switch on if it is ever installed.
 - WP's existing draft `privacy-policy` page was reused (matched by slug) and published; `wp_page_for_privacy_policy` points to it.
 - Content word counts (rendered, incl. FAQ + tables, excl. editorial box): size pages 595–720, hubs: ring-size-in-mm ~1,240, bangle-size ~610. Phase-1 pages `bracelet-size-calculator` (~330), `ring-size-chart` (~530) and `bangle-size-chart` (~470) are still under the 1,200 hub target → expand in Phase 3/4.
 - Hand-fit ranges on all bangle pages come from `rbs_bangle_sizes()` (`prev_mm·π` to `mm·π`). If sizes in `inc/sizes.php` change, also update the hard-coded ranges in the bangle content tables (`bangle-sizes`, `bangle-measure`, `chudi`, `bangle-2-6`, `bangle-2-12`).
@@ -52,10 +54,10 @@ All in PR #3 (`RBS_PAGES_VERSION` 1 → 2, theme 0.2.0). 31 new pages, 36 publis
 - `docs/handoff/phase-3.md` written.
 
 ## Open items (Ali)
-- Install **Rank Math** (then run its setup wizard; keep "Rich snippet" defaults – our pages turn it off per page) and **Contact Form 7** (create one form; `/contact/` picks it up automatically). Install **Complianz** (or another Google-certified CMP) before any ads/analytics.
-- Create the `contact@ringbanglesizer.com` mailbox in Hostinger (the address is now published on legal pages).
-- Verify **Google Search Console + Bing Webmaster**, submit `sitemap_index.xml` (Rank Math) or `wp-sitemap.xml` (core), request indexing for the bangle size pages first (2.4, 2.6, 2.8, 2.10, in-cm, India).
-- Optional: Settings → General → Site Title "Ring Bangle Sizer" (currently "ringbanglesizer.com"; shows in the header).
+- Optional: Contact Form 7 (one form; `/contact/` picks it up automatically). Until then `/contact/` shows the e-mail. `contact@ringbanglesizer.com` mailbox: created by Ali.
+- Before any analytics/ads: a Google-certified CMP (Complianz or a lightweight one) — Phase 5.
+- Verify **Google Search Console + Bing Webmaster**, submit `/wp-sitemap.xml`, request indexing for the bangle size pages first (2.4, 2.6, 2.8, 2.10, in-cm, India).
+- Settings → General: Site Title "Ring Bangle Sizer", Tagline "Free Ring & Bangle Size Tools – Measure on Your Screen" (Ali doing this).
 - Enable "Allow auto-merge" in repo settings (still off).
 - Create social profiles and send URLs for `sameAs`; send accuracy-test photos for `/how-we-measure/`.
 - Test calibration on a phone with a real ring and bangle.
