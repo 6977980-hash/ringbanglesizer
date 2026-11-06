@@ -51,6 +51,7 @@ function rbs_sizer_shortcode( $atts ) {
 		<div class="rbs-body">
 			<p class="rbs-loading">Loading sizer…</p>
 		</div>
+		<p class="rbs-trust">Free · No sign-up · Works on any phone · Your measurements stay on your device</p>
 	</div>
 	<?php
 	return ob_get_clean();
