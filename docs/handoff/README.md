@@ -20,4 +20,6 @@ The next thread reads the latest handoff first, then the plan doc.
 - **Quality bar:** no template-copy pages. Every page needs its own table, example numbers and FAQ. 600+ words for size pages, 1,200+ for hub pages. English, US spelling, sizes always shown in US/UK/EU/India/mm.
 - **Rules Ali set:** strict Google guidelines, no PBN/bought links, no AI mass pages, AdSense not before May 2027 (domain age) but site must stay AdSense-ready (legal pages, CMP, ad-placement rules).
 - **Plan doc:** https://claude.ai/artifact/VJ8nREVm9fbepMK9VWSgpj (sections 5 = content map, 11 = checklists).
+- **Growth kit (phase 5):** https://claude.ai/artifact/LwYGoBUEtXGteTpa5xZ3km (Pinterest, Reddit/Quora, outreach, video).
+- **Share images:** every new page needs an entry in `tools/og/pages.json` + `node tools/og/render.js` (see phase-5.md).
 - **Keyword data:** `/mnt/project-files/niche-research/ring-bangle-keyword-analysis.md` (Planner exports, Nov 2026).
