@@ -321,3 +321,28 @@
 		border-radius: 0;
 	}
 }
+
+/* Zoom: no pinch-zoom or double-tap zoom on the drawings and buttons
+   (page scrolling still works), and a warning if the page is pinch-zoomed. */
+.rbs-card-stage,
+.rbs-stage { touch-action: pan-x pan-y; }
+.rbs button,
+.rbs input[type="range"] { touch-action: manipulation; }
+.rbs-zoomed .rbs-card-stage > *,
+.rbs-zoomed .rbs-stage > * { visibility: hidden; }
+.rbs-zoomed .rbs-card-stage::after,
+.rbs-zoomed .rbs-stage::after {
+	content: "Page is zoomed in, so this drawing is not true size. Pinch out to normal size to measure.";
+	position: absolute;
+	top: 50%;
+	left: 16px;
+	right: 16px;
+	transform: translateY(-50%);
+	padding: 12px;
+	border-radius: 8px;
+	background: #fef3c7;
+	color: #92400e;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
+}
