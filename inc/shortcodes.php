@@ -322,3 +322,23 @@ function rbs_mm_lookup_shortcode() {
 	return $html . '</tbody></table></div>';
 }
 add_shortcode( 'rbs_mm_lookup', 'rbs_mm_lookup_shortcode' );
+
+/* ------------------------------------------------------- guide widgets */
+
+/**
+ * [rbs_fit_quiz] – 30-second "is my ring too tight or too loose?" quiz.
+ */
+function rbs_fit_quiz_shortcode() {
+	wp_enqueue_script( 'rbs-widgets' );
+	return '<div class="rbs-widget rbs-quiz"><noscript><p>Use the three-point fit test below.</p></noscript></div>';
+}
+add_shortcode( 'rbs_fit_quiz', 'rbs_fit_quiz_shortcode' );
+
+/**
+ * [rbs_kids_growth] – estimate a child's bangle size over the next three years.
+ */
+function rbs_kids_growth_shortcode() {
+	wp_enqueue_script( 'rbs-widgets' );
+	return '<div class="rbs-widget rbs-growth"><noscript><p>Use the chart by age above.</p></noscript></div>';
+}
+add_shortcode( 'rbs_kids_growth', 'rbs_kids_growth_shortcode' );

@@ -5,7 +5,7 @@ Description:  GeneratePress child theme for ringbanglesizer.com. Adds the on-scr
 Author:       Ring Bangle Sizer
 Author URI:   https://ringbanglesizer.com
 Template:     generatepress
-Version:      0.8.0
+Version:      0.8.1
 Requires at least: 6.4
 Requires PHP: 7.4
 License:      GNU General Public License v2 or later
@@ -120,3 +120,23 @@ h1.entry-title,
 	.main-title .rbs-logo { width: 30px; height: 30px; }
 	.main-title a { gap: 8px; }
 }
+
+/* guide widgets: fit quiz, kids growth estimate */
+.rbs-widget { margin: 16px 0 24px; padding: 16px; border: 1px solid #bfdbfe; border-radius: 12px; background: #f8fbff; }
+.rbs-q-n { margin: 0 0 4px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #1d4ed8; }
+.rbs-q-t { margin: 0 0 12px; font-size: 19px; font-weight: 700; color: #111827; }
+.rbs-q-opts { display: flex; flex-direction: column; gap: 8px; }
+.rbs-widget button.rbs-q-opt { text-align: left; padding: 12px 14px; font-size: 16px; line-height: 1.35; color: #111827; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; }
+.rbs-widget button.rbs-q-opt:hover, .rbs-widget button.rbs-q-opt:focus { border-color: #1d4ed8; background: #eff6ff; color: #111827; }
+.rbs-widget button.rbs-q-back, .rbs-widget button.rbs-q-again { margin-top: 10px; padding: 6px 0; background: none; border: 0; color: #1d4ed8; font-size: 15px; font-weight: 600; }
+.rbs-q-res { margin: 0 0 8px; padding: 10px 12px; border-radius: 8px; font-size: 18px; }
+.rbs-q-res.ok { background: #ecfdf5; color: #065f46; }
+.rbs-q-res.warn { background: #fffbeb; color: #92400e; }
+.rbs-q-res.bad { background: #fef2f2; color: #991b1b; }
+.rbs-q-links { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; margin: 0; }
+.rbs-q-links a { font-weight: 600; }
+.rbs-g-row { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+.rbs-g-row label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600; color: #374151; }
+.rbs-g-row select { padding: 8px; font-size: 16px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; min-width: 150px; }
+.rbs-g-out .rbs-table-wrap { margin: 14px 0 6px; }
+.rbs-g-note { margin: 6px 0 0; font-size: 13px; color: #6b7280; }
