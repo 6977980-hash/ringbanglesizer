@@ -143,3 +143,175 @@ function rbs_cta_shortcode( $atts ) {
 	);
 }
 add_shortcode( 'rbs_cta', 'rbs_cta_shortcode' );
+
+/* ------------------------------------------------------ size detail */
+
+/**
+ * Pages that exist for a single size (used for neighbour links).
+ */
+function rbs_bangle_size_page_slugs() {
+	return array( '2.2', '2.4', '2.6', '2.8', '2.10', '2.12' );
+}
+function rbs_ring_size_page_sizes() {
+	return array( 5, 5.5, 6, 6.5, 7, 7.5, 8, 9, 10 );
+}
+
+function rbs_bangle_size_url( $label ) {
+	if ( in_array( $label, rbs_bangle_size_page_slugs(), true ) ) {
+		return home_url( '/bangle-size/' . str_replace( '.', '-', $label ) . '/' );
+	}
+	return home_url( '/bangle-size-chart/' );
+}
+
+function rbs_ring_size_url( $us ) {
+	foreach ( rbs_ring_size_page_sizes() as $s ) {
+		if ( abs( $s - $us ) < 0.01 ) {
+			return home_url( '/ring-size-in-mm/size-' . str_replace( '.', '-', (string) $s ) . '/' );
+		}
+	}
+	return home_url( '/ring-size-in-mm/' );
+}
+
+/**
+ * "2.4" → "2 4/16 in (2¼ in)".
+ */
+function rbs_bangle_fraction( $label ) {
+	$parts = explode( '.', $label );
+	$whole = (int) $parts[0];
+	$six   = isset( $parts[1] ) ? (int) $parts[1] : 0;
+	$simple = array( 0 => '', 2 => '⅛', 4 => '¼', 6 => '⅜', 8 => '½', 10 => '⅝', 12 => '¾', 14 => '⅞' );
+	if ( 0 === $six ) {
+		return $whole . ' in';
+	}
+	return $whole . ' ' . $six . '/16 in (' . $whole . ( isset( $simple[ $six ] ) ? $simple[ $six ] : '' ) . ' in)';
+}
+
+/**
+ * [rbs_bangle_size size="2.4"] – one bangle size in every unit, with the hand range it fits.
+ */
+function rbs_bangle_size_shortcode( $atts ) {
+	$atts = shortcode_atts( array( 'size' => '2.4' ), $atts, 'rbs_bangle_size' );
+	$all  = rbs_bangle_sizes();
+	$idx  = null;
+	foreach ( $all as $i => $b ) {
+		if ( $b['label'] === $atts['size'] ) {
+			$idx = $i;
+		}
+	}
+	if ( null === $idx ) {
+		return '';
+	}
+	$b        = $all[ $idx ];
+	$prev     = $idx > 0 ? $all[ $idx - 1 ] : null;
+	$next     = isset( $all[ $idx + 1 ] ) ? $all[ $idx + 1 ] : null;
+	$circ     = $b['mm'] * M_PI;
+	$hand_min = $prev ? $prev['mm'] * M_PI : 0;
+	$rows     = array(
+		array( 'Indian bangle size', esc_html( $b['label'] ) ),
+		array( 'Inner diameter (inches)', esc_html( rbs_bangle_fraction( $b['label'] ) . ' = ' . number_format( $b['inch'], 3 ) . ' in' ) ),
+		array( 'Inner diameter (mm)', esc_html( number_format( $b['mm'], 1 ) . ' mm' ) ),
+		array( 'Inner diameter (cm)', esc_html( number_format( $b['mm'] / 10, 2 ) . ' cm' ) ),
+		array( 'Inner circumference', esc_html( number_format( $circ, 1 ) . ' mm = ' . number_format( $circ / 10, 1 ) . ' cm = ' . number_format( $circ / 25.4, 2 ) . ' in' ) ),
+		array( 'Fits a hand circumference of', esc_html( ( $prev ? 'over ' . number_format( $hand_min / 10, 1 ) . ' cm up to ' : 'up to ' ) . number_format( $circ / 10, 1 ) . ' cm (' . ( $prev ? number_format( $hand_min / 25.4, 2 ) . '–' : 'up to ' ) . number_format( $circ / 25.4, 2 ) . ' in)' ) ),
+		array( 'Typical wearer', esc_html( $b['fit'] ) ),
+	);
+	if ( $prev ) {
+		$rows[] = array( 'One size smaller', '<a href="' . esc_url( rbs_bangle_size_url( $prev['label'] ) ) . '">' . esc_html( $prev['label'] ) . '</a> (' . esc_html( number_format( $prev['mm'], 1 ) ) . ' mm)' );
+	}
+	if ( $next ) {
+		$rows[] = array( 'One size larger', '<a href="' . esc_url( rbs_bangle_size_url( $next['label'] ) ) . '">' . esc_html( $next['label'] ) . '</a> (' . esc_html( number_format( $next['mm'], 1 ) ) . ' mm)' );
+	}
+	return rbs_kv_table( $rows, 'Bangle size ' . $b['label'] . ' measurements' );
+}
+add_shortcode( 'rbs_bangle_size', 'rbs_bangle_size_shortcode' );
+
+/**
+ * [rbs_ring_size us="7"] – one ring size in every system.
+ */
+function rbs_ring_size_shortcode( $atts ) {
+	$atts = shortcode_atts( array( 'us' => '7' ), $atts, 'rbs_ring_size' );
+	$us   = (float) $atts['us'];
+	$all  = rbs_ring_sizes();
+	$idx  = null;
+	foreach ( $all as $i => $r ) {
+		if ( abs( $r['us'] - $us ) < 0.01 ) {
+			$idx = $i;
+		}
+	}
+	if ( null === $idx ) {
+		return '';
+	}
+	$r    = $all[ $idx ];
+	$d    = rbs_ring_derived( $r['mm'] );
+	$prev = $idx > 0 ? $all[ $idx - 1 ] : null;
+	$next = isset( $all[ $idx + 1 ] ) ? $all[ $idx + 1 ] : null;
+	$rows = array(
+		array( 'US / Canada size', esc_html( $r['us'] ) ),
+		array( 'Inner diameter', esc_html( number_format( $r['mm'], 1 ) . ' mm = ' . number_format( $d['inch'], 3 ) . ' in' ) ),
+		array( 'Inner circumference', esc_html( number_format( $d['circ_mm'], 1 ) . ' mm = ' . number_format( $d['circ_mm'] / 25.4, 2 ) . ' in' ) ),
+		array( 'UK / Australia', esc_html( $r['uk'] ) ),
+		array( 'EU / ISO / Germany', esc_html( $d['eu'] ) ),
+		array( 'India / Japan / China', esc_html( $d['jp'] ) ),
+		array( 'Switzerland', esc_html( $d['eu'] - 40 ) ),
+	);
+	if ( $prev ) {
+		$rows[] = array( 'Half size smaller', '<a href="' . esc_url( rbs_ring_size_url( $prev['us'] ) ) . '">US ' . esc_html( $prev['us'] ) . '</a> (' . esc_html( number_format( $prev['mm'], 1 ) ) . ' mm)' );
+	}
+	if ( $next ) {
+		$rows[] = array( 'Half size larger', '<a href="' . esc_url( rbs_ring_size_url( $next['us'] ) ) . '">US ' . esc_html( $next['us'] ) . '</a> (' . esc_html( number_format( $next['mm'], 1 ) ) . ' mm)' );
+	}
+	return rbs_kv_table( $rows, 'Ring size ' . $r['us'] . ' measurements' );
+}
+add_shortcode( 'rbs_ring_size', 'rbs_ring_size_shortcode' );
+
+/**
+ * Two-column table. Values are already escaped by the caller.
+ */
+function rbs_kv_table( $rows, $caption ) {
+	$html = '<div class="rbs-table-wrap"><table class="rbs-table rbs-kv"><caption>' . esc_html( $caption ) . '</caption><tbody>';
+	foreach ( $rows as $row ) {
+		$html .= '<tr><th scope="row">' . esc_html( $row[0] ) . '</th><td>' . $row[1] . '</td></tr>';
+	}
+	return $html . '</tbody></table></div>';
+}
+
+/**
+ * [rbs_bangle_cm_table] – bangle sizes in cm with the hand circumference each one clears.
+ */
+function rbs_bangle_cm_table_shortcode() {
+	$all  = rbs_bangle_sizes();
+	$html = '<div class="rbs-table-wrap"><table class="rbs-table"><thead><tr><th>Bangle size</th><th>Diameter (cm)</th><th>Circumference (cm)</th><th>Hand circumference it clears (cm)</th><th>Diameter (in)</th></tr></thead><tbody>';
+	foreach ( $all as $i => $b ) {
+		$min   = $i > 0 ? $all[ $i - 1 ]['mm'] * M_PI / 10 : 0;
+		$max   = $b['mm'] * M_PI / 10;
+		$range = $i > 0 ? number_format( $min, 1 ) . '–' . number_format( $max, 1 ) : 'up to ' . number_format( $max, 1 );
+		$label = in_array( $b['label'], rbs_bangle_size_page_slugs(), true )
+			? '<a href="' . esc_url( rbs_bangle_size_url( $b['label'] ) ) . '">' . esc_html( $b['label'] ) . '</a>'
+			: esc_html( $b['label'] );
+		$html .= '<tr><td>' . $label . '</td><td>' . esc_html( number_format( $b['mm'] / 10, 2 ) ) . '</td><td>' . esc_html( number_format( $max, 1 ) ) . '</td><td>' . esc_html( $range ) . '</td><td>' . esc_html( number_format( $b['inch'], 3 ) ) . '</td></tr>';
+	}
+	return $html . '</tbody></table></div>';
+}
+add_shortcode( 'rbs_bangle_cm_table', 'rbs_bangle_cm_table_shortcode' );
+
+/**
+ * [rbs_mm_lookup] – measured diameter (every 0.5 mm) → nearest ring size.
+ */
+function rbs_mm_lookup_shortcode() {
+	$all  = rbs_ring_sizes();
+	$html = '<div class="rbs-table-wrap"><table class="rbs-table"><thead><tr><th>You measured (mm)</th><th>Circumference (mm)</th><th>Nearest US</th><th>Nearest UK</th><th>EU</th></tr></thead><tbody>';
+	for ( $mm = 14.0; $mm <= 23.01; $mm += 0.5 ) {
+		$best = $all[0];
+		foreach ( $all as $r ) {
+			if ( abs( $r['mm'] - $mm ) < abs( $best['mm'] - $mm ) ) {
+				$best = $r;
+			}
+		}
+		$us = in_array( (float) $best['us'], array_map( 'floatval', rbs_ring_size_page_sizes() ), true )
+			? '<a href="' . esc_url( rbs_ring_size_url( $best['us'] ) ) . '">' . esc_html( $best['us'] ) . '</a>'
+			: esc_html( $best['us'] );
+		$html .= '<tr><td>' . esc_html( number_format( $mm, 1 ) ) . '</td><td>' . esc_html( number_format( $mm * M_PI, 1 ) ) . '</td><td>' . $us . '</td><td>' . esc_html( $best['uk'] ) . '</td><td>' . esc_html( (int) round( $mm * M_PI ) ) . '</td></tr>';
+	}
+	return $html . '</tbody></table></div>';
+}
+add_shortcode( 'rbs_mm_lookup', 'rbs_mm_lookup_shortcode' );

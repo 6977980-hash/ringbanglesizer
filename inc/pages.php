@@ -1,20 +1,53 @@
 <?php
 /**
- * Creates / updates the core pages from inc/page-content.php.
+ * Creates / updates every site page from the content files, plus the menus.
  *
  * Runs once per RBS_PAGES_VERSION (on admin or front-end init), so merging a
  * content change and bumping the version republishes the pages without touching
- * WP admin. Pages are matched by slug; manual edits in WP admin are overwritten
- * when the version is bumped, so edit content in the repo.
+ * WP admin. Pages are matched by full path (parent/slug); manual edits in WP
+ * admin are overwritten when the version is bumped, so edit content in the repo.
+ *
+ * Page entry keys:
+ *   slug, title, seo_title, seo_desc, content, faq   (required)
+ *   mode      tool mode or null
+ *   parent    key of the parent page (must exist in the same list)
+ *   noindex   true → noindex,follow (Rank Math meta + core wp_robots fallback)
+ *   author_box false → hide the editorial box (legal pages)
+ *   menu_order int, used for sibling ordering
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_PAGES_VERSION', '1' );
+define( 'RBS_PAGES_VERSION', '2' );
 
 require_once RBS_DIR . '/inc/page-content.php';
+require_once RBS_DIR . '/inc/content/legal.php';
+require_once RBS_DIR . '/inc/content/bangle.php';
+require_once RBS_DIR . '/inc/content/ring-mm.php';
+
+/**
+ * All pages, keyed by a stable key. Parents are listed before their children.
+ */
+function rbs_all_pages() {
+	return array_merge( rbs_core_pages(), rbs_legal_pages(), rbs_bangle_pages(), rbs_ring_mm_pages() );
+}
+
+/**
+ * Full path of a page ("bangle-size/2-4") from its key.
+ */
+function rbs_page_path( $key, $pages = null ) {
+	$pages = $pages ? $pages : rbs_all_pages();
+	if ( empty( $pages[ $key ] ) ) {
+		return '';
+	}
+	$p = $pages[ $key ];
+	if ( ! empty( $p['parent'] ) ) {
+		return rbs_page_path( $p['parent'], $pages ) . '/' . $p['slug'];
+	}
+	return $p['slug'];
+}
 
 function rbs_render_faq_html( $faq ) {
 	if ( empty( $faq ) ) {
@@ -34,11 +67,26 @@ function rbs_sync_pages() {
 	if ( ! function_exists( 'wp_insert_post' ) ) {
 		return;
 	}
+	// Avoid two requests running the sync at the same time.
+	if ( get_transient( 'rbs_pages_lock' ) ) {
+		return;
+	}
+	set_transient( 'rbs_pages_lock', 1, 120 );
 
-	$ids = array();
-	foreach ( rbs_core_pages() as $key => $p ) {
+	$pages = rbs_all_pages();
+	$ids   = array();
+
+	foreach ( $pages as $key => $p ) {
+		$parent_id = 0;
+		if ( ! empty( $p['parent'] ) ) {
+			if ( empty( $ids[ $p['parent'] ] ) ) {
+				continue; // Parent failed; skip child rather than create it at the root.
+			}
+			$parent_id = $ids[ $p['parent'] ];
+		}
+
 		$content  = trim( $p['content'] ) . "\n" . rbs_render_faq_html( $p['faq'] );
-		$existing = get_page_by_path( $p['slug'], OBJECT, 'page' );
+		$existing = get_page_by_path( rbs_page_path( $key, $pages ), OBJECT, 'page' );
 
 		$postarr = array(
 			'post_title'     => $p['title'],
@@ -46,6 +94,8 @@ function rbs_sync_pages() {
 			'post_content'   => $content,
 			'post_status'    => 'publish',
 			'post_type'      => 'page',
+			'post_parent'    => $parent_id,
+			'menu_order'     => isset( $p['menu_order'] ) ? (int) $p['menu_order'] : 0,
 			'comment_status' => 'closed',
 			'ping_status'    => 'closed',
 		);
@@ -60,11 +110,15 @@ function rbs_sync_pages() {
 		}
 		$ids[ $key ] = $id;
 
+		update_post_meta( $id, 'rbs_key', $key );
 		update_post_meta( $id, 'rbs_faq', $p['faq'] );
-		update_post_meta( $id, 'rbs_mode', $p['mode'] ? $p['mode'] : '' );
+		update_post_meta( $id, 'rbs_mode', ! empty( $p['mode'] ) ? $p['mode'] : '' );
+		update_post_meta( $id, 'rbs_author_box', isset( $p['author_box'] ) && ! $p['author_box'] ? '0' : '1' );
+		update_post_meta( $id, 'rbs_noindex', ! empty( $p['noindex'] ) ? '1' : '0' );
 		// Rank Math reads these meta keys.
 		update_post_meta( $id, 'rank_math_title', $p['seo_title'] );
 		update_post_meta( $id, 'rank_math_description', $p['seo_desc'] );
+		update_post_meta( $id, 'rank_math_robots', ! empty( $p['noindex'] ) ? array( 'noindex' ) : array( 'index' ) );
 		// Tell Rank Math we output FAQ schema ourselves (avoid duplicate).
 		update_post_meta( $id, 'rank_math_rich_snippet', 'off' );
 	}
@@ -73,11 +127,149 @@ function rbs_sync_pages() {
 		update_option( 'show_on_front', 'page' );
 		update_option( 'page_on_front', $ids['home'] );
 	}
+	if ( ! empty( $ids['privacy'] ) ) {
+		update_option( 'wp_page_for_privacy_policy', $ids['privacy'] );
+	}
+
+	rbs_unpublish_wp_samples();
+	rbs_sync_menus( $ids );
+	rbs_enable_rank_math_breadcrumbs();
 
 	update_option( 'rbs_pages_version', RBS_PAGES_VERSION );
+	delete_transient( 'rbs_pages_lock' );
 	flush_rewrite_rules( false );
 }
 add_action( 'init', 'rbs_sync_pages', 20 );
+
+/**
+ * WordPress ships "Sample Page" and "Hello world!" – thin content we do not want indexed.
+ * Moved to draft (not deleted) and only while they still hold the default content.
+ */
+function rbs_unpublish_wp_samples() {
+	$sample = get_page_by_path( 'sample-page', OBJECT, 'page' );
+	if ( $sample && 'publish' === $sample->post_status && false !== strpos( $sample->post_content, 'This is an example page' ) ) {
+		wp_update_post( array( 'ID' => $sample->ID, 'post_status' => 'draft' ) );
+	}
+	$hello = get_page_by_path( 'hello-world', OBJECT, 'post' );
+	if ( $hello && 'publish' === $hello->post_status && false !== strpos( $hello->post_content, 'Welcome to WordPress' ) ) {
+		wp_update_post( array( 'ID' => $hello->ID, 'post_status' => 'draft' ) );
+	}
+}
+
+/* ---------------------------------------------------------------- menus */
+
+/**
+ * Menu structure. Items are page keys; nested arrays are sub-menus.
+ */
+function rbs_menu_structure() {
+	return array(
+		'primary' => array(
+			'name'  => 'RBS Primary',
+			'items' => array(
+				array( 'key' => 'home', 'label' => 'Ring Sizer', 'children' => array(
+					array( 'key' => 'ring-chart', 'label' => 'Ring Size Chart' ),
+					array( 'key' => 'ring-mm', 'label' => 'Ring Size in mm' ),
+					array( 'key' => 'ring-chart-pk', 'label' => 'Ring Size Chart Pakistan' ),
+				) ),
+				array( 'key' => 'bangle', 'label' => 'Bangle Size', 'children' => array(
+					array( 'key' => 'bangle', 'label' => 'Bangle Size Calculator' ),
+					array( 'key' => 'bangle-chart', 'label' => 'Bangle Size Chart' ),
+					array( 'key' => 'bangle-chart-india', 'label' => 'Bangle Size Chart India' ),
+					array( 'key' => 'bangle-cm', 'label' => 'Bangle Size in cm' ),
+					array( 'key' => 'bangle-sizes', 'label' => 'All Bangle Sizes' ),
+					array( 'key' => 'bangle-measure', 'label' => 'How to Measure' ),
+					array( 'key' => 'bangle-kids', 'label' => 'Kids Bangle Sizes' ),
+					array( 'key' => 'chudi', 'label' => 'Chudi & Kada Sizes' ),
+				) ),
+				array( 'key' => 'bracelet', 'label' => 'Bracelet Size' ),
+				array( 'key' => 'about', 'label' => 'About' ),
+			),
+		),
+		'rbs-footer' => array(
+			'name'  => 'RBS Footer',
+			'items' => array(
+				array( 'key' => 'about', 'label' => 'About' ),
+				array( 'key' => 'method', 'label' => 'How We Measure' ),
+				array( 'key' => 'contact', 'label' => 'Contact' ),
+				array( 'key' => 'privacy', 'label' => 'Privacy Policy' ),
+				array( 'key' => 'terms', 'label' => 'Terms' ),
+				array( 'key' => 'disclaimer', 'label' => 'Disclaimer' ),
+				array( 'key' => 'affiliate', 'label' => 'Affiliate Disclosure' ),
+			),
+		),
+	);
+}
+
+function rbs_register_menus() {
+	register_nav_menus( array( 'rbs-footer' => 'Footer menu (Ring Bangle Sizer)' ) );
+}
+add_action( 'after_setup_theme', 'rbs_register_menus' );
+
+function rbs_sync_menus( $ids ) {
+	if ( ! function_exists( 'wp_create_nav_menu' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/nav-menu.php';
+	}
+	$locations = get_theme_mod( 'nav_menu_locations', array() );
+
+	foreach ( rbs_menu_structure() as $location => $menu ) {
+		$obj     = wp_get_nav_menu_object( $menu['name'] );
+		$menu_id = $obj ? (int) $obj->term_id : wp_create_nav_menu( $menu['name'] );
+		if ( is_wp_error( $menu_id ) || ! $menu_id ) {
+			continue;
+		}
+		// Rebuild from scratch so the code stays the source of truth.
+		foreach ( (array) wp_get_nav_menu_items( $menu_id ) as $item ) {
+			if ( $item ) {
+				wp_delete_post( $item->ID, true );
+			}
+		}
+		$pos = 0;
+		rbs_add_menu_items( $menu_id, $menu['items'], 0, $ids, $pos );
+		$locations[ $location ] = $menu_id;
+	}
+	set_theme_mod( 'nav_menu_locations', $locations );
+}
+
+function rbs_add_menu_items( $menu_id, $items, $parent_item, $ids, &$pos ) {
+	foreach ( $items as $it ) {
+		if ( empty( $ids[ $it['key'] ] ) ) {
+			continue;
+		}
+		$pos++;
+		$item_id = wp_update_nav_menu_item( $menu_id, 0, array(
+			'menu-item-title'     => $it['label'],
+			'menu-item-object'    => 'page',
+			'menu-item-object-id' => $ids[ $it['key'] ],
+			'menu-item-type'      => 'post_type',
+			'menu-item-status'    => 'publish',
+			'menu-item-parent-id' => $parent_item,
+			'menu-item-position'  => $pos,
+		) );
+		if ( ! is_wp_error( $item_id ) && ! empty( $it['children'] ) ) {
+			rbs_add_menu_items( $menu_id, $it['children'], $item_id, $ids, $pos );
+		}
+	}
+}
+
+/**
+ * Turn on Rank Math breadcrumbs once Rank Math is installed (its own setting).
+ */
+function rbs_enable_rank_math_breadcrumbs() {
+	$opt = get_option( 'rank-math-options-general' );
+	if ( is_array( $opt ) && ( empty( $opt['breadcrumbs'] ) || 'on' !== $opt['breadcrumbs'] ) ) {
+		$opt['breadcrumbs'] = 'on';
+		update_option( 'rank-math-options-general', $opt );
+	}
+}
+// Rank Math may be installed after the pages were synced: check in admin too.
+add_action( 'admin_init', function () {
+	if ( defined( 'RANK_MATH_VERSION' ) && ! get_option( 'rbs_rm_breadcrumbs_done' ) ) {
+		rbs_enable_rank_math_breadcrumbs();
+		update_option( 'rbs_rm_breadcrumbs_done', 1 );
+	}
+} );
+
+/* ------------------------------------------------------------ FAQ schema */
 
 /**
  * FAQPage JSON-LD from the page's stored FAQ.

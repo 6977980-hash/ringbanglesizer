@@ -20,6 +20,11 @@ Hostinger GIT pulls `main` into `public_html/wp-content/themes/ringbanglesizer`.
 | `[rbs_ring_table]` | Full ring conversion chart (US, UK, EU, India/Japan, mm, inch, circumference). Server-rendered HTML. |
 | `[rbs_bangle_table]` | Indian bangle size chart (size, inch, mm, cm, circumference, fit). |
 | `[rbs_cta mode="bangle"]` | Blue call-to-action box linking to the tool page. |
+| `[rbs_bangle_size size="2.4"]` | One bangle size in every unit + hand range + neighbour links. |
+| `[rbs_ring_size us="7"]` | One ring size in every system + neighbour links. |
+| `[rbs_bangle_cm_table]` | Bangle sizes in cm with the hand circumference each clears. |
+| `[rbs_mm_lookup]` | Measured diameter (0.5 mm steps) → nearest ring size. |
+| `[rbs_contact]` / `[rbs_email]` | First CF7/WPForms form if installed, else the obfuscated contact e-mail. |
 
 Tool page URLs assumed by `[rbs_cta]`: `/` (ring), `/bangle-size-calculator/`, `/bracelet-size-calculator/`. Change in `inc/shortcodes.php → rbs_tool_url()` if the slugs differ.
 
@@ -31,6 +36,11 @@ functions.php          enqueue, asset registration, data → JS
 inc/sizes.php          single source of truth for ring + bangle sizes
 inc/shortcodes.php     [rbs_sizer] [rbs_ring_table] [rbs_bangle_table] [rbs_cta]
 inc/schema.php         WebApplication + HowTo JSON-LD on tool pages
+inc/site.php           layout, breadcrumbs, editorial box, footer menu, contact, Organization schema, SEO fallback
+inc/pages.php          page + menu sync from code (bump RBS_PAGES_VERSION)
+inc/page-content.php   core tool/chart pages
+inc/content/*.php      legal/trust, bangle silo, ring-in-mm pages
+docs/handoff/          phase handoff notes
 assets/css/sizer.css   tool styles (mobile first)
 assets/js/sizer.js     tool logic: calibration, ring, bangle, bracelet
 ```

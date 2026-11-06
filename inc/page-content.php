@@ -16,7 +16,7 @@ function rbs_core_pages() {
 		'home' => array(
 			'slug'      => 'ring-sizer',
 			'title'     => 'Online Ring Sizer – Measure Your Ring Size on Screen',
-			'seo_title' => 'Online Ring Sizer – Find Your Ring Size on Your Phone Screen (Free)',
+			'seo_title' => 'Online Ring Sizer – Find Your Ring Size on Your Phone Screen',
 			'seo_desc'  => 'Measure your ring size on screen in 30 seconds. Calibrate with a credit card, match your ring to the circle, get your size in US, UK, EU, India and mm.',
 			'mode'      => 'ring',
 			'content'   => '
@@ -58,7 +58,7 @@ function rbs_core_pages() {
 				array( 'How do I find my ring size at home?', 'Use an on-screen sizer like the one above: calibrate with a bank card, then match a ring you already own to the circle. Alternatively wrap a thin strip of paper around the base of your finger, mark where it overlaps, measure the length in mm and look it up in the circumference column of the chart.' ),
 				array( 'What is the average ring size for women and men?', 'In the US and UK the most common women\'s ring size is 6–7 (UK L–N, 16.5–17.3 mm). The most common men\'s size is 9–10 (UK R–T, 19–19.8 mm).' ),
 				array( 'Can I measure my ring size on my phone?', 'Yes. After calibrating with a credit card the circle on screen is drawn at true size, so a ring placed on the phone can be matched to within about a quarter size.' ),
-				array( 'What is ring size 7 in mm?', 'US size 7 has an inner diameter of 17.3 mm and a circumference of 54.4 mm. It is UK size N½ and EU size 54.' ),
+				array( 'What is ring size 7 in mm?', 'US size 7 has an inner diameter of 17.3 mm and a circumference of 54.3 mm. It is UK size N½ and EU size 54.' ),
 				array( 'Is UK ring size the same as US?', 'No. UK and Australian sizes use letters, US and Canadian sizes use numbers. US 7 is about UK N½–O; use the converter above for any size.' ),
 			),
 		),
@@ -67,8 +67,8 @@ function rbs_core_pages() {
 		'bangle' => array(
 			'slug'      => 'bangle-size-calculator',
 			'title'     => 'Bangle Size Calculator – Find Your Bangle Size Online',
-			'seo_title' => 'Bangle Size Calculator – Find Your Indian Bangle Size (2.4, 2.6, 2.8) Online',
-			'seo_desc'  => 'Free bangle size calculator. Match a bangle on your screen or enter your hand measurement to get your Indian bangle size with diameter in mm, cm and inches.',
+			'seo_title' => 'Bangle Size Calculator – Find Your Bangle Size Online',
+			'seo_desc'  => 'Free bangle size calculator. Match a bangle on your screen or enter your hand size to get your Indian bangle size with diameter in mm, cm and inches.',
 			'mode'      => 'bangle',
 			'content'   => '
 <p><strong>Find your bangle size in under a minute.</strong> Either place a bangle that fits you on the screen and match the circle, or measure around your hand and let the calculator pick the size. Results are given in Indian sizes (2.2, 2.4, 2.6, 2.8, 2.10 …) with the inner diameter in mm, cm and inches.</p>
@@ -106,7 +106,7 @@ function rbs_core_pages() {
 <ul>
 <li><a href="/">Ring sizer</a> – measure a ring on your phone screen</li>
 <li><a href="/bracelet-size-calculator/">Bracelet size calculator</a></li>
-<li><a href="/bangle-size-chart/">Printable bangle size chart</a></li>
+<li><a href="/bangle-size-chart/">Bangle size chart</a> and <a href="/how-to-measure-bangle-size/">how to measure bangle size</a></li>
 </ul>
 ',
 			'faq' => array(
@@ -122,8 +122,8 @@ function rbs_core_pages() {
 		'bracelet' => array(
 			'slug'      => 'bracelet-size-calculator',
 			'title'     => 'Bracelet Size Calculator – Wrist to Bracelet Length',
-			'seo_title' => 'Bracelet Size Calculator – Find Your Bracelet Length from Wrist Size',
-			'seo_desc'  => 'Enter your wrist measurement and get the right bracelet length for a snug, comfortable or loose fit, for chain, bangle and cuff bracelets. In inches and cm.',
+			'seo_title' => 'Bracelet Size Calculator – Bracelet Length from Wrist Size',
+			'seo_desc'  => 'Enter your wrist size and get the right bracelet length for a snug, comfortable or loose fit, for chain, bangle and cuff bracelets. In inches and cm.',
 			'mode'      => 'bracelet',
 			'content'   => '
 <p><strong>Turn your wrist measurement into a bracelet size.</strong> Measure around your wrist, choose the bracelet style and the calculator gives snug, comfortable and loose lengths in inches and centimetres.</p>
@@ -173,7 +173,7 @@ function rbs_core_pages() {
 		'ring-chart' => array(
 			'slug'      => 'ring-size-chart',
 			'title'     => 'Ring Size Chart – US, UK, EU, India and mm',
-			'seo_title' => 'Ring Size Chart 2026: US, UK, EU, India Sizes in mm and Inches',
+			'seo_title' => 'Ring Size Chart: US, UK, EU and India Sizes in mm and Inches',
 			'seo_desc'  => 'Complete ring size chart with US, UK, EU/ISO and Indian sizes, inner diameter in mm and inches, and circumference. Convert any ring size instantly.',
 			'mode'      => null,
 			'content'   => '
@@ -201,13 +201,15 @@ function rbs_core_pages() {
 
 <h2>Related</h2>
 <ul>
+<li><a href="/ring-size-in-mm/">Ring size in mm</a> – diameter and circumference for every size</li>
+<li><a href="/ring-size-chart/pakistan/">Ring size chart Pakistan</a></li>
 <li><a href="/bangle-size-chart/">Bangle size chart</a></li>
 <li><a href="/bracelet-size-calculator/">Bracelet size calculator</a></li>
 </ul>
 ',
 			'faq' => array(
-				array( 'What is ring size 6 in mm?', 'US size 6 is 16.5 mm inner diameter (51.9 mm circumference), UK L½, EU 52.' ),
-				array( 'What is ring size 8 in mm?', 'US size 8 is 18.1 mm inner diameter (57.0 mm circumference), UK P½, EU 57.' ),
+				array( 'What is ring size 6 in mm?', 'US size 6 is 16.5 mm inner diameter (51.8 mm circumference), UK L½, EU 52.' ),
+				array( 'What is ring size 8 in mm?', 'US size 8 is 18.1 mm inner diameter (56.9 mm circumference), UK P½, EU 57.' ),
 				array( 'What is a 17 mm ring size?', 'A 17 mm inner diameter is between US 6.5 (16.9 mm) and 7 (17.3 mm); most people choose US 7 / UK N½.' ),
 				array( 'How do I convert UK ring size to US?', 'Use the chart: UK L½ is US 6, UK N½ is US 7, UK P½ is US 8, UK R½ is US 9, UK T½ is US 10.' ),
 			),
@@ -217,7 +219,7 @@ function rbs_core_pages() {
 		'bangle-chart' => array(
 			'slug'      => 'bangle-size-chart',
 			'title'     => 'Bangle Size Chart – Indian Sizes in mm, cm and Inches',
-			'seo_title' => 'Bangle Size Chart 2026: 2.2, 2.4, 2.6, 2.8, 2.10 in mm, cm and Inches',
+			'seo_title' => 'Bangle Size Chart: 2.2 to 2.12 in mm, cm and Inches',
 			'seo_desc'  => 'Indian bangle size chart with inner diameter in inches, mm and cm for sizes 1.10 to 3.0, plus who each size fits and how to measure at home.',
 			'mode'      => null,
 			'content'   => '
@@ -235,18 +237,22 @@ function rbs_core_pages() {
 
 <h2>Which bangle size should I buy?</h2>
 <ul>
-<li><strong>2.2:</strong> petite adults, teenagers; hand circumference up to about 17.5 cm.</li>
-<li><strong>2.4:</strong> small adult hands, 17.5–18.5 cm; the most sold size.</li>
-<li><strong>2.6:</strong> medium adult hands, 18.5–19.5 cm; the second most sold size.</li>
-<li><strong>2.8:</strong> large hands, 19.5–20.5 cm.</li>
-<li><strong>2.10 and 2.12:</strong> extra-large hands or a loose fit.</li>
-<li><strong>Below 2.0:</strong> babies and children; see the kids rows in the chart.</li>
+<li><strong><a href="/bangle-size/2-2/">2.2</a>:</strong> petite adults, teenagers; hand circumference 16.0–17.0 cm.</li>
+<li><strong><a href="/bangle-size/2-4/">2.4</a>:</strong> small adult hands, 17.0–18.0 cm; the most sold size.</li>
+<li><strong><a href="/bangle-size/2-6/">2.6</a>:</strong> medium adult hands, 18.0–18.9 cm; the second most sold size.</li>
+<li><strong><a href="/bangle-size/2-8/">2.8</a>:</strong> large hands, 18.9–19.9 cm.</li>
+<li><strong><a href="/bangle-size/2-10/">2.10</a> and <a href="/bangle-size/2-12/">2.12</a>:</strong> extra-large hands (19.9–22.0 cm), men\'s kada or a loose fit.</li>
+<li><strong>Below 2.0:</strong> babies and children; see the <a href="/kids-bangle-size-chart/">kids bangle size chart</a>.</li>
 </ul>
 
 [rbs_cta mode="bangle"]
 
 <h2>Related</h2>
 <ul>
+<li><a href="/bangle-size-chart/india/">Bangle size chart India</a> – shop notation and regional names</li>
+<li><a href="/bangle-size-chart/in-cm/">Bangle size in cm</a> – with the hand size each bangle clears</li>
+<li><a href="/how-to-measure-bangle-size/">How to measure bangle size</a></li>
+<li><a href="/chudi-size-chart/">Chudi and kada size chart</a></li>
 <li><a href="/ring-size-chart/">Ring size chart</a></li>
 <li><a href="/bracelet-size-calculator/">Bracelet size calculator</a></li>
 </ul>
@@ -254,7 +260,7 @@ function rbs_core_pages() {
 			'faq' => array(
 				array( 'What is bangle size 2.8 in cm?', 'Size 2.8 has an inner diameter of 2.5 inches, which is 6.35 cm (63.5 mm).' ),
 				array( 'What is bangle size 2.2 in mm?', 'Size 2.2 is 2 2/16 inch, an inner diameter of 54.0 mm (5.4 cm).' ),
-				array( 'What bangle size is a 7.5 inch hand?', 'A hand circumference of 7.5 inches (19 cm) gives a diameter of about 60.6 mm, so choose size 2.6 (60.3 mm) if it slides on, otherwise 2.8.' ),
+				array( 'What bangle size is a 7.5 inch hand?', 'A hand circumference of 7.5 inches (19 cm) gives a diameter of about 60.6 mm, so choose size 2.8 (63.5 mm); 2.6 (60.3 mm) is just too small to pass over the hand.' ),
 				array( 'Is bangle size the same as bracelet size?', 'No. Bangle size is the inner diameter and must clear your hand; bracelet size is the length around your wrist. A bracelet for a 6.5 inch wrist is about 7.25 inches long, while a rigid bangle for the same person is usually size 2.4 or 2.6.' ),
 			),
 		),
