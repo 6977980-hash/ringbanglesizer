@@ -346,3 +346,30 @@
 	font-weight: 600;
 	text-align: center;
 }
+
+/* coin calibration */
+.rbs-cal-mode { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 8px; }
+.rbs .rbs-coin-toggle { padding: 4px 0; font-size: 14px; font-weight: 600; color: var(--rbs-blue); }
+.rbs-coin-sel { padding: 6px 8px; font-size: 15px; border: 1px solid #bfdbfe; border-radius: 6px; background: #fff; max-width: 100%; }
+.rbs-card.coin { border-radius: 50%; padding: 0; font-size: 14px; }
+
+/* saved sizes for the family */
+.rbs-save-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; margin: 12px 0 0; }
+.rbs-name-label { display: flex; flex-direction: column; font-size: 13px; color: var(--rbs-muted); gap: 2px; }
+.rbs-name { width: 150px; padding: 8px 10px; font-size: 16px; border: 1px solid #cbd5e1; border-radius: 8px; }
+.rbs-saved { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 8px; }
+.rbs-saved:empty { display: none; }
+.rbs-saved-t { font-weight: 600; }
+.rbs-chip { display: inline-flex; align-items: center; border: 1px solid #bfdbfe; background: #eff6ff; border-radius: 999px; overflow: hidden; }
+.rbs .rbs-chip button { background: none; border: 0; color: var(--rbs-blue); font-size: 14px; font-weight: 600; padding: 5px 4px 5px 10px; cursor: pointer; line-height: 1.2; }
+.rbs .rbs-chip .rbs-chip-x { padding: 5px 10px 5px 4px; color: #6b7280; font-weight: 400; }
+
+/* will it fit */
+.rbs-fit-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.rbs-fit-val { flex: 1 1 200px; min-width: 0; padding: 10px 12px; font-size: 16px; border: 1px solid #cbd5e1; border-radius: 8px; }
+.rbs-fit-who-l { font-size: 14px; color: var(--rbs-muted); }
+.rbs-fit-who { padding: 8px; font-size: 15px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; max-width: 220px; }
+.rbs-fit-res { margin: 10px 0 4px; padding: 10px 12px; border-radius: 8px; font-size: 16px; }
+.rbs-fit-res.ok { background: #ecfdf5; color: #065f46; }
+.rbs-fit-res.warn { background: #fffbeb; color: #92400e; }
+.rbs-fit-res.bad { background: #fef2f2; color: #991b1b; }
