@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_VERSION', '0.8.0' );
+define( 'RBS_VERSION', '0.8.1' );
 define( 'RBS_DIR', get_stylesheet_directory() );
 define( 'RBS_URI', get_stylesheet_directory_uri() );
 
@@ -44,6 +44,8 @@ add_filter( 'generate_load_child_theme_stylesheet', '__return_false' );
 function rbs_register_tool_assets() {
 	wp_register_style( 'rbs-sizer', RBS_URI . '/assets/css/sizer.css', array(), RBS_VERSION );
 	wp_register_script( 'rbs-sizer', RBS_URI . '/assets/js/sizer.js', array(), RBS_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
+
+	wp_register_script( 'rbs-widgets', RBS_URI . '/assets/js/widgets.js', array(), RBS_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
 
 	wp_localize_script( 'rbs-sizer', 'RBS_DATA', array(
 		'rings'   => rbs_ring_rows_for_js(),

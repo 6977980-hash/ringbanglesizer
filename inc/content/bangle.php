@@ -646,6 +646,10 @@ function rbs_bangle_pages() {
 </table>
 <p>Ages are a guide only. A chubby 9-month-old may need a size bigger than a slim 1-year-old. When in doubt, choose the larger size for a growing child.</p>
 
+<h2>What size will my child need next year?</h2>
+<p>Buying gold that should last a few years? Pick your child\'s age and the size that fits now to see an estimate for the next three years. It follows the typical growth in the chart above, so treat it as a rough guide.</p>
+[rbs_kids_growth]
+
 <h2>How kids\' sizes are written</h2>
 <p>Children\'s bangles use the same Indian system as adults: the first number is whole inches and the second is sixteenths. So 1.12 means 1 12/16 inches (1¾ in, 44.5 mm) and 2.0 means exactly 2 inches (50.8 mm). Sizes below 1.10 – often written 1.4, 1.6 and 1.8 – are made mainly for newborn ceremonies such as naming, aqiqah or annaprashan.</p>
 

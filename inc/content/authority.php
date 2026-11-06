@@ -522,6 +522,10 @@ HTML
 			'content'    => <<<'HTML'
 <p><strong>A ring that fits well slides over your knuckle with a little resistance, sits at the base of the finger without spinning, and comes off with a gentle twist.</strong> If it leaves a deep mark or will not pass the knuckle, it is too tight; if it spins, slides off when your hands are cold or moves up the finger, it is too loose. The fix is usually a half size either way. Check your size on the <a href="/">online ring sizer</a> before you resize anything.</p>
 
+<h2>30-second fit quiz</h2>
+<p>Answer five quick questions about the ring you are wearing and see whether it is too tight, too loose or just right.</p>
+[rbs_fit_quiz]
+
 <h2>The three-point fit test</h2>
 <ol>
 <li><strong>On:</strong> the ring should need a small push to get over the knuckle. If it drops on with no resistance, it will probably fall off.</li>

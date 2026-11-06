@@ -29,6 +29,9 @@ Phase 5 is ongoing (plan doc section 12). This note covers the first thread.
 3. From ~4 Dec 2026 (4 weeks of GSC data): query-first expansion. Ask Ali for a GSC Performance export (Queries + Pages, last 28 days); expand pages ranking 8–20, add pages for queries with impressions but no page. Chart pages are 765–1,120 words vs 1,200 target: grow them from real queries.
 4. Rich Results Test results from Ali (3 URLs in the kit).
 5. Ezoic only after ~10k visits/month; AdSense not before May 2027.
+6. **December 2026 (wedding season): bridal chura planner** (Ali's idea 5, planned, not built). A page + small widget on `/bangle-size-chart/` family: pick bangle size (or use a saved size from the sizer, `rbs_people_v1`), chura style (Punjabi chura of 21 or 2×21 pieces, half or full set, kangan + chudi mix), wear for 40 days vs. 1 year. Output: how many pieces per hand, which ones one size bigger (thick kada/ kangan ends), shopping checklist, shareable size card (reuse `sizeCard()` from sizer.js). Build it after the GSC query check in step 3 so wording matches real queries ("bridal chura size", "chura size chart"). Ship by mid-Dec for the wedding season.
+
+Tool features added after this handoff (UI/UX thread, 0.8.x): coin calibration, family saved sizes (`rbs_people_v1`, migrates `rbs_my_size_v1`), "Will it fit?" shop-size checker, size card PNG, ring fit quiz (`[rbs_fit_quiz]` on `/blog/ring-too-tight-or-loose/`), kids bangle growth estimate (`[rbs_kids_growth]` on `/kids-bangle-size-chart/`), both from `assets/js/widgets.js`.
 
 ## Open items (Ali)
 
