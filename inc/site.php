@@ -368,3 +368,13 @@ add_action( 'template_redirect', function () {
 		exit;
 	}
 } );
+
+/**
+ * Search engine verification tags (Google Search Console, Bing Webmaster).
+ */
+add_action( 'wp_head', function () {
+	if ( ! is_front_page() ) {
+		return;
+	}
+	echo '<meta name="google-site-verification" content="T07U_TvOgPRCg3jNwhmYO_Ui8VniA4LaTNXJe4YaZvs" />' . "\n";
+}, 1 );
