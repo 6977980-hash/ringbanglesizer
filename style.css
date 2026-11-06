@@ -1,0 +1,42 @@
+/*
+Theme Name:   Ring Bangle Sizer
+Theme URI:    https://ringbanglesizer.com
+Description:  GeneratePress child theme for ringbanglesizer.com. Adds the on-screen ring, bangle and bracelet sizer tool, size tables and SEO schema.
+Author:       Ring Bangle Sizer
+Author URI:   https://ringbanglesizer.com
+Template:     generatepress
+Version:      0.1.0
+Requires at least: 6.4
+Requires PHP: 7.4
+License:      GNU General Public License v2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:  ringbanglesizer
+*/
+
+/* Theme-level tweaks only. Tool styles live in assets/css/sizer.css */
+
+.rbs-cta {
+	border: 2px solid #1d4ed8;
+	border-radius: 12px;
+	padding: 18px 20px;
+	margin: 28px 0;
+	background: #eff6ff;
+}
+.rbs-cta p { margin: 0 0 10px; }
+.rbs-cta a.button {
+	display: inline-block;
+	background: #1d4ed8;
+	color: #fff;
+	padding: 10px 18px;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: 600;
+}
+.rbs-cta a.button:hover { background: #1e40af; }
+
+.rbs-table-wrap { overflow-x: auto; margin: 20px 0; }
+.rbs-table { border-collapse: collapse; width: 100%; font-size: 15px; }
+.rbs-table th, .rbs-table td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: center; }
+.rbs-table th { background: #f3f4f6; font-weight: 600; }
+.rbs-table tr:nth-child(even) td { background: #fafafa; }
+.rbs-table td:first-child { font-weight: 600; }
