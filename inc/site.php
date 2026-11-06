@@ -98,7 +98,16 @@ function rbs_breadcrumbs() {
 }
 add_action( 'generate_before_main_content', 'rbs_breadcrumbs', 5 );
 
-/* ---------------------------------------------------- editorial box */
+/* ---------------------------------------------------- author box */
+
+/**
+ * Founder photo, if one has been added to the theme (WebP, square, ~128 px).
+ * Until then the box shows the founder's initials.
+ */
+function rbs_founder_photo_uri() {
+	$rel = '/assets/img/ali-ahmad.webp';
+	return file_exists( RBS_DIR . $rel ) ? RBS_URI . $rel . '?v=' . RBS_VERSION : '';
+}
 
 function rbs_author_box( $content ) {
 	if ( ! is_singular( 'page' ) || ! in_the_loop() || ! is_main_query() ) {
@@ -107,21 +116,70 @@ function rbs_author_box( $content ) {
 	if ( '1' !== get_post_meta( get_the_ID(), 'rbs_author_box', true ) ) {
 		return $content;
 	}
+	$photo  = rbs_founder_photo_uri();
+	$avatar = $photo
+		? '<img class="rbs-author-pic" src="' . esc_url( $photo ) . '" width="64" height="64" loading="lazy" decoding="async" alt="' . esc_attr( RBS_FOUNDER_NAME ) . '">'
+		: '<span class="rbs-author-pic rbs-author-initials" aria-hidden="true">AA</span>';
 	$box = sprintf(
-		'<aside class="rbs-author"><p class="rbs-author-name"><strong>Written and checked by the %1$s</strong> · Updated <time datetime="%2$s">%3$s</time></p><p>Ring Bangle Sizer was founded by <a href="%6$s" rel="noopener" target="_blank">%7$s</a>. We build free sizing tools for rings, bangles and bracelets. Every size on this site comes from published standards (ISO 8653 for rings, the Indian inch-and-sixteenths system for bangles), and we show the maths so you can check it yourself. Read <a href="%4$s">how we measure</a> or <a href="%5$s">contact us</a> if something looks wrong.</p></aside>',
+		'<aside class="rbs-author">%8$s<div class="rbs-author-body"><p class="rbs-author-name"><strong>Written by <a href="%9$s">%7$s</a></strong>, founder of Ring Bangle Sizer · <a class="rbs-author-in" href="%6$s" rel="noopener" target="_blank">LinkedIn</a></p><p class="rbs-author-meta">Checked by the %1$s · Updated <time datetime="%2$s">%3$s</time></p><p>We build free sizing tools for rings, bangles and bracelets. Every size on this site comes from published standards (ISO 8653 for rings, the Indian inch-and-sixteenths system for bangles), and we show the maths so you can check it yourself. Read <a href="%4$s">how we measure</a> or <a href="%5$s">contact us</a> if something looks wrong.</p></div></aside>',
 		esc_html( RBS_EDITOR_NAME ),
 		esc_attr( get_the_modified_date( 'c' ) ),
 		esc_html( get_the_modified_date( 'F j, Y' ) ),
 		esc_url( home_url( '/how-we-measure/' ) ),
 		esc_url( home_url( '/contact/' ) ),
 		esc_url( RBS_FOUNDER_URL ),
-		esc_html( RBS_FOUNDER_NAME )
+		esc_html( RBS_FOUNDER_NAME ),
+		$avatar,
+		esc_url( home_url( '/about/' ) )
 	);
 	return $content . $box;
 }
 add_filter( 'the_content', 'rbs_author_box', 20 );
 
 /* ------------------------------------------------------------ footer */
+
+/**
+ * Three-column footer above the legal links: about, ring tools, bangle tools.
+ * Columns are <details> so they fold into an accordion on phones.
+ */
+function rbs_footer_columns() {
+	$cols = array(
+		'Ring tools'               => array(
+			'/'                                 => 'Online ring sizer',
+			'/ring-size-calculator/'            => 'Ring size calculator',
+			'/ring-size-converter/'             => 'Ring size converter',
+			'/ring-size-chart/'                 => 'Ring size chart',
+			'/ring-size-in-mm/'                 => 'Ring size in mm',
+			'/printable-ring-sizer/'            => 'Printable ring sizer',
+			'/how-to-measure-ring-size-at-home/' => 'How to measure ring size',
+		),
+		'Bangle & bracelet tools' => array(
+			'/bangle-size-calculator/'    => 'Bangle size calculator',
+			'/bangle-size-chart/'         => 'Bangle size chart',
+			'/bangle-size-chart-in-cm/'   => 'Bangle size in cm',
+			'/kids-bangle-size-chart/'    => 'Kids bangle sizes',
+			'/how-to-measure-bangle-size/' => 'How to measure bangle size',
+			'/bracelet-size-calculator/'  => 'Bracelet size calculator',
+			'/wrist-size-chart/'          => 'Wrist size chart',
+		),
+	);
+	$html  = '<div class="rbs-footer"><div class="rbs-footer-in">';
+	$html .= '<div class="rbs-fcol rbs-fabout"><a class="rbs-flogo" href="' . esc_url( home_url( '/' ) ) . '">' . rbs_logo_svg( 28 ) . '<span class="rbs-wordmark">Ring Bangle <span>Sizer</span></span></a>';
+	$html .= '<p>Free on-screen sizers for rings, bangles and bracelets. Sizes follow ISO 8653 and the Indian bangle system, and nothing you measure leaves your phone.</p>';
+	$html .= '<p>Made by <a href="' . esc_url( home_url( '/about/' ) ) . '">' . esc_html( RBS_FOUNDER_NAME ) . '</a> · ' . rbs_email_shortcode() . '</p></div>';
+	foreach ( $cols as $title => $links ) {
+		$html .= '<details class="rbs-fcol" open><summary>' . esc_html( $title ) . '</summary><ul>';
+		foreach ( $links as $path => $label ) {
+			$html .= '<li><a href="' . esc_url( home_url( $path ) ) . '">' . esc_html( $label ) . '</a></li>';
+		}
+		$html .= '</ul></details>';
+	}
+	$html .= '</div></div>';
+	// Phones: start folded (accordion). Desktop keeps them open and the summary is a plain heading.
+	$html .= '<script>if(window.matchMedia&&matchMedia("(max-width:767px)").matches){document.querySelectorAll(".rbs-fcol[open]").forEach(function(d){d.removeAttribute("open")})}</script>';
+	echo $html; // phpcs:ignore WordPress.Security.EscapeOutput -- built from escaped parts above.
+}
+add_action( 'generate_before_footer_content', 'rbs_footer_columns' );
 
 function rbs_footer_menu() {
 	if ( ! has_nav_menu( 'rbs-footer' ) ) {
@@ -146,6 +204,71 @@ add_filter( 'generate_copyright', function () {
 		esc_url( home_url( '/disclaimer/' ) )
 	);
 } );
+
+/* -------------------------------------------------------- tool cards */
+
+/**
+ * "Other free sizing tools" / "More sizing tools" lists become a grid of
+ * icon cards. Done on output, so the page content itself stays the same.
+ */
+function rbs_tool_card_info() {
+	return array(
+		'/'                                  => array( 'ring', 'Online ring sizer', 'Match a ring on your phone screen' ),
+		'/ring-size-calculator/'             => array( 'calc', 'Ring size calculator', 'From a measurement in mm or inches' ),
+		'/ring-size-converter/'              => array( 'swap', 'Ring size converter', 'US, UK, EU and India sizes' ),
+		'/ring-size-chart/'                  => array( 'chart', 'Ring size chart', 'Every system in one table' ),
+		'/printable-ring-sizer/'             => array( 'print', 'Printable ring sizer', 'Free PDF, print at 100%' ),
+		'/how-to-measure-ring-size-at-home/' => array( 'guide', 'Measure ring size at home', 'Four ways, no tools needed' ),
+		'/bangle-size-calculator/'           => array( 'bangle', 'Bangle size calculator', 'Indian sizes 2.2 to 2.12 on screen' ),
+		'/bangle-size-chart/'                => array( 'chart', 'Bangle size chart', 'Diameter in inches, mm and cm' ),
+		'/how-to-measure-bangle-size/'       => array( 'guide', 'Measure bangle size', 'With a string or an old bangle' ),
+		'/bracelet-size-calculator/'         => array( 'bracelet', 'Bracelet size calculator', 'Length from your wrist size' ),
+		'/wrist-size-chart/'                 => array( 'chart', 'Wrist size chart', 'Bracelet length for every wrist' ),
+	);
+}
+
+function rbs_icon( $name ) {
+	$paths = array(
+		'ring'     => '<circle cx="12" cy="14" r="7"/><path d="M9 4h6l-3 3z"/>',
+		'bangle'   => '<ellipse cx="12" cy="12" rx="9" ry="5"/><ellipse cx="12" cy="12" rx="6" ry="2.6"/>',
+		'bracelet' => '<circle cx="6" cy="12" r="3"/><circle cx="12" cy="12" r="3"/><circle cx="18" cy="12" r="3"/>',
+		'chart'    => '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M10 4v16"/>',
+		'calc'     => '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/>',
+		'swap'     => '<path d="M4 8h14l-3-3M20 16H6l3 3"/>',
+		'print'    => '<path d="M7 9V4h10v5"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v6H7z"/>',
+		'guide'    => '<path d="M3 17 17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/>',
+	);
+	$p = isset( $paths[ $name ] ) ? $paths[ $name ] : $paths['ring'];
+	return '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' . $p . '</svg>';
+}
+
+function rbs_tool_cards( $content ) {
+	if ( ! is_singular( 'page' ) || false === strpos( $content, 'sizing tools</h2>' ) ) {
+		return $content;
+	}
+	return preg_replace_callback(
+		'#(<h2>(?:Other free sizing tools|More sizing tools)</h2>)\s*<ul>(.*?)</ul>#s',
+		function ( $m ) {
+			$info = rbs_tool_card_info();
+			preg_match_all( '#<a href="([^"]+)"[^>]*>(.*?)</a>#s', $m[2], $links, PREG_SET_ORDER );
+			$seen  = array();
+			$cards = '';
+			foreach ( $links as $l ) {
+				$path = wp_parse_url( $l[1], PHP_URL_PATH );
+				$path = $path ? $path : '/';
+				if ( isset( $seen[ $path ] ) ) {
+					continue;
+				}
+				$seen[ $path ] = true;
+				$i      = isset( $info[ $path ] ) ? $info[ $path ] : array( 'guide', wp_strip_all_tags( $l[2] ), '' );
+				$cards .= '<a class="rbs-tcard" href="' . esc_url( $l[1] ) . '"><span class="rbs-tico">' . rbs_icon( $i[0] ) . '</span><span class="rbs-ttxt"><strong>' . esc_html( $i[1] ) . '</strong>' . ( $i[2] ? '<small>' . esc_html( $i[2] ) . '</small>' : '' ) . '</span></a>';
+			}
+			return $m[1] . '<nav class="rbs-tcards" aria-label="More sizing tools">' . $cards . '</nav>';
+		},
+		$content
+	);
+}
+add_filter( 'the_content', 'rbs_tool_cards', 16 );
 
 /* ----------------------------------------------------------- contact */
 
@@ -210,7 +333,7 @@ function rbs_editor_entity() {
 }
 
 /**
- * With Rank Math: add sameAs to its Organization and credit pages to the editorial team.
+ * With Rank Math: add sameAs to its Organization and credit pages to the founder (matches the author box).
  */
 add_filter( 'rank_math/json_ld', function ( $data ) {
 	if ( ! is_array( $data ) ) {
@@ -229,10 +352,10 @@ add_filter( 'rank_math/json_ld', function ( $data ) {
 		}
 		if ( is_singular( 'page' ) ) {
 			if ( isset( $entity['author'] ) ) {
-				$data[ $k ]['author'] = rbs_editor_entity();
+				$data[ $k ]['author'] = rbs_founder_entity();
 			}
 			if ( in_array( 'Person', $types, true ) ) {
-				unset( $data[ $k ] ); // WP admin user; pages are credited to the team.
+				unset( $data[ $k ] ); // WP admin user; pages are credited to the founder.
 			}
 		}
 	}
@@ -268,7 +391,7 @@ function rbs_fallback_schema() {
 		}
 		$graph[] = array( '@type' => 'BreadcrumbList', 'itemListElement' => $items );
 
-		// Guides under /blog/ are articles. The byline matches the visible editorial box.
+		// Guides under /blog/ are articles. The byline matches the visible author box.
 		$id     = get_queried_object_id();
 		$parent = (int) wp_get_post_parent_id( $id );
 		if ( $parent && 'blog' === get_post_field( 'post_name', $parent ) ) {
@@ -281,7 +404,7 @@ function rbs_fallback_schema() {
 				'image'            => array( '@type' => 'ImageObject', 'url' => $img['url'], 'width' => $img['w'], 'height' => $img['h'] ),
 				'datePublished'    => get_the_date( 'c', $id ),
 				'dateModified'     => get_the_modified_date( 'c', $id ),
-				'author'           => rbs_editor_entity(),
+				'author'           => rbs_founder_entity(),
 				'publisher'        => array( '@id' => home_url( '/#organization' ) ),
 				'mainEntityOfPage' => get_permalink( $id ),
 				'inLanguage'       => 'en',
