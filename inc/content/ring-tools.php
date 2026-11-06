@@ -264,6 +264,7 @@ HTML
 <li>Measure again at right angles and take the average, since rings are rarely perfectly round.</li>
 <li>Enter the number in the <a href="/ring-size-calculator/">ring size calculator</a> or find it in <a href="/ring-size-by-diameter/">ring size by diameter</a>.</li>
 </ol>
+[rbs_diagram name="ring-inner"]
 <p><em>Example:</em> 18 mm one way and 18.2 mm the other gives 18.1 mm, which is US 8 / UK P½. A digital caliper (inside jaws) gives 0.1 mm readings and is the most accurate home tool.</p>
 
 <h2>Method 3: String or paper strip around your finger</h2>
@@ -274,6 +275,7 @@ HTML
 <li>Lay it flat on a ruler and measure to the mark in millimetres. This is your finger circumference.</li>
 <li>Look it up in <a href="/ring-size-by-circumference/">ring size by circumference</a>, or divide by 3.1416 for the diameter.</li>
 </ol>
+[rbs_diagram name="paper-strip"]
 <p><em>Example:</em> the strip measures 59.5 mm. 59.5 ÷ 3.1416 = 18.9 mm diameter, closest to US 9 / UK R½ / EU 60.</p>
 <p>Repeat three times. If the readings differ by more than 1.5 mm, you pulled harder on one of them; use the middle value.</p>
 
@@ -295,6 +297,7 @@ HTML
 
 <h2>Measuring someone else's ring size secretly</h2>
 <p>For a surprise engagement ring, borrow a ring they wear on the <em>same</em> finger and measure it on your phone with the <a href="/">ring sizer</a> or with a ruler, then put it back. If you can only borrow a ring from another finger, remember that the ring finger is usually about half a size smaller than the middle finger. Most women wear US 5 to 7 and most men US 8 to 11, but buy from a jeweller that offers free resizing in case you are off.</p>
+<p>More ideas, from tracing a ring to asking a friend: <a href="/blog/find-ring-size-secretly/">how to find out someone's ring size secretly</a>.</p>
 
 [rbs_cta mode="ring"]
 HTML

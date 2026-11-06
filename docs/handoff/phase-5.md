@@ -39,3 +39,11 @@ Tool features added after this handoff (UI/UX thread, 0.8.x): coin calibration, 
 - Bing Webmaster: import from GSC.
 - Social profiles + Pinterest claim tag; upload pins; Reddit/Quora/outreach per the kit.
 - Still from phase 4: accuracy test photos for `/how-we-measure/`, print the PDF once and check the 50 mm line.
+
+## UI/UX batch D (0.10.0, pages v7)
+
+- FAQ is a `<details>` accordion (`rbs_render_faq_html()` in `inc/pages.php`); FAQ schema unchanged (from `rbs_faq` meta).
+- `inc/engage.php`: ids on every H2 + "On this page" list on pages with 4+ H2s (`rbs_toc`, runs after `rbs_tool_cards`); chart tables wrapped in `.rbs-tw` with sticky first column, swipe hint, tap-to-highlight and a "Find your size" box on tables with 8+ rows (`rbs_table_tools`, script `assets/js/content.js` printed inline only where needed); "Your saved sizes" strip under the header on non-tool pages (reads `rbs_people_v1`, inline script before content so no layout shift, hide = sessionStorage); `[rbs_diagram name="ring-inner|paper-strip|bangle-hand"]` inline SVGs.
+- Tool: tab icons, desktop (≥1100 px) "How to measure" side panel (`rbs_side_guide()`, off in the embed via `side="0"`), "How accurate is it?" link in the trust line, "Sizing someone else?" link under results. Tool links now use `RBS_DATA.home` so they work inside the embed.
+- New guide `/blog/find-ring-size-secretly/` (key `blog-gift-size`, menu Guides, share image added).
+- Point 26 (accuracy proof) waits on Ali's test photos: fill section 6 of `/how-we-measure/` and add "Tested with N rings" under the tool then.

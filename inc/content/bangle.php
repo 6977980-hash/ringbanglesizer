@@ -571,6 +571,7 @@ function rbs_bangle_pages() {
 <li>Mark where it meets, lay it on a ruler, and note the length in cm.</li>
 <li>Divide by 3.14 to get the diameter, then choose the <em>first size that is at least that wide</em>.</li>
 </ol>
+[rbs_diagram name="bangle-hand"]
 <p><strong>Example:</strong> a hand of 18.4 cm ÷ 3.14 = 5.86 cm. Size 2.4 is 5.72 cm (too small) and 2.6 is 6.03 cm, so your size is 2.6. You can skip the maths by using the hand-circumference column on the <a href="/bangle-size-chart/in-cm/">bangle size in cm chart</a>.</p>
 
 <h2>Method 3: By hand width</h2>

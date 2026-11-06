@@ -125,7 +125,9 @@
 	// Save / share / chart buttons under a result.
 	var lastName = 'Me';
 	function resultActions(kind, label, shareText) {
-		var chart = kind === 'bangle' ? '/bangle-size-chart/' : '/ring-size-chart/';
+		// Absolute links: inside the embeddable widget a relative link would point at the host site.
+		var home = data.home || '';
+		var chart = home + (kind === 'bangle' ? '/bangle-size-chart/' : '/ring-size-chart/');
 		return '<div class="rbs-save-row">' +
 			'<label class="rbs-name-label">Whose size? <input type="text" class="rbs-name" maxlength="24" value="' + escHtml(lastName) + '" autocomplete="off"></label>' +
 			'<button type="button" class="rbs-btn rbs-save" data-kind="' + kind + '" data-label="' + label + '">Save</button>' +
@@ -134,7 +136,8 @@
 			'<button type="button" class="rbs-btn secondary rbs-card-btn">Size card</button>' +
 			'<button type="button" class="rbs-btn secondary rbs-share" data-text="' + shareText.replace(/"/g, '&quot;') + '">Share</button>' +
 			'<a class="rbs-chart-link" href="' + chart + '">Full size chart →</a>' +
-			'</div>';
+			'</div>' +
+			'<p class="rbs-gift"><a href="' + home + '/blog/find-ring-size-secretly/">Sizing someone else for a surprise? Find their size secretly →</a></p>';
 	}
 	// onSaved(): called after a save so the panel can refresh its saved-size chips.
 	// card: { kind, title, big, rows: [[k, v]…] } for the downloadable size card.

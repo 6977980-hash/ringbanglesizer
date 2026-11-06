@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_PAGES_VERSION', '6' );
+define( 'RBS_PAGES_VERSION', '7' );
 
 require_once RBS_DIR . '/inc/page-content.php';
 require_once RBS_DIR . '/inc/content/legal.php';
@@ -55,11 +55,12 @@ function rbs_render_faq_html( $faq ) {
 	if ( empty( $faq ) ) {
 		return '';
 	}
-	$html = "\n<h2>Frequently asked questions</h2>\n";
+	// Accordion: questions stay visible (and in the FAQ schema), answers open on tap.
+	$html = "\n<h2>Frequently asked questions</h2>\n<div class=\"rbs-faq\">\n";
 	foreach ( $faq as $qa ) {
-		$html .= '<h3>' . esc_html( $qa[0] ) . "</h3>\n<p>" . wp_kses_post( $qa[1] ) . "</p>\n";
+		$html .= "<details>\n<summary><h3>" . esc_html( $qa[0] ) . "</h3></summary>\n<p>" . wp_kses_post( $qa[1] ) . "</p>\n</details>\n";
 	}
-	return $html;
+	return $html . "</div>\n";
 }
 
 function rbs_sync_pages() {
@@ -198,6 +199,7 @@ function rbs_menu_structure() {
 					array( 'key' => 'blog-ring-fit', 'label' => 'How Should a Ring Fit?' ),
 					array( 'key' => 'blog-resize', 'label' => 'Can You Resize a Ring?' ),
 					array( 'key' => 'blog-bridal-bangle', 'label' => 'Bridal Bangle Sizes' ),
+					array( 'key' => 'blog-gift-size', 'label' => 'Find a Ring Size Secretly' ),
 				) ),
 				array( 'key' => 'about', 'label' => 'About' ),
 			),
