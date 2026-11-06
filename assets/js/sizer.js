@@ -436,7 +436,11 @@
 			var circMm = u === 'in' ? v * MM_IN : v * 10;
 			var d = circMm / Math.PI;
 			var b = nearestBangleUp(d);
-			show(b, '<p class="rbs-note">Your hand circumference ' + fmt(circMm) + ' mm ≈ ' + fmt(d) + ' mm across. The bangle must be at least this wide inside.</p>');
+			var top = data.bangles[data.bangles.length - 1];
+			var over = d > top.mm + 0.3
+				? ' That is larger than size ' + top.label + ' (' + fmt(top.mm) + ' mm), the biggest standard size: ask the jeweller for a made-to-order kada or an openable bangle.'
+				: '';
+			show(b, '<p class="rbs-note">Your hand circumference ' + fmt(circMm) + ' mm ≈ ' + fmt(d) + ' mm across. The bangle must be at least this wide inside.' + over + '</p>');
 		}
 		$('.rbs-hand-val', panel).addEventListener('input', fromHand);
 		$('.rbs-hand-unit', panel).addEventListener('change', fromHand);

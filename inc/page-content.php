@@ -342,7 +342,7 @@ function rbs_core_pages() {
 			'slug'      => 'bangle-size-chart',
 			'title'     => 'Bangle Size Chart – Indian Sizes in mm, cm and Inches',
 			'seo_title' => 'Bangle Size Chart: 2.2 to 2.12 in mm, cm and Inches',
-			'seo_desc'  => 'Indian bangle size chart with inner diameter in inches, mm and cm for sizes 1.10 to 3.0, plus who each size fits and how to measure at home.',
+			'seo_desc'  => 'Indian bangle size chart with inner diameter in inches, mm and cm for sizes 1.10 to 3.4, plus who each size fits and how to measure at home.',
 			'mode'      => null,
 			'content'   => '
 <p><strong>Indian bangle sizes explained in one chart.</strong> Each size is the inner diameter in inches and sixteenths: 2.4 means 2 4/16 inch. Read across for mm and cm, and the typical hand each size fits.</p>
@@ -381,6 +381,8 @@ function rbs_core_pages() {
 <tr><td><a href="/bangle-size/2-12/">2.12</a></td><td>2 12/16 in</td><td>2¾ in</td><td>2.750 in</td><td>8.65 in</td></tr>
 <tr><td>2.14</td><td>2 14/16 in</td><td>2⅞ in</td><td>2.875 in</td><td>9.03 in</td></tr>
 <tr><td>3.0</td><td>3 0/16 in</td><td>3 in</td><td>3.000 in</td><td>9.42 in</td></tr>
+<tr><td>3.2</td><td>3 2/16 in</td><td>3⅛ in</td><td>3.125 in</td><td>9.82 in</td></tr>
+<tr><td>3.4</td><td>3 4/16 in</td><td>3¼ in</td><td>3.250 in</td><td>10.21 in</td></tr>
 </tbody>
 </table>
 <p>Each adult step is 2/16 inch (3.2 mm) of diameter, or about 1 cm of circumference. Shops sometimes write the same size as 2/4, 2-4 or 2.25 inch; they all mean 2.4. The <a href="/bangle-size-chart/in-cm/">bangle size in cm</a> page lists every size in centimetres.</p>
@@ -411,7 +413,7 @@ function rbs_core_pages() {
 <tr><td>4 – 7 years</td><td>2.0</td><td>50.8 mm</td></tr>
 <tr><td>Teenagers, petite adults</td><td>2.2</td><td>54.0 mm</td></tr>
 <tr><td>Adult women</td><td>2.4 – 2.8</td><td>57.2 – 63.5 mm</td></tr>
-<tr><td>Adult men (kada)</td><td>2.10 – 3.0</td><td>66.7 – 76.2 mm</td></tr>
+<tr><td>Adult men (kada)</td><td>2.10 – 3.4</td><td>66.7 – 82.6 mm</td></tr>
 </tbody>
 </table>
 <p>Age is only a rough guide; children of the same age can be a full size apart. Measure the hand where you can, and see the <a href="/kids-bangle-size-chart/">kids bangle size chart</a> for babies and children.</p>
