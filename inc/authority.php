@@ -144,8 +144,9 @@ add_action( 'template_redirect', function () {
 	$data = array(
 		'rings'   => rbs_ring_rows_for_js(),
 		'bangles' => rbs_bangle_sizes(),
+		'home'    => untrailingslashit( home_url() ),
 	);
-	$tool = rbs_sizer_shortcode( array( 'mode' => $mode ) );
+	$tool = rbs_sizer_shortcode( array( 'mode' => $mode, 'side' => '0' ) );
 	$home = add_query_arg( array( 'utm_source' => 'widget', 'utm_medium' => 'embed' ), rbs_tool_url( $mode ) );
 	?><!doctype html>
 <html lang="en">

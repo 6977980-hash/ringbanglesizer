@@ -486,6 +486,7 @@ HTML
 <ul>
 <li><strong><a href="/blog/ring-too-tight-or-loose/">How should a ring fit? Too tight vs too loose</a></strong> – the knuckle test, signs of a bad fit, and quick fixes such as sizing beads and ring guards.</li>
 <li><strong><a href="/blog/resize-a-ring/">Can you resize a ring?</a></strong> – how far a ring can go up or down, which metals cannot be resized, and what affects the cost.</li>
+<li><strong><a href="/blog/find-ring-size-secretly/">How to find out someone's ring size secretly</a></strong> – eight ways to get a size for a surprise proposal or gift, plus bangles.</li>
 </ul>
 
 <h2>Bangle guides</h2>
@@ -781,6 +782,106 @@ HTML
 				array( 'Does resizing a ring damage it?', 'A good jeweller leaves an almost invisible join. Stretching thins the band slightly, and engraving or patterns near the join can be distorted.' ),
 				array( 'Is it cheaper to size a ring up or down?', 'Down. Sizing down removes metal; sizing up usually adds metal, which costs more, especially in gold or platinum.' ),
 				array( 'Can a tungsten ring be resized?', 'No. Tungsten carbide is too hard to cut and solder. Most brands offer an exchange for a different size instead.' ),
+			),
+		),
+
+		/* --------------------------------------------- GUIDE: SURPRISE / GIFT SIZE */
+		'blog-gift-size' => array(
+			'slug'       => 'find-ring-size-secretly',
+			'parent'     => 'blog',
+			'title'      => 'How to Find Out Someone\'s Ring Size Secretly (and Their Bangle Size)',
+			'seo_title'  => 'How to Find Out Someone\'s Ring Size Secretly: 8 Ways That Work',
+			'seo_desc'   => 'Planning a surprise proposal or gift? 8 ways to find someone\'s ring or bangle size without asking: borrow a ring, trace it, ask a friend, and what to do if you guess.',
+			'mode'       => null,
+			'menu_order' => 4,
+			'content'    => <<<'HTML'
+<p><strong>The most reliable way to find someone's ring size without asking is to borrow a ring they already wear on the same finger and measure its inside diameter</strong>, either on your phone with the <a href="/">online ring sizer</a> or with a ruler. It takes two minutes and the ring is back before it is missed. If you cannot borrow one, trace it, ask a friend, or use the averages below and buy from a shop that resizes for free.</p>
+
+<h2>1. Borrow a ring they wear (best)</h2>
+<ol>
+<li>Pick a ring they wear on the <strong>same finger of the same hand</strong> the new ring is for. A ring from another finger still helps; see the conversion table below.</li>
+<li>Lay it flat on your phone and open the <a href="/">ring sizer</a>. Calibrate once with your own bank card or a coin.</li>
+<li>Move the circle until it lines up with the <em>inside</em> edge of the ring. Note the size and the diameter in mm.</li>
+<li>Put the ring back exactly where it was.</li>
+</ol>
+[rbs_diagram name="ring-inner"]
+<p>No phone time alone? Measure across the inside of the ring with a mm ruler, twice at right angles, and look the number up in <a href="/ring-size-by-diameter/">ring size by diameter</a>. Even a quick photo of the ring lying next to a coin helps: a jeweller can estimate the size from it.</p>
+
+<h2>2. Trace or press the ring</h2>
+<p>If you only have the ring for a few seconds:</p>
+<ul>
+<li><strong>Trace the inside:</strong> put the ring on paper and run a sharp pencil around the <em>inside</em> edge. Measure the circle across its widest point.</li>
+<li><strong>Press it into soap or a bar of chocolate:</strong> the impression keeps the exact inner size. Wipe the ring clean and measure the hollow later.</li>
+<li><strong>Slide it on your own finger:</strong> mark with a pen how far it goes. Later, find a ring of yours (or a sizer) that stops at the same point.</li>
+</ul>
+
+<h2>3. Ring from another finger? Convert it</h2>
+<table class="rbs-table">
+<thead><tr><th>The ring you borrowed is from their…</th><th>Their ring-finger size is usually…</th></tr></thead>
+<tbody>
+<tr><td>Middle finger, same hand</td><td>about ½ size smaller</td></tr>
+<tr><td>Index finger, same hand</td><td>about the same, or ½ size smaller</td></tr>
+<tr><td>Little finger (pinky)</td><td>1½ to 2 sizes larger</td></tr>
+<tr><td>Thumb</td><td>2 to 3 sizes smaller</td></tr>
+<tr><td>Ring finger, other hand</td><td>¼ to ½ size larger if the new ring goes on the dominant hand</td></tr>
+</tbody>
+</table>
+<p>These are typical differences, not rules. Treat the result as a starting point and buy where resizing is easy.</p>
+
+<h2>4. Ask a friend or family member</h2>
+<p>Their best friend, sister or mother may know the size, or can find out naturally: trying on rings together in a shop, or "I'm ordering a ring online, what size are you?". Ask them to keep it quiet, and ask for the system too (US 6 and UK 6 are not the same size; see the <a href="/ring-size-converter/">ring size converter</a>).</p>
+
+<h2>5. Look for clues</h2>
+<ul>
+<li>Old jewellery boxes, receipts or order e-mails often show the size.</li>
+<li>Rings bought online usually list the size in the order history.</li>
+<li>A ring that was resized may have the size stamped inside, next to the metal mark.</li>
+</ul>
+
+<h2>6. Make it part of a game</h2>
+<p>Ring-pop sweets, a "guess your ring size" quiz, trying on costume rings at a market, or a printable sizer left in a magazine can all get a size without suspicion. Write it down straight away.</p>
+
+<h2>7. Measure while they sleep (risky)</h2>
+<p>Some people wrap a thin strip of paper around the finger while their partner sleeps. It works only if they are deep sleepers, and a sleeping finger is relaxed and slightly swollen, so the result is often a quarter size too large. Use it as a rough check, not the final number.</p>
+
+<h2>8. If you have to guess</h2>
+<p>Use the averages and choose a shop with free resizing. Most women wear US 5 to 8 (6 to 7 is most common, 16.5 to 17.3 mm) and most men US 8 to 12 (9 to 10 is most common, 19 to 19.8 mm). Look at their hands: slim fingers are usually at the low end, larger hands and prominent knuckles at the high end. See <a href="/average-ring-size/">average ring size</a> for the full breakdown by country.</p>
+<p><strong>When in doubt, size up.</strong> A ring that is slightly big can be worn on the middle finger until it is resized, and making a ring smaller is easier and cheaper than making it larger. Avoid guessing for rings that are hard to resize: full eternity bands, tungsten, titanium and ceramic.</p>
+
+<h2>Buying bangles as a surprise</h2>
+<p>Bangles have no clasp, so the size has to pass over the hand. Guessing is riskier than with rings.</p>
+<ol>
+<li><strong>Borrow a bangle she wears</strong> and measure across the inside edge in mm, or lay it on the <a href="/bangle-size-calculator/">bangle size calculator</a>. 57 mm is size 2.4, 60 mm is 2.6, 63.5 mm is 2.8.</li>
+<li><strong>Glass and metal differ:</strong> if the borrowed bangle is glass, a metal or gold one in the same number may feel slightly larger. Match the material if you can.</li>
+<li><strong>Ask her mother or sister.</strong> Bangle sizes are often shared in the family, especially for weddings.</li>
+<li><strong>If you must guess:</strong> 2.4 and 2.6 are the most common adult women's sizes. Between two sizes, choose the larger one: a slightly loose bangle can be worn, a small one cannot be put on.</li>
+</ol>
+<p>For a bride, see the <a href="/blog/bangle-size-for-wedding/">bridal bangle size guide</a>.</p>
+
+<h2>Once you have a number</h2>
+<ul>
+<li>Check it in the <a href="/ring-size-chart/">ring size chart</a> or <a href="/bangle-size-chart/">bangle size chart</a> and convert it to the system the shop uses.</li>
+<li>Save it on your phone in the sizer as "Partner" or "Ammi". It stays on your device only, and you can download it as a size card.</li>
+<li>Ask the shop about free resizing or exchange before you pay.</li>
+</ul>
+
+[rbs_cta mode="ring"]
+
+<h2>Related</h2>
+<ul>
+<li><a href="/average-ring-size/">Average ring size</a></li>
+<li><a href="/blog/ring-too-tight-or-loose/">How should a ring fit?</a></li>
+<li><a href="/blog/resize-a-ring/">Can you resize a ring?</a></li>
+<li><a href="/how-to-measure-ring-size-at-home/">How to measure ring size at home</a></li>
+</ul>
+HTML
+			,
+			'faq' => array(
+				array( 'How can I find out my girlfriend\'s ring size without her knowing?', 'Borrow a ring she wears on the same finger and measure its inside diameter on your phone with an on-screen ring sizer or with a ruler. If you cannot borrow one, ask a close friend or family member, or trace the inside of a ring on paper.' ),
+				array( 'What if the ring I borrowed is from a different finger?', 'Adjust it: the ring finger is usually about half a size smaller than the middle finger on the same hand, and 1½ to 2 sizes larger than the little finger. The dominant hand is often a quarter to half size larger.' ),
+				array( 'Should I size up or down if I am not sure?', 'Size up. A slightly loose ring can be worn on another finger until it is resized, and making a ring smaller is easier and cheaper than making it larger.' ),
+				array( 'What is the most common ring size for a woman?', 'US 6 to 7 (UK L½ to N½, about 16.5 to 17.3 mm inner diameter). Most women wear between US 5 and 8.' ),
+				array( 'Can a jeweller tell the ring size from a photo?', 'Roughly, if the ring is photographed flat next to a coin or ruler so the jeweller can scale it. A direct measurement of the inside diameter is more accurate.' ),
 			),
 		),
 

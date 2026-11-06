@@ -26,7 +26,7 @@ function rbs_tool_url( $mode ) {
 /* ---------------------------------------------------------------- tool */
 
 function rbs_sizer_shortcode( $atts ) {
-	$atts   = shortcode_atts( array( 'mode' => 'ring', 'method' => '', 'name' => '' ), $atts, 'rbs_sizer' );
+	$atts   = shortcode_atts( array( 'mode' => 'ring', 'method' => '', 'name' => '', 'side' => '1' ), $atts, 'rbs_sizer' );
 	$mode   = in_array( $atts['mode'], array( 'ring', 'bangle', 'bracelet' ), true ) ? $atts['mode'] : 'ring';
 	$method = 'mm' === $atts['method'] ? 'mm' : '';
 
@@ -39,22 +39,83 @@ function rbs_sizer_shortcode( $atts ) {
 		$GLOBALS['rbs_tool_name'] = sanitize_text_field( $atts['name'] );
 	}
 
+	$side = '0' !== $atts['side'];
+
 	ob_start();
+	if ( $side ) {
+		echo '<div class="rbs-layout">';
+	}
 	?>
 	<div class="rbs" data-mode="<?php echo esc_attr( $mode ); ?>"<?php echo $method ? ' data-method="' . esc_attr( $method ) . '"' : ''; ?>>
 		<noscript><p><strong>This tool needs JavaScript.</strong> Use the size chart below instead.</p></noscript>
 		<div class="rbs-tabs" role="tablist">
-			<button type="button" class="rbs-tab" data-tab="ring" role="tab">Ring</button>
-			<button type="button" class="rbs-tab" data-tab="bangle" role="tab">Bangle</button>
-			<button type="button" class="rbs-tab" data-tab="bracelet" role="tab">Bracelet</button>
+			<button type="button" class="rbs-tab" data-tab="ring" role="tab"><?php echo rbs_tab_icon( 'ring' ); // phpcs:ignore ?>Ring</button>
+			<button type="button" class="rbs-tab" data-tab="bangle" role="tab"><?php echo rbs_tab_icon( 'bangle' ); // phpcs:ignore ?>Bangle</button>
+			<button type="button" class="rbs-tab" data-tab="bracelet" role="tab"><?php echo rbs_tab_icon( 'bracelet' ); // phpcs:ignore ?>Bracelet</button>
 		</div>
 		<div class="rbs-body">
 			<p class="rbs-loading">Loading sizer…</p>
 		</div>
-		<p class="rbs-trust">Free · No sign-up · Works on any phone · Your measurements stay on your device</p>
+		<p class="rbs-trust">Free · No sign-up · Works on any phone · Your measurements stay on your device · <a href="<?php echo esc_url( home_url( '/how-we-measure/#5-how-accurate-is-it' ) ); ?>">How accurate is it?</a></p>
 	</div>
 	<?php
+	if ( $side ) {
+		echo rbs_side_guide( $mode ) . '</div>'; // phpcs:ignore -- static markup
+	}
 	return ob_get_clean();
+}
+
+/**
+ * Small icons for the Ring / Bangle / Bracelet tabs (same set as the tool cards, rbs_icon() in inc/site.php).
+ */
+function rbs_tab_icon( $kind ) {
+	return str_replace( '<svg width="24" height="24"', '<svg class="rbs-tab-ico" width="18" height="18"', rbs_icon( $kind ) );
+}
+
+/**
+ * Desktop-only "how to measure" panel next to the tool (hidden below 1100 px).
+ */
+function rbs_side_guide( $mode ) {
+	$steps = array(
+		'ring'     => array(
+			'Hold any bank card on the screen and match the outline once. No card? Use a coin.',
+			'Lay a ring that fits flat on the circle and match its <strong>inside</strong> edge.',
+			'Read your size, then tap Save so this device remembers it.',
+		),
+		'bangle'   => array(
+			'Calibrate once with a bank card or a coin.',
+			'Lay a bangle that fits flat on the circle and match its <strong>inside</strong> edge. No bangle? Enter your hand size.',
+			'Read your Indian size, then tap Save.',
+		),
+		'bracelet' => array(
+			'Wrap a string or paper strip around your wrist, just below the bone.',
+			'Mark where it meets and measure it on a ruler.',
+			'Enter it and pick snug, comfortable or loose.',
+		),
+	);
+	$tips = array(
+		'ring'     => array( 'Measure in the evening: fingers are smallest in the morning.', 'Between two sizes? Choose the larger one.' ),
+		'bangle'   => array( 'A rigid bangle must pass your folded hand, not just your wrist.', 'Between two sizes? Choose the larger one.' ),
+		'bracelet' => array( 'Keep the string snug but not tight.', 'Measure the wrist you wear jewellery on.' ),
+	);
+	$links = array(
+		'ring'     => array( array( '/how-to-measure-ring-size-at-home/', 'No ring? 5 ways to measure' ), array( '/blog/find-ring-size-secretly/', 'Buying a surprise? Find their size' ) ),
+		'bangle'   => array( array( '/how-to-measure-bangle-size/', 'No bangle? Measure your hand' ), array( '/blog/find-ring-size-secretly/', 'Buying a gift? Find their size' ) ),
+		'bracelet' => array( array( '/wrist-size-chart/', 'Wrist size chart' ) ),
+	);
+	$html = '<aside class="rbs-side" aria-label="How to measure"><p class="rbs-side-t">How to measure in 30 seconds</p><ol>';
+	foreach ( $steps[ $mode ] as $s ) {
+		$html .= '<li>' . $s . '</li>';
+	}
+	$html .= '</ol><ul class="rbs-side-tips">';
+	foreach ( $tips[ $mode ] as $t ) {
+		$html .= '<li>' . esc_html( $t ) . '</li>';
+	}
+	$html .= '</ul><p class="rbs-side-links">';
+	foreach ( $links[ $mode ] as $l ) {
+		$html .= '<a href="' . esc_url( home_url( $l[0] ) ) . '">' . esc_html( $l[1] ) . ' →</a>';
+	}
+	return $html . '</p></aside>';
 }
 add_shortcode( 'rbs_sizer', 'rbs_sizer_shortcode' );
 

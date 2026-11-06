@@ -30,6 +30,7 @@ function rbs_core_pages() {
 <li><strong>Match a ring.</strong> Put a ring that fits the right finger flat on the screen. Move the size slider until the blue circle lines up with the <em>inside</em> edge of the ring. Not the outside: the inside edge is what sits on your finger.</li>
 <li><strong>Read your size.</strong> The result shows US, UK/Australian, EU/ISO, Indian/Japanese sizes plus the inner diameter and circumference in mm.</li>
 </ol>
+[rbs_diagram name="ring-inner"]
 <p>No ring to hand? Switch to <strong>"I know the diameter / circumference"</strong> and type a measurement from a tape, string or vernier, in mm or inches.</p>
 
 <h2>How accurate is an on-screen ring sizer?</h2>

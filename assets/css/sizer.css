@@ -373,3 +373,28 @@
 .rbs-fit-res.ok { background: #ecfdf5; color: #065f46; }
 .rbs-fit-res.warn { background: #fffbeb; color: #92400e; }
 .rbs-fit-res.bad { background: #fef2f2; color: #991b1b; }
+
+/* Tab icons */
+.rbs-tab { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.rbs-tab-ico { flex-shrink: 0; }
+
+/* Desktop: "how to measure" panel beside the tool (hidden on phones and tablets) */
+.rbs-side { display: none; }
+@media (min-width: 1100px) {
+	.rbs-layout { display: grid; grid-template-columns: minmax(0, 720px) 270px; gap: 28px; justify-content: center; align-items: start; margin: 0 0 32px; }
+	.rbs-layout > .rbs { margin: 0; width: 100%; }
+	.rbs-side { display: block; position: sticky; top: 20px; padding: 16px 18px; border: 1px solid #e5e7eb; border-radius: 12px; background: #f9fafb; font-size: 15px; line-height: 1.5; color: #374151; }
+	.rbs-side-t { margin: 0 0 10px; font-size: 16px; font-weight: 700; color: #111827; }
+	.rbs-side ol { margin: 0 0 12px 1.2em; padding: 0; }
+	.rbs-side ol li { margin: 0 0 8px; }
+	.rbs-side-tips { margin: 0 0 12px; padding: 10px 0 0; list-style: none; border-top: 1px solid #e5e7eb; font-size: 14px; }
+	.rbs-side-tips li { margin: 0 0 6px; padding-left: 18px; position: relative; }
+	.rbs-side-tips li::before { content: ""; position: absolute; left: 2px; top: .55em; width: 8px; height: 8px; border-radius: 50%; border: 2px solid #d4a017; box-sizing: border-box; }
+	.rbs-side-links { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+	.rbs-side-links a { font-weight: 600; color: #1d4ed8; text-decoration: none; font-size: 14px; }
+	.rbs-side-links a:hover { text-decoration: underline; }
+}
+
+/* "Sizing someone else?" link under a result */
+.rbs-gift { margin: 4px 0 0; font-size: 14px; }
+.rbs-gift a { color: var(--rbs-blue); font-weight: 600; text-decoration: none; }
