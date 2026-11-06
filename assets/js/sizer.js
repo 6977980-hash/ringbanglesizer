@@ -302,7 +302,8 @@
 		}
 		m = s.match(/([\d.]+)/);
 		if (!m) { return null; }
-		var n = parseFloat(m[1]) + (/½/.test(s) ? 0.5 : 0);
+		// "7½" and "7 1/2" are both US 7.5 ("7.5" is already read whole).
+		var n = parseFloat(m[1]) + (/½|1\/2/.test(s) ? 0.5 : 0);
 		var sys = /eu|iso|de|fr|it|es/.test(s) ? 'eu' : (/india|in\b|jp|japan|ind/.test(s) ? 'in' : (/us|ca/.test(s) ? 'us' : ''));
 		if (!sys) { sys = n <= 16 ? 'us' : (n < 38 ? 'in' : 'eu'); }
 		if (sys === 'eu') { return { mm: n / Math.PI, text: 'EU ' + n + ' (' + fmt(n / Math.PI) + ' mm)' }; }
@@ -320,8 +321,10 @@
 			if (v > 110 && v < 300) { return { mm: v / Math.PI, text: fmt(v) + ' mm around (' + fmt(v / Math.PI) + ' mm across)' }; }
 			return null;
 		}
-		m = s.match(/^(\d)\s*[.\/\-:]\s*(\d{1,2})$/);
-		if (m) {
+		// Indian notation is inches + sixteenths ("2.6" = 2 6/16 in), so it only starts with 1–3
+		// and the part after the dot is 0–15. "6.2" is cm and "2.75" is decimal inches (below).
+		m = s.match(/^([1-3])\s*[.\/\-:]\s*(\d{1,2})$/);
+		if (m && parseInt(m[2], 10) <= 15) {
 			var lab = m[1] + '.' + m[2];
 			for (var i = 0; i < data.bangles.length; i++) {
 				if (data.bangles[i].label === lab) { return { mm: data.bangles[i].mm, text: 'Indian size ' + lab + ' (' + fmt(data.bangles[i].mm) + ' mm)' }; }
