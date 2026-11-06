@@ -20,18 +20,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_PAGES_VERSION', '2' );
+define( 'RBS_PAGES_VERSION', '3' );
 
 require_once RBS_DIR . '/inc/page-content.php';
 require_once RBS_DIR . '/inc/content/legal.php';
 require_once RBS_DIR . '/inc/content/bangle.php';
 require_once RBS_DIR . '/inc/content/ring-mm.php';
+require_once RBS_DIR . '/inc/content/ring-tools.php';
 
 /**
  * All pages, keyed by a stable key. Parents are listed before their children.
  */
 function rbs_all_pages() {
-	return array_merge( rbs_core_pages(), rbs_legal_pages(), rbs_bangle_pages(), rbs_ring_mm_pages() );
+	return array_merge( rbs_core_pages(), rbs_legal_pages(), rbs_bangle_pages(), rbs_ring_mm_pages(), rbs_ring_tool_pages() );
 }
 
 /**
@@ -167,8 +168,14 @@ function rbs_menu_structure() {
 			'name'  => 'RBS Primary',
 			'items' => array(
 				array( 'key' => 'home', 'label' => 'Ring Sizer', 'children' => array(
+					array( 'key' => 'ring-calc', 'label' => 'Ring Size Calculator' ),
+					array( 'key' => 'ring-converter', 'label' => 'Ring Size Converter' ),
 					array( 'key' => 'ring-chart', 'label' => 'Ring Size Chart' ),
 					array( 'key' => 'ring-mm', 'label' => 'Ring Size in mm' ),
+					array( 'key' => 'ring-diameter', 'label' => 'Ring Size by Diameter' ),
+					array( 'key' => 'ring-circ', 'label' => 'Ring Size by Circumference' ),
+					array( 'key' => 'printable', 'label' => 'Printable Ring Sizer' ),
+					array( 'key' => 'ring-measure', 'label' => 'How to Measure' ),
 					array( 'key' => 'ring-chart-pk', 'label' => 'Ring Size Chart Pakistan' ),
 				) ),
 				array( 'key' => 'bangle', 'label' => 'Bangle Size', 'children' => array(
@@ -181,7 +188,10 @@ function rbs_menu_structure() {
 					array( 'key' => 'bangle-kids', 'label' => 'Kids Bangle Sizes' ),
 					array( 'key' => 'chudi', 'label' => 'Chudi & Kada Sizes' ),
 				) ),
-				array( 'key' => 'bracelet', 'label' => 'Bracelet Size' ),
+				array( 'key' => 'bracelet', 'label' => 'Bracelet Size', 'children' => array(
+					array( 'key' => 'bracelet', 'label' => 'Bracelet Size Calculator' ),
+					array( 'key' => 'wrist-chart', 'label' => 'Wrist Size Chart' ),
+				) ),
 				array( 'key' => 'about', 'label' => 'About' ),
 			),
 		),

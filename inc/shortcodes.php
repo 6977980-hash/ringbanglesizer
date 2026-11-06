@@ -2,7 +2,9 @@
 /**
  * Shortcodes.
  *
- * [rbs_sizer mode="ring|bangle|bracelet"]   – the interactive tool
+ * [rbs_sizer mode="ring|bangle|bracelet" method="mm" name="…"] – the interactive tool
+ *   method="mm" opens the ring tool on "I know the diameter / circumference";
+ *   name overrides the WebApplication name in the schema.
  * [rbs_ring_table]                           – server-rendered ring conversion chart
  * [rbs_bangle_table]                         – server-rendered bangle chart
  * [rbs_cta mode="ring|bangle|bracelet"]      – link box to the tool page
@@ -24,18 +26,22 @@ function rbs_tool_url( $mode ) {
 /* ---------------------------------------------------------------- tool */
 
 function rbs_sizer_shortcode( $atts ) {
-	$atts = shortcode_atts( array( 'mode' => 'ring' ), $atts, 'rbs_sizer' );
-	$mode = in_array( $atts['mode'], array( 'ring', 'bangle', 'bracelet' ), true ) ? $atts['mode'] : 'ring';
+	$atts   = shortcode_atts( array( 'mode' => 'ring', 'method' => '', 'name' => '' ), $atts, 'rbs_sizer' );
+	$mode   = in_array( $atts['mode'], array( 'ring', 'bangle', 'bracelet' ), true ) ? $atts['mode'] : 'ring';
+	$method = 'mm' === $atts['method'] ? 'mm' : '';
 
 	wp_enqueue_style( 'rbs-sizer' );
 	wp_enqueue_script( 'rbs-sizer' );
 
 	// Flag for schema output.
 	$GLOBALS['rbs_tool_on_page'] = $mode;
+	if ( '' !== $atts['name'] ) {
+		$GLOBALS['rbs_tool_name'] = sanitize_text_field( $atts['name'] );
+	}
 
 	ob_start();
 	?>
-	<div class="rbs" data-mode="<?php echo esc_attr( $mode ); ?>">
+	<div class="rbs" data-mode="<?php echo esc_attr( $mode ); ?>"<?php echo $method ? ' data-method="' . esc_attr( $method ) . '"' : ''; ?>>
 		<noscript><p><strong>This tool needs JavaScript.</strong> Use the size chart below instead.</p></noscript>
 		<div class="rbs-tabs" role="tablist">
 			<button type="button" class="rbs-tab" data-tab="ring" role="tab">Ring</button>

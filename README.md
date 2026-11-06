@@ -16,7 +16,7 @@ Hostinger GIT pulls `main` into `public_html/wp-content/themes/ringbanglesizer`.
 
 | Shortcode | Use |
 |---|---|
-| `[rbs_sizer mode="ring"]` | Interactive tool. `mode` = `ring` (default), `bangle`, `bracelet`. Only enqueues JS/CSS on pages where it is used. |
+| `[rbs_sizer mode="ring"]` | Interactive tool. `mode` = `ring` (default), `bangle`, `bracelet`. Optional `method="mm"` (ring: open on the measurement input) and `name="…"` (schema name). Only enqueues JS/CSS on pages where it is used. |
 | `[rbs_ring_table]` | Full ring conversion chart (US, UK, EU, India/Japan, mm, inch, circumference). Server-rendered HTML. |
 | `[rbs_bangle_table]` | Indian bangle size chart (size, inch, mm, cm, circumference, fit). |
 | `[rbs_cta mode="bangle"]` | Blue call-to-action box linking to the tool page. |
@@ -24,6 +24,10 @@ Hostinger GIT pulls `main` into `public_html/wp-content/themes/ringbanglesizer`.
 | `[rbs_ring_size us="7"]` | One ring size in every system + neighbour links. |
 | `[rbs_bangle_cm_table]` | Bangle sizes in cm with the hand circumference each clears. |
 | `[rbs_mm_lookup]` | Measured diameter (0.5 mm steps) → nearest ring size. |
+| `[rbs_ring_converter]` | US/UK/EU/India/mm/inch converter (`assets/js/converter.js`, loaded only where used). |
+| `[rbs_circ_lookup]` / `[rbs_inch_lookup]` / `[rbs_diameter_ranges]` | Finger circumference (mm), diameter (in) and diameter bands → ring size. |
+| `[rbs_printable_sizer]` | PDF download buttons + true-size SVG preview. PDFs are built by `tools/printable_pdf.py` from `inc/sizes.php`. |
+| `[rbs_wrist_table]` | Wrist 5–9 in → snug / comfortable / loose bracelet length. |
 | `[rbs_contact]` / `[rbs_email]` | First CF7/WPForms form if installed, else the obfuscated contact e-mail. |
 
 Tool page URLs assumed by `[rbs_cta]`: `/` (ring), `/bangle-size-calculator/`, `/bracelet-size-calculator/`. Change in `inc/shortcodes.php → rbs_tool_url()` if the slugs differ.

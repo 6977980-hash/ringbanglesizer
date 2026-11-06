@@ -135,7 +135,7 @@
 
 	/* ------------------------------------------------------------- ring */
 
-	function renderRing(root) {
+	function renderRing(root, method) {
 		var idx = 8; // US 7
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
@@ -210,7 +210,11 @@
 
 		root.appendChild(panel);
 		drawMatch();
-		return drawMatch;
+		if (method === 'mm') { $('.rbs-method[data-m="mm"]', panel).click(); }
+		// After calibration only the "match" view depends on the screen scale.
+		return function () {
+			if (!$('.rbs-m-match', panel).classList.contains('rbs-hidden')) { drawMatch(); }
+		};
 	}
 
 	/* ----------------------------------------------------------- bangle */
@@ -290,7 +294,11 @@
 
 		root.appendChild(panel);
 		drawMatch();
-		return drawMatch;
+		if (method === 'mm') { $('.rbs-method[data-m="mm"]', panel).click(); }
+		// After calibration only the "match" view depends on the screen scale.
+		return function () {
+			if (!$('.rbs-m-match', panel).classList.contains('rbs-hidden')) { drawMatch(); }
+		};
 	}
 
 	/* --------------------------------------------------------- bracelet */
@@ -341,6 +349,7 @@
 
 	function init(container) {
 		var mode = container.getAttribute('data-mode') || 'ring';
+		var method = container.getAttribute('data-method') || '';
 		var body = $('.rbs-body', container);
 		var tabs = container.querySelectorAll('.rbs-tab');
 		var redraw = function () {};
@@ -356,7 +365,7 @@
 				body.querySelectorAll('.rbs-approx').forEach(function (n) { n.remove(); });
 				redraw();
 			});
-			redraw = m === 'bangle' ? renderBangle(body) : renderRing(body);
+			redraw = m === 'bangle' ? renderBangle(body) : renderRing(body, m === mode ? method : '');
 		}
 		tabs.forEach(function (t) {
 			t.addEventListener('click', function () { mount(t.getAttribute('data-tab')); });

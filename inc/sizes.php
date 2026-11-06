@@ -79,3 +79,22 @@ function rbs_ring_derived( $mm ) {
 		'inch'    => round( $mm / 25.4, 3 ),
 	);
 }
+
+/**
+ * Ring rows with every system, as passed to the front-end scripts.
+ */
+function rbs_ring_rows_for_js() {
+	$rings = array();
+	foreach ( rbs_ring_sizes() as $r ) {
+		$d       = rbs_ring_derived( $r['mm'] );
+		$rings[] = array(
+			'us'   => $r['us'],
+			'uk'   => $r['uk'],
+			'mm'   => $r['mm'],
+			'circ' => $d['circ_mm'],
+			'eu'   => $d['eu'],
+			'jp'   => $d['jp'],
+		);
+	}
+	return $rings;
+}

@@ -147,7 +147,7 @@ function rbs_ring_mm_pages() {
 
 [rbs_cta mode="ring"]
 
-<p>Need other systems? See the full <a href="/ring-size-chart/">ring size chart</a> or the <a href="/ring-size-chart/pakistan/">ring size chart for Pakistan</a>.</p>
+<p>Need other systems? See the full <a href="/ring-size-chart/">ring size chart</a>, the <a href="/ring-size-converter/">ring size converter</a> or the <a href="/ring-size-chart/pakistan/">ring size chart for Pakistan</a>. Have a measurement? Look it up by <a href="/ring-size-by-diameter/">diameter</a> or <a href="/ring-size-by-circumference/">circumference</a>.</p>
 ',
 			'faq' => array(
 				array( 'What is ring size in mm?', 'Ring size in mm is either the inner diameter of the ring (US 7 = 17.3 mm) or its inner circumference (US 7 = 54.3 mm). European sizes use the circumference.' ),
