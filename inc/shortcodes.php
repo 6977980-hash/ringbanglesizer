@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function rbs_tool_url( $mode ) {
 	$map = array(
-		'ring'     => home_url( '/' ),
+		'ring'     => home_url( '/' ), // ring-sizer page is set as the front page
 		'bangle'   => home_url( '/bangle-size-calculator/' ),
 		'bracelet' => home_url( '/bracelet-size-calculator/' ),
 	);

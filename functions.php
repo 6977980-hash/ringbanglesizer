@@ -19,6 +19,7 @@ define( 'RBS_URI', get_stylesheet_directory_uri() );
 require_once RBS_DIR . '/inc/sizes.php';
 require_once RBS_DIR . '/inc/shortcodes.php';
 require_once RBS_DIR . '/inc/schema.php';
+require_once RBS_DIR . '/inc/pages.php';
 
 /**
  * Styles: parent, then child.
