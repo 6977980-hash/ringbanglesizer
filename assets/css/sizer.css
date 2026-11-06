@@ -1,0 +1,227 @@
+/* Ring Bangle Sizer tool – mobile first */
+
+.rbs {
+	--rbs-blue: #1d4ed8;
+	--rbs-blue-dark: #1e40af;
+	--rbs-border: #e5e7eb;
+	--rbs-bg: #f9fafb;
+	--rbs-text: #111827;
+	--rbs-muted: #6b7280;
+	max-width: 720px;
+	margin: 0 auto 32px;
+	color: var(--rbs-text);
+	font-size: 16px;
+	line-height: 1.5;
+	min-height: 520px; /* reserve space: avoids CLS while JS loads */
+}
+
+.rbs * { box-sizing: border-box; }
+
+.rbs-tabs {
+	display: flex;
+	gap: 6px;
+	margin-bottom: 14px;
+}
+.rbs-tab {
+	flex: 1;
+	padding: 10px 6px;
+	border: 1px solid var(--rbs-border);
+	border-radius: 10px;
+	background: #fff;
+	font-weight: 600;
+	font-size: 15px;
+	cursor: pointer;
+	color: var(--rbs-text);
+}
+.rbs-tab[aria-selected="true"] {
+	background: var(--rbs-blue);
+	border-color: var(--rbs-blue);
+	color: #fff;
+}
+
+.rbs-panel {
+	border: 1px solid var(--rbs-border);
+	border-radius: 12px;
+	padding: 16px;
+	background: #fff;
+	margin-bottom: 14px;
+}
+.rbs-panel h3 {
+	margin: 0 0 8px;
+	font-size: 17px;
+}
+.rbs-panel p { margin: 0 0 10px; }
+.rbs-muted { color: var(--rbs-muted); font-size: 14px; }
+.rbs-loading { color: var(--rbs-muted); }
+
+/* calibration */
+.rbs-cal-status {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+.rbs-badge {
+	display: inline-block;
+	padding: 3px 10px;
+	border-radius: 999px;
+	font-size: 13px;
+	font-weight: 600;
+	background: #fef3c7;
+	color: #92400e;
+}
+.rbs-badge.ok { background: #d1fae5; color: #065f46; }
+
+.rbs-card-stage {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	background: var(--rbs-bg);
+	border-radius: 10px;
+	padding: 16px 0;
+	display: flex;
+	justify-content: center;
+}
+.rbs-card {
+	border: 3px dashed var(--rbs-blue);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--rbs-blue);
+	font-size: 13px;
+	font-weight: 600;
+	text-align: center;
+	padding: 6px;
+}
+
+/* sliders */
+.rbs-slider-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 12px 0;
+}
+.rbs-slider-row input[type="range"] {
+	flex: 1;
+	min-width: 0;
+}
+.rbs-step {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 1px solid var(--rbs-border);
+	background: #fff;
+	font-size: 20px;
+	line-height: 1;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+/* buttons */
+.rbs-btn {
+	display: inline-block;
+	padding: 10px 18px;
+	border-radius: 8px;
+	border: none;
+	background: var(--rbs-blue);
+	color: #fff;
+	font-weight: 600;
+	font-size: 15px;
+	cursor: pointer;
+}
+.rbs-btn:hover { background: var(--rbs-blue-dark); }
+.rbs-btn.secondary {
+	background: #fff;
+	color: var(--rbs-blue);
+	border: 1px solid var(--rbs-blue);
+}
+.rbs-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+/* circle stage */
+.rbs-stage {
+	position: relative;
+	width: 100%;
+	min-height: 260px;
+	background: var(--rbs-bg);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+.rbs-stage svg { display: block; }
+.rbs-stage .rbs-circle { fill: none; stroke: var(--rbs-blue); stroke-width: 2; }
+.rbs-stage .rbs-circle-inner { fill: #fff; stroke: none; }
+.rbs-stage .rbs-center { stroke: #9ca3af; stroke-width: 1; }
+.rbs-stage-label {
+	position: absolute;
+	bottom: 8px;
+	left: 0; right: 0;
+	text-align: center;
+	font-size: 13px;
+	color: var(--rbs-muted);
+}
+
+/* result */
+.rbs-result {
+	background: #eff6ff;
+	border: 1px solid #bfdbfe;
+	border-radius: 10px;
+	padding: 14px 16px;
+	margin-top: 12px;
+}
+.rbs-result .rbs-big {
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 1.1;
+	margin-bottom: 6px;
+}
+.rbs-result table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 15px; }
+.rbs-result td { padding: 5px 0; border-bottom: 1px solid #dbeafe; }
+.rbs-result td:last-child { text-align: right; font-weight: 600; }
+.rbs-result tr:last-child td { border-bottom: none; }
+
+/* inputs */
+.rbs-field { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+.rbs-field label { font-weight: 600; font-size: 14px; }
+.rbs-field input[type="number"] {
+	width: 110px;
+	padding: 8px 10px;
+	border: 1px solid var(--rbs-border);
+	border-radius: 8px;
+	font-size: 16px;
+}
+.rbs-field select {
+	padding: 8px 10px;
+	border: 1px solid var(--rbs-border);
+	border-radius: 8px;
+	font-size: 15px;
+	background: #fff;
+}
+
+/* method toggle */
+.rbs-methods { display: flex; gap: 6px; margin: 0 0 12px; flex-wrap: wrap; }
+.rbs-method {
+	padding: 7px 12px;
+	border-radius: 999px;
+	border: 1px solid var(--rbs-border);
+	background: #fff;
+	font-size: 14px;
+	cursor: pointer;
+}
+.rbs-method[aria-pressed="true"] { background: var(--rbs-text); color: #fff; border-color: var(--rbs-text); }
+
+.rbs-hidden { display: none !important; }
+
+.rbs-note {
+	font-size: 13px;
+	color: var(--rbs-muted);
+	margin-top: 10px;
+}
+
+@media (min-width: 600px) {
+	.rbs-panel { padding: 20px 22px; }
+	.rbs-result .rbs-big { font-size: 34px; }
+}
