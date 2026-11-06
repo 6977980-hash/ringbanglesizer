@@ -2,7 +2,7 @@
 
 ## Done
 
-All in the Phase 3 PR (stacked on PR #3; `RBS_PAGES_VERSION` 2 → 3, theme 0.3.0). 7 new pages, 43 published pages in total.
+All in PR #4 (merged 2026-11-06 after PR #3; `RBS_PAGES_VERSION` 2 → 3, theme 0.3.0). 7 new pages, 43 published pages in total.
 
 | Item | Where |
 |---|---|
@@ -21,19 +21,19 @@ All in the Phase 3 PR (stacked on PR #3; `RBS_PAGES_VERSION` 2 → 3, theme 0.3.
 ## State / gotchas
 
 - **Tested** on local WordPress + GeneratePress + SQLite: sync creates 43 pages, no duplicates; all pages 200, no unrendered shortcodes, no PHP warnings; every internal link (incl. PDFs) resolves; new pages are in the core sitemap (38 URLs + front page); FAQPage JSON-LD on all new pages; converter and calculator tested in headless Chrome (Pixel 7) with no JS errors.
-- **Not seen live yet** (PR #3 and this PR still unmerged when written).
+- **Verified live** after merge (2026-11-06): new pages 200, converter + calculator work in headless Chrome on ringbanglesizer.com with no JS errors, PDFs download, menu has the new items, sitemap 38 page URLs + front page, privacy page noindex.
+- **Merging:** Ali wants Claude to merge every phase PR itself (squash via `gh api -X PUT .../pulls/N/merge`). This worked for #3 and #4.
 - If ring sizes in `inc/sizes.php` change, re-run `python3 tools/printable_pdf.py` (needs php + reportlab) and commit the PDFs. Hard-coded numbers also live in content tables/FAQ of `ring-tools.php` and the women/men tables in `page-content.php`.
 - US-size formula used in copy: diameter = 11.63 + 0.8128 × US (matches the chart to ±0.05 mm).
 - Lookup tables pick the nearest size; ties (e.g. 20.0 mm between 10 and 10.5) resolve to the smaller size. The diameter page FAQ says so explicitly.
 - `bangle-size-chart` is still ~480 words (hub target 1,200) → do in Phase 4.
-- Rich Results Test and PageSpeed could not be run from the sandbox (site not live with these changes). Run after merge.
+- Rich Results Test and PageSpeed are Google web tools Claude could not run from the sandbox; do them in Phase 4.
 
 ## Next phase: Phase 4 (see plan doc sections 5 and 12)
-1. Verify Phase 2 + 3 live: load any page once (triggers sync), check `/ring-size-converter/` converter works on a phone, PDFs download from `/printable-ring-sizer/` and print at 100%, menus on mobile, `/wp-sitemap.xml`.
+1. Phase 2 + 3 are live and checked. Ali still to print the PDF once and confirm the 50 mm line.
 2. Rich Results Test on `/ring-size-calculator/`, `/ring-size-converter/`, `/bangle-size/2-4/`; PageSpeed mobile on `/` and `/bangle-size-calculator/` (target ≥ 90).
 3. Expand `/bangle-size-chart/` to hub length; continue the content map from the plan doc (remaining bangle/bracelet/kids long-tail pages).
 
 ## Open items (Ali)
-- Merge PR #3, then this PR (or ask Claude to merge).
 - Print the PDF once and check the 50 mm line + card box on paper (real-printer check).
 - Everything still open from phase-2.md: Search Console/Bing + sitemap submit, Site Title/Tagline, auto-merge setting, social profiles, accuracy-test photos, CMP before analytics.
