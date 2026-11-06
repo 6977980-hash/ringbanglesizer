@@ -74,10 +74,7 @@ function braceletSvg() {
 }
 
 function brandSvg() {
-	return `<svg viewBox="0 0 400 400" width="400" height="400">
-<rect x="40" y="40" width="320" height="320" rx="64" fill="${BLUE}"/>
-<circle cx="200" cy="220" r="96" fill="none" stroke="#fff" stroke-width="36"/>
-<path d="M160 80h80l-40 48z" fill="#fde68a"/></svg>`;
+	return `<svg viewBox="0 0 40 40" width="400" height="400">${MARK}</svg>`;
 }
 
 function visualFor(p) {
@@ -104,7 +101,8 @@ function visualFor(p) {
 /* ---------------------------------------------------------- templates */
 
 const BASE_CSS = `*{margin:0;box-sizing:border-box}body{font-family:Inter,sans-serif;color:${DARK};background:${BG}}`;
-const LOGO = `<svg viewBox="0 0 48 48" width="44" height="44"><rect width="48" height="48" rx="10" fill="${BLUE}"/><circle cx="24" cy="26" r="12" fill="none" stroke="#fff" stroke-width="5"/><path d="M19 9h10l-5 6z" fill="#fde68a"/></svg>`;
+const MARK = '<circle cx="16" cy="20" r="12" fill="none" stroke="#1d4ed8" stroke-width="4"/><circle cx="28" cy="22" r="7.5" fill="none" stroke="#d4a017" stroke-width="4"/>';
+const LOGO = `<svg viewBox="0 0 40 40" width="48" height="48">${MARK}</svg>`;
 
 function ogHtml(pg) {
 	const [head, ...rest] = pg.title.split(' – ');
@@ -146,7 +144,7 @@ ${pin.note ? `<div class="n">${esc(pin.note)}</div>` : '<div class="n"></div>'}
 
 function pins() {
 	const B = sizes.bangle, R = sizes.ring;
-	const frac = { 1.625: '1⅝"', 1.75: '1¾"', 1.875: '1⅞"', 2: '2"', 2.125: '2⅛"', 2.25: '2¼"', 2.375: '2⅜"', 2.5: '2½"', 2.625: '2⅝"', 2.75: '2¾"', 2.875: '2⅞"', 3: '3"' };
+	const frac = { 1.625: '1⅝"', 1.75: '1¾"', 1.875: '1⅞"', 2: '2"', 2.125: '2⅛"', 2.25: '2¼"', 2.375: '2⅜"', 2.5: '2½"', 2.625: '2⅝"', 2.75: '2¾"', 2.875: '2⅞"', 3: '3"', 3.125: '3⅛"', 3.25: '3¼"' };
 	const adult = B.filter((b) => b.inch >= 2.125);
 	const kids = B.filter((b) => b.inch <= 2.125);
 	const pick = (list) => R.filter((r) => list.includes(r.us));

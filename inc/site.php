@@ -188,6 +188,9 @@ function rbs_org_entity() {
 		'founder' => rbs_founder_entity(),
 	);
 	$logo = get_site_icon_url( 512 );
+	if ( ! $logo ) {
+		$logo = RBS_URI . '/assets/img/logo-512.png';
+	}
 	if ( $logo ) {
 		$org['logo'] = $logo;
 	}
@@ -391,6 +394,8 @@ add_action( 'wp_head', function () {
 		return;
 	}
 	echo '<link rel="icon" href="' . esc_url( RBS_URI . '/assets/img/icon.svg' ) . '" type="image/svg+xml">' . "\n";
+	echo '<link rel="icon" href="' . esc_url( RBS_URI . '/assets/img/icon-32.png' ) . '" sizes="32x32" type="image/png">' . "\n";
+	echo '<link rel="apple-touch-icon" href="' . esc_url( RBS_URI . '/assets/img/apple-touch-icon.png' ) . '">' . "\n";
 }, 3 );
 
 /**
@@ -410,4 +415,19 @@ function rbs_wrap_tables( $content ) {
 	);
 }
 add_filter( 'the_content', 'rbs_wrap_tables', 15 );
+
+/**
+ * Logo mark (ring + bangle) in front of the site title, and "Sizer" in blue.
+ * Inline SVG: no extra request.
+ */
+function rbs_logo_svg( $size = 34 ) {
+	return '<svg class="rbs-logo" width="' . (int) $size . '" height="' . (int) $size . '" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="16" cy="20" r="12" fill="none" stroke="#1d4ed8" stroke-width="4"/><circle cx="28" cy="22" r="7.5" fill="none" stroke="#d4a017" stroke-width="4"/></svg>';
+}
+add_filter( 'generate_site_title_output', function ( $output ) {
+	$name = get_bloginfo( 'name' );
+	if ( 'Ring Bangle Sizer' !== $name || false === strpos( $output, $name . '</a>' ) ) {
+		return $output;
+	}
+	return str_replace( $name . '</a>', rbs_logo_svg() . '<span class="rbs-wordmark">Ring Bangle <span>Sizer</span></span></a>', $output );
+} );
 
