@@ -87,28 +87,71 @@
 		});
 	}
 
-	function savedSize() {
-		try { return JSON.parse(load(SAVED_KEY) || 'null'); } catch (e) { return null; }
+	// Saved sizes for several people ("Me", "Ammi" …), kept on this device only.
+	var PEOPLE_KEY = 'rbs_people_v1';
+	function people() {
+		var list;
+		try { list = JSON.parse(load(PEOPLE_KEY) || 'null'); } catch (e) { list = null; }
+		if (!list) {
+			list = [];
+			var old;
+			try { old = JSON.parse(load(SAVED_KEY) || 'null'); } catch (e) { old = null; }
+			if (old && old.kind && old.label) { list.push({ name: 'Me', kind: old.kind, label: old.label, date: old.date }); }
+		}
+		return list;
+	}
+	function savePerson(name, kind, label) {
+		name = String(name || '').trim().slice(0, 24) || 'Me';
+		var list = people().filter(function (x) { return !(x.kind === kind && x.name.toLowerCase() === name.toLowerCase()); });
+		list.push({ name: name, kind: kind, label: label, date: new Date().toISOString().slice(0, 10) });
+		store(PEOPLE_KEY, JSON.stringify(list));
+		return name;
+	}
+	function removePerson(name, kind) {
+		store(PEOPLE_KEY, JSON.stringify(people().filter(function (x) { return !(x.kind === kind && x.name === name); })));
+	}
+	function escHtml(t) {
+		return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+	}
+	function ringByLabel(label) {
+		for (var i = 0; i < data.rings.length; i++) { if ('US ' + data.rings[i].us === label) { return data.rings[i]; } }
+		return null;
+	}
+	function bangleByLabel(label) {
+		for (var i = 0; i < data.bangles.length; i++) { if ('Size ' + data.bangles[i].label === label) { return data.bangles[i]; } }
+		return null;
 	}
 
 	// Save / share / chart buttons under a result.
+	var lastName = 'Me';
 	function resultActions(kind, label, shareText) {
 		var chart = kind === 'bangle' ? '/bangle-size-chart/' : '/ring-size-chart/';
-		var saved = savedSize();
-		var isSaved = saved && saved.kind === kind && saved.label === label;
-		return '<div class="rbs-actions">' +
-			'<button type="button" class="rbs-btn rbs-save" data-kind="' + kind + '" data-label="' + label + '">' + (isSaved ? 'Saved ✓' : 'Save my size') + '</button>' +
+		return '<div class="rbs-save-row">' +
+			'<label class="rbs-name-label">Whose size? <input type="text" class="rbs-name" maxlength="24" value="' + escHtml(lastName) + '" autocomplete="off"></label>' +
+			'<button type="button" class="rbs-btn rbs-save" data-kind="' + kind + '" data-label="' + label + '">Save</button>' +
+			'</div>' +
+			'<div class="rbs-actions">' +
+			'<button type="button" class="rbs-btn secondary rbs-card-btn">Size card</button>' +
 			'<button type="button" class="rbs-btn secondary rbs-share" data-text="' + shareText.replace(/"/g, '&quot;') + '">Share</button>' +
 			'<a class="rbs-chart-link" href="' + chart + '">Full size chart →</a>' +
 			'</div>';
 	}
-	function wireActions(box) {
+	// onSaved(): called after a save so the panel can refresh its saved-size chips.
+	// card: { kind, title, big, rows: [[k, v]…] } for the downloadable size card.
+	function wireActions(box, onSaved, card) {
 		var save = $('.rbs-save', box);
+		var nameIn = $('.rbs-name', box);
+		if (nameIn) { nameIn.addEventListener('input', function () { lastName = nameIn.value; }); }
 		if (save) {
 			save.addEventListener('click', function () {
-				store(SAVED_KEY, JSON.stringify({ kind: save.getAttribute('data-kind'), label: save.getAttribute('data-label'), date: new Date().toISOString().slice(0, 10) }));
+				var who = savePerson(nameIn ? nameIn.value : 'Me', save.getAttribute('data-kind'), save.getAttribute('data-label'));
 				save.textContent = 'Saved ✓';
+				if (onSaved) { onSaved(who); }
 			});
+		}
+		var cardBtn = $('.rbs-card-btn', box);
+		if (cardBtn && card) {
+			cardBtn.addEventListener('click', function () { sizeCard(card, nameIn ? nameIn.value : ''); });
 		}
 		var share = $('.rbs-share', box);
 		if (share) {
@@ -131,20 +174,222 @@
 			: '<svg class="rbs-art" width="72" height="56" viewBox="0 0 72 56" aria-hidden="true"><rect x="2" y="4" width="68" height="44" rx="4" fill="#fff" stroke="#9ca3af" stroke-width="2"/><rect x="16" y="13" width="40" height="26" rx="3" fill="#fde68a" stroke="#b45309" stroke-width="1.5"/><rect x="20" y="17" width="7" height="5" rx="1" fill="#b45309"/><path d="M16 13v26M56 13v26" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="3 2"/><path d="M26 52h20" stroke="#9ca3af" stroke-width="2"/></svg>';
 	}
 
-	function savedLine(kind) {
-		var sv = savedSize();
-		if (!sv || sv.kind !== kind) { return ''; }
-		return '<p class="rbs-saved">Your saved size: <strong>' + sv.label + '</strong> <button type="button" class="rbs-link rbs-show-saved">show it</button></p>';
+	function savedLine() {
+		return '<div class="rbs-saved" aria-live="polite"></div>';
 	}
-	// Jump the slider to the saved size. find(label) returns the index or -1.
-	function wireSaved(panel, find, go) {
-		var b = $('.rbs-show-saved', panel);
-		if (!b) { return; }
-		b.addEventListener('click', function () {
-			var sv = savedSize();
-			var i = sv ? find(sv.label) : -1;
-			if (i >= 0) { go(i); }
+	// Saved sizes as chips: tap a name to show that size, × to forget it.
+	// find(label) returns the slider index or -1; go(i) moves the slider there.
+	function wireSaved(panel, kind, find, go) {
+		var box = $('.rbs-saved', panel);
+		function paint() {
+			var list = people().filter(function (x) { return x.kind === kind; });
+			if (!list.length) { box.innerHTML = ''; return; }
+			box.innerHTML = '<span class="rbs-saved-t">Saved sizes:</span> ' + list.map(function (x) {
+				return '<span class="rbs-chip"><button type="button" class="rbs-chip-show" data-label="' + escHtml(x.label) + '">' + escHtml(x.name) + ' · ' + escHtml(x.label.replace('Size ', '')) + '</button>' +
+					'<button type="button" class="rbs-chip-x" data-name="' + escHtml(x.name) + '" aria-label="Forget ' + escHtml(x.name) + '">×</button></span>';
+			}).join(' ');
+			box.querySelectorAll('.rbs-chip-show').forEach(function (b) {
+				b.addEventListener('click', function () {
+					var i = find(b.getAttribute('data-label'));
+					if (i >= 0) { go(i); }
+				});
+			});
+			box.querySelectorAll('.rbs-chip-x').forEach(function (b) {
+				b.addEventListener('click', function () { removePerson(b.getAttribute('data-name'), kind); paint(); });
+			});
+		}
+		paint();
+		return paint;
+	}
+
+	/* Size card: a 1080×1350 PNG drawn on a canvas, shared as a file where the
+	 * phone allows it (WhatsApp etc.), otherwise downloaded. */
+	function sizeCard(card, name) {
+		var W = 1080, H = 1350;
+		var c = document.createElement('canvas');
+		c.width = W; c.height = H;
+		var g = c.getContext('2d');
+		if (!g) { return; }
+		var F = '-apple-system, "Segoe UI", Roboto, Arial, sans-serif';
+		var grd = g.createLinearGradient(0, 0, 0, H);
+		grd.addColorStop(0, '#eff6ff'); grd.addColorStop(0.5, '#ffffff');
+		g.fillStyle = grd; g.fillRect(0, 0, W, H);
+		// logo mark
+		g.lineWidth = 11;
+		g.strokeStyle = '#1d4ed8'; g.beginPath(); g.arc(130, 140, 44, 0, Math.PI * 2); g.stroke();
+		g.strokeStyle = '#d4a017'; g.beginPath(); g.arc(176, 148, 28, 0, Math.PI * 2); g.stroke();
+		g.fillStyle = '#111827'; g.font = '800 46px ' + F; g.textBaseline = 'middle';
+		g.fillText('Ring Bangle', 236, 142);
+		g.fillStyle = '#1d4ed8'; g.fillText('Sizer', 236 + g.measureText('Ring Bangle ').width, 142);
+		// title + big size
+		name = String(name || '').trim();
+		var who = !name || name.toLowerCase() === 'me' ? 'My' : name + '\u2019s';
+		g.textBaseline = 'alphabetic';
+		g.fillStyle = '#4b5563'; g.font = '600 52px ' + F;
+		g.fillText(who + ' ' + card.title, 90, 330);
+		g.fillStyle = '#111827'; g.font = '800 ' + (card.big.length > 9 ? 150 : 190) + 'px ' + F;
+		g.fillText(card.big, 84, 520);
+		// rows
+		var y = 640;
+		card.rows.forEach(function (r, i) {
+			g.fillStyle = i % 2 ? '#ffffff' : '#f3f6fb';
+			g.fillRect(84, y - 58, W - 168, 88);
+			g.fillStyle = '#4b5563'; g.font = '500 40px ' + F; g.fillText(r[0], 116, y);
+			g.fillStyle = '#111827'; g.font = '700 42px ' + F;
+			g.fillText(r[1], W - 116 - g.measureText(r[1]).width, y);
+			y += 88;
 		});
+		// footer
+		g.fillStyle = '#111827'; g.fillRect(0, H - 170, W, 170);
+		g.fillStyle = '#ffffff'; g.font = '600 38px ' + F;
+		g.fillText('Measured free on screen at', 90, H - 98);
+		g.fillStyle = '#fde68a'; g.font = '800 46px ' + F;
+		g.fillText('ringbanglesizer.com', 90, H - 44);
+		g.fillStyle = '#9ca3af'; g.font = '500 30px ' + F;
+		var d = new Date().toISOString().slice(0, 10);
+		g.fillText(d, W - 90 - g.measureText(d).width, H - 44);
+
+		var file = (card.kind === 'bangle' ? 'bangle' : 'ring') + '-size-card.png';
+		c.toBlob(function (blob) {
+			if (!blob) { return; }
+			var f = null;
+			try { f = new File([blob], file, { type: 'image/png' }); } catch (e) { f = null; }
+			if (f && navigator.canShare && navigator.canShare({ files: [f] }) && navigator.share) {
+				navigator.share({ files: [f], title: card.title }).catch(function () {});
+				return;
+			}
+			var a = document.createElement('a');
+			a.href = URL.createObjectURL(blob);
+			a.download = file;
+			document.body.appendChild(a);
+			a.click();
+			setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+		}, 'image/png');
+	}
+
+	/* "Will it fit?": read a size the way shops write it and compare it with
+	 * a size measured here. Returns { mm, text } (inner diameter) or null. */
+	var UK_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	function ringMmFromUs(us) {
+		var R = data.rings;
+		if (us <= R[0].us) { return R[0].mm + (us - R[0].us) * 0.81; }
+		for (var i = 1; i < R.length; i++) {
+			if (us <= R[i].us) {
+				var t = (us - R[i - 1].us) / (R[i].us - R[i - 1].us);
+				return R[i - 1].mm + t * (R[i].mm - R[i - 1].mm);
+			}
+		}
+		return R[R.length - 1].mm + (us - R[R.length - 1].us) * 0.81;
+	}
+	function parseRing(raw) {
+		var s = String(raw || '').toLowerCase().replace(/size|ring/g, '').replace(/\s+/g, ' ').trim();
+		if (!s) { return null; }
+		var half = /½|1\/2|\.5$/.test(s) ? 0.5 : 0;
+		var m = s.match(/([\d.]+)\s*(mm|cm)/);
+		if (m) {
+			var v = parseFloat(m[1]) * (m[2] === 'cm' ? 10 : 1);
+			if (v >= 12 && v <= 26) { return { mm: v, text: fmt(v) + ' mm inner diameter' }; }
+			if (v >= 38 && v <= 82) { return { mm: v / Math.PI, text: fmt(v) + ' mm around (' + fmt(v / Math.PI) + ' mm across)' }; }
+			return null;
+		}
+		m = s.match(/^z\s*\+\s*(\d)/) || s.match(/uk\s*z\s*\+\s*(\d)/);
+		if (m) { var zd = 21.8 + 0.4 * parseInt(m[1], 10); return { mm: zd, text: 'UK Z+' + m[1] + ' (' + fmt(zd) + ' mm)' }; }
+		m = s.match(/^(?:uk|au|aus|nz|ie)?\s*([a-z])\s*(?:½|1\/2)?$/);
+		if (m && !/^(us|eu|in)$/.test(s)) {
+			var li = UK_LETTERS.indexOf(m[1].toUpperCase());
+			var ud = 15.7 + (li + half - 9.5) * 0.407; // from the ISO chart: J½ = 15.7 mm, ~0.41 mm a letter
+			return { mm: ud, text: 'UK ' + m[1].toUpperCase() + (half ? '½' : '') + ' (' + fmt(ud) + ' mm)' };
+		}
+		m = s.match(/([\d.]+)/);
+		if (!m) { return null; }
+		var n = parseFloat(m[1]) + (/½/.test(s) ? 0.5 : 0);
+		var sys = /eu|iso|de|fr|it|es/.test(s) ? 'eu' : (/india|in\b|jp|japan|ind/.test(s) ? 'in' : (/us|ca/.test(s) ? 'us' : ''));
+		if (!sys) { sys = n <= 16 ? 'us' : (n < 38 ? 'in' : 'eu'); }
+		if (sys === 'eu') { return { mm: n / Math.PI, text: 'EU ' + n + ' (' + fmt(n / Math.PI) + ' mm)' }; }
+		if (sys === 'in') { var id = 13 + (n - 1) / 3; return { mm: id, text: 'India/Japan ' + n + ' (' + fmt(id) + ' mm)' }; }
+		var usd = ringMmFromUs(n);
+		return { mm: usd, text: 'US ' + n + ' (' + fmt(usd) + ' mm)' };
+	}
+	function parseBangle(raw) {
+		var s = String(raw || '').toLowerCase().replace(/size|bangle|kada|chudi/g, '').replace(/\s+/g, ' ').trim();
+		if (!s) { return null; }
+		var m = s.match(/([\d.]+)\s*(mm|cm)/);
+		if (m) {
+			var v = parseFloat(m[1]) * (m[2] === 'cm' ? 10 : 1);
+			if (v >= 35 && v <= 95) { return { mm: v, text: fmt(v) + ' mm inner diameter' }; }
+			if (v > 110 && v < 300) { return { mm: v / Math.PI, text: fmt(v) + ' mm around (' + fmt(v / Math.PI) + ' mm across)' }; }
+			return null;
+		}
+		m = s.match(/^(\d)\s*[.\/\-:]\s*(\d{1,2})$/);
+		if (m) {
+			var lab = m[1] + '.' + m[2];
+			for (var i = 0; i < data.bangles.length; i++) {
+				if (data.bangles[i].label === lab) { return { mm: data.bangles[i].mm, text: 'Indian size ' + lab + ' (' + fmt(data.bangles[i].mm) + ' mm)' }; }
+			}
+			var inch = parseInt(m[1], 10) + parseInt(m[2], 10) / 16;
+			return { mm: inch * MM_IN, text: 'Indian size ' + lab + ' (' + fmt(inch * MM_IN) + ' mm)' };
+		}
+		m = s.match(/([\d.]+)\s*(in|inch|")?/);
+		if (m) {
+			var x = parseFloat(m[1]);
+			if (x >= 1.4 && x <= 3.6) { return { mm: x * MM_IN, text: x + ' in (' + fmt(x * MM_IN) + ' mm)' }; }
+			if (x >= 4.5 && x <= 9) { return { mm: x * 10, text: x + ' cm (' + fmt(x * 10) + ' mm)' }; }
+		}
+		return null;
+	}
+	function fitVerdict(kind, shopMm, myMm) {
+		var d = shopMm - myMm;
+		if (kind === 'ring') {
+			// one US size is about 0.8 mm of diameter
+			var sizes = Math.max(1, Math.round(Math.abs(d) / 0.4) / 2);
+			var n = String(sizes).replace('.5', '½') + ' size' + (sizes === 1 ? '' : 's');
+			if (Math.abs(d) <= 0.2) { return ['ok', 'Fits: same size.']; }
+			if (d > 0 && d <= 0.6) { return ['warn', 'A little loose (about ½ size bigger). Fine for wide bands or a big knuckle.']; }
+			if (d < 0 && d >= -0.6) { return ['warn', 'A little tight (about ½ size smaller). Pick the next size up if you can.']; }
+			return ['bad', d > 0 ? 'Too big: about ' + n + ' larger.' : 'Too small: about ' + n + ' smaller.'];
+		}
+		if (d >= -0.5 && d <= 1.8) { return ['ok', 'Fits: it should slide over the hand and sit well.']; }
+		if (d > 1.8 && d <= 4) { return ['warn', 'Loose: it will slide over easily but move around on the wrist.']; }
+		if (d < -0.5 && d >= -2) { return ['warn', 'Tight: it may not pass over the knuckles. Choose the next size up.']; }
+		return ['bad', d > 0 ? 'Too big: it may slip off the hand.' : 'Too small: it will not go over the hand.'];
+	}
+	// The "Will it fit?" panel. getCurrent() returns { label, mm } of the size shown in the tool.
+	function renderFit(root, kind, getCurrent) {
+		var panel = el('div', { 'class': 'rbs-panel rbs-fit' });
+		var eg = kind === 'ring' ? 'e.g. UK O, EU 54, 7.5 or 17.3 mm' : 'e.g. 2.6, 2/8 or 6.2 cm';
+		panel.innerHTML =
+			'<h2 class="rbs-h">Will it fit? Check a shop\'s size</h2>' +
+			'<p class="rbs-muted">Type the size from the product page and see how it compares.</p>' +
+			'<div class="rbs-fit-row"><input type="text" class="rbs-fit-val" placeholder="' + eg + '" aria-label="Size on the shop page" autocomplete="off">' +
+			'<label class="rbs-fit-who-l">for <select class="rbs-fit-who"></select></label></div>' +
+			'<div class="rbs-fit-out" aria-live="polite"></div>';
+		var input = $('.rbs-fit-val', panel), who = $('.rbs-fit-who', panel), out = $('.rbs-fit-out', panel);
+		function fillWho() {
+			var keep = who.value;
+			var list = people().filter(function (x) { return x.kind === kind; });
+			who.innerHTML = '<option value="">the size above</option>' + list.map(function (x) {
+				return '<option value="' + escHtml(x.label) + '">' + escHtml(x.name) + ' (' + escHtml(x.label.replace('Size ', '')) + ')</option>';
+			}).join('');
+			if (keep) { who.value = keep; }
+		}
+		function check() {
+			var shop = (kind === 'ring' ? parseRing : parseBangle)(input.value);
+			if (!input.value.trim()) { out.innerHTML = ''; return; }
+			if (!shop) { out.innerHTML = '<p class="rbs-fit-res bad">Could not read that size. Try ' + eg + '.</p>'; return; }
+			var mine = who.value
+				? (kind === 'ring' ? ringByLabel(who.value) : bangleByLabel(who.value))
+				: getCurrent();
+			var myLabel = who.value ? who.value : (mine && mine.label);
+			if (!mine) { out.innerHTML = ''; return; }
+			var v = fitVerdict(kind, shop.mm, mine.mm);
+			out.innerHTML = '<p class="rbs-fit-res ' + v[0] + '"><strong>' + v[1] + '</strong></p>' +
+				'<p class="rbs-note">Shop size read as ' + escHtml(shop.text) + '. Compared with ' + escHtml(myLabel) + ' (' + fmt(mine.mm) + ' mm). Different brands can vary by about ¼ size.</p>';
+		}
+		input.addEventListener('input', check);
+		who.addEventListener('change', check);
+		fillWho();
+		root.appendChild(panel);
+		return { refresh: function () { fillWho(); check(); } };
 	}
 
 	function scrollToNext(panel) {
@@ -156,6 +401,20 @@
 
 	/* --------------------------------------------------------- calibration */
 
+	// Coins for calibrating without a card (official diameters).
+	var COINS = [
+		{ id: 'in10', name: 'India ₹10 coin', short: '₹10', mm: 27 },
+		{ id: 'pk10', name: 'Pakistan Rs 10 coin', short: 'Rs 10', mm: 25.5 },
+		{ id: 'us25', name: 'US quarter (25¢)', short: '25¢', mm: 24.26 },
+		{ id: 'uk1', name: 'UK £1 coin', short: '£1', mm: 23.43 },
+		{ id: 'eu2', name: '€2 coin', short: '€2', mm: 25.75 }
+	];
+	function defaultCoin() {
+		var langs = (navigator.languages || [navigator.language || '']).join(',').toLowerCase();
+		if (/-pk\b|\bur\b/.test(langs)) { return 'pk10'; }
+		return { in: 'in10', uk: 'uk1', eu: 'eu2' }[guessSystem()] || 'us25';
+	}
+
 	function renderCalibration(root, onDone) {
 		var panel = el('div', { 'class': 'rbs-panel rbs-cal' });
 		var badge = calibrated
@@ -164,6 +423,10 @@
 		panel.innerHTML =
 			'<div class="rbs-cal-status"><h2 class="rbs-h">Step 1: Calibrate your screen</h2>' + badge + '</div>' +
 			'<div class="rbs-cal-intro"><span class="rbs-art-wrap"></span><p class="rbs-muted rbs-cal-help"></p></div>' +
+			'<div class="rbs-cal-mode"><button type="button" class="rbs-link rbs-coin-toggle">No card? Use a coin</button>' +
+			'<select class="rbs-coin-sel rbs-hidden" aria-label="Coin">' + COINS.map(function (c) {
+				return '<option value="' + c.id + '"' + (c.id === defaultCoin() ? ' selected' : '') + '>' + c.name + ' – ' + c.mm + ' mm</option>';
+			}).join('') + '</select></div>' +
 			// Slider sits above the card: the card grows downwards, so the −/+ buttons stay under the finger.
 			'<div class="rbs-slider-row"><button type="button" class="rbs-step" data-d="-1" aria-label="Smaller">−</button>' +
 			'<input type="range" min="2" max="12" step="0.01" value="' + ppm + '" aria-label="Card outline size">' +
@@ -177,8 +440,35 @@
 		var stage = $('.rbs-card-stage', panel);
 		var help = $('.rbs-cal-help', panel);
 		var upright = null;
+		var coin = null; // null = card mode
+		var coinSel = $('.rbs-coin-sel', panel);
+		var coinToggle = $('.rbs-coin-toggle', panel);
+		function coinById(id) { for (var i = 0; i < COINS.length; i++) { if (COINS[i].id === id) { return COINS[i]; } } return COINS[0]; }
+		coinToggle.addEventListener('click', function () {
+			coin = coin ? null : coinById(coinSel.value);
+			coinSel.classList.toggle('rbs-hidden', !coin);
+			coinToggle.textContent = coin ? 'Use a card instead (more accurate)' : 'No card? Use a coin';
+			upright = null;
+			draw();
+		});
+		coinSel.addEventListener('change', function () { coin = coinById(coinSel.value); upright = null; draw(); });
 
 		function draw() {
+			if (coin) {
+				if (upright !== 'coin') {
+					upright = 'coin';
+					help.innerHTML = 'Lay a <strong>' + coin.name + '</strong> flat on the screen inside the circle. Drag the slider until the dashed circle is exactly the size of the coin.';
+					card.textContent = coin.short;
+					card.classList.add('coin');
+					card.classList.remove('upright');
+					$('.rbs-art-wrap', panel).innerHTML = '';
+				}
+				card.style.width = card.style.height = (ppm * coin.mm) + 'px';
+				range.setAttribute('aria-valuetext', fmt(ppm * 25.4, 0) + ' pixels per inch');
+				return;
+			}
+			card.classList.remove('coin');
+			if (upright === 'coin') { upright = null; }
 			// A bank card (85.6 mm) is wider than a phone screen (~65–70 mm), so on narrow
 			// screens the card is held upright and its short side (53.98 mm) is matched.
 			// The outline is always drawn at true size; it never shrinks to fit.
@@ -297,7 +587,7 @@
 		var idx = 8; // US 7
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
-			'<h2 class="rbs-h">Step 2: Find your ring size</h2>' + savedLine('ring') +
+			'<h2 class="rbs-h">Step 2: Find your ring size</h2>' + savedLine() +
 			'<div class="rbs-methods">' +
 			'<button type="button" class="rbs-method" data-m="match" aria-pressed="true">Match a ring I own</button>' +
 			'<button type="button" class="rbs-method" data-m="mm" aria-pressed="false">I know the diameter / circumference</button>' +
@@ -347,7 +637,11 @@
 				store(SYSTEM_KEY, ringSystem);
 				show(lastRing, lastFromMm);
 			});
-			wireActions(result);
+			wireActions(result, function () { paintSaved(); if (fit) { fit.refresh(); } }, {
+				kind: 'ring', title: 'ring size', big: ringIn(r, ringSystem),
+				rows: [['US / Canada', String(r.us)], ['UK / Australia', r.uk], ['EU / ISO', String(r.eu)], ['India / Japan', String(r.jp)], ['Inside diameter', fmt(r.mm) + ' mm'], ['Inside circumference', fmt(r.circ) + ' mm']]
+			});
+			if (fit) { fit.refresh(); }
 		}
 		function drawMatch() {
 			var r = data.rings[idx];
@@ -384,7 +678,8 @@
 			});
 		});
 
-		wireSaved(panel, function (label) {
+		var fit = null;
+		var paintSaved = wireSaved(panel, 'ring', function (label) {
 			for (var i = 0; i < data.rings.length; i++) { if ('US ' + data.rings[i].us === label) { return i; } }
 			return -1;
 		}, function (i) {
@@ -392,6 +687,7 @@
 			$('.rbs-method[data-m="match"]', panel).click();
 		});
 		root.appendChild(panel);
+		fit = renderFit(root, 'ring', function () { return lastRing ? { label: 'US ' + lastRing.us, mm: lastRing.mm } : null; });
 		drawMatch();
 		if (method === 'mm') { $('.rbs-method[data-m="mm"]', panel).click(); }
 		// After calibration only the "match" view depends on the screen scale.
@@ -406,7 +702,7 @@
 		var idx = 6; // 2.6
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
-			'<h2 class="rbs-h">Step 2: Find your bangle size</h2>' + savedLine('bangle') +
+			'<h2 class="rbs-h">Step 2: Find your bangle size</h2>' + savedLine() +
 			'<div class="rbs-methods">' +
 			'<button type="button" class="rbs-method" data-m="match" aria-pressed="true">Match a bangle I own</button>' +
 			'<button type="button" class="rbs-method" data-m="hand" aria-pressed="false">Measure my hand</button>' +
@@ -429,7 +725,9 @@
 		var range = $('input[type=range]', panel);
 		var result = $('.rbs-result', panel);
 
+		var lastBangle = null;
 		function show(b, extra) {
+			lastBangle = b;
 			result.innerHTML =
 				'<div class="rbs-result-top"><span class="rbs-kicker">Your bangle size</span></div>' +
 				'<div class="rbs-big">Size ' + b.label + '</div>' +
@@ -443,7 +741,11 @@
 					['Typical fit', b.fit]
 				]) + '</details>' + (extra || '') +
 				'<p class="rbs-note">Adult bangle sizes step by 2/16 inch (about 3.2 mm). If you are between sizes, choose the larger one for a bangle that slides over the hand.</p>';
-			wireActions(result);
+			wireActions(result, function () { paintSaved(); if (fit) { fit.refresh(); } }, {
+				kind: 'bangle', title: 'bangle size', big: 'Size ' + b.label,
+				rows: [['Indian size', b.label], ['Inside diameter', fmt(b.mm) + ' mm'], ['In centimetres', fmt(b.mm / 10, 2) + ' cm'], ['In inches', fmt(b.inch, 3) + ' in'], ['Inside circumference', fmt(b.mm * Math.PI) + ' mm'], ['Typical fit', b.fit]]
+			});
+			if (fit) { fit.refresh(); }
 		}
 		function drawMatch() {
 			var b = data.bangles[idx];
@@ -485,7 +787,8 @@
 				if (m === 'match') { drawMatch(); } else { fromHand(); }
 			});
 		});
-		wireSaved(panel, function (label) {
+		var fit = null;
+		var paintSaved = wireSaved(panel, 'bangle', function (label) {
 			for (var i = 0; i < data.bangles.length; i++) { if ('Size ' + data.bangles[i].label === label) { return i; } }
 			return -1;
 		}, function (i) {
@@ -494,6 +797,7 @@
 		});
 
 		root.appendChild(panel);
+		fit = renderFit(root, 'bangle', function () { return lastBangle ? { label: 'Size ' + lastBangle.label, mm: lastBangle.mm } : null; });
 		drawMatch();
 		// After calibration only the "match" view depends on the screen scale.
 		return function () {
