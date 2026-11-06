@@ -5,7 +5,7 @@ Description:  GeneratePress child theme for ringbanglesizer.com. Adds the on-scr
 Author:       Ring Bangle Sizer
 Author URI:   https://ringbanglesizer.com
 Template:     generatepress
-Version:      0.6.4
+Version:      0.7.0
 Requires at least: 6.4
 Requires PHP: 7.4
 License:      GNU General Public License v2 or later
@@ -109,4 +109,14 @@ h1.entry-title,
 	border-radius: 8px;
 	background: #f9fafb;
 	margin-bottom: 14px;
+}
+
+/* Logo */
+.main-title a { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.main-title .rbs-logo { flex-shrink: 0; }
+.rbs-wordmark { font-weight: 800; letter-spacing: -0.01em; color: #111827; }
+.rbs-wordmark span { color: #1d4ed8; }
+@media (max-width: 768px) {
+	.main-title .rbs-logo { width: 30px; height: 30px; }
+	.main-title a { gap: 8px; }
 }
