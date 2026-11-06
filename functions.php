@@ -12,13 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_VERSION', '0.3.0' );
+define( 'RBS_VERSION', '0.4.0' );
 define( 'RBS_DIR', get_stylesheet_directory() );
 define( 'RBS_URI', get_stylesheet_directory_uri() );
 
 require_once RBS_DIR . '/inc/sizes.php';
 require_once RBS_DIR . '/inc/shortcodes.php';
 require_once RBS_DIR . '/inc/tools.php';
+require_once RBS_DIR . '/inc/authority.php';
 require_once RBS_DIR . '/inc/schema.php';
 require_once RBS_DIR . '/inc/site.php';
 require_once RBS_DIR . '/inc/pages.php';
