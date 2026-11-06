@@ -22,6 +22,7 @@ function rbs_founder_entity() {
 		'jobTitle' => 'Founder',
 		'url'      => home_url( '/about/' ),
 		'sameAs'   => array( RBS_FOUNDER_URL ),
+		'image'    => RBS_URI . '/assets/img/ali-ahmad.webp',
 	);
 }
 
