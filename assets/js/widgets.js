@@ -1,6 +1,7 @@
 /* Ring Bangle Sizer – small guide widgets (no dependencies).
  *  [rbs_fit_quiz]    30-second "is my ring too tight or too loose?" quiz
  *  [rbs_kids_growth] estimate a child's bangle size in the next few years
+ *  .rbs-true         real-size circle on each ring / bangle size page
  */
 (function () {
 	'use strict';
@@ -134,9 +135,60 @@
 		calc();
 	}
 
+
+	/* ------------------------------------------------ real-size circle */
+
+	// Same calibration the sizer saves (sizer.js): CSS px per mm + the
+	// devicePixelRatio it was taken at, so browser zoom is corrected for.
+	function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+	function scale() {
+		var dpr = window.devicePixelRatio || 1;
+		var ppm = parseFloat(load('rbs_ppm_v1')) || 0;
+		if (ppm > 0) {
+			var saved = parseFloat(load('rbs_dpr_v1')) || 0;
+			if (saved && Math.abs(saved - dpr) > 0.01) { ppm = ppm * saved / dpr; }
+			return { ppm: ppm, cal: true };
+		}
+		var narrow = Math.min(window.innerWidth || 1024, (window.screen && window.screen.width) || 1024) < 600;
+		return { ppm: narrow ? 6 : 96 / 25.4, cal: false };
+	}
+
+	function initTrue(box) {
+		var mm = parseFloat(box.getAttribute('data-mm'));
+		var label = box.getAttribute('data-label');
+		var ring = box.getAttribute('data-kind') === 'ring';
+		var tool = box.getAttribute('data-tool');
+		var name = ring ? 'ring' : 'bangle';
+		box.innerHTML =
+			'<p class="rbs-true-k">Real size</p>' +
+			'<p class="rbs-true-t">' + (ring ? 'Ring size ' : 'Bangle size ') + esc(label) + ' drawn at ' + esc(mm.toFixed(1)) + ' mm across the inside</p>' +
+			'<div class="rbs-true-stage"></div>' +
+			'<p class="rbs-true-note"></p>';
+		var stage = box.querySelector('.rbs-true-stage'), note = box.querySelector('.rbs-true-note');
+		function draw() {
+			var s = scale();
+			var d = mm * s.ppm, w = d + 4, r = d / 2;
+			var fits = w <= stage.clientWidth;
+			stage.innerHTML = '<svg width="' + w + '" height="' + w + '" viewBox="0 0 ' + w + ' ' + w + '" aria-hidden="true" focusable="false" style="margin:' + (fits ? '0 auto' : '0 0 0 ' + ((stage.clientWidth - w) / 2) + 'px') + '">' +
+				'<circle cx="' + (w / 2) + '" cy="' + (w / 2) + '" r="' + r + '" fill="#fdf6e3" stroke="#1d4ed8" stroke-width="2"/>' +
+				'<text x="' + (w / 2) + '" y="' + (w / 2 - 2) + '" text-anchor="middle" font-size="' + Math.max(12, Math.min(22, d / 6)) + '" font-weight="700" fill="#111827">' + esc(label) + '</text>' +
+				'<text x="' + (w / 2) + '" y="' + (w / 2 + 16) + '" text-anchor="middle" font-size="12" fill="#4b5563">' + esc(mm.toFixed(1)) + ' mm</text></svg>';
+			stage.style.height = Math.min(w, stage.clientWidth * 1.4) + 'px';
+			var msg = s.cal
+				? 'Calibrated on this device. Lay your ' + name + ' flat on the screen: if its inside edge sits on the blue line, it is ' + esc(label) + '.'
+				: 'Approximate until you calibrate. <a href="' + esc(tool) + '">Calibrate once with a bank card or coin</a> (20 seconds) and this circle shows the true size.';
+			if (!fits) { msg += ' The circle is wider than your screen: line up the top and bottom edges.'; }
+			note.innerHTML = msg;
+		}
+		draw();
+		var t;
+		window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(draw, 150); });
+	}
+
 	function boot() {
 		document.querySelectorAll('.rbs-quiz').forEach(initQuiz);
 		document.querySelectorAll('.rbs-growth').forEach(initGrowth);
+		document.querySelectorAll('.rbs-true').forEach(initTrue);
 	}
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', boot);

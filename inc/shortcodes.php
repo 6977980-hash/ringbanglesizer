@@ -228,7 +228,7 @@ function rbs_bangle_size_shortcode( $atts ) {
 	if ( $next ) {
 		$rows[] = array( 'One size larger', '<a href="' . esc_url( rbs_bangle_size_url( $next['label'] ) ) . '">' . esc_html( $next['label'] ) . '</a> (' . esc_html( number_format( $next['mm'], 1 ) ) . ' mm)' );
 	}
-	return rbs_kv_table( $rows, 'Bangle size ' . $b['label'] . ' measurements' );
+	return rbs_true_size_box( $b['mm'], $b['label'], 'bangle' ) . rbs_kv_table( $rows, 'Bangle size ' . $b['label'] . ' measurements' );
 }
 add_shortcode( 'rbs_bangle_size', 'rbs_bangle_size_shortcode' );
 
@@ -267,9 +267,24 @@ function rbs_ring_size_shortcode( $atts ) {
 	if ( $next ) {
 		$rows[] = array( 'Half size larger', '<a href="' . esc_url( rbs_ring_size_url( $next['us'] ) ) . '">US ' . esc_html( $next['us'] ) . '</a> (' . esc_html( number_format( $next['mm'], 1 ) ) . ' mm)' );
 	}
-	return rbs_kv_table( $rows, 'Ring size ' . $r['us'] . ' measurements' );
+	return rbs_true_size_box( $r['mm'], 'US ' . $r['us'], 'ring' ) . rbs_kv_table( $rows, 'Ring size ' . $r['us'] . ' measurements' );
 }
 add_shortcode( 'rbs_ring_size', 'rbs_ring_size_shortcode' );
+
+/**
+ * Real-size circle at the top of a size page, drawn by widgets.js with the
+ * visitor's saved calibration (rbs_ppm_v1), so the page doubles as a sizer.
+ */
+function rbs_true_size_box( $mm, $label, $kind ) {
+	wp_enqueue_script( 'rbs-widgets' );
+	return sprintf(
+		'<div class="rbs-true" data-mm="%1$s" data-label="%2$s" data-kind="%3$s" data-tool="%4$s" style="--mm:%1$s"><noscript><p>Turn on JavaScript to see this size drawn at real size.</p></noscript></div>',
+		esc_attr( number_format( $mm, 2, '.', '' ) ),
+		esc_attr( $label ),
+		esc_attr( $kind ),
+		esc_url( rbs_tool_url( 'bangle' === $kind ? 'bangle' : 'ring' ) )
+	);
+}
 
 /**
  * Two-column table. Values are already escaped by the caller.
