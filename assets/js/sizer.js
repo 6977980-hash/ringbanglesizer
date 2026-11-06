@@ -136,10 +136,11 @@
 		panel.innerHTML =
 			'<div class="rbs-cal-status"><h2 class="rbs-h">Step 1: Calibrate your screen</h2>' + badge + '</div>' +
 			'<div class="rbs-cal-intro"><span class="rbs-art-wrap"></span><p class="rbs-muted rbs-cal-help"></p></div>' +
-			'<div class="rbs-card-stage"><div class="rbs-card"></div></div>' +
+			// Slider sits above the card: the card grows downwards, so the −/+ buttons stay under the finger.
 			'<div class="rbs-slider-row"><button type="button" class="rbs-step" data-d="-1" aria-label="Smaller">−</button>' +
 			'<input type="range" min="2" max="12" step="0.01" value="' + ppm + '" aria-label="Card outline size">' +
 			'<button type="button" class="rbs-step" data-d="1" aria-label="Larger">+</button></div>' +
+			'<div class="rbs-card-stage"><div class="rbs-card"></div></div>' +
 			'<div class="rbs-btn-row"><button type="button" class="rbs-btn rbs-cal-save">Save calibration</button>' +
 			'<button type="button" class="rbs-link rbs-cal-toggle">' + (calibrated ? 'Hide' : 'Skip for now (sizes will be approximate)') + '</button></div>';
 
@@ -210,6 +211,13 @@
 	}
 
 	/* --------------------------------------------------------- circle stage */
+
+	// Keep a circle stage as tall as its largest size needs, so the slider under it never moves.
+	function reserveStage(stage, maxMm) {
+		var px = maxMm * ppm;
+		var tip = px > stage.clientWidth - 4 ? 90 : 0; // room for the 2–3 line "wider than your screen" hint
+		stage.style.minHeight = Math.max(260, Math.max(px + 40, 220) + 26 + tip) + 'px';
+	}
 
 	function circleStage(mm, label, stageWidth) {
 		var px = mm * ppm;
@@ -313,6 +321,7 @@
 		}
 		function drawMatch() {
 			var r = data.rings[idx];
+			reserveStage(stage, data.rings[data.rings.length - 1].mm);
 			stage.innerHTML = circleStage(r.mm, 'Inner diameter ' + fmt(r.mm) + ' mm · US ' + r.us, stage.clientWidth);
 			range.setAttribute('aria-valuetext', 'US ' + r.us + ', UK ' + r.uk + ', ' + fmt(r.mm) + ' mm');
 			show(r, false);
@@ -408,6 +417,7 @@
 		}
 		function drawMatch() {
 			var b = data.bangles[idx];
+			reserveStage(stage, data.bangles[data.bangles.length - 1].mm);
 			stage.innerHTML = circleStage(b.mm, 'Inner diameter ' + fmt(b.mm) + ' mm · size ' + b.label, stage.clientWidth);
 			range.setAttribute('aria-valuetext', 'Size ' + b.label + ', ' + fmt(b.mm) + ' mm');
 			show(b);
