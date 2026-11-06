@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_VERSION', '0.4.0' );
+define( 'RBS_VERSION', '0.4.1' );
 define( 'RBS_DIR', get_stylesheet_directory() );
 define( 'RBS_URI', get_stylesheet_directory_uri() );
 
@@ -61,3 +61,15 @@ add_filter( 'the_generator', '__return_empty_string' );
  * Keep GeneratePress from loading its dashicons on the front end.
  */
 add_filter( 'generate_load_dashicons', '__return_false' );
+
+/**
+ * Purge the LiteSpeed page cache once after each theme release, so cached
+ * pages stop pointing at the previous ?ver= of the tool scripts and styles.
+ */
+add_action( 'init', function () {
+	if ( get_option( 'rbs_purged_version' ) === RBS_VERSION ) {
+		return;
+	}
+	update_option( 'rbs_purged_version', RBS_VERSION );
+	do_action( 'litespeed_purge_all' );
+}, 30 );
