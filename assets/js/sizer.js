@@ -32,6 +32,34 @@
 	var calibrated = ppm > 0;
 	if (!calibrated) { ppm = DEFAULT_PPM; }
 
+	/* Zoom. Calibration is in CSS px per mm, and browser zoom (Ctrl +/−, or a
+	 * phone's page-zoom setting) changes how big a CSS px is: devicePixelRatio
+	 * moves with it while the screen's real pixels stay the same. So the
+	 * devicePixelRatio at calibration is stored and the scale corrected for
+	 * any change since. Pinch-zoom does not change CSS px; it only magnifies
+	 * the view (visualViewport.scale), so it is blocked on the drawing areas
+	 * and, if it happens anyway, the drawings are hidden behind a warning. */
+	var DPR_KEY = 'rbs_dpr_v1';
+	var dpr = window.devicePixelRatio || 1;
+	var savedDpr = parseFloat(load(DPR_KEY)) || 0;
+	if (calibrated && savedDpr && Math.abs(savedDpr - dpr) > 0.01) {
+		ppm = ppm * savedDpr / dpr;
+	}
+	var scaleListeners = [];
+	function onScale(fn) { scaleListeners.push(fn); }
+	function checkZoom() {
+		var now = window.devicePixelRatio || 1;
+		if (Math.abs(now - dpr) > 0.01) {
+			if (calibrated) { ppm = ppm * dpr / now; }
+			dpr = now;
+			scaleListeners.forEach(function (fn) { fn(); });
+		}
+		var pinched = !!(window.visualViewport && window.visualViewport.scale > 1.02);
+		document.querySelectorAll('.rbs').forEach(function (r) { r.classList.toggle('rbs-zoomed', pinched); });
+	}
+	window.addEventListener('resize', checkZoom);
+	if (window.visualViewport) { window.visualViewport.addEventListener('resize', checkZoom); }
+
 	/* ----------------------------------------------------------- helpers */
 
 	// Which ring system to show first, guessed from the browser language/region.
@@ -181,6 +209,7 @@
 		$('.rbs-cal-save', panel).addEventListener('click', function () {
 			calibrated = true;
 			store(STORE_KEY, String(ppm));
+			store(DPR_KEY, String(window.devicePixelRatio || 1));
 			$('.rbs-badge', panel).outerHTML = '<span class="rbs-badge ok">Screen calibrated</span>';
 			$('.rbs-cal-toggle', panel).textContent = 'Hide';
 			collapse(true);
@@ -208,6 +237,7 @@
 		draw();
 		if (calibrated) { collapse(true); }
 		window.addEventListener('resize', draw);
+		onScale(function () { range.value = ppm; draw(); });
 	}
 
 	/* --------------------------------------------------------- circle stage */
@@ -545,10 +575,12 @@
 			t.addEventListener('click', function () { mount(t.getAttribute('data-tab')); });
 		});
 		mount(mode);
+		onScale(function () { redraw(); });
 	}
 
 	function boot() {
 		document.querySelectorAll('.rbs').forEach(init);
+		checkZoom();
 	}
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', boot);
