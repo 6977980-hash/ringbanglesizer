@@ -261,8 +261,54 @@
 
 @media (min-width: 600px) {
 	.rbs-panel { padding: 20px 22px; }
-	.rbs-result .rbs-big { font-size: 34px; }
+	.rbs-result .rbs-big { font-size: 44px; }
 }
+
+/* 1-2-3 progress */
+.rbs-steps {
+	display: flex;
+	gap: 6px;
+	margin: 0 0 12px;
+	padding: 0;
+	list-style: none;
+	counter-reset: rbs-step;
+	font-size: 13px;
+	color: var(--rbs-muted);
+}
+.rbs-steps li {
+	flex: 1;
+	margin: 0;
+	padding: 6px 4px 0;
+	border-top: 3px solid var(--rbs-border);
+	text-align: center;
+	counter-increment: rbs-step;
+}
+.rbs-steps li::before { content: counter(rbs-step) ". "; font-weight: 700; }
+.rbs-steps li.done { border-color: #93c5fd; color: var(--rbs-text); }
+.rbs-steps li.done::before { content: "✓ "; color: #059669; }
+.rbs-steps li.current { border-color: var(--rbs-blue); color: var(--rbs-blue); font-weight: 600; }
+
+/* calibration drawing */
+.rbs-cal-intro { display: flex; gap: 12px; align-items: center; margin: 4px 0 10px; }
+.rbs-cal-intro .rbs-cal-help { margin: 0; }
+.rbs-art { display: block; flex-shrink: 0; }
+
+/* result hero */
+.rbs-result-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 2px; }
+.rbs-kicker { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--rbs-blue); }
+.rbs-sys { font-size: 13px; color: var(--rbs-muted); }
+.rbs-sys select { margin-left: 4px; padding: 3px 6px; font-size: 14px; border: 1px solid #bfdbfe; border-radius: 6px; background: #fff; }
+.rbs-result .rbs-big { font-size: 40px; margin: 2px 0 4px; }
+.rbs-sub { font-size: 15px; color: #374151; margin-bottom: 4px; }
+.rbs-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 12px 0 6px; }
+.rbs-chart-link { font-size: 15px; font-weight: 600; color: var(--rbs-blue); text-decoration: none; }
+.rbs-more { margin-top: 8px; }
+.rbs-more summary { cursor: pointer; font-size: 14px; font-weight: 600; color: #374151; padding: 6px 0; }
+.rbs-saved { font-size: 14px; color: #374151; }
+.rbs-saved .rbs-link { padding: 0 0 0 4px; color: var(--rbs-blue); }
+
+/* trust line under the tool */
+.rbs-trust { margin: 10px 0 0; font-size: 13px; color: var(--rbs-muted); text-align: center; }
 
 /* Phones: the card and circle stages run edge to edge, because a card's short side
    (54 mm) and most bangles (60+ mm) are nearly as wide as the whole screen. */

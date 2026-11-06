@@ -32,6 +32,100 @@
 	var calibrated = ppm > 0;
 	if (!calibrated) { ppm = DEFAULT_PPM; }
 
+	/* ----------------------------------------------------------- helpers */
+
+	// Which ring system to show first, guessed from the browser language/region.
+	var SYSTEM_KEY = 'rbs_system_v1';
+	var SAVED_KEY = 'rbs_my_size_v1';
+	function guessSystem() {
+		var langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en-US']).join(',').toLowerCase();
+		if (/-(gb|au|nz|ie|za)\b/.test(langs)) { return 'uk'; }
+		if (/-(in|pk|bd|lk|np)\b|\b(hi|ur|bn|ta|te|mr|gu|pa|kn|ml)\b/.test(langs)) { return 'in'; }
+		if (/^(de|fr|es|it|nl|pt|pl|sv|da|fi|nb|no|cs|el|hu|ro|tr)\b/.test(langs)) { return 'eu'; }
+		return 'us';
+	}
+	var ringSystem = load(SYSTEM_KEY) || guessSystem();
+	var SYSTEMS = { us: 'US', uk: 'UK', eu: 'EU', in: 'India' };
+	function ringIn(r, sys) {
+		return sys === 'uk' ? 'UK ' + r.uk : (sys === 'eu' ? 'EU ' + r.eu : (sys === 'in' ? 'India ' + r.jp : 'US ' + r.us));
+	}
+
+	function setStep(root, n) {
+		var steps = root && root.parentNode ? $('.rbs-steps', root.parentNode) : null;
+		if (!steps) { return; }
+		steps.querySelectorAll('li').forEach(function (li, i) {
+			li.className = i + 1 < n ? 'done' : (i + 1 === n ? 'current' : '');
+			if (i + 1 === n) { li.setAttribute('aria-current', 'step'); } else { li.removeAttribute('aria-current'); }
+		});
+	}
+
+	function savedSize() {
+		try { return JSON.parse(load(SAVED_KEY) || 'null'); } catch (e) { return null; }
+	}
+
+	// Save / share / chart buttons under a result.
+	function resultActions(kind, label, shareText) {
+		var chart = kind === 'bangle' ? '/bangle-size-chart/' : '/ring-size-chart/';
+		var saved = savedSize();
+		var isSaved = saved && saved.kind === kind && saved.label === label;
+		return '<div class="rbs-actions">' +
+			'<button type="button" class="rbs-btn rbs-save" data-kind="' + kind + '" data-label="' + label + '">' + (isSaved ? 'Saved ✓' : 'Save my size') + '</button>' +
+			'<button type="button" class="rbs-btn secondary rbs-share" data-text="' + shareText.replace(/"/g, '&quot;') + '">Share</button>' +
+			'<a class="rbs-chart-link" href="' + chart + '">Full size chart →</a>' +
+			'</div>';
+	}
+	function wireActions(box) {
+		var save = $('.rbs-save', box);
+		if (save) {
+			save.addEventListener('click', function () {
+				store(SAVED_KEY, JSON.stringify({ kind: save.getAttribute('data-kind'), label: save.getAttribute('data-label'), date: new Date().toISOString().slice(0, 10) }));
+				save.textContent = 'Saved ✓';
+			});
+		}
+		var share = $('.rbs-share', box);
+		if (share) {
+			share.addEventListener('click', function () {
+				var text = share.getAttribute('data-text');
+				var url = location.origin + location.pathname;
+				if (navigator.share) {
+					navigator.share({ title: document.title, text: text, url: url }).catch(function () {});
+				} else {
+					window.open('https://wa.me/?text=' + encodeURIComponent(text + ' ' + url), '_blank', 'noopener');
+				}
+			});
+		}
+	}
+
+	// Small drawing: a card held against a phone (upright) or a laptop screen.
+	function cardArt(upright) {
+		return upright
+			? '<svg class="rbs-art" width="56" height="72" viewBox="0 0 56 72" aria-hidden="true"><rect x="8" y="2" width="40" height="68" rx="7" fill="#fff" stroke="#9ca3af" stroke-width="2"/><rect x="15" y="14" width="26" height="42" rx="3" fill="#fde68a" stroke="#b45309" stroke-width="1.5"/><rect x="18" y="18" width="6" height="5" rx="1" fill="#b45309"/><path d="M15 14v42" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="3 2"/><path d="M41 14v42" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="3 2"/></svg>'
+			: '<svg class="rbs-art" width="72" height="56" viewBox="0 0 72 56" aria-hidden="true"><rect x="2" y="4" width="68" height="44" rx="4" fill="#fff" stroke="#9ca3af" stroke-width="2"/><rect x="16" y="13" width="40" height="26" rx="3" fill="#fde68a" stroke="#b45309" stroke-width="1.5"/><rect x="20" y="17" width="7" height="5" rx="1" fill="#b45309"/><path d="M16 13v26M56 13v26" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="3 2"/><path d="M26 52h20" stroke="#9ca3af" stroke-width="2"/></svg>';
+	}
+
+	function savedLine(kind) {
+		var sv = savedSize();
+		if (!sv || sv.kind !== kind) { return ''; }
+		return '<p class="rbs-saved">Your saved size: <strong>' + sv.label + '</strong> <button type="button" class="rbs-link rbs-show-saved">show it</button></p>';
+	}
+	// Jump the slider to the saved size. find(label) returns the index or -1.
+	function wireSaved(panel, find, go) {
+		var b = $('.rbs-show-saved', panel);
+		if (!b) { return; }
+		b.addEventListener('click', function () {
+			var sv = savedSize();
+			var i = sv ? find(sv.label) : -1;
+			if (i >= 0) { go(i); }
+		});
+	}
+
+	function scrollToNext(panel) {
+		var next = panel.nextElementSibling;
+		if (next && next.scrollIntoView) {
+			next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+	}
+
 	/* --------------------------------------------------------- calibration */
 
 	function renderCalibration(root, onDone) {
@@ -41,7 +135,7 @@
 			: '<span class="rbs-badge">Not calibrated – sizes approximate</span>';
 		panel.innerHTML =
 			'<div class="rbs-cal-status"><h2 class="rbs-h">Step 1: Calibrate your screen</h2>' + badge + '</div>' +
-			'<p class="rbs-muted rbs-cal-help"></p>' +
+			'<div class="rbs-cal-intro"><span class="rbs-art-wrap"></span><p class="rbs-muted rbs-cal-help"></p></div>' +
 			'<div class="rbs-card-stage"><div class="rbs-card"></div></div>' +
 			'<div class="rbs-slider-row"><button type="button" class="rbs-step" data-d="-1" aria-label="Smaller">−</button>' +
 			'<input type="range" min="2" max="12" step="0.01" value="' + ppm + '" aria-label="Card outline size">' +
@@ -67,6 +161,7 @@
 					: 'Hold any credit, debit or ID card against the screen. Drag the slider until the dashed outline is exactly the width of the card.';
 				card.textContent = upright ? 'Match the card\'s short side' : 'Match the card width';
 				card.classList.toggle('upright', upright);
+				$('.rbs-art-wrap', panel).innerHTML = cardArt(upright);
 			}
 			var w = ppm * (upright ? CARD_SHORT_MM : CARD_MM);
 			var h = ppm * (upright ? CARD_MM : CARD_SHORT_MM);
@@ -89,6 +184,8 @@
 			$('.rbs-cal-toggle', panel).textContent = 'Hide';
 			collapse(true);
 			onDone();
+			setStep(root, 2);
+			scrollToNext(panel);
 		});
 		var body = Array.prototype.slice.call(panel.children, 1);
 		function collapse(yes) {
@@ -97,11 +194,15 @@
 			var old = $('.rbs-cal-reopen', panel);
 			if (old) { old.remove(); }
 			if (yes) {
-				t.addEventListener('click', function () { collapse(false); });
+				t.addEventListener('click', function () { collapse(false); setStep(root, 1); });
 				panel.appendChild(t);
 			}
 		}
-		$('.rbs-cal-toggle', panel).addEventListener('click', function () { collapse(true); });
+		$('.rbs-cal-toggle', panel).addEventListener('click', function () {
+			collapse(true);
+			setStep(root, 2);
+			scrollToNext(panel);
+		});
 		root.appendChild(panel);
 		draw();
 		if (calibrated) { collapse(true); }
@@ -158,7 +259,7 @@
 		var idx = 8; // US 7
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
-			'<h2 class="rbs-h">Step 2: Find your ring size</h2>' +
+			'<h2 class="rbs-h">Step 2: Find your ring size</h2>' + savedLine('ring') +
 			'<div class="rbs-methods">' +
 			'<button type="button" class="rbs-method" data-m="match" aria-pressed="true">Match a ring I own</button>' +
 			'<button type="button" class="rbs-method" data-m="mm" aria-pressed="false">I know the diameter / circumference</button>' +
@@ -180,10 +281,20 @@
 		var range = $('input[type=range]', panel);
 		var result = $('.rbs-result', panel);
 
+		var lastRing = null, lastFromMm = false;
 		function show(r, fromMm) {
-			var head = fromMm ? 'Closest size: US ' + r.us : 'US ' + r.us;
+			lastRing = r; lastFromMm = fromMm;
+			var others = ['us', 'uk', 'eu', 'in'].filter(function (k) { return k !== ringSystem; })
+				.map(function (k) { return ringIn(r, k); }).join(' · ');
+			var picker = '<label class="rbs-sys">Show sizes for <select class="rbs-sys-sel">' +
+				Object.keys(SYSTEMS).map(function (k) { return '<option value="' + k + '"' + (k === ringSystem ? ' selected' : '') + '>' + SYSTEMS[k] + '</option>'; }).join('') +
+				'</select></label>';
 			result.innerHTML =
-				'<div class="rbs-big">' + head + ' &nbsp;·&nbsp; UK ' + r.uk + '</div>' +
+				'<div class="rbs-result-top"><span class="rbs-kicker">' + (fromMm ? 'Closest ring size' : 'Your ring size') + '</span>' + picker + '</div>' +
+				'<div class="rbs-big">' + ringIn(r, ringSystem) + '</div>' +
+				'<div class="rbs-sub">= ' + others + ' · ' + fmt(r.mm) + ' mm inside</div>' +
+				resultActions('ring', 'US ' + r.us, 'My ring size is US ' + r.us + ' / UK ' + r.uk + ' / EU ' + r.eu + ' (' + fmt(r.mm) + ' mm inside diameter). Find yours free:') +
+				'<details class="rbs-more"><summary>All sizes and measurements</summary>' +
 				resultTable([
 					['US / Canada', r.us],
 					['UK / Australia / NZ', r.uk],
@@ -191,8 +302,14 @@
 					['India / Japan', r.jp],
 					['Inner diameter', fmt(r.mm) + ' mm (' + fmt(r.mm / MM_IN, 2) + ' in)'],
 					['Inner circumference', fmt(r.circ) + ' mm']
-				]) +
+				]) + '</details>' +
 				'<p class="rbs-note">Ring sizes are accurate to about ±¼ size. Fingers swell in heat and in the evening; measure at room temperature.</p>';
+			$('.rbs-sys-sel', result).addEventListener('change', function (e) {
+				ringSystem = e.target.value;
+				store(SYSTEM_KEY, ringSystem);
+				show(lastRing, lastFromMm);
+			});
+			wireActions(result);
 		}
 		function drawMatch() {
 			var r = data.rings[idx];
@@ -200,11 +317,11 @@
 			range.setAttribute('aria-valuetext', 'US ' + r.us + ', UK ' + r.uk + ', ' + fmt(r.mm) + ' mm');
 			show(r, false);
 		}
-		range.addEventListener('input', function () { idx = parseInt(range.value, 10); drawMatch(); });
+		range.addEventListener('input', function () { idx = parseInt(range.value, 10); drawMatch(); setStep(root, 3); });
 		panel.querySelectorAll('.rbs-m-match .rbs-step').forEach(function (b) {
 			b.addEventListener('click', function () {
 				idx = Math.min(data.rings.length - 1, Math.max(0, idx + parseInt(b.getAttribute('data-d'), 10)));
-				range.value = idx; drawMatch();
+				range.value = idx; drawMatch(); setStep(root, 3);
 			});
 		});
 		function fromMm() {
@@ -228,6 +345,13 @@
 			});
 		});
 
+		wireSaved(panel, function (label) {
+			for (var i = 0; i < data.rings.length; i++) { if ('US ' + data.rings[i].us === label) { return i; } }
+			return -1;
+		}, function (i) {
+			idx = i; range.value = i;
+			$('.rbs-method[data-m="match"]', panel).click();
+		});
 		root.appendChild(panel);
 		drawMatch();
 		if (method === 'mm') { $('.rbs-method[data-m="mm"]', panel).click(); }
@@ -243,7 +367,7 @@
 		var idx = 6; // 2.6
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
-			'<h2 class="rbs-h">Step 2: Find your bangle size</h2>' +
+			'<h2 class="rbs-h">Step 2: Find your bangle size</h2>' + savedLine('bangle') +
 			'<div class="rbs-methods">' +
 			'<button type="button" class="rbs-method" data-m="match" aria-pressed="true">Match a bangle I own</button>' +
 			'<button type="button" class="rbs-method" data-m="hand" aria-pressed="false">Measure my hand</button>' +
@@ -268,14 +392,19 @@
 
 		function show(b, extra) {
 			result.innerHTML =
+				'<div class="rbs-result-top"><span class="rbs-kicker">Your bangle size</span></div>' +
 				'<div class="rbs-big">Size ' + b.label + '</div>' +
+				'<div class="rbs-sub">= ' + fmt(b.mm) + ' mm (' + fmt(b.inch, 3) + ' in) inside · ' + b.fit + '</div>' +
+				resultActions('bangle', 'Size ' + b.label, 'My bangle size is ' + b.label + ' (' + fmt(b.mm) + ' mm inside diameter). Find yours free:') +
+				'<details class="rbs-more"><summary>All measurements</summary>' +
 				resultTable([
 					['Indian bangle size', b.label],
 					['Inner diameter', fmt(b.mm) + ' mm · ' + fmt(b.mm / 10, 2) + ' cm · ' + fmt(b.inch, 3) + ' in'],
 					['Inner circumference', fmt(b.mm * Math.PI) + ' mm'],
 					['Typical fit', b.fit]
-				]) + (extra || '') +
+				]) + '</details>' + (extra || '') +
 				'<p class="rbs-note">Adult bangle sizes step by 2/16 inch (about 3.2 mm). If you are between sizes, choose the larger one for a bangle that slides over the hand.</p>';
+			wireActions(result);
 		}
 		function drawMatch() {
 			var b = data.bangles[idx];
@@ -283,11 +412,11 @@
 			range.setAttribute('aria-valuetext', 'Size ' + b.label + ', ' + fmt(b.mm) + ' mm');
 			show(b);
 		}
-		range.addEventListener('input', function () { idx = parseInt(range.value, 10); drawMatch(); });
+		range.addEventListener('input', function () { idx = parseInt(range.value, 10); drawMatch(); setStep(root, 3); });
 		panel.querySelectorAll('.rbs-m-match .rbs-step').forEach(function (b) {
 			b.addEventListener('click', function () {
 				idx = Math.min(data.bangles.length - 1, Math.max(0, idx + parseInt(b.getAttribute('data-d'), 10)));
-				range.value = idx; drawMatch();
+				range.value = idx; drawMatch(); setStep(root, 3);
 			});
 		});
 		function fromHand() {
@@ -311,6 +440,13 @@
 				$('.rbs-m-hand', panel).classList.toggle('rbs-hidden', m !== 'hand');
 				if (m === 'match') { drawMatch(); } else { fromHand(); }
 			});
+		});
+		wireSaved(panel, function (label) {
+			for (var i = 0; i < data.bangles.length; i++) { if ('Size ' + data.bangles[i].label === label) { return i; } }
+			return -1;
+		}, function (i) {
+			idx = i; range.value = i;
+			$('.rbs-method[data-m="match"]', panel).click();
 		});
 
 		root.appendChild(panel);
@@ -373,10 +509,13 @@
 		var body = $('.rbs-body', container);
 		var tabs = container.querySelectorAll('.rbs-tab');
 		var redraw = function () {};
+		var steps = el('ol', { 'class': 'rbs-steps' }, '<li>Calibrate</li><li>Match</li><li>Your size</li>');
+		container.insertBefore(steps, body);
 
 		function mount(m) {
 			body.innerHTML = '';
 			tabs.forEach(function (t) { t.setAttribute('aria-selected', t.getAttribute('data-tab') === m ? 'true' : 'false'); });
+			steps.classList.toggle('rbs-hidden', m === 'bracelet');
 			if (m === 'bracelet') {
 				redraw = renderBracelet(body);
 				return;
@@ -386,6 +525,7 @@
 				redraw();
 			});
 			redraw = m === 'bangle' ? renderBangle(body) : renderRing(body, m === mode ? method : '');
+			setStep(body, calibrated ? 2 : 1);
 		}
 		tabs.forEach(function (t) {
 			t.addEventListener('click', function () { mount(t.getAttribute('data-tab')); });

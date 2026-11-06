@@ -392,3 +392,22 @@ add_action( 'wp_head', function () {
 	}
 	echo '<link rel="icon" href="' . esc_url( RBS_URI . '/assets/img/icon.svg' ) . '" type="image/svg+xml">' . "\n";
 }, 3 );
+
+/**
+ * Wrap every content table that is not already in .rbs-table-wrap, so wide
+ * tables scroll inside their own box on phones instead of widening the page.
+ */
+function rbs_wrap_tables( $content ) {
+	if ( false === strpos( $content, '<table' ) ) {
+		return $content;
+	}
+	return preg_replace_callback(
+		'#(<div class="rbs-table-wrap">\s*)?<table\b.*?</table>#s',
+		function ( $m ) {
+			return ! empty( $m[1] ) ? $m[0] : '<div class="rbs-table-wrap">' . $m[0] . '</div>';
+		},
+		$content
+	);
+}
+add_filter( 'the_content', 'rbs_wrap_tables', 15 );
+
