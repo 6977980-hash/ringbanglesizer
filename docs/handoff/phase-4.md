@@ -28,7 +28,7 @@ All in PR #6 (`RBS_PAGES_VERSION` 3 → 4, theme 0.4.0). 10 new pages, 53 publis
 - Widget credit link is a brand anchor only and linking back is optional (Google treats keyword-rich widget links as a link scheme).
 - Word counts: chart pages 765–1,120, guides 950–1,080, average 850, blog hub 245. Plan target for chart pages is 1,200+; expand from GSC queries rather than padding.
 - Hard-coded numbers live in the men's/women's tables and the bridal/bangle hand-range tables. If `inc/sizes.php` changes, update those too (the UK/US/India tables are generated).
-- **Merging:** the merge of PR #6 via `gh api PUT …/merge` was blocked by the session's auto-mode safety check ("merge without review"), so Ali merged it / approved it. Future phases: expect the same; ask Ali to merge or add the merge permission.
+- **Merging:** the first `gh api PUT …/merge` of #6 was blocked by the auto-mode safety check; it went through once Ali's standing "auto merge" instruction was passed along. #7 adds a LiteSpeed purge on every theme version change (mobile page cache kept serving `sizer.js?ver=0.3.0` after #6). Bump `RBS_VERSION` on every asset change.
 
 ## Next phase: Phase 5 – off-page + growth (plan doc sections 8, 11, 12)
 1. Verify phase 4 live: new pages 200, `/embed/ring/` loads with noindex header, bangle calculator has no console error, menus show Guides.
