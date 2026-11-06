@@ -378,3 +378,14 @@ add_action( 'wp_head', function () {
 	}
 	echo '<meta name="google-site-verification" content="T07U_TvOgPRCg3jNwhmYO_Ui8VniA4LaTNXJe4YaZvs" />' . "\n";
 }, 1 );
+
+/**
+ * Favicon from the theme while no Site Icon is set in WP admin
+ * (avoids the /favicon.ico 404 and gives Google a search-result icon).
+ */
+add_action( 'wp_head', function () {
+	if ( has_site_icon() ) {
+		return;
+	}
+	echo '<link rel="icon" href="' . esc_url( RBS_URI . '/assets/img/icon.svg' ) . '" type="image/svg+xml">' . "\n";
+}, 3 );

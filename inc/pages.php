@@ -20,19 +20,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_PAGES_VERSION', '3' );
+define( 'RBS_PAGES_VERSION', '4' );
 
 require_once RBS_DIR . '/inc/page-content.php';
 require_once RBS_DIR . '/inc/content/legal.php';
 require_once RBS_DIR . '/inc/content/bangle.php';
 require_once RBS_DIR . '/inc/content/ring-mm.php';
 require_once RBS_DIR . '/inc/content/ring-tools.php';
+require_once RBS_DIR . '/inc/content/authority.php';
 
 /**
  * All pages, keyed by a stable key. Parents are listed before their children.
  */
 function rbs_all_pages() {
-	return array_merge( rbs_core_pages(), rbs_legal_pages(), rbs_bangle_pages(), rbs_ring_mm_pages(), rbs_ring_tool_pages() );
+	return array_merge( rbs_core_pages(), rbs_legal_pages(), rbs_bangle_pages(), rbs_ring_mm_pages(), rbs_ring_tool_pages(), rbs_authority_pages() );
 }
 
 /**
@@ -171,6 +172,7 @@ function rbs_menu_structure() {
 					array( 'key' => 'ring-calc', 'label' => 'Ring Size Calculator' ),
 					array( 'key' => 'ring-converter', 'label' => 'Ring Size Converter' ),
 					array( 'key' => 'ring-chart', 'label' => 'Ring Size Chart' ),
+					array( 'key' => 'average-ring', 'label' => 'Average Ring Size' ),
 					array( 'key' => 'ring-mm', 'label' => 'Ring Size in mm' ),
 					array( 'key' => 'ring-diameter', 'label' => 'Ring Size by Diameter' ),
 					array( 'key' => 'ring-circ', 'label' => 'Ring Size by Circumference' ),
@@ -192,6 +194,11 @@ function rbs_menu_structure() {
 					array( 'key' => 'bracelet', 'label' => 'Bracelet Size Calculator' ),
 					array( 'key' => 'wrist-chart', 'label' => 'Wrist Size Chart' ),
 				) ),
+				array( 'key' => 'blog', 'label' => 'Guides', 'children' => array(
+					array( 'key' => 'blog-ring-fit', 'label' => 'How Should a Ring Fit?' ),
+					array( 'key' => 'blog-resize', 'label' => 'Can You Resize a Ring?' ),
+					array( 'key' => 'blog-bridal-bangle', 'label' => 'Bridal Bangle Sizes' ),
+				) ),
 				array( 'key' => 'about', 'label' => 'About' ),
 			),
 		),
@@ -201,6 +208,7 @@ function rbs_menu_structure() {
 				array( 'key' => 'about', 'label' => 'About' ),
 				array( 'key' => 'method', 'label' => 'How We Measure' ),
 				array( 'key' => 'contact', 'label' => 'Contact' ),
+				array( 'key' => 'widget', 'label' => 'Free Sizer Widget' ),
 				array( 'key' => 'privacy', 'label' => 'Privacy Policy' ),
 				array( 'key' => 'terms', 'label' => 'Terms' ),
 				array( 'key' => 'disclaimer', 'label' => 'Disclaimer' ),

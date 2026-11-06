@@ -36,7 +36,7 @@
 			? '<span class="rbs-badge ok">Screen calibrated</span>'
 			: '<span class="rbs-badge">Not calibrated – sizes approximate</span>';
 		panel.innerHTML =
-			'<div class="rbs-cal-status"><h3>Step 1: Calibrate your screen</h3>' + badge + '</div>' +
+			'<div class="rbs-cal-status"><h2 class="rbs-h">Step 1: Calibrate your screen</h2>' + badge + '</div>' +
 			'<p class="rbs-muted">Hold any credit, debit or ID card against the screen. Drag the slider until the dashed outline is exactly the width of the card.</p>' +
 			'<div class="rbs-card-stage"><div class="rbs-card">Match the card width</div></div>' +
 			'<div class="rbs-slider-row"><button type="button" class="rbs-step" data-d="-1" aria-label="Smaller">−</button>' +
@@ -139,7 +139,7 @@
 		var idx = 8; // US 7
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
-			'<h3>Step 2: Find your ring size</h3>' +
+			'<h2 class="rbs-h">Step 2: Find your ring size</h2>' +
 			'<div class="rbs-methods">' +
 			'<button type="button" class="rbs-method" data-m="match" aria-pressed="true">Match a ring I own</button>' +
 			'<button type="button" class="rbs-method" data-m="mm" aria-pressed="false">I know the diameter / circumference</button>' +
@@ -223,7 +223,7 @@
 		var idx = 6; // 2.6
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
-			'<h3>Step 2: Find your bangle size</h3>' +
+			'<h2 class="rbs-h">Step 2: Find your bangle size</h2>' +
 			'<div class="rbs-methods">' +
 			'<button type="button" class="rbs-method" data-m="match" aria-pressed="true">Match a bangle I own</button>' +
 			'<button type="button" class="rbs-method" data-m="hand" aria-pressed="false">Measure my hand</button>' +
@@ -294,7 +294,6 @@
 
 		root.appendChild(panel);
 		drawMatch();
-		if (method === 'mm') { $('.rbs-method[data-m="mm"]', panel).click(); }
 		// After calibration only the "match" view depends on the screen scale.
 		return function () {
 			if (!$('.rbs-m-match', panel).classList.contains('rbs-hidden')) { drawMatch(); }
@@ -306,7 +305,7 @@
 	function renderBracelet(root) {
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
-			'<h3>Find your bracelet size</h3>' +
+			'<h2 class="rbs-h">Find your bracelet size</h2>' +
 			'<p class="rbs-muted">Wrap a string or tape snugly around your wrist just below the wrist bone, then measure it.</p>' +
 			'<div class="rbs-field"><label>Wrist circumference</label><input type="number" step="0.1" min="3" max="30" class="rbs-wrist-val" value="6.5">' +
 			'<select class="rbs-wrist-unit"><option value="in">inches</option><option value="cm">cm</option></select></div>' +

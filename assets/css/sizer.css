@@ -6,7 +6,7 @@
 	--rbs-border: #e5e7eb;
 	--rbs-bg: #f9fafb;
 	--rbs-text: #111827;
-	--rbs-muted: #6b7280;
+	--rbs-muted: #4b5563;
 	max-width: 720px;
 	margin: 0 auto 32px;
 	color: var(--rbs-text);
@@ -46,7 +46,8 @@
 	background: #fff;
 	margin-bottom: 14px;
 }
-.rbs-panel h3 {
+.rbs-panel h3,
+.rbs-panel .rbs-h {
 	margin: 0 0 8px;
 	font-size: 17px;
 }

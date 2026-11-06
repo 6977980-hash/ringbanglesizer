@@ -254,7 +254,7 @@ function rbs_core_pages() {
 </ul>
 
 <h2>Women\'s ring size chart</h2>
-<p>Most women wear between US 5 and 8. These are the sizes jewellers stock most, with every conversion:</p>
+<p>Most women wear between US 5 and 8. These are the sizes jewellers stock most, with every conversion (sizes by finger and engagement ring tips are in the full <a href="/ring-size-chart/womens/">women\'s ring size chart</a>):</p>
 <table class="rbs-table">
 <thead><tr><th>US</th><th>UK</th><th>EU</th><th>India</th><th>Diameter</th><th>Common for</th></tr></thead>
 <tbody>
@@ -283,7 +283,7 @@ function rbs_core_pages() {
 <tr><td>12</td><td>X½</td><td>67</td><td>26</td><td>21.4 mm</td><td>67.2 mm</td></tr>
 </tbody>
 </table>
-<p>Men\'s bands are often 6–8 mm wide. A wide band covers more of the finger and feels tighter, so many men go up half a size from their measured size.</p>
+<p>Men\'s bands are often 6–8 mm wide. A wide band covers more of the finger and feels tighter, so many men go up half a size from their measured size. Sizes up to 15 and band-width advice are in the <a href="/ring-size-chart/mens/">men\'s ring size chart</a>.</p>
 
 <h2>Ring size chart in inches</h2>
 <p>Some US jewellers and ring mandrels give sizes in inches. The inner diameter of US 5 is 0.618 in, US 6 is 0.650 in, US 7 is 0.681 in, US 8 is 0.713 in, US 9 is 0.748 in and US 10 is 0.780 in, so each whole size adds about 0.032 in (a little under 1/32 inch). Inner circumference grows by about 0.1 in per size: US 7 is 2.14 in around and US 8 is 2.24 in. Multiply inches by 25.4 to get millimetres, or use the <a href="/ring-size-by-diameter/">ring size by diameter</a> table, which has an inch column.</p>
@@ -320,7 +320,9 @@ function rbs_core_pages() {
 <li><a href="/ring-size-in-mm/">Ring size in mm</a> – diameter and circumference for every size</li>
 <li><a href="/ring-size-by-diameter/">Ring size by diameter</a> and <a href="/ring-size-by-circumference/">by circumference</a></li>
 <li><a href="/ring-size-converter/">Ring size converter</a></li>
-<li><a href="/ring-size-chart/pakistan/">Ring size chart Pakistan</a></li>
+<li>By country: <a href="/ring-size-chart/us/">US</a>, <a href="/ring-size-chart/uk/">UK</a>, <a href="/ring-size-chart/india/">India</a>, <a href="/ring-size-chart/pakistan/">Pakistan</a></li>
+<li><a href="/ring-size-chart/womens/">Women\'s ring size chart</a> and <a href="/ring-size-chart/mens/">men\'s ring size chart</a></li>
+<li><a href="/average-ring-size/">Average ring size</a></li>
 <li><a href="/bangle-size-chart/">Bangle size chart</a></li>
 <li><a href="/bracelet-size-calculator/">Bracelet size calculator</a></li>
 </ul>
@@ -365,6 +367,75 @@ function rbs_core_pages() {
 <li><strong>Below 2.0:</strong> babies and children; see the <a href="/kids-bangle-size-chart/">kids bangle size chart</a>.</li>
 </ul>
 
+<h2>Bangle size chart in inches</h2>
+<p>The number after the dot counts sixteenths of an inch, not tenths. That is why 2.10 and 2.12 come after 2.8, and why there is no 2.9. Written as a fraction:</p>
+<table class="rbs-table">
+<thead><tr><th>Size</th><th>Meaning</th><th>Inner diameter (fraction)</th><th>Inner diameter (decimal)</th><th>Inner circumference</th></tr></thead>
+<tbody>
+<tr><td>2.0</td><td>2 0/16 in</td><td>2 in</td><td>2.000 in</td><td>6.28 in</td></tr>
+<tr><td><a href="/bangle-size/2-2/">2.2</a></td><td>2 2/16 in</td><td>2⅛ in</td><td>2.125 in</td><td>6.68 in</td></tr>
+<tr><td><a href="/bangle-size/2-4/">2.4</a></td><td>2 4/16 in</td><td>2¼ in</td><td>2.250 in</td><td>7.07 in</td></tr>
+<tr><td><a href="/bangle-size/2-6/">2.6</a></td><td>2 6/16 in</td><td>2⅜ in</td><td>2.375 in</td><td>7.46 in</td></tr>
+<tr><td><a href="/bangle-size/2-8/">2.8</a></td><td>2 8/16 in</td><td>2½ in</td><td>2.500 in</td><td>7.85 in</td></tr>
+<tr><td><a href="/bangle-size/2-10/">2.10</a></td><td>2 10/16 in</td><td>2⅝ in</td><td>2.625 in</td><td>8.25 in</td></tr>
+<tr><td><a href="/bangle-size/2-12/">2.12</a></td><td>2 12/16 in</td><td>2¾ in</td><td>2.750 in</td><td>8.65 in</td></tr>
+<tr><td>2.14</td><td>2 14/16 in</td><td>2⅞ in</td><td>2.875 in</td><td>9.03 in</td></tr>
+<tr><td>3.0</td><td>3 0/16 in</td><td>3 in</td><td>3.000 in</td><td>9.42 in</td></tr>
+</tbody>
+</table>
+<p>Each adult step is 2/16 inch (3.2 mm) of diameter, or about 1 cm of circumference. Shops sometimes write the same size as 2/4, 2-4 or 2.25 inch; they all mean 2.4. The <a href="/bangle-size-chart/in-cm/">bangle size in cm</a> page lists every size in centimetres.</p>
+
+<h2>Bangle size by hand measurement</h2>
+<p>A rigid bangle has to slide over the hand, so the size depends on the widest part of the hand with the thumb folded in, not on the wrist. Each size fits hands up to its own inner circumference:</p>
+<table class="rbs-table">
+<thead><tr><th>Hand circumference (thumb folded in)</th><th>In inches</th><th>Bangle size</th></tr></thead>
+<tbody>
+<tr><td>15.0 – 16.0 cm</td><td>5.9 – 6.3 in</td><td>2.0</td></tr>
+<tr><td>16.0 – 17.0 cm</td><td>6.3 – 6.7 in</td><td>2.2</td></tr>
+<tr><td>17.0 – 18.0 cm</td><td>6.7 – 7.1 in</td><td>2.4</td></tr>
+<tr><td>18.0 – 18.9 cm</td><td>7.1 – 7.4 in</td><td>2.6</td></tr>
+<tr><td>18.9 – 19.9 cm</td><td>7.4 – 7.8 in</td><td>2.8</td></tr>
+<tr><td>19.9 – 20.9 cm</td><td>7.8 – 8.2 in</td><td>2.10</td></tr>
+<tr><td>20.9 – 22.0 cm</td><td>8.2 – 8.6 in</td><td>2.12</td></tr>
+</tbody>
+</table>
+<p>If the tape reads exactly on a boundary, take the larger size; a bangle that is 1 mm too small will not go on at all. The step-by-step method is in <a href="/how-to-measure-bangle-size/">how to measure bangle size</a>.</p>
+
+<h2>Bangle size by age</h2>
+<table class="rbs-table">
+<thead><tr><th>Age</th><th>Usual size</th><th>Inner diameter</th></tr></thead>
+<tbody>
+<tr><td>0 – 1 year</td><td>1.10</td><td>41.3 mm</td></tr>
+<tr><td>1 – 2 years</td><td>1.12</td><td>44.5 mm</td></tr>
+<tr><td>2 – 4 years</td><td>1.14</td><td>47.6 mm</td></tr>
+<tr><td>4 – 7 years</td><td>2.0</td><td>50.8 mm</td></tr>
+<tr><td>Teenagers, petite adults</td><td>2.2</td><td>54.0 mm</td></tr>
+<tr><td>Adult women</td><td>2.4 – 2.8</td><td>57.2 – 63.5 mm</td></tr>
+<tr><td>Adult men (kada)</td><td>2.10 – 3.0</td><td>66.7 – 76.2 mm</td></tr>
+</tbody>
+</table>
+<p>Age is only a rough guide; children of the same age can be a full size apart. Measure the hand where you can, and see the <a href="/kids-bangle-size-chart/">kids bangle size chart</a> for babies and children.</p>
+
+<h2>Does the type of bangle change the size?</h2>
+<ul>
+<li><strong>Glass, lac and plastic bangles</strong> cannot open or stretch, so they need the full size that passes the hand.</li>
+<li><strong>Solid gold or silver bangles</strong> also need the full size. Very thick bangles (over 8 mm wide) can feel tighter going on; some people go up one size.</li>
+<li><strong>Bangles with a screw, hinge or clasp</strong> open to go on, so they can be one size smaller and sit closer to the wrist.</li>
+<li><strong>Kada for men</strong> are usually worn loose, in 2.10 to 2.14; see the <a href="/chudi-size-chart/">chudi and kada size chart</a>.</li>
+<li><strong>Bridal sets and chooda</strong> follow the same rule as glass bangles. Our <a href="/blog/bangle-size-for-wedding/">bridal bangle size guide</a> covers the details.</li>
+</ul>
+
+<h2>Buying bangles online</h2>
+<ul>
+<li><strong>Check which number the shop means.</strong> Indian and Pakistani sellers use 2.4, 2.6 and so on. Shops elsewhere may give the inner diameter in mm or inches, or sell S / M / L; compare the diameter with the chart above.</li>
+<li><strong>Look for the inner diameter, not the outer.</strong> A thick bangle can be 5–10 mm wider outside than inside.</li>
+<li><strong>Order a set in one size.</strong> Mixing sizes in a stack makes the smaller ones hard to put on and the larger ones slide over them.</li>
+<li><strong>Keep one bangle that fits.</strong> It is the best reference you have: match it on the <a href="/bangle-size-calculator/">bangle size calculator</a> before every order.</li>
+</ul>
+
+<h2>Bangle size vs bracelet size</h2>
+<p>A bangle is a rigid ring measured by its inner diameter. A bracelet is a chain or band measured by its length, and it is chosen from the wrist size (usually wrist plus 1.5 to 2 cm). The two numbers are not interchangeable: a person with a 15 cm wrist might wear a 2.4 bangle and a 17 cm bracelet. For bracelets use the <a href="/bracelet-size-calculator/">bracelet size calculator</a> and the <a href="/wrist-size-chart/">wrist size chart</a>.</p>
+
 [rbs_cta mode="bangle"]
 
 <h2>Related</h2>
@@ -381,6 +452,7 @@ function rbs_core_pages() {
 				array( 'What is bangle size 2.8 in cm?', 'Size 2.8 has an inner diameter of 2.5 inches, which is 6.35 cm (63.5 mm).' ),
 				array( 'What is bangle size 2.2 in mm?', 'Size 2.2 is 2 2/16 inch, an inner diameter of 54.0 mm (5.4 cm).' ),
 				array( 'What bangle size is a 7.5 inch hand?', 'A hand circumference of 7.5 inches (19 cm) gives a diameter of about 60.6 mm, so choose size 2.8 (63.5 mm); 2.6 (60.3 mm) is just too small to pass over the hand.' ),
+				array( 'Why is there no bangle size 2.9?', 'Because the number after the dot counts sixteenths of an inch, not tenths. Adult sizes go up in steps of 2/16 inch: 2.8, 2.10, 2.12, 2.14, then 3.0.' ),
 				array( 'Is bangle size the same as bracelet size?', 'No. Bangle size is the inner diameter and must clear your hand; bracelet size is the length around your wrist. A bracelet for a 6.5 inch wrist is about 7.25 inches long, while a rigid bangle for the same person is usually size 2.4 or 2.6.' ),
 			),
 		),
