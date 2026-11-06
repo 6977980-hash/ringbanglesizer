@@ -251,7 +251,7 @@
 					['Inner circumference', fmt(b.mm * Math.PI) + ' mm'],
 					['Typical fit', b.fit]
 				]) + (extra || '') +
-				'<p class="rbs-note">Bangle sizes step by 1/16 inch. If you are between sizes, choose the larger one for a bangle that slides over the hand.</p>';
+				'<p class="rbs-note">Adult bangle sizes step by 2/16 inch (about 3.2 mm). If you are between sizes, choose the larger one for a bangle that slides over the hand.</p>';
 		}
 		function drawMatch() {
 			var b = data.bangles[idx];

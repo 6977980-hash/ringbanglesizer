@@ -5,7 +5,7 @@ Description:  GeneratePress child theme for ringbanglesizer.com. Adds the on-scr
 Author:       Ring Bangle Sizer
 Author URI:   https://ringbanglesizer.com
 Template:     generatepress
-Version:      0.1.0
+Version:      0.2.0
 Requires at least: 6.4
 Requires PHP: 7.4
 License:      GNU General Public License v2 or later
@@ -40,3 +40,31 @@ Text Domain:  ringbanglesizer
 .rbs-table th { background: #f3f4f6; font-weight: 600; }
 .rbs-table tr:nth-child(even) td { background: #fafafa; }
 .rbs-table td:first-child { font-weight: 600; }
+
+/* Breadcrumbs */
+.rbs-crumbs { font-size: 14px; color: #6b7280; margin: 0 0 12px; }
+.rbs-crumbs a { color: #1d4ed8; text-decoration: none; }
+.rbs-crumbs .sep { margin: 0 4px; }
+.separate-containers .rbs-crumbs { padding: 0 0 4px; }
+
+/* Single-size key/value table */
+.rbs-kv th { text-align: left; background: #f9fafb; font-weight: 600; width: 45%; }
+.rbs-kv td { text-align: left; }
+.rbs-kv td:first-child { font-weight: 400; }
+.rbs-table caption { caption-side: top; text-align: left; font-weight: 600; padding: 0 0 8px; }
+
+/* Editorial box */
+.rbs-author {
+	border-top: 1px solid #e5e7eb;
+	margin: 36px 0 0;
+	padding: 18px 0 0;
+	font-size: 15px;
+	color: #374151;
+}
+.rbs-author p { margin: 0 0 8px; }
+
+/* Footer menu */
+.rbs-footer-nav { width: 100%; margin: 0 0 10px; }
+.rbs-footer-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
+.rbs-footer-nav a { font-size: 14px; }
+.inside-site-info { flex-direction: column; }
