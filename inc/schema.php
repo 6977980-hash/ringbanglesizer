@@ -50,7 +50,7 @@ function rbs_tool_schema() {
 		'@graph'   => array(
 			array(
 				'@type'               => 'WebApplication',
-				'name'                => $names[ $mode ],
+				'name'                => ! empty( $GLOBALS['rbs_tool_name'] ) ? $GLOBALS['rbs_tool_name'] : $names[ $mode ],
 				'url'                 => get_permalink(),
 				'applicationCategory' => 'UtilitiesApplication',
 				'operatingSystem'     => 'Any',
@@ -63,7 +63,7 @@ function rbs_tool_schema() {
 			),
 			array(
 				'@type' => 'HowTo',
-				'name'  => 'How to use the ' . strtolower( $names[ $mode ] ),
+				'name'  => 'How to use the ' . strtolower( ! empty( $GLOBALS['rbs_tool_name'] ) ? $GLOBALS['rbs_tool_name'] : $names[ $mode ] ),
 				'step'  => $how_to,
 			),
 		),

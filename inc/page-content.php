@@ -52,6 +52,10 @@ function rbs_core_pages() {
 <li><a href="/bangle-size-calculator/">Bangle size calculator</a> – Indian sizes 2.2, 2.4, 2.6, 2.8 and more</li>
 <li><a href="/bracelet-size-calculator/">Bracelet size calculator</a> – from your wrist measurement</li>
 <li><a href="/ring-size-chart/">Full ring size chart</a> with US, UK, EU and India columns</li>
+<li><a href="/ring-size-calculator/">Ring size calculator</a> – from a measurement in mm or inches</li>
+<li><a href="/ring-size-converter/">Ring size converter</a> – US, UK, EU and India sizes</li>
+<li><a href="/printable-ring-sizer/">Printable ring sizer</a> – free PDF</li>
+<li><a href="/how-to-measure-ring-size-at-home/">How to measure ring size at home</a></li>
 </ul>
 ',
 			'faq' => array(
@@ -149,15 +153,64 @@ function rbs_core_pages() {
 <p>A rigid bangle bracelet has to pass over your hand, so its size is really a <a href="/bangle-size-calculator/">bangle size</a>; the calculator shows the matching Indian bangle size when you select that style.</p>
 
 <h2>Standard bracelet sizes</h2>
+<table class="rbs-table">
+<thead><tr><th>Label</th><th>Bracelet length</th><th>Fits a wrist of</th><th>Usually for</th></tr></thead>
+<tbody>
+<tr><td>Child</td><td>5–6 in (12.7–15.2 cm)</td><td>4.25–5.25 in</td><td>Ages 3–10</td></tr>
+<tr><td>Extra small</td><td>6–6.5 in (15.2–16.5 cm)</td><td>5.25–5.75 in</td><td>Teens, very slim wrists</td></tr>
+<tr><td>Small</td><td>6.5–7 in (16.5–17.8 cm)</td><td>5.75–6.25 in</td><td>Petite women</td></tr>
+<tr><td>Medium</td><td>7–7.5 in (17.8–19 cm)</td><td>6.25–6.75 in</td><td>Most women (7 in is standard)</td></tr>
+<tr><td>Large</td><td>7.5–8 in (19–20.3 cm)</td><td>6.75–7.25 in</td><td>Larger women\'s wrists, slim men\'s wrists</td></tr>
+<tr><td>Extra large</td><td>8–8.5 in (20.3–21.6 cm)</td><td>7.25–7.75 in</td><td>Most men (8 in is standard)</td></tr>
+<tr><td>XXL</td><td>8.5–9 in (21.6–22.9 cm)</td><td>7.75–8.25 in</td><td>Larger men\'s wrists</td></tr>
+</tbody>
+</table>
+<p>Lengths assume a comfortable fit (wrist + ¾ in). For every wrist size from 5 to 9 inches, see the <a href="/wrist-size-chart/">wrist size chart</a>.</p>
+
+<h2>Bracelet size by style</h2>
+<h3>Chain and link bracelets</h3>
+<p>Measured end to end including the clasp. Add ¾ in (about 2 cm) to your wrist for a comfortable drape. Thick links take up room on the inside of the wrist, so for chunky chains wider than 8 mm add another ¼ in.</p>
+<h3>Tennis bracelets</h3>
+<p>Rows of stones look best sitting close to the wrist without sliding over the hand. Most people choose wrist + ½ in. A 6.5 in wrist usually wears a 7 in tennis bracelet.</p>
+<h3>Charm bracelets</h3>
+<p>Charms hang inward and take up space, so add about 1 in to your wrist (more if you plan to add many charms). A bracelet that is too tight pushes the charms against the skin.</p>
+<h3>Beaded and stretch bracelets</h3>
+<p>Elastic bracelets are made to sit snug: wrist + ¼ to ½ in. Large beads (10 mm and over) reduce the inside space, so add another ¼ in. Stretch bracelets that are too small wear out quickly from being forced over the hand.</p>
+<h3>Bangle bracelets</h3>
+<p>A rigid bangle bracelet must pass over your hand, so it is sized by inner diameter, not length. Use the <a href="/bangle-size-calculator/">bangle size calculator</a> or switch the calculator above to "Rigid bangle bracelet" to get the Indian bangle size (2.4, 2.6, 2.8 …).</p>
+<h3>Cuffs</h3>
+<p>Open cuffs slip on sideways at the narrow part of the wrist, so they need only ¼ to ¾ in more than your wrist size. Metal cuffs can be squeezed slightly to adjust, but not repeatedly.</p>
+<h3>Watch bracelets</h3>
+<p>Metal watch bracelets are adjusted by removing links; a jeweller or watch shop can do it in minutes. Leather and fabric straps use holes, so check the strap\'s listed wrist range against your wrist measurement.</p>
+
+<h2>Bracelet sizes for men</h2>
+<p>Men\'s bracelets are usually sold at 8 in (20.3 cm), with 8.5 and 9 in for larger wrists. Because men\'s chains and beads are often thicker, they need more room: for a Cuban or curb chain wider than 8 mm, add about 1 in to your wrist rather than ¾ in. Leather and cord bracelets with a sliding knot or magnetic clasp are more forgiving, but check that the stated length is the inside length, not including the clasp. Beaded men\'s bracelets with 10 mm beads typically fit a wrist ¾ in smaller than the bracelet\'s listed length.</p>
+
+<h2>Common bracelet sizing mistakes</h2>
 <ul>
-<li>Women: 7 in (17.8 cm) is standard; 6.5 in small, 7.5–8 in large.</li>
-<li>Men: 8 in (20.3 cm) is standard; 8.5–9 in for larger wrists.</li>
-<li>Children: 5–6 in (12.7–15 cm) depending on age.</li>
+<li><strong>Using your wrist size as the bracelet size.</strong> A 6.5 in bracelet on a 6.5 in wrist will not close comfortably. Always add for fit.</li>
+<li><strong>Measuring over the wrist bone.</strong> Measure just below it, where the bracelet actually sits.</li>
+<li><strong>Ignoring bead and link thickness.</strong> Thick links and large beads take up space inside the bracelet, so add ¼ in for each step up in chunkiness.</li>
+<li><strong>Buying a rigid bangle by length.</strong> Rigid bangles have to pass over the hand and are sized by diameter; use the <a href="/bangle-size-calculator/">bangle size calculator</a>.</li>
 </ul>
+
+<h2>Measuring a bracelet you already own</h2>
+<p>If you have a bracelet that fits well, you do not need to measure your wrist at all. Lay it flat and straight on a table, open the clasp, and measure from one end to the other including the clasp. That length is the bracelet size to buy again. For a bangle, measure the inside diameter instead.</p>
+
+<h2>Too tight or too loose?</h2>
+<ul>
+<li><strong>Too tight:</strong> it leaves a mark on the skin, or you cannot slide one finger under it. Add an extension chain (usually 1–2 in) or have a jeweller add a link.</li>
+<li><strong>Too loose:</strong> it slides over the wrist bone onto your hand. A jeweller can remove links from most chains, or you can use a smaller jump ring at the clasp.</li>
+<li><strong>Just right:</strong> one finger fits between the bracelet and your wrist, and it stays above the wrist bone when you lower your arm.</li>
+</ul>
+
+<h2>Bracelet sizes for children</h2>
+<p>Children\'s wrists grow quickly, so choose an adjustable bracelet or one with an extension chain. Typical lengths: 4–5 in for babies and toddlers, 5–5.5 in for ages 3–6 and 5.5–6 in for ages 7–10. For babies, choose a safety clasp and avoid small beads that could come loose. For children\'s bangles, see the <a href="/kids-bangle-size-chart/">kids bangle size chart</a>.</p>
 
 <h2>More sizing tools</h2>
 <ul>
-<li><a href="/">Ring sizer</a></li>
+<li><a href="/wrist-size-chart/">Wrist size chart</a> – bracelet length for every wrist size</li>
+<li><a href="/">Ring sizer</a> and <a href="/ring-size-chart/">ring size chart</a></li>
 <li><a href="/bangle-size-calculator/">Bangle size calculator</a></li>
 </ul>
 ',
@@ -166,6 +219,8 @@ function rbs_core_pages() {
 				array( 'What size bracelet for a 7 inch wrist?', 'A 7.75 inch (19.7 cm) chain bracelet is comfortable; 7.5 inches is snug and 8.25 inches loose.' ),
 				array( 'How do I measure my wrist without a tape measure?', 'Wrap a strip of paper or a piece of string around your wrist, mark the overlap, then lay it flat against a ruler.' ),
 				array( 'What is the average bracelet size for women?', '7 inches (17.8 cm) is the standard women\'s bracelet length and fits a 6–6.5 inch wrist.' ),
+				array( 'What is the standard bracelet size for men?', '8 inches (20.3 cm) is the standard men\'s length and fits a wrist of about 7–7.5 inches.' ),
+				array( 'How do I measure an existing bracelet?', 'Lay it flat and straight, open the clasp and measure from end to end, including the clasp. That length is your bracelet size.' ),
 			),
 		),
 
@@ -177,7 +232,7 @@ function rbs_core_pages() {
 			'seo_desc'  => 'Complete ring size chart with US, UK, EU/ISO and Indian sizes, inner diameter in mm and inches, and circumference. Convert any ring size instantly.',
 			'mode'      => null,
 			'content'   => '
-<p><strong>Every ring size system in one chart.</strong> Find your size in one column and read across for the others. Diameters follow the ISO 8653 standard used by jewellers worldwide.</p>
+<p><strong>Every ring size system in one chart.</strong> Find your size in one column and read across for the others: US 7 is UK N½, EU 54, India 14 and 17.3 mm inside diameter. Diameters follow the ISO 8653 standard used by jewellers worldwide. Don\'t know your size yet? <a href="/">Measure a ring on your screen</a> or use the <a href="/ring-size-calculator/">ring size calculator</a>.</p>
 
 [rbs_ring_table]
 
@@ -185,7 +240,8 @@ function rbs_core_pages() {
 <ul>
 <li><strong>You know your US size:</strong> read across for UK, EU and India.</li>
 <li><strong>You have a ring:</strong> measure its inner diameter in mm with a ruler or vernier and find the nearest value in the diameter column, or <a href="/">match it on screen</a> for a faster result.</li>
-<li><strong>You measured your finger with string:</strong> use the circumference column.</li>
+<li><strong>You measured your finger with string:</strong> use the circumference column, or the full <a href="/ring-size-by-circumference/">ring size by circumference</a> table.</li>
+<li><strong>You need a quick answer in another system:</strong> the <a href="/ring-size-converter/">ring size converter</a> does it in one click.</li>
 </ul>
 
 <h2>How the size systems differ</h2>
@@ -197,11 +253,73 @@ function rbs_core_pages() {
 <li><strong>Switzerland:</strong> circumference minus 40, so EU 54 is Swiss 14.</li>
 </ul>
 
+<h2>Women\'s ring size chart</h2>
+<p>Most women wear between US 5 and 8. These are the sizes jewellers stock most, with every conversion:</p>
+<table class="rbs-table">
+<thead><tr><th>US</th><th>UK</th><th>EU</th><th>India</th><th>Diameter</th><th>Common for</th></tr></thead>
+<tbody>
+<tr><td><a href="/ring-size-in-mm/size-5/">5</a></td><td>J½</td><td>49</td><td>9</td><td>15.7 mm</td><td>Petite fingers, pinky rings</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-5-5/">5.5</a></td><td>K½</td><td>51</td><td>10</td><td>16.1 mm</td><td>Slim ring fingers</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-6/">6</a></td><td>L½</td><td>52</td><td>12</td><td>16.5 mm</td><td>Very common ring-finger size</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-6-5/">6.5</a></td><td>M½</td><td>53</td><td>13</td><td>16.9 mm</td><td>Very common ring-finger size</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-7/">7</a></td><td>N½</td><td>54</td><td>14</td><td>17.3 mm</td><td>Common; middle and index fingers</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-7-5/">7.5</a></td><td>O½</td><td>56</td><td>15</td><td>17.7 mm</td><td>Larger ring fingers, middle fingers</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>16</td><td>18.1 mm</td><td>Larger hands, thumb rings for petite hands</td></tr>
+</tbody>
+</table>
+
+<h2>Men\'s ring size chart</h2>
+<p>Most men wear between US 8 and 12, with 9 to 10 the most common for wedding bands:</p>
+<table class="rbs-table">
+<thead><tr><th>US</th><th>UK</th><th>EU</th><th>India</th><th>Diameter</th><th>Circumference</th></tr></thead>
+<tbody>
+<tr><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>16</td><td>18.1 mm</td><td>56.9 mm</td></tr>
+<tr><td>8.5</td><td>Q½</td><td>58</td><td>18</td><td>18.5 mm</td><td>58.1 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-9/">9</a></td><td>R½</td><td>60</td><td>19</td><td>19.0 mm</td><td>59.7 mm</td></tr>
+<tr><td>9.5</td><td>S½</td><td>61</td><td>20</td><td>19.4 mm</td><td>60.9 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-10/">10</a></td><td>T½</td><td>62</td><td>21</td><td>19.8 mm</td><td>62.2 mm</td></tr>
+<tr><td>10.5</td><td>U½</td><td>63</td><td>23</td><td>20.2 mm</td><td>63.5 mm</td></tr>
+<tr><td>11</td><td>V½</td><td>65</td><td>24</td><td>20.6 mm</td><td>64.7 mm</td></tr>
+<tr><td>12</td><td>X½</td><td>67</td><td>26</td><td>21.4 mm</td><td>67.2 mm</td></tr>
+</tbody>
+</table>
+<p>Men\'s bands are often 6–8 mm wide. A wide band covers more of the finger and feels tighter, so many men go up half a size from their measured size.</p>
+
+<h2>Ring size chart in inches</h2>
+<p>Some US jewellers and ring mandrels give sizes in inches. The inner diameter of US 5 is 0.618 in, US 6 is 0.650 in, US 7 is 0.681 in, US 8 is 0.713 in, US 9 is 0.748 in and US 10 is 0.780 in, so each whole size adds about 0.032 in (a little under 1/32 inch). Inner circumference grows by about 0.1 in per size: US 7 is 2.14 in around and US 8 is 2.24 in. Multiply inches by 25.4 to get millimetres, or use the <a href="/ring-size-by-diameter/">ring size by diameter</a> table, which has an inch column.</p>
+
+<h2>Half and quarter sizes</h2>
+<p>Each US half size is only 0.4 mm of diameter, and a quarter size is 0.2 mm. Most jewellers can order quarter sizes for wedding bands and engagement rings; fashion rings are usually sold in whole or half sizes. If you measure between two sizes on this chart, choose the larger one for a rigid or wide ring and the smaller one for a thin band that you want to stay put. Rings with a heavy stone on top tend to roll sideways if they are loose, so they should fit closer.</p>
+
+<h2>Ring size by finger</h2>
+<p>Fingers on the same hand can differ by two or three sizes. As a rule of thumb, for the same person:</p>
+<ul>
+<li><strong>Thumb:</strong> about 2 to 3 sizes larger than the ring finger.</li>
+<li><strong>Index and middle finger:</strong> about ½ to 1½ sizes larger than the ring finger.</li>
+<li><strong>Ring finger:</strong> the size most charts and averages refer to.</li>
+<li><strong>Little finger (pinky):</strong> about 1½ to 2 sizes smaller than the ring finger.</li>
+</ul>
+<p>These are only rough guides; always measure the finger the ring is for. The <a href="/how-to-measure-ring-size-at-home/">how to measure ring size at home</a> guide covers five ways to do it.</p>
+
+<h2>Does ring style change the size?</h2>
+<ul>
+<li><strong>Thin bands (under 4 mm):</strong> buy your measured size.</li>
+<li><strong>Wide bands (6 mm and over):</strong> add ¼ to ½ size.</li>
+<li><strong>Comfort-fit bands:</strong> the rounded inside feels looser, so some people take ¼ size smaller; check the brand\'s advice.</li>
+<li><strong>Stacking rings:</strong> several thin rings worn together act like one wide band, so go up ¼ size.</li>
+<li><strong>Tungsten, titanium and ceramic:</strong> these cannot be resized, so measure with extra care.</li>
+</ul>
+
+<h2>Prefer paper?</h2>
+<p>Download the free <a href="/printable-ring-sizer/">printable ring sizer</a>: true-size circles for US 4 to 12.5 and a finger strip, with a check line to make sure it printed at 100%.</p>
+
 [rbs_cta mode="ring"]
 
 <h2>Related</h2>
 <ul>
 <li><a href="/ring-size-in-mm/">Ring size in mm</a> – diameter and circumference for every size</li>
+<li><a href="/ring-size-by-diameter/">Ring size by diameter</a> and <a href="/ring-size-by-circumference/">by circumference</a></li>
+<li><a href="/ring-size-converter/">Ring size converter</a></li>
 <li><a href="/ring-size-chart/pakistan/">Ring size chart Pakistan</a></li>
 <li><a href="/bangle-size-chart/">Bangle size chart</a></li>
 <li><a href="/bracelet-size-calculator/">Bracelet size calculator</a></li>
@@ -212,6 +330,8 @@ function rbs_core_pages() {
 				array( 'What is ring size 8 in mm?', 'US size 8 is 18.1 mm inner diameter (56.9 mm circumference), UK P½, EU 57.' ),
 				array( 'What is a 17 mm ring size?', 'A 17 mm inner diameter is between US 6.5 (16.9 mm) and 7 (17.3 mm); most people choose US 7 / UK N½.' ),
 				array( 'How do I convert UK ring size to US?', 'Use the chart: UK L½ is US 6, UK N½ is US 7, UK P½ is US 8, UK R½ is US 9, UK T½ is US 10.' ),
+				array( 'What is the most common ring size for women?', 'US 6 to 7 (UK L½ to N½, 16.5 to 17.3 mm) is the most common range for a woman\'s ring finger.' ),
+				array( 'What is the most common ring size for men?', 'US 9 to 10 (UK R½ to T½, 19.0 to 19.8 mm) is the most common range for men.' ),
 			),
 		),
 

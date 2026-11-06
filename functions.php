@@ -12,12 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_VERSION', '0.2.0' );
+define( 'RBS_VERSION', '0.3.0' );
 define( 'RBS_DIR', get_stylesheet_directory() );
 define( 'RBS_URI', get_stylesheet_directory_uri() );
 
 require_once RBS_DIR . '/inc/sizes.php';
 require_once RBS_DIR . '/inc/shortcodes.php';
+require_once RBS_DIR . '/inc/tools.php';
 require_once RBS_DIR . '/inc/schema.php';
 require_once RBS_DIR . '/inc/site.php';
 require_once RBS_DIR . '/inc/pages.php';
@@ -38,20 +39,8 @@ function rbs_register_tool_assets() {
 	wp_register_style( 'rbs-sizer', RBS_URI . '/assets/css/sizer.css', array(), RBS_VERSION );
 	wp_register_script( 'rbs-sizer', RBS_URI . '/assets/js/sizer.js', array(), RBS_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
 
-	$rings = array();
-	foreach ( rbs_ring_sizes() as $r ) {
-		$d       = rbs_ring_derived( $r['mm'] );
-		$rings[] = array(
-			'us'   => $r['us'],
-			'uk'   => $r['uk'],
-			'mm'   => $r['mm'],
-			'circ' => $d['circ_mm'],
-			'eu'   => $d['eu'],
-			'jp'   => $d['jp'],
-		);
-	}
 	wp_localize_script( 'rbs-sizer', 'RBS_DATA', array(
-		'rings'   => $rings,
+		'rings'   => rbs_ring_rows_for_js(),
 		'bangles' => rbs_bangle_sizes(),
 	) );
 }

@@ -5,7 +5,7 @@ Description:  GeneratePress child theme for ringbanglesizer.com. Adds the on-scr
 Author:       Ring Bangle Sizer
 Author URI:   https://ringbanglesizer.com
 Template:     generatepress
-Version:      0.2.0
+Version:      0.3.0
 Requires at least: 6.4
 Requires PHP: 7.4
 License:      GNU General Public License v2 or later
@@ -68,3 +68,20 @@ Text Domain:  ringbanglesizer
 .rbs-footer-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
 .rbs-footer-nav a { font-size: 14px; }
 .inside-site-info { flex-direction: column; }
+
+/* Ring size converter [rbs_ring_converter] */
+.rbs-conv { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; margin: 20px 0 28px; background: #f9fafb; max-width: 720px; }
+.rbs-conv-fields { display: flex; flex-wrap: wrap; gap: 12px; }
+.rbs-conv-fields label { flex: 1 1 220px; display: flex; flex-direction: column; gap: 4px; font-weight: 600; font-size: 15px; }
+.rbs-conv-fields select, .rbs-conv-fields input { width: 100%; padding: 8px 10px; font-size: 16px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; }
+.rbs-conv-fields [hidden] { display: none; }
+.rbs-conv-out { min-height: 330px; }
+.rbs-conv-big { font-size: 22px; font-weight: 700; color: #1d4ed8; margin: 16px 0 8px; }
+.rbs-conv-out .rbs-table { background: #fff; }
+.rbs-conv-note { font-size: 14px; color: #4b5563; margin: 8px 0 0; }
+
+/* Printable sizer */
+.rbs-printable { margin: 20px 0 28px; }
+.rbs-printable-buttons .button { display: inline-block; background: #1d4ed8; color: #fff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0 8px 8px 0; }
+.rbs-printable-buttons .button:hover { background: #1e40af; color: #fff; }
+.rbs-print-preview { display: block; max-width: none; background: #fff; }
