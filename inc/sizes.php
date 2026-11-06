@@ -64,6 +64,8 @@ function rbs_bangle_sizes() {
 		array( 'label' => '2.12', 'inch' => 2.75,  'mm' => 69.9, 'fit' => 'XXL' ),
 		array( 'label' => '2.14', 'inch' => 2.875, 'mm' => 73.0, 'fit' => 'XXXL' ),
 		array( 'label' => '3.0',  'inch' => 3.0,   'mm' => 76.2, 'fit' => 'Men / kada' ),
+		array( 'label' => '3.2',  'inch' => 3.125, 'mm' => 79.4, 'fit' => 'Large men\'s kada' ),
+		array( 'label' => '3.4',  'inch' => 3.25,  'mm' => 82.6, 'fit' => 'Extra-large men\'s kada' ),
 	);
 }
 

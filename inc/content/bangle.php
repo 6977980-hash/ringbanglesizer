@@ -171,7 +171,7 @@ function rbs_bangle_pages() {
 <h2>Average bangle size by group</h2>
 <ul>
 <li>Women in India and Pakistan: 2.4–2.6 (most common), 2.8 for larger frames.</li>
-<li>Men (kada): 2.10–2.12; very large hands 2.14 or 3.0.</li>
+<li>Men (kada): 2.10–2.12; very large hands 2.14 or 3.0; heavy kadas for the largest hands 3.2 or 3.4.</li>
 <li>Teenagers: 2.2–2.4.</li>
 <li>Children 4–7 years: 2.0; under 4: 1.10–1.14.</li>
 </ul>
@@ -182,7 +182,7 @@ function rbs_bangle_pages() {
 			'faq' => array(
 				array( 'Which bangle size is most common?', 'Sizes 2.4 and 2.6 are the most common for adult women in India and Pakistan and are the sizes most shops stock.' ),
 				array( 'What is the difference between 2.4 and 2.6 bangle size?', '2.6 is 3.1 mm wider in diameter (60.3 mm vs 57.2 mm) and about 1 cm longer around the inside. That is one full size.' ),
-				array( 'What bangle size do men wear?', 'Most men wear a kada in size 2.10 or 2.12 (66.7–69.9 mm). Very large hands may need 2.14 or 3.0.' ),
+				array( 'What bangle size do men wear?', 'Most men wear a kada in size 2.10 or 2.12 (66.7–69.9 mm). Very large hands may need 2.14 or 3.0, and a few men need 3.2 or 3.4 (79.4–82.6 mm).' ),
 				array( 'Is there a 2.9 bangle size?', 'No. The number after the dot counts sixteenths of an inch in steps of two, so after 2.8 comes 2.10.' ),
 				array( 'Should I size up or down for bangles?', 'For rigid bangles size up if you are between sizes, because the bangle has to pass your knuckles. For openable bangles and kadas with a clasp you can size down.' ),
 			),
@@ -507,6 +507,8 @@ function rbs_bangle_pages() {
 <tr><td><strong>2.12</strong></td><td><strong>69.9 mm</strong></td><td><strong>21.0–22.0 cm</strong></td><td><strong>Average to large men</strong></td></tr>
 <tr><td>2.14</td><td>73.0 mm</td><td>22.0–22.9 cm</td><td>Large hands, heavy kada</td></tr>
 <tr><td>3.0</td><td>76.2 mm</td><td>22.9–23.9 cm</td><td>Very large hands</td></tr>
+<tr><td>3.2</td><td>79.4 mm</td><td>23.9–24.9 cm</td><td>Very large hands, heavy kada</td></tr>
+<tr><td>3.4</td><td>82.6 mm</td><td>24.9–25.9 cm</td><td>Largest stock size, often made to order</td></tr>
 </tbody>
 </table>
 
@@ -536,7 +538,7 @@ function rbs_bangle_pages() {
 				array( 'What is 2.12 bangle size in inches?', '2 12/16 inches, which is 2¾ or 2.75 inches across the inside.' ),
 				array( 'Is 2.12 bangle size for men?', 'Mostly yes. 2.12 is a common men\'s kada size, especially for thick or heavy kadas.' ),
 				array( 'What hand size fits a 2.12 bangle?', 'A folded hand measuring about 21.0 to 22.0 cm (8.3 to 8.6 inches) around the knuckles.' ),
-				array( 'What comes after 2.12 bangle size?', 'Size 2.14 (73.0 mm), then 3.0 (76.2 mm).' ),
+				array( 'What comes after 2.12 bangle size?', 'Size 2.14 (73.0 mm), then 3.0 (76.2 mm). Large men\'s kadas also come in 3.2 (79.4 mm) and 3.4 (82.6 mm).' ),
 			),
 		),
 
