@@ -267,6 +267,26 @@ function rbs_fallback_schema() {
 			);
 		}
 		$graph[] = array( '@type' => 'BreadcrumbList', 'itemListElement' => $items );
+
+		// Guides under /blog/ are articles. The byline matches the visible editorial box.
+		$id     = get_queried_object_id();
+		$parent = (int) wp_get_post_parent_id( $id );
+		if ( $parent && 'blog' === get_post_field( 'post_name', $parent ) ) {
+			$img     = rbs_og_image( $id );
+			$graph[] = array(
+				'@type'            => 'Article',
+				'@id'              => get_permalink( $id ) . '#article',
+				'headline'         => wp_strip_all_tags( get_the_title( $id ) ),
+				'description'      => (string) get_post_meta( $id, 'rank_math_description', true ),
+				'image'            => array( '@type' => 'ImageObject', 'url' => $img['url'], 'width' => $img['w'], 'height' => $img['h'] ),
+				'datePublished'    => get_the_date( 'c', $id ),
+				'dateModified'     => get_the_modified_date( 'c', $id ),
+				'author'           => rbs_editor_entity(),
+				'publisher'        => array( '@id' => home_url( '/#organization' ) ),
+				'mainEntityOfPage' => get_permalink( $id ),
+				'inLanguage'       => 'en',
+			);
+		}
 	}
 	echo '<script type="application/ld+json">' . wp_json_encode( array( '@context' => 'https://schema.org', '@graph' => $graph ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
 }
