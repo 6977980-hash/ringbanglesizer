@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_VERSION', '0.5.0' );
+define( 'RBS_VERSION', '0.5.1' );
 define( 'RBS_DIR', get_stylesheet_directory() );
 define( 'RBS_URI', get_stylesheet_directory_uri() );
 
@@ -30,9 +30,13 @@ require_once RBS_DIR . '/inc/pages.php';
  */
 function rbs_enqueue_styles() {
 	wp_enqueue_style( 'generatepress-parent', get_template_directory_uri() . '/style.css', array(), wp_get_theme( 'generatepress' )->get( 'Version' ) );
-	wp_enqueue_style( 'rbs-child', RBS_URI . '/style.css', array( 'generatepress-parent' ), RBS_VERSION );
+	// Load after GeneratePress main.min.css so child rules win (same order as GP's own child stylesheet).
+	wp_enqueue_style( 'rbs-child', RBS_URI . '/style.css', array( 'generatepress-parent', 'generate-style' ), RBS_VERSION );
 }
 add_action( 'wp_enqueue_scripts', 'rbs_enqueue_styles' );
+
+// GeneratePress also enqueues the child style.css itself ("generate-child"); we already load it above.
+add_filter( 'generate_load_child_theme_stylesheet', '__return_false' );
 
 /**
  * Register (not enqueue) the tool assets. Shortcode enqueues them on demand.

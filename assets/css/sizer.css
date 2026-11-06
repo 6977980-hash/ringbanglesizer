@@ -85,6 +85,7 @@
 	justify-content: center;
 }
 .rbs-card {
+	flex-shrink: 0; /* true size: never squeeze to fit */
 	border: 3px dashed var(--rbs-blue);
 	border-radius: 10px;
 	display: flex;
@@ -109,16 +110,21 @@
 	min-width: 0;
 }
 .rbs-step {
-	width: 40px;
-	height: 40px;
+	width: 44px;
+	height: 44px;
+	padding: 0;
 	border-radius: 50%;
-	border: 1px solid var(--rbs-border);
+	border: 1px solid #93c5fd;
 	background: #fff;
-	font-size: 20px;
+	color: var(--rbs-blue);
+	font-size: 22px;
+	font-weight: 700;
 	line-height: 1;
 	cursor: pointer;
 	flex-shrink: 0;
 }
+.rbs-step:hover,
+.rbs-step:focus { background: #eff6ff; color: var(--rbs-blue-dark); }
 
 /* buttons */
 .rbs-btn {
@@ -138,7 +144,18 @@
 	color: var(--rbs-blue);
 	border: 1px solid var(--rbs-blue);
 }
-.rbs-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.rbs-btn-row { display: flex; gap: 8px 16px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+.rbs-link {
+	padding: 10px 0;
+	border: none;
+	background: none;
+	color: var(--rbs-muted);
+	font-size: 14px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.rbs-link:hover,
+.rbs-link:focus { background: none; color: var(--rbs-text); }
 
 /* circle stage */
 .rbs-stage {
@@ -151,14 +168,28 @@
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
+	padding-bottom: 26px; /* room for the label under the circle */
 }
-.rbs-stage svg { display: block; }
+.rbs-stage svg { display: block; flex-shrink: 0; max-width: none; height: auto; }
+.rbs-stage-tip {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	right: 8px;
+	padding: 6px 10px;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.92);
+	font-size: 13px;
+	line-height: 1.35;
+	color: var(--rbs-text);
+	text-align: center;
+}
 .rbs-stage .rbs-circle { fill: none; stroke: var(--rbs-blue); stroke-width: 2; }
 .rbs-stage .rbs-circle-inner { fill: #fff; stroke: none; }
 .rbs-stage .rbs-center { stroke: #9ca3af; stroke-width: 1; }
 .rbs-stage-label {
 	position: absolute;
-	bottom: 8px;
+	bottom: 6px;
 	left: 0; right: 0;
 	text-align: center;
 	font-size: 13px;
@@ -205,13 +236,19 @@
 /* method toggle */
 .rbs-methods { display: flex; gap: 6px; margin: 0 0 12px; flex-wrap: wrap; }
 .rbs-method {
-	padding: 7px 12px;
+	padding: 9px 14px;
 	border-radius: 999px;
-	border: 1px solid var(--rbs-border);
+	border: 1px solid #d1d5db;
 	background: #fff;
+	color: var(--rbs-text);
 	font-size: 14px;
+	line-height: 1.3;
 	cursor: pointer;
 }
+.rbs-method:hover,
+.rbs-method:focus { background: #f3f4f6; color: var(--rbs-text); }
+.rbs-method[aria-pressed="true"]:hover,
+.rbs-method[aria-pressed="true"]:focus { background: var(--rbs-text); color: #fff; }
 .rbs-method[aria-pressed="true"] { background: var(--rbs-text); color: #fff; border-color: var(--rbs-text); }
 
 .rbs-hidden { display: none !important; }
@@ -225,4 +262,15 @@
 @media (min-width: 600px) {
 	.rbs-panel { padding: 20px 22px; }
 	.rbs-result .rbs-big { font-size: 34px; }
+}
+
+/* Phones: the card and circle stages run edge to edge, because a card's short side
+   (54 mm) and most bangles (60+ mm) are nearly as wide as the whole screen. */
+@media (max-width: 599px) {
+	.rbs-card-stage,
+	.rbs-stage {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		border-radius: 0;
+	}
 }

@@ -5,7 +5,11 @@
 	'use strict';
 
 	var CARD_MM = 85.6;                 // ISO/IEC 7810 ID-1 width
-	var DEFAULT_PPM = 96 / 25.4;        // CSS px per mm if never calibrated (~3.78)
+	var CARD_SHORT_MM = 53.98;          // ISO/IEC 7810 ID-1 height
+	// CSS px per mm if never calibrated. Desktop monitors are close to 96 CSS px/inch (~3.78);
+	// phones are much denser (most are 5.8–6.4 CSS px/mm), so a narrow screen starts at 6.
+	var NARROW = Math.min(window.innerWidth || 1024, (window.screen && window.screen.width) || 1024) < 600;
+	var DEFAULT_PPM = NARROW ? 6 : 96 / 25.4;
 	var STORE_KEY = 'rbs_ppm_v1';
 	var MM_IN = 25.4;
 
@@ -37,27 +41,38 @@
 			: '<span class="rbs-badge">Not calibrated – sizes approximate</span>';
 		panel.innerHTML =
 			'<div class="rbs-cal-status"><h2 class="rbs-h">Step 1: Calibrate your screen</h2>' + badge + '</div>' +
-			'<p class="rbs-muted">Hold any credit, debit or ID card against the screen. Drag the slider until the dashed outline is exactly the width of the card.</p>' +
-			'<div class="rbs-card-stage"><div class="rbs-card">Match the card width</div></div>' +
+			'<p class="rbs-muted rbs-cal-help"></p>' +
+			'<div class="rbs-card-stage"><div class="rbs-card"></div></div>' +
 			'<div class="rbs-slider-row"><button type="button" class="rbs-step" data-d="-1" aria-label="Smaller">−</button>' +
-			'<input type="range" min="2" max="12" step="0.01" value="' + ppm + '" aria-label="Card width">' +
+			'<input type="range" min="2" max="12" step="0.01" value="' + ppm + '" aria-label="Card outline size">' +
 			'<button type="button" class="rbs-step" data-d="1" aria-label="Larger">+</button></div>' +
 			'<div class="rbs-btn-row"><button type="button" class="rbs-btn rbs-cal-save">Save calibration</button>' +
-			'<button type="button" class="rbs-btn secondary rbs-cal-toggle">' + (calibrated ? 'Hide' : 'Skip for now') + '</button></div>';
+			'<button type="button" class="rbs-link rbs-cal-toggle">' + (calibrated ? 'Hide' : 'Skip for now (sizes will be approximate)') + '</button></div>';
 
 		var card = $('.rbs-card', panel);
 		var range = $('input[type=range]', panel);
 		var stage = $('.rbs-card-stage', panel);
+		var help = $('.rbs-cal-help', panel);
+		var upright = null;
 
 		function draw() {
-			var w = ppm * CARD_MM;
-			var h = ppm * 53.98;
-			var maxW = stage.clientWidth - 8;
-			if (w > maxW) { // card wider than viewport: still draw true size, let it overflow visually
-				stage.style.justifyContent = 'flex-start';
+			// A bank card (85.6 mm) is wider than a phone screen (~65–70 mm), so on narrow
+			// screens the card is held upright and its short side (53.98 mm) is matched.
+			// The outline is always drawn at true size; it never shrinks to fit.
+			var isUpright = stage.clientWidth < 480;
+			if (isUpright !== upright) {
+				upright = isUpright;
+				help.innerHTML = upright
+					? 'Hold any credit, debit or ID card <strong>upright</strong> against the screen. Drag the slider until the dashed outline is exactly as wide as the card\'s <strong>short side</strong>.'
+					: 'Hold any credit, debit or ID card against the screen. Drag the slider until the dashed outline is exactly the width of the card.';
+				card.textContent = upright ? 'Match the card\'s short side' : 'Match the card width';
+				card.classList.toggle('upright', upright);
 			}
+			var w = ppm * (upright ? CARD_SHORT_MM : CARD_MM);
+			var h = ppm * (upright ? CARD_MM : CARD_SHORT_MM);
 			card.style.width = w + 'px';
 			card.style.height = h + 'px';
+			range.setAttribute('aria-valuetext', fmt(ppm * 25.4, 0) + ' pixels per inch');
 		}
 		range.addEventListener('input', function () { ppm = parseFloat(range.value); draw(); });
 		panel.querySelectorAll('.rbs-step').forEach(function (b) {
@@ -95,9 +110,10 @@
 
 	/* --------------------------------------------------------- circle stage */
 
-	function circleStage(mm, label) {
+	function circleStage(mm, label, stageWidth) {
 		var px = mm * ppm;
 		var size = Math.max(px + 40, 220);
+		var wide = stageWidth && px > stageWidth - 4;
 		var svg =
 			'<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '" aria-hidden="true">' +
 			'<circle class="rbs-circle-inner" cx="' + size / 2 + '" cy="' + size / 2 + '" r="' + px / 2 + '"/>' +
@@ -105,6 +121,9 @@
 			'<line class="rbs-center" x1="' + (size / 2 - 6) + '" y1="' + size / 2 + '" x2="' + (size / 2 + 6) + '" y2="' + size / 2 + '"/>' +
 			'<line class="rbs-center" x1="' + size / 2 + '" y1="' + (size / 2 - 6) + '" x2="' + size / 2 + '" y2="' + (size / 2 + 6) + '"/>' +
 			'</svg><div class="rbs-stage-label">' + label + '</div>';
+		if (wide) {
+			svg += '<div class="rbs-stage-tip">Wider than your screen: let the bangle hang over the sides and line up the <strong>top and bottom</strong> of the circle with its inside edge.</div>';
+		}
 		return svg;
 	}
 
@@ -177,7 +196,8 @@
 		}
 		function drawMatch() {
 			var r = data.rings[idx];
-			stage.innerHTML = circleStage(r.mm, 'Inner diameter ' + fmt(r.mm) + ' mm · US ' + r.us);
+			stage.innerHTML = circleStage(r.mm, 'Inner diameter ' + fmt(r.mm) + ' mm · US ' + r.us, stage.clientWidth);
+			range.setAttribute('aria-valuetext', 'US ' + r.us + ', UK ' + r.uk + ', ' + fmt(r.mm) + ' mm');
 			show(r, false);
 		}
 		range.addEventListener('input', function () { idx = parseInt(range.value, 10); drawMatch(); });
@@ -259,7 +279,8 @@
 		}
 		function drawMatch() {
 			var b = data.bangles[idx];
-			stage.innerHTML = circleStage(b.mm, 'Inner diameter ' + fmt(b.mm) + ' mm · size ' + b.label);
+			stage.innerHTML = circleStage(b.mm, 'Inner diameter ' + fmt(b.mm) + ' mm · size ' + b.label, stage.clientWidth);
+			range.setAttribute('aria-valuetext', 'Size ' + b.label + ', ' + fmt(b.mm) + ' mm');
 			show(b);
 		}
 		range.addEventListener('input', function () { idx = parseInt(range.value, 10); drawMatch(); });
