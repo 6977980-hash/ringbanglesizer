@@ -241,18 +241,18 @@ HTML
 <table class="rbs-table">
 <thead><tr><th>Method</th><th>You need</th><th>Typical accuracy</th><th>Best for</th></tr></thead>
 <tbody>
-<tr><td>1. On-screen sizer</td><td>Phone + bank card + a ring</td><td>±¼ size</td><td>Fastest, no tools</td></tr>
+<tr><td>1. On-screen sizer</td><td>Phone + bank card + a ring</td><td>About ±¼ size (designed for)</td><td>Fastest, no tools</td></tr>
 <tr><td>2. Ring + ruler or caliper</td><td>A ring + mm ruler</td><td>±½ size (ruler), ±¼ (caliper)</td><td>When you have a ruler</td></tr>
 <tr><td>3. Paper strip or string</td><td>Paper / thread + ruler</td><td>±½ size</td><td>No ring that fits</td></tr>
 <tr><td>4. Printable sizer</td><td>Printer + ruler</td><td>±½ size</td><td>Measuring away from a screen</td></tr>
-<tr><td>5. Plastic ring sizer</td><td>Reusable sizer belt</td><td>±¼ size</td><td>Measuring several people</td></tr>
+<tr><td>5. Plastic ring sizer</td><td>Reusable sizer belt</td><td>±½ size</td><td>Measuring several people</td></tr>
 </tbody>
 </table>
 
 <h2>Method 1: On your phone screen</h2>
 <ol>
 <li>Open the <a href="/">ring sizer</a> on your phone.</li>
-<li>Hold any bank, debit or ID card against the screen and drag the slider until the outline matches the card. All these cards are 85.6 mm wide, so this tells the tool the true size of your screen.</li>
+<li>Hold any bank, debit or ID card against the screen and drag the slider until the outline matches the card. On a phone, hold the card upright and match its short side (53.98 mm); on a computer, match its long side (85.6 mm). All these cards are the same size, so this tells the tool the true size of your screen.</li>
 <li>Lay a ring that fits the right finger flat on the screen and adjust the circle until it lines up with the <em>inside</em> edge.</li>
 <li>Read your US, UK, EU, Indian size and the diameter in mm.</li>
 </ol>
@@ -284,7 +284,7 @@ HTML
 <p>Download the free <a href="/printable-ring-sizer/">printable ring sizer</a>, print at 100% and check the 50 mm line with a ruler. Then match a ring to the true-size circles or use the cut-out finger strip. This is a good option if you need to measure someone else's ring without a phone nearby.</p>
 
 <h2>Method 5: A plastic ring sizer</h2>
-<p>Reusable plastic sizer belts cost very little and work like a small belt: thread the end through, tighten and read the size. They are as accurate as a jeweller's ring stick, but make sure the one you buy uses the same system as the shop (US numbers or UK letters).</p>
+<p>Reusable plastic sizer belts cost very little and work like a small belt: thread the end through, tighten and read the size. They are handy for a quick check, but they are less reliable than a jeweller's metal ring sizers: the strip can be pulled too tight or sit at an angle, so read it twice and treat it as within about half a size. Make sure the one you buy uses the same system as the shop (US numbers or UK letters).</p>
 
 <h2>Tips for an accurate result</h2>
 <ul>

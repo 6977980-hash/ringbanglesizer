@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_PAGES_VERSION', '10' );
+define( 'RBS_PAGES_VERSION', '11' );
 
 require_once RBS_DIR . '/inc/page-content.php';
 require_once RBS_DIR . '/inc/content/legal.php';

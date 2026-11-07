@@ -26,7 +26,7 @@ function rbs_core_pages() {
 
 <h2>How to measure your ring size on screen</h2>
 <ol>
-<li><strong>Calibrate.</strong> Hold a credit, debit or ID card on the screen and drag the slider until the dashed outline is exactly as wide as the card. Every bank card is 85.6 mm wide, so this tells the tool the real size of your screen. You only do this once.</li>
+<li><strong>Calibrate.</strong> Hold a credit, debit or ID card on the screen and drag the slider until the dashed outline matches the card. On a phone, hold the card upright and match its short side (53.98 mm); on a computer, match its long side (85.6 mm). Every bank card is the same size, so this tells the tool the real size of your screen. You only do this once.</li>
 <li><strong>Match a ring.</strong> Put a ring that fits the right finger flat on the screen. Move the size slider until the blue circle lines up with the <em>inside</em> edge of the ring. Not the outside: the inside edge is what sits on your finger.</li>
 <li><strong>Read your size.</strong> The result shows US, UK/Australian, EU/ISO, Indian/Pakistani sizes plus the inner diameter and circumference in mm.</li>
 </ol>
@@ -34,7 +34,7 @@ function rbs_core_pages() {
 <p>No ring to hand? Switch to <strong>"I know the diameter / circumference"</strong> and type a measurement from a tape, string or vernier, in mm or inches.</p>
 
 <h2>How accurate is an on-screen ring sizer?</h2>
-<p>After calibration the circle is drawn to within about 0.1 mm, which is finer than the 0.4 mm gap between half sizes. The real limit is how well you line the ring up, so hold the phone flat, use good light and check with a second ring if you have one. Treat the result as accurate to ±¼ size, the same tolerance jewellers quote for plastic sizer sets.</p>
+<p>After calibration the circle is drawn to within about 0.1 mm, which is finer than the 0.4 mm gap between half sizes. The real limit is how well you line the ring up, so hold the phone flat, use good light and check with a second ring if you have one. The tool is designed to land within about ±¼ size; see <a href="/how-we-measure/">how we measure</a> for the method and its limits.</p>
 
 <h2>Tips for a ring that fits</h2>
 <ul>
@@ -104,7 +104,7 @@ function rbs_core_pages() {
 <ul>
 <li>For a <strong>rigid bangle</strong> you must be able to push it over your knuckles, so if your hand measurement falls between sizes, take the larger one.</li>
 <li>For an <strong>openable bangle or kada</strong> with a clasp, you can size down for a closer fit on the wrist.</li>
-<li>Bridal sets and chooda are usually bought in your exact size or one size smaller, because they are worn stacked and should not slide around.</li>
+<li>Rigid bridal sets and glass or lac chooda must still pass over the hand, so buy your exact size, never smaller. Only an openable kangan with a screw or hinge can be one size smaller.</li>
 </ul>
 
 <h2>More sizing tools</h2>
@@ -396,10 +396,10 @@ function rbs_core_pages() {
 <tr><td>15.0 – 16.0 cm</td><td>5.9 – 6.3 in</td><td>2.0</td></tr>
 <tr><td>16.0 – 17.0 cm</td><td>6.3 – 6.7 in</td><td>2.2</td></tr>
 <tr><td>17.0 – 18.0 cm</td><td>6.7 – 7.1 in</td><td>2.4</td></tr>
-<tr><td>18.0 – 18.9 cm</td><td>7.1 – 7.4 in</td><td>2.6</td></tr>
-<tr><td>18.9 – 19.9 cm</td><td>7.4 – 7.8 in</td><td>2.8</td></tr>
-<tr><td>19.9 – 20.9 cm</td><td>7.8 – 8.2 in</td><td>2.10</td></tr>
-<tr><td>20.9 – 22.0 cm</td><td>8.2 – 8.6 in</td><td>2.12</td></tr>
+<tr><td>18.0 – 18.9 cm</td><td>7.1 – 7.5 in</td><td>2.6</td></tr>
+<tr><td>18.9 – 19.9 cm</td><td>7.5 – 7.9 in</td><td>2.8</td></tr>
+<tr><td>19.9 – 21.0 cm</td><td>7.9 – 8.2 in</td><td>2.10</td></tr>
+<tr><td>21.0 – 22.0 cm</td><td>8.2 – 8.6 in</td><td>2.12</td></tr>
 </tbody>
 </table>
 <p>If the tape reads exactly on a boundary, take the larger size; a bangle that is 1 mm too small will not go on at all. The step-by-step method is in <a href="/how-to-measure-bangle-size/">how to measure bangle size</a>.</p>

@@ -66,7 +66,7 @@ function rbs_bangle_pages() {
 				array( 'Is 2.10 bigger than 2.8?', 'Yes. Indian sizes count sixteenths of an inch, so 2.10 means 2 10/16 inches (66.7 mm), which is larger than 2.8 (2 8/16 inches, 63.5 mm).' ),
 				array( 'What does 2/6 bangle size mean?', '2/6 and 2-6 are other ways of writing size 2.6: an inner diameter of 2 6/16 inches, or 60.3 mm.' ),
 				array( 'Are Indian and Pakistani bangle sizes the same?', 'Yes. Both use the same inch-and-sixteenths system, so a 2.6 bangle from Pakistan fits the same as a 2.6 from India.' ),
-				array( 'Which bangle size for a bride?', 'Bridal chooda and bangle sets are usually bought in the bride\'s exact size or one size smaller, because stacked bangles should not slide around. Measure a few weeks before the wedding.' ),
+				array( 'Which bangle size for a bride?', 'Rigid chooda and glass or lac bangle sets must pass over the hand, so buy the bride\'s exact size, never smaller. Only openable kangan with a screw or hinge can be one size smaller. Measure a few weeks before the wedding.' ),
 			),
 		),
 
@@ -157,7 +157,7 @@ function rbs_bangle_pages() {
 <ul>
 <li><strong>Rigid gold, silver or glass bangles:</strong> take the larger size.</li>
 <li><strong>Openable bangles, kadas with a screw, or bangles with a hinge:</strong> take the smaller size for a neater fit on the wrist.</li>
-<li><strong>Stacked bridal sets:</strong> your exact size; many brides go one size smaller for chooda so it stays in place.</li>
+<li><strong>Stacked bridal sets and chooda:</strong> your exact size. A rigid glass or lac chooda one size smaller can crack while being rolled on or hurt the hand.</li>
 <li><strong>Thick or wide designs (over 8 mm):</strong> go one size up, as explained on the <a href="/chudi-size-chart/">chudi and kada size chart</a>.</li>
 </ul>
 
@@ -338,7 +338,7 @@ function rbs_bangle_pages() {
 <li>Bring your thumb across your palm and hold your fingers together.</li>
 <li>Wrap a strip of paper around the widest part, over the thumb knuckle and the base of the little finger.</li>
 <li>Mark the overlap, lay the strip on a ruler and read the length in cm.</li>
-<li>18.0–18.9 cm is size 2.6. Exactly on 18.9? Choose 2.8 for a rigid bangle.</li>
+<li>18.0–18.9 cm is size 2.6. Over 18.9 cm? Choose 2.8 for a rigid bangle.</li>
 </ol>
 <p>Already have a bangle that fits? It is quicker to place it on the screen in our <a href="/bangle-size-calculator/">bangle sizer</a> and read the result.</p>
 
@@ -401,7 +401,7 @@ function rbs_bangle_pages() {
 <li>Or measure around your folded hand: 18.9–19.9 cm means 2.8.</li>
 <li>Or place your bangle on your phone with the <a href="/bangle-size-calculator/">online bangle sizer</a> and read the size.</li>
 </ol>
-<p>If your hand is right at 19.9 cm, buy 2.10 for rigid bangles. For openable kadas and bangles with a screw or hinge, 2.8 will still close comfortably around the wrist.</p>
+<p>If your hand is over 19.9 cm, buy 2.10 for rigid bangles. Right at 19.9 cm a 2.8 will only just pass, so try one on if you can. For openable kadas and bangles with a screw or hinge, 2.8 will still close comfortably around the wrist.</p>
 
 <h2>Buying tips for 2.8</h2>
 <ul>
@@ -442,7 +442,7 @@ function rbs_bangle_pages() {
 <p>Bangle sizes are not decimals. The number after the dot counts sixteenths of an inch, so the scale goes 2.6 (6/16), 2.8 (8/16), 2.10 (10/16), 2.12 (12/16). Reading 2.10 as "2.1" would make it look smaller than 2.2, which is a common and expensive mistake when ordering online. A true 2.1 size does not exist; if a listing shows it, ask whether they mean 2.10 and confirm the diameter is about 66–67 mm.</p>
 
 <h2>Who wears 2.10?</h2>
-<p>A 2.10 bangle passes over a folded hand of about 19.9 to 21.0 cm (7.9 to 8.3 inches). That suits:</p>
+<p>A 2.10 bangle passes over a folded hand of about 19.9 to 21.0 cm (7.9 to 8.2 inches). That suits:</p>
 <ul>
 <li>men with average hands wearing a kada or a gold bangle;</li>
 <li>women with large hands, long fingers or prominent knuckles;</li>
@@ -492,7 +492,7 @@ function rbs_bangle_pages() {
 [rbs_bangle_size size="2.12"]
 
 <h2>Who needs a 2.12?</h2>
-<p>A 2.12 bangle passes over a folded hand of about 21.0 to 22.0 cm (8.3 to 8.6 inches) around the knuckles. Common 2.12 wearers:</p>
+<p>A 2.12 bangle passes over a folded hand of about 21.0 to 22.0 cm (8.2 to 8.6 inches) around the knuckles. Common 2.12 wearers:</p>
 <ul>
 <li>men with average-to-large hands, especially for thick or heavy kadas;</li>
 <li>men who wear 2.10 for thin bangles but need extra room for a wide kada;</li>
@@ -537,7 +537,7 @@ function rbs_bangle_pages() {
 				array( 'What is 2.12 bangle size in cm?', 'Size 2.12 is 6.99 cm (about 7 cm) in inner diameter and about 21.96 cm around the inside.' ),
 				array( 'What is 2.12 bangle size in inches?', '2 12/16 inches, which is 2¾ or 2.75 inches across the inside.' ),
 				array( 'Is 2.12 bangle size for men?', 'Mostly yes. 2.12 is a common men\'s kada size, especially for thick or heavy kadas.' ),
-				array( 'What hand size fits a 2.12 bangle?', 'A folded hand measuring about 21.0 to 22.0 cm (8.3 to 8.6 inches) around the knuckles.' ),
+				array( 'What hand size fits a 2.12 bangle?', 'A folded hand measuring about 21.0 to 22.0 cm (8.2 to 8.6 inches) around the knuckles.' ),
 				array( 'What comes after 2.12 bangle size?', 'Size 2.14 (73.0 mm), then 3.0 (76.2 mm). Large men\'s kadas also come in 3.2 (79.4 mm) and 3.4 (82.6 mm).' ),
 			),
 		),
@@ -580,7 +580,7 @@ function rbs_bangle_pages() {
 <h2>Method 4: On your phone screen</h2>
 <ol>
 <li>Open the <a href="/bangle-size-calculator/">online bangle sizer</a>.</li>
-<li>Calibrate once by matching a bank card to the outline (every card is 85.6 mm wide).</li>
+<li>Calibrate once by matching a bank card to the outline (on a phone, hold the card upright and match its short side; on a computer, match its long side).</li>
 <li>Place your bangle flat on the screen and move the slider until the circle meets the inside edge.</li>
 <li>Read the size in Indian sizes, mm, cm and inches.</li>
 </ol>
@@ -603,8 +603,8 @@ function rbs_bangle_pages() {
 <tr><td>17.0–18.0 cm (6.7–7.1 in)</td><td><a href="/bangle-size/2-4/">2.4</a></td></tr>
 <tr><td>18.0–18.9 cm (7.1–7.5 in)</td><td><a href="/bangle-size/2-6/">2.6</a></td></tr>
 <tr><td>18.9–19.9 cm (7.5–7.9 in)</td><td><a href="/bangle-size/2-8/">2.8</a></td></tr>
-<tr><td>19.9–21.0 cm (7.9–8.3 in)</td><td><a href="/bangle-size/2-10/">2.10</a></td></tr>
-<tr><td>21.0–22.0 cm (8.3–8.6 in)</td><td><a href="/bangle-size/2-12/">2.12</a></td></tr>
+<tr><td>19.9–21.0 cm (7.9–8.2 in)</td><td><a href="/bangle-size/2-10/">2.10</a></td></tr>
+<tr><td>21.0–22.0 cm (8.2–8.6 in)</td><td><a href="/bangle-size/2-12/">2.12</a></td></tr>
 </tbody>
 </table>
 <p>Measuring a child? See the <a href="/kids-bangle-size-chart/">kids bangle size chart</a>.</p>
@@ -732,7 +732,7 @@ function rbs_bangle_pages() {
 <p>The size number is only the inside diameter. A thin 3 mm chudi can be tilted and rolled over the knuckles, so it goes on even when the fit is close. A wide band stays flat against the hand and a thick one cannot flex, so the same diameter feels about one size smaller. That is why a person who wears 2.6 chudiyan often needs a 2.8 kada.</p>
 
 <h2>Bridal chooda and sets</h2>
-<p>Bridal chooda (red and white or red and gold sets) is usually bought in the bride\'s exact chudi size or one size smaller, because the stack of 20–60 bangles should not slide down the arm. The shop helps put them on with soap or a thin plastic bag. If your hand is at the top of a size range, stay with your exact size.</p>
+<p>Bridal chooda (red and white or red and gold sets) is bought in the bride\'s exact chudi size. The rigid glass or lac bangles still have to pass over the hand, and the shop helps roll them on with soap or a thin plastic bag. A smaller size risks cracked bangles or a hurt hand, so never size down a rigid chooda. Only an openable kangan with a screw or hinge can be one size smaller.</p>
 
 <h2>How to find your chudi or kada size</h2>
 <ol>
@@ -750,7 +750,7 @@ function rbs_bangle_pages() {
 				array( 'What size kada should a man wear?', 'Most men wear a kada in size 2.10 or 2.12 (66.7 to 69.9 mm). For a wide or heavy kada, go one size larger than your thin-bangle size.' ),
 				array( 'What is 2.6 kada size in mm?', 'A 2.6 kada has an inner diameter of 60.3 mm (2⅜ inches).' ),
 				array( 'Should a kada be bigger than a bangle?', 'For a thick or wide kada, yes, usually one size bigger, because it cannot be rolled over the knuckles like a thin bangle.' ),
-				array( 'What size chooda should a bride buy?', 'Usually the bride\'s exact bangle size or one size smaller, so the stack stays in place. Measure a few weeks before the wedding.' ),
+				array( 'What size chooda should a bride buy?', 'The bride\'s exact bangle size. A rigid chooda must pass over the hand, so a smaller size can crack or hurt. Measure a few weeks before the wedding.' ),
 			),
 		),
 	);

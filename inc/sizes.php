@@ -58,7 +58,7 @@ function rbs_bangle_sizes() {
 		array( 'label' => '1.14', 'inch' => 1.875, 'mm' => 47.6, 'fit' => 'Child (2–4 yr)' ),
 		array( 'label' => '2.0',  'inch' => 2.0,   'mm' => 50.8, 'fit' => 'Child (4–7 yr)' ),
 		array( 'label' => '2.2',  'inch' => 2.125, 'mm' => 54.0, 'fit' => 'Petite / teen' ),
-		array( 'label' => '2.4',  'inch' => 2.25,  'mm' => 57.2, 'fit' => 'Small (most common)' ),
+		array( 'label' => '2.4',  'inch' => 2.25,  'mm' => 57.2, 'fit' => 'Small' ),
 		array( 'label' => '2.6',  'inch' => 2.375, 'mm' => 60.3, 'fit' => 'Medium (most common)' ),
 		array( 'label' => '2.8',  'inch' => 2.5,   'mm' => 63.5, 'fit' => 'Large' ),
 		array( 'label' => '2.10', 'inch' => 2.625, 'mm' => 66.7, 'fit' => 'Extra large' ),

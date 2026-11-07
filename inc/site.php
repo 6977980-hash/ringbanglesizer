@@ -122,8 +122,8 @@ function rbs_author_box( $content ) {
 		? '<img class="rbs-author-pic" src="' . esc_url( $photo ) . '" width="64" height="64" loading="lazy" decoding="async" alt="' . esc_attr( RBS_FOUNDER_NAME ) . '">'
 		: '<span class="rbs-author-pic rbs-author-initials" aria-hidden="true">AA</span>';
 	$box = sprintf(
-		'<aside class="rbs-author">%8$s<div class="rbs-author-body"><p class="rbs-author-name"><strong>Written by <a href="%9$s">%7$s</a></strong>, founder of Ring Bangle Sizer · <a class="rbs-author-in" href="%6$s" rel="noopener" target="_blank">LinkedIn</a></p><p class="rbs-author-meta">Checked by the %1$s · Updated <time datetime="%2$s">%3$s</time></p><p>We build free sizing tools for rings, bangles and bracelets. Every size on this site comes from published standards (ISO 8653 for rings, the Indian inch-and-sixteenths system for bangles), and we show the maths so you can check it yourself. Read <a href="%4$s">how we measure</a> or <a href="%5$s">contact us</a> if something looks wrong.</p></div></aside>',
-		esc_html( RBS_EDITOR_NAME ),
+		'<aside class="rbs-author">%8$s<div class="rbs-author-body"><p class="rbs-author-name"><strong>Written and checked by <a href="%9$s">%7$s</a></strong>, founder of Ring Bangle Sizer · <a class="rbs-author-in" href="%6$s" rel="noopener" target="_blank">LinkedIn</a></p><p class="rbs-author-meta">Page last updated <time datetime="%2$s">%3$s</time> · sizes checked against published sizing standards</p><p>We build free sizing tools for rings, bangles and bracelets. Every size on this site comes from published standards (ISO 8653 for rings, the Indian inch-and-sixteenths system for bangles), and we show the maths so you can check it yourself. Read <a href="%4$s">how we measure</a> or <a href="%5$s">contact us</a> if something looks wrong.</p></div></aside>',
+		'',
 		esc_attr( get_the_modified_date( 'c' ) ),
 		esc_html( get_the_modified_date( 'F j, Y' ) ),
 		esc_url( home_url( '/how-we-measure/' ) ),
@@ -228,7 +228,7 @@ function rbs_tool_card_info() {
 		'/ring-size-chart/'                  => array( 'chart', 'Ring size chart', 'Every system in one table' ),
 		'/printable-ring-sizer/'             => array( 'print', 'Printable ring sizer', 'Free PDF, print at 100%' ),
 		'/how-to-measure-ring-size-at-home/' => array( 'guide', 'Measure ring size at home', 'Four ways, no tools needed' ),
-		'/bangle-size-calculator/'           => array( 'bangle', 'Bangle size calculator', 'Indian sizes 2.2 to 2.12 on screen' ),
+		'/bangle-size-calculator/'           => array( 'bangle', 'Bangle size calculator', 'Indian sizes 1.10 to 3.4 on screen' ),
 		'/bangle-size-chart/'                => array( 'chart', 'Bangle size chart', 'Diameter in inches, mm and cm' ),
 		'/how-to-measure-bangle-size/'       => array( 'guide', 'Measure bangle size', 'With a string or an old bangle' ),
 		'/bracelet-size-calculator/'         => array( 'bracelet', 'Bracelet size calculator', 'Length from your wrist size' ),

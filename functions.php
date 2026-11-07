@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_VERSION', '0.13.1' );
+define( 'RBS_VERSION', '0.14.0' );
 define( 'RBS_DIR', get_stylesheet_directory() );
 define( 'RBS_URI', get_stylesheet_directory_uri() );
 
