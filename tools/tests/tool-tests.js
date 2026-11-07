@@ -118,4 +118,5 @@ function rec(tool, cse, expect, shown, pass) { results.push({ tool, cse, expect,
   let pass = 0;
   for (const r of results) { if (r.pass) pass++; console.log(`${r.pass ? 'PASS' : 'FAIL'} | ${r.tool} | ${r.cse} | expected: ${r.expect} | shown: ${r.shown}`); }
   console.log(`\n${pass}/${results.length} pass`);
+  process.exitCode = pass === results.length ? 0 : 1; // non-zero for CI (.github/workflows/checks.yml)
 })();

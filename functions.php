@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_VERSION', '0.15.0' );
+define( 'RBS_VERSION', '0.16.0' );
 define( 'RBS_DIR', get_stylesheet_directory() );
 define( 'RBS_URI', get_stylesheet_directory_uri() );
 
@@ -26,6 +26,7 @@ require_once RBS_DIR . '/inc/growth.php';
 require_once RBS_DIR . '/inc/aeo.php';
 require_once RBS_DIR . '/inc/engage.php';
 require_once RBS_DIR . '/inc/pages.php';
+require_once RBS_DIR . '/inc/security.php';
 
 /**
  * Styles: parent, then child.

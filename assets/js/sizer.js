@@ -1001,8 +1001,12 @@
 		var body = $('.rbs-body', container);
 		var tabs = container.querySelectorAll('.rbs-tab');
 		var redraw = function () {};
-		var steps = el('ol', { 'class': 'rbs-steps' }, '<li>Calibrate</li><li>Match</li><li>Your size</li>');
-		container.insertBefore(steps, body);
+		// The steps list is server-rendered (inc/shortcodes.php) so nothing shifts on load; build it only if missing.
+		var steps = $('.rbs-steps', container);
+		if (!steps) {
+			steps = el('ol', { 'class': 'rbs-steps' }, '<li>Calibrate</li><li>Match</li><li>Your size</li>');
+			container.insertBefore(steps, body);
+		}
 
 		function mount(m) {
 			body.innerHTML = '';
@@ -1023,6 +1027,7 @@
 			t.addEventListener('click', function () { mount(t.getAttribute('data-tab')); });
 		});
 		mount(mode);
+		body.classList.remove('rbs-pending'); // reserved height no longer needed once the tool is drawn
 		onScale(function () { redraw(); });
 	}
 
