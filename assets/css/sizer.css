@@ -300,6 +300,7 @@
 .rbs-sys { font-size: 13px; color: var(--rbs-muted); }
 .rbs-sys select { margin-left: 4px; padding: 3px 6px; font-size: 14px; border: 1px solid #bfdbfe; border-radius: 6px; background: #fff; }
 .rbs-result .rbs-big { font-size: 40px; margin: 2px 0 4px; }
+.rbs-big-pre { display: block; font-size: 15px; font-weight: 700; letter-spacing: .02em; color: #92400e; }
 .rbs-sub { font-size: 15px; color: #374151; margin-bottom: 4px; }
 .rbs-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 12px 0 6px; }
 .rbs-chart-link { font-size: 15px; font-weight: 600; color: var(--rbs-blue); text-decoration: none; }
