@@ -26,7 +26,7 @@ function rbs_legal_pages() {
 <p><strong>Ring Bangle Sizer is a free, independent website that helps you find your ring, bangle and bracelet size at home.</strong> Our tools draw true-to-size circles on your phone or computer screen, so you can check a ring or bangle you already own against the standard size charts without buying a sizer kit or visiting a jeweller.</p>
 
 <h2>Who runs Ring Bangle Sizer</h2>
-<p>Ring Bangle Sizer was founded by <strong>Ali Ahmad</strong> (<a href="https://www.linkedin.com/in/ali-ahmad-chaudhry-12777486/" rel="noopener" target="_blank">LinkedIn</a>), who builds free, practical web tools for everyday measuring problems. Ali leads the Ring Bangle Sizer Editorial Team, which writes, checks and updates every tool and guide on the site. You can reach the team at [rbs_email].</p>
+<p>Ring Bangle Sizer was founded by <strong>Ali Ahmad</strong> (<a href="https://www.linkedin.com/in/ali-ahmad-chaudhry-12777486/" rel="noopener" target="_blank">LinkedIn</a>), who builds free, practical web tools for everyday measuring problems. Ali writes, checks and updates every tool and guide on the site. You can reach Ali at [rbs_email].</p>
 
 <h2>Why we built it</h2>
 <p>Buying a ring or a set of bangles online usually ends with the same question: which size do I order? Most size charts online are copied from each other, give only one system (US letters or Indian numbers, never both), and do not explain what the numbers actually mean. People in the US, UK, India and Pakistan also use completely different sizing systems for the same piece of jewellery. We wanted one place that shows every system side by side, explains the maths, and lets you measure on the screen you are already holding.</p>
@@ -59,7 +59,7 @@ function rbs_legal_pages() {
 			'faq' => array(
 				array( 'Is Ring Bangle Sizer free to use?', 'Yes. All tools and charts are free, need no account and work in any modern browser.' ),
 				array( 'Do you sell rings or bangles?', 'No. We only provide sizing tools and guides. Buy from any jeweller or shop and use our tools to choose the size.' ),
-				array( 'Who runs Ring Bangle Sizer?', 'The site was founded by Ali Ahmad and is run by the Ring Bangle Sizer Editorial Team. Every guide is based on published sizing standards and the conversion maths is shown on the page.' ),
+				array( 'Who runs Ring Bangle Sizer?', 'The site was founded and is run by Ali Ahmad, who writes and checks every page. Every guide is based on published sizing standards and the conversion maths is shown on the page.' ),
 				array( 'How can I report a wrong size?', 'Use the contact page and tell us the page and the size. We check it against the standard and correct the page if needed.' ),
 			),
 		),
@@ -144,7 +144,7 @@ function rbs_legal_pages() {
 </ul>
 
 <h2>Who you are writing to</h2>
-<p>Messages go to the Ring Bangle Sizer Editorial Team, led by founder Ali Ahmad (<a href="https://www.linkedin.com/in/ali-ahmad-chaudhry-12777486/" rel="noopener" target="_blank">LinkedIn</a>). E-mail: [rbs_email].</p>
+<p>Messages go straight to founder Ali Ahmad (<a href="https://www.linkedin.com/in/ali-ahmad-chaudhry-12777486/" rel="noopener" target="_blank">LinkedIn</a>). E-mail: [rbs_email].</p>
 
 <h2>What we cannot help with</h2>
 <p>We do not sell jewellery, so we cannot help with orders, deliveries or returns from a shop. Please contact the seller for those.</p>

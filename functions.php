@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_VERSION', '0.16.0' );
+define( 'RBS_VERSION', '0.16.1' );
 define( 'RBS_DIR', get_stylesheet_directory() );
 define( 'RBS_URI', get_stylesheet_directory_uri() );
 
@@ -32,9 +32,10 @@ require_once RBS_DIR . '/inc/security.php';
  * Styles: parent, then child.
  */
 function rbs_enqueue_styles() {
-	wp_enqueue_style( 'generatepress-parent', get_template_directory_uri() . '/style.css', array(), wp_get_theme( 'generatepress' )->get( 'Version' ) );
+	// GeneratePress's own style.css is only a theme header comment (its CSS is main.min.css),
+	// so it is not loaded: one render-blocking request less on every page.
 	// Load after GeneratePress main.min.css so child rules win (same order as GP's own child stylesheet).
-	wp_enqueue_style( 'rbs-child', RBS_URI . '/style.css', array( 'generatepress-parent', 'generate-style' ), RBS_VERSION );
+	wp_enqueue_style( 'rbs-child', RBS_URI . '/style.css', array( 'generate-style' ), RBS_VERSION );
 }
 add_action( 'wp_enqueue_scripts', 'rbs_enqueue_styles' );
 
@@ -67,6 +68,11 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'rsd_link' );
+remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+remove_action( 'wp_head', 'rest_output_link_wp_head' );
+remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+remove_action( 'template_redirect', 'wp_shortlink_header', 11 );
 add_filter( 'the_generator', '__return_empty_string' );
 
 /**

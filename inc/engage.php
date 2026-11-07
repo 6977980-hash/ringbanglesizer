@@ -171,7 +171,9 @@ add_action( 'generate_after_header', function () {
  */
 function rbs_diagram_shortcode( $atts ) {
 	$atts = shortcode_atts( array( 'name' => '' ), $atts, 'rbs_diagram' );
-	$defs = '<defs><marker id="rbs-ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#047857"/></marker><marker id="rbs-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b91c1c"/></marker><marker id="rbs-ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1d4ed8"/></marker></defs>';
+	// Arrow markers are page-wide ids: print them only in the first diagram on the page.
+	static $defs_done = false;
+	$defs = $defs_done ? '' : '<defs><marker id="rbs-ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#047857"/></marker><marker id="rbs-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b91c1c"/></marker><marker id="rbs-ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1d4ed8"/></marker></defs>';
 
 	$d = array(
 		'ring-inner'  => array(
@@ -223,7 +225,8 @@ function rbs_diagram_shortcode( $atts ) {
 	if ( empty( $d[ $atts['name'] ] ) ) {
 		return '';
 	}
-	$x = $d[ $atts['name'] ];
+	$x         = $d[ $atts['name'] ];
+	$defs_done = true;
 	return '<figure class="rbs-fig"><svg viewBox="' . $x[1] . '" role="img" aria-label="' . esc_attr( $x[0] ) . '" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">' . $defs . $x[2] . '</svg><figcaption>' . esc_html( $x[0] ) . '</figcaption></figure>';
 }
 add_shortcode( 'rbs_diagram', 'rbs_diagram_shortcode' );
