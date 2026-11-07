@@ -380,6 +380,32 @@ function rbs_fallback_schema() {
 			'publisher' => array( '@id' => home_url( '/#organization' ) ),
 		),
 	);
+	if ( is_singular( 'page' ) && '1' !== get_post_meta( get_queried_object_id(), 'rbs_noindex', true ) ) {
+		// WebPage: dates, author and sources for answer engines and AI search.
+		$id      = get_queried_object_id();
+		$url     = get_permalink( $id );
+		$webpage = array(
+			'@type'         => 'WebPage',
+			'@id'           => $url . '#webpage',
+			'url'           => $url,
+			'name'          => wp_strip_all_tags( get_the_title( $id ) ),
+			'description'   => (string) get_post_meta( $id, 'rank_math_description', true ),
+			'isPartOf'      => array( '@id' => home_url( '/#website' ) ),
+			'datePublished' => get_the_date( 'c', $id ),
+			'dateModified'  => get_the_modified_date( 'c', $id ),
+			'author'        => array( '@id' => home_url( '/#founder' ) ),
+			'publisher'     => array( '@id' => home_url( '/#organization' ) ),
+			'inLanguage'    => 'en',
+		);
+		if ( ! is_front_page() ) {
+			$webpage['breadcrumb'] = array( '@id' => $url . '#breadcrumb' );
+		}
+		$cites = function_exists( 'rbs_page_citations' ) ? rbs_page_citations( $id ) : array();
+		if ( $cites ) {
+			$webpage['citation'] = $cites;
+		}
+		$graph[] = $webpage;
+	}
 	if ( is_singular( 'page' ) && ! is_front_page() ) {
 		$items = array();
 		foreach ( rbs_breadcrumb_trail() as $i => $c ) {
@@ -390,7 +416,7 @@ function rbs_fallback_schema() {
 				'item'     => $c[1],
 			);
 		}
-		$graph[] = array( '@type' => 'BreadcrumbList', 'itemListElement' => $items );
+		$graph[] = array( '@type' => 'BreadcrumbList', '@id' => get_permalink( get_queried_object_id() ) . '#breadcrumb', 'itemListElement' => $items );
 
 		// Guides under /blog/ are articles. The byline matches the visible author box.
 		$id     = get_queried_object_id();
