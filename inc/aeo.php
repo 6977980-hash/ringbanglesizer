@@ -158,13 +158,13 @@ function rbs_llms_txt() {
 		$sections[ rbs_llms_section( $key, $p ) ][] = '- [' . $title . '](' . $url . '): ' . trim( $p['seo_desc'] );
 	}
 
-	$ring_rows = array( '| US / Canada | UK / Australia | EU / ISO | India / Japan | Inner diameter (mm) | Inner circumference (mm) |', '|---|---|---|---|---|---|' );
+	$ring_rows = array( '| US / Canada | UK / Australia | EU / ISO | India / Pakistan | Inner diameter (mm) | Inner circumference (mm) |', '|---|---|---|---|---|---|' );
 	foreach ( rbs_ring_sizes() as $r ) {
 		if ( $r['us'] > 13 ) {
 			continue;
 		}
 		$d           = rbs_ring_derived( $r['mm'] );
-		$ring_rows[] = '| ' . $r['us'] . ' | ' . $r['uk'] . ' | ' . $d['eu'] . ' | ' . $d['jp'] . ' | ' . number_format( $r['mm'], 1 ) . ' | ' . number_format( $d['circ_mm'], 1 ) . ' |';
+		$ring_rows[] = '| ' . $r['us'] . ' | ' . $r['uk'] . ' | ' . $d['eu'] . ' | ' . $d['india'] . ' | ' . number_format( $r['mm'], 1 ) . ' | ' . number_format( $d['circ_mm'], 1 ) . ' |';
 	}
 	$bangle_rows = array( '| Indian size | Inner diameter (in) | Inner diameter (mm) | Typical fit |', '|---|---|---|---|' );
 	foreach ( rbs_bangle_sizes() as $b ) {
@@ -174,7 +174,7 @@ function rbs_llms_txt() {
 	$out   = array();
 	$out[] = '# ' . RBS_SITE_NAME;
 	$out[] = '';
-	$out[] = '> Free tools that measure ring, bangle and bracelet size on a phone or computer screen. The screen is calibrated with a bank card (ISO/IEC 7810 ID-1, 85.60 mm wide), then a true-size circle is matched to a ring or bangle the visitor already owns. Results are given in US, UK, EU/ISO, Indian/Japanese ring sizes, Indian bangle sizes, and mm/inches. No sign-up; measurements stay on the device.';
+	$out[] = '> Free tools that measure ring, bangle and bracelet size on a phone or computer screen. The screen is calibrated with a bank card (ISO/IEC 7810 ID-1, 85.60 mm wide), then a true-size circle is matched to a ring or bangle the visitor already owns. Results are given in US, UK, EU/ISO, Indian/Pakistani ring sizes, Indian bangle sizes, and mm/inches. No sign-up; measurements stay on the device.';
 	$out[] = '';
 	$out[] = 'Founded by ' . RBS_FOUNDER_NAME . ' (' . RBS_FOUNDER_URL . '). Contact: ' . RBS_CONTACT_EMAIL . '. Ring sizes follow ISO 8653 (inner circumference in mm); Indian bangle sizes are inner diameter in inches and sixteenths (2.4 = 2 4/16 in = 57.2 mm). Method and accuracy: ' . home_url( '/how-we-measure/' );
 	$out[] = '';

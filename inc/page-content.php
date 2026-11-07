@@ -28,7 +28,7 @@ function rbs_core_pages() {
 <ol>
 <li><strong>Calibrate.</strong> Hold a credit, debit or ID card on the screen and drag the slider until the dashed outline is exactly as wide as the card. Every bank card is 85.6 mm wide, so this tells the tool the real size of your screen. You only do this once.</li>
 <li><strong>Match a ring.</strong> Put a ring that fits the right finger flat on the screen. Move the size slider until the blue circle lines up with the <em>inside</em> edge of the ring. Not the outside: the inside edge is what sits on your finger.</li>
-<li><strong>Read your size.</strong> The result shows US, UK/Australian, EU/ISO, Indian/Japanese sizes plus the inner diameter and circumference in mm.</li>
+<li><strong>Read your size.</strong> The result shows US, UK/Australian, EU/ISO, Indian/Pakistani sizes plus the inner diameter and circumference in mm.</li>
 </ol>
 [rbs_diagram name="ring-inner"]
 <p>No ring to hand? Switch to <strong>"I know the diameter / circumference"</strong> and type a measurement from a tape, string or vernier, in mm or inches.</p>
@@ -250,8 +250,8 @@ function rbs_core_pages() {
 <li><strong>US / Canada / Mexico:</strong> numbers 3–15 in half steps; each full size is 0.8 mm of diameter.</li>
 <li><strong>UK / Australia / NZ / Ireland / South Africa:</strong> letters A–Z with half sizes; each letter is about 0.4 mm.</li>
 <li><strong>EU / ISO / Germany / France:</strong> the inner circumference in mm, so size 54 is 54 mm around.</li>
-<li><strong>India / Japan / China:</strong> numbers starting at 1 for 13 mm, rising one number per 1/3 mm.</li>
-<li><strong>Switzerland:</strong> circumference minus 40, so EU 54 is Swiss 14.</li>
+<li><strong>India / Pakistan:</strong> the inner circumference minus 40 mm, so India 14 is about 54 mm around (US 7) and India 22 is 62 mm around (US 10).</li>
+<li><strong>Italy / Spain / Switzerland:</strong> also circumference minus 40, so EU 54 is Italian or Swiss 14.</li>
 </ul>
 
 <h2>Women\'s ring size chart</h2>
@@ -260,12 +260,12 @@ function rbs_core_pages() {
 <thead><tr><th>US</th><th>UK</th><th>EU</th><th>India</th><th>Diameter</th><th>Common for</th></tr></thead>
 <tbody>
 <tr><td><a href="/ring-size-in-mm/size-5/">5</a></td><td>J½</td><td>49</td><td>9</td><td>15.7 mm</td><td>Petite fingers, pinky rings</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-5-5/">5.5</a></td><td>K½</td><td>51</td><td>10</td><td>16.1 mm</td><td>Slim ring fingers</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-5-5/">5.5</a></td><td>K½</td><td>51</td><td>11</td><td>16.1 mm</td><td>Slim ring fingers</td></tr>
 <tr><td><a href="/ring-size-in-mm/size-6/">6</a></td><td>L½</td><td>52</td><td>12</td><td>16.5 mm</td><td>Very common ring-finger size</td></tr>
 <tr><td><a href="/ring-size-in-mm/size-6-5/">6.5</a></td><td>M½</td><td>53</td><td>13</td><td>16.9 mm</td><td>Very common ring-finger size</td></tr>
 <tr><td><a href="/ring-size-in-mm/size-7/">7</a></td><td>N½</td><td>54</td><td>14</td><td>17.3 mm</td><td>Common; middle and index fingers</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-7-5/">7.5</a></td><td>O½</td><td>56</td><td>15</td><td>17.7 mm</td><td>Larger ring fingers, middle fingers</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>16</td><td>18.1 mm</td><td>Larger hands, thumb rings for petite hands</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-7-5/">7.5</a></td><td>O½</td><td>56</td><td>16</td><td>17.7 mm</td><td>Larger ring fingers, middle fingers</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>17</td><td>18.1 mm</td><td>Larger hands, thumb rings for petite hands</td></tr>
 </tbody>
 </table>
 
@@ -274,14 +274,14 @@ function rbs_core_pages() {
 <table class="rbs-table">
 <thead><tr><th>US</th><th>UK</th><th>EU</th><th>India</th><th>Diameter</th><th>Circumference</th></tr></thead>
 <tbody>
-<tr><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>16</td><td>18.1 mm</td><td>56.9 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>17</td><td>18.1 mm</td><td>56.9 mm</td></tr>
 <tr><td>8.5</td><td>Q½</td><td>58</td><td>18</td><td>18.5 mm</td><td>58.1 mm</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-9/">9</a></td><td>R½</td><td>60</td><td>19</td><td>19.0 mm</td><td>59.7 mm</td></tr>
-<tr><td>9.5</td><td>S½</td><td>61</td><td>20</td><td>19.4 mm</td><td>60.9 mm</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-10/">10</a></td><td>T½</td><td>62</td><td>21</td><td>19.8 mm</td><td>62.2 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-9/">9</a></td><td>R½</td><td>60</td><td>20</td><td>19.0 mm</td><td>59.7 mm</td></tr>
+<tr><td>9.5</td><td>S½</td><td>61</td><td>21</td><td>19.4 mm</td><td>60.9 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-10/">10</a></td><td>T½</td><td>62</td><td>22</td><td>19.8 mm</td><td>62.2 mm</td></tr>
 <tr><td>10.5</td><td>U½</td><td>63</td><td>23</td><td>20.2 mm</td><td>63.5 mm</td></tr>
-<tr><td>11</td><td>V½</td><td>65</td><td>24</td><td>20.6 mm</td><td>64.7 mm</td></tr>
-<tr><td>12</td><td>X½</td><td>67</td><td>26</td><td>21.4 mm</td><td>67.2 mm</td></tr>
+<tr><td>11</td><td>V½</td><td>65</td><td>25</td><td>20.6 mm</td><td>64.7 mm</td></tr>
+<tr><td>12</td><td>X½</td><td>67</td><td>27</td><td>21.4 mm</td><td>67.2 mm</td></tr>
 </tbody>
 </table>
 <p>Men\'s bands are often 6–8 mm wide. A wide band covers more of the finger and feels tighter, so many men go up half a size from their measured size. Sizes up to 15 and band-width advice are in the <a href="/ring-size-chart/mens/">men\'s ring size chart</a>.</p>
@@ -331,7 +331,7 @@ function rbs_core_pages() {
 			'faq' => array(
 				array( 'What is ring size 6 in mm?', 'US size 6 is 16.5 mm inner diameter (51.8 mm circumference), UK L½, EU 52.' ),
 				array( 'What is ring size 8 in mm?', 'US size 8 is 18.1 mm inner diameter (56.9 mm circumference), UK P½, EU 57.' ),
-				array( 'What is a 17 mm ring size?', 'A 17 mm inner diameter is between US 6.5 (16.9 mm) and 7 (17.3 mm); most people choose US 7 / UK N½.' ),
+				array( 'What is a 17 mm ring size?', 'A 17.0 mm inner diameter is closest to US 6.5 (16.9 mm), just under US 7 (17.3 mm). If you are between the two, or the band is wide, choose US 7 / UK N½.' ),
 				array( 'How do I convert UK ring size to US?', 'Use the chart: UK L½ is US 6, UK N½ is US 7, UK P½ is US 8, UK R½ is US 9, UK T½ is US 10.' ),
 				array( 'What is the most common ring size for women?', 'US 6 to 7 (UK L½ to N½, 16.5 to 17.3 mm) is the most common range for a woman\'s ring finger.' ),
 				array( 'What is the most common ring size for men?', 'US 9 to 10 (UK R½ to T½, 19.0 to 19.8 mm) is the most common range for men.' ),

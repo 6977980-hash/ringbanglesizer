@@ -115,7 +115,8 @@
 				var p = sizeSel.value.split('.');
 				nowMm = (parseInt(p[0], 10) + parseInt(p[1], 10) / 16) * MM_IN;
 			} else {
-				nowMm = sizeFor(typical(age), false).mm;
+				// Start from the typical (unrounded) size: rounding down first made every later size too small.
+				nowMm = typical(age);
 			}
 			var rows = [[0, 'Now']].concat([[1, 'In 1 year'], [2, 'In 2 years'], [3, 'In 3 years']]).map(function (r) {
 				var mm = nowMm + typical(age + r[0]) - typical(age);

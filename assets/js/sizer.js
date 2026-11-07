@@ -14,6 +14,7 @@
 	var MM_IN = 25.4;
 
 	var data = window.RBS_DATA || { rings: [], bangles: [] };
+	data.uk = data.uk || [];
 
 	function $(sel, root) { return (root || document).querySelector(sel); }
 	function el(tag, attrs, html) {
@@ -75,7 +76,7 @@
 	var ringSystem = load(SYSTEM_KEY) || guessSystem();
 	var SYSTEMS = { us: 'US', uk: 'UK', eu: 'EU', in: 'India' };
 	function ringIn(r, sys) {
-		return sys === 'uk' ? 'UK ' + r.uk : (sys === 'eu' ? 'EU ' + r.eu : (sys === 'in' ? 'India ' + r.jp : 'US ' + r.us));
+		return sys === 'uk' ? 'UK ' + r.uk : (sys === 'eu' ? 'EU ' + r.eu : (sys === 'in' ? 'India ' + r.india : 'US ' + r.us));
 	}
 
 	function setStep(root, n) {
@@ -284,56 +285,123 @@
 		}
 		return R[R.length - 1].mm + (us - R[R.length - 1].us) * 0.81;
 	}
+	// "6¾" → "6 3/4" so one fraction rule reads both.
+	function plainFractions(s) {
+		return s.replace(/\s*¼/g, ' 1/4').replace(/\s*½/g, ' 1/2').replace(/\s*¾/g, ' 3/4').replace(/\s+/g, ' ').trim();
+	}
+	// "6", "6.5", "6 3/4", "3/4" → number, or NaN.
+	function readNumber(s) {
+		var m = s.match(/(\d+(?:\.\d+)?)?\s*(?:(\d)\s*\/\s*(\d))?/);
+		if (!m || (!m[1] && !m[2])) { return NaN; }
+		var n = m[1] ? parseFloat(m[1]) : 0;
+		if (m[2] && parseInt(m[3], 10) > 0) { n += parseInt(m[2], 10) / parseInt(m[3], 10); }
+		return n;
+	}
+	function usText(n) {
+		var w = Math.floor(n), q = Math.round((n - w) * 4);
+		return 'US ' + w + (['', '¼', '½', '¾'][q] || '');
+	}
+	function ukByLetter(label) {
+		for (var i = 0; i < data.uk.length; i++) { if (data.uk[i].uk === label) { return data.uk[i].mm; } }
+		return 0;
+	}
+	function ringAround(name, n) {
+		var circ = n + 40;
+		return { mm: circ / Math.PI, text: name + ' ' + n + ' (' + fmt(circ) + ' mm around, ' + fmt(circ / Math.PI) + ' mm across)' };
+	}
 	function parseRing(raw) {
-		var s = String(raw || '').toLowerCase().replace(/size|ring/g, '').replace(/\s+/g, ' ').trim();
+		var s = plainFractions(String(raw || '').toLowerCase().replace(/size|ring/g, ' '));
 		if (!s) { return null; }
-		var half = /½|1\/2|\.5$/.test(s) ? 0.5 : 0;
-		var m = s.match(/([\d.]+)\s*(mm|cm)/);
+		var m = s.match(/(\d+(?:\.\d+)?)\s*(mm|cm)\b/);
 		if (m) {
 			var v = parseFloat(m[1]) * (m[2] === 'cm' ? 10 : 1);
 			if (v >= 12 && v <= 26) { return { mm: v, text: fmt(v) + ' mm inner diameter' }; }
 			if (v >= 38 && v <= 82) { return { mm: v / Math.PI, text: fmt(v) + ' mm around (' + fmt(v / Math.PI) + ' mm across)' }; }
 			return null;
 		}
-		m = s.match(/^z\s*\+\s*(\d)/) || s.match(/uk\s*z\s*\+\s*(\d)/);
+		m = s.match(/^(?:uk\s*)?z\s*\+\s*(\d)$/);
 		if (m) { var zd = 21.8 + 0.4 * parseInt(m[1], 10); return { mm: zd, text: 'UK Z+' + m[1] + ' (' + fmt(zd) + ' mm)' }; }
-		m = s.match(/^(?:uk|au|aus|nz|ie)?\s*([a-z])\s*(?:½|1\/2)?$/);
-		if (m && !/^(us|eu|in)$/.test(s)) {
-			var li = UK_LETTERS.indexOf(m[1].toUpperCase());
-			var ud = 15.7 + (li + half - 9.5) * 0.407; // from the ISO chart: J½ = 15.7 mm, ~0.41 mm a letter
-			return { mm: ud, text: 'UK ' + m[1].toUpperCase() + (half ? '½' : '') + ' (' + fmt(ud) + ' mm)' };
+		m = s.match(/^(?:uk|au|aus|nz|ie)?\s*([a-z])\s*(1\/2)?$/);
+		if (m) {
+			var letter = m[1].toUpperCase() + (m[2] ? '½' : '');
+			var ud = ukByLetter(letter);
+			if (!ud) { // letters outside the chart (A–E): about 0.4 mm a letter from J½ = 15.7 mm
+				ud = 15.7 + (UK_LETTERS.indexOf(m[1].toUpperCase()) + (m[2] ? 0.5 : 0) - 9.5) * 0.407;
+			}
+			return { mm: ud, text: 'UK ' + letter + ' (' + fmt(ud) + ' mm)' };
 		}
-		m = s.match(/([\d.]+)/);
-		if (!m) { return null; }
-		// "7½" and "7 1/2" are both US 7.5 ("7.5" is already read whole).
-		var n = parseFloat(m[1]) + (/½|1\/2/.test(s) ? 0.5 : 0);
-		var sys = /eu|iso|de|fr|it|es/.test(s) ? 'eu' : (/india|in\b|jp|japan|ind/.test(s) ? 'in' : (/us|ca/.test(s) ? 'us' : ''));
-		if (!sys) { sys = n <= 16 ? 'us' : (n < 38 ? 'in' : 'eu'); }
-		if (sys === 'eu') { return { mm: n / Math.PI, text: 'EU ' + n + ' (' + fmt(n / Math.PI) + ' mm)' }; }
-		if (sys === 'in') { var id = 13 + (n - 1) / 3; return { mm: id, text: 'India/Japan ' + n + ' (' + fmt(id) + ' mm)' }; }
-		var usd = ringMmFromUs(n);
-		return { mm: usd, text: 'US ' + n + ' (' + fmt(usd) + ' mm)' };
+		// Scale words. Italy, Spain and Switzerland number rings as circumference − 40 mm;
+		// Germany often gives the inner diameter in mm; France and the EU the full circumference.
+		var sys = '';
+		if (/\b(it|ita|italy|italian|es|spain|spanish|ch|swiss|switzerland)\b/.test(s)) { sys = 'it'; }
+		else if (/\b(de|ger|german|germany)\b/.test(s)) { sys = 'de'; }
+		else if (/\b(eu|iso|fr|france|french|europe|european)\b/.test(s)) { sys = 'eu'; }
+		else if (/\b(jp|japan|japanese)\b/.test(s)) { sys = 'jp'; }
+		else if (/\b(india|indian|in|ind|pk|pak|pakistan|pakistani)\b/.test(s)) { sys = 'in'; }
+		else if (/\b(us|usa|ca|canada)\b/.test(s)) { sys = 'us'; }
+		var n = readNumber(s.replace(/[a-z]+/g, ' ').trim());
+		if (isNaN(n) || n <= 0) { return null; }
+		var guess = '';
+		if (!sys) {
+			var frac = n - Math.floor(n);
+			var quarter = Math.abs(frac * 4 - Math.round(frac * 4)) < 1e-6;
+			if (n >= 12 && n <= 26 && frac > 0 && (!quarter || n > 15.75)) {
+				// "17.3": a decimal that is not a quarter size is a diameter in mm.
+				return { mm: n, text: fmt(n) + ' mm inner diameter' };
+			}
+			// A bare number is read in the system the visitor picked in the result, then by its range.
+			if (ringSystem === 'in' && frac === 0 && n <= 40) { sys = 'in'; }
+			else if (ringSystem === 'eu' && frac === 0 && n <= 35) { sys = 'it'; }
+			else { sys = n <= 16 ? 'us' : (n < 38 ? 'in' : 'eu'); }
+			guess = ' (type a country, e.g. "US 7" or "EU 54", if that is wrong)';
+		}
+		var res;
+		if (sys === 'it' || sys === 'eu') {
+			// Italian / Spanish / Swiss numbers run 1–35; a number from 38 up is the full circumference.
+			res = n < 38 ? ringAround('Italy / Spain / Switzerland', n) : { mm: n / Math.PI, text: 'EU ' + n + ' (' + fmt(n) + ' mm around, ' + fmt(n / Math.PI) + ' mm across)' };
+		}
+		else if (sys === 'de') {
+			if (n >= 14 && n <= 25) { res = { mm: n, text: 'German ' + n + ' (' + fmt(n) + ' mm inner diameter)' }; }
+			else if (n >= 38 && n <= 82) { res = { mm: n / Math.PI, text: 'German ' + n + ' (' + fmt(n) + ' mm around, ' + fmt(n / Math.PI) + ' mm across)' }; }
+			else { return null; }
+		}
+		else if (sys === 'jp') { var jd = 13 + (n - 1) / 3; res = { mm: jd, text: 'Japan ' + n + ' (' + fmt(jd) + ' mm)' }; }
+		else if (sys === 'in') { res = ringAround('India', n); }
+		else { var usd = ringMmFromUs(n); res = { mm: usd, text: usText(n) + ' (' + fmt(usd) + ' mm)' }; }
+		res.text += guess;
+		return res;
 	}
 	function parseBangle(raw) {
-		var s = String(raw || '').toLowerCase().replace(/size|bangle|kada|chudi/g, '').replace(/\s+/g, ' ').trim();
+		var s = plainFractions(String(raw || '').toLowerCase().replace(/size|bangle|kada|chudi|chura|choori/g, ' ').replace(/⅛/g, ' 1/8').replace(/⅜/g, ' 3/8').replace(/⅝/g, ' 5/8').replace(/⅞/g, ' 7/8'));
 		if (!s) { return null; }
-		var m = s.match(/([\d.]+)\s*(mm|cm)/);
+		var m = s.match(/(\d+(?:\.\d+)?)\s*(mm|cm)\b/);
 		if (m) {
 			var v = parseFloat(m[1]) * (m[2] === 'cm' ? 10 : 1);
 			if (v >= 35 && v <= 95) { return { mm: v, text: fmt(v) + ' mm inner diameter' }; }
 			if (v > 110 && v < 300) { return { mm: v / Math.PI, text: fmt(v) + ' mm around (' + fmt(v / Math.PI) + ' mm across)' }; }
 			return null;
 		}
+		// Inches with a fraction: "2 1/4", "2 1/4 in", "2 6/16".
+		m = s.match(/^([1-3])\s+(\d{1,2})\s*\/\s*(\d{1,2})\s*(?:in|inch|inches|")?$/);
+		if (m && parseInt(m[3], 10) > 0) {
+			var fin = parseInt(m[1], 10) + parseInt(m[2], 10) / parseInt(m[3], 10);
+			return { mm: fin * MM_IN, text: m[1] + ' ' + m[2] + '/' + m[3] + ' in (' + fmt(fin * MM_IN) + ' mm)' };
+		}
 		// Indian notation is inches + sixteenths ("2.6" = 2 6/16 in), so it only starts with 1–3
 		// and the part after the dot is 0–15. "6.2" is cm and "2.75" is decimal inches (below).
-		m = s.match(/^([1-3])\s*[.\/\-:]\s*(\d{1,2})$/);
-		if (m && parseInt(m[2], 10) <= 15) {
-			var lab = m[1] + '.' + m[2];
+		m = s.match(/^([1-3])\s*([.\/\-:])\s*(\d{1,2})$/);
+		if (m && parseInt(m[3], 10) <= 15) {
+			var six = parseInt(m[3], 10);
+			var note = '';
+			// "2.1" is how many shops shorten 2.10 (there is no 2 1/16 size).
+			if (m[3] === '1' && m[2] === '.') { six = 10; note = ' (read as ' + m[1] + '.10 = ' + m[1] + ' 10/16 in)'; }
+			var lab = m[1] + '.' + six;
 			for (var i = 0; i < data.bangles.length; i++) {
-				if (data.bangles[i].label === lab) { return { mm: data.bangles[i].mm, text: 'Indian size ' + lab + ' (' + fmt(data.bangles[i].mm) + ' mm)' }; }
+				if (data.bangles[i].label === lab) { return { mm: data.bangles[i].mm, text: 'Indian size ' + lab + ' (' + fmt(data.bangles[i].mm) + ' mm)' + note }; }
 			}
-			var inch = parseInt(m[1], 10) + parseInt(m[2], 10) / 16;
-			return { mm: inch * MM_IN, text: 'Indian size ' + lab + ' (' + fmt(inch * MM_IN) + ' mm)' };
+			var inch = parseInt(m[1], 10) + six / 16;
+			if (six % 2) { note += '. ' + lab + ' is not a standard size (sizes go up in 2/16 in), so check the label with the shop'; }
+			return { mm: inch * MM_IN, text: 'Indian size ' + lab + ' (' + m[1] + ' ' + six + '/16 in = ' + fmt(inch * MM_IN) + ' mm)' + note };
 		}
 		m = s.match(/([\d.]+)\s*(in|inch|")?/);
 		if (m) {
@@ -412,13 +480,13 @@
 		{ id: 'in10', name: 'India ₹10 coin', short: '₹10', mm: 27 },
 		{ id: 'pk10', name: 'Pakistan Rs 10 coin', short: 'Rs 10', mm: 25.5 },
 		{ id: 'us25', name: 'US quarter (25¢)', short: '25¢', mm: 24.26 },
-		{ id: 'uk1', name: 'UK £1 coin', short: '£1', mm: 23.43 },
+		{ id: 'uk10p', name: 'UK 10p coin', short: '10p', mm: 24.5 },
 		{ id: 'eu2', name: '€2 coin', short: '€2', mm: 25.75 }
 	];
 	function defaultCoin() {
 		var langs = (navigator.languages || [navigator.language || '']).join(',').toLowerCase();
 		if (/-pk\b|\bur\b/.test(langs)) { return 'pk10'; }
-		return { in: 'in10', uk: 'uk1', eu: 'eu2' }[guessSystem()] || 'us25';
+		return { in: 'in10', uk: 'uk10p', eu: 'eu2' }[guessSystem()] || 'us25';
 	}
 
 	function renderCalibration(root, onDone) {
@@ -571,16 +639,45 @@
 	function nearestRing(mm) {
 		var best = data.rings[0], bd = 99;
 		data.rings.forEach(function (r) {
+			// "<=": exactly between two sizes gives the larger one (the site's own advice).
 			var d = Math.abs(r.mm - mm);
-			if (d < bd) { bd = d; best = r; }
+			if (d <= bd + 1e-9) { bd = d; best = r; }
 		});
 		return best;
 	}
 	function nearestBangleUp(mm) {
 		for (var i = 0; i < data.bangles.length; i++) {
-			if (data.bangles[i].mm >= mm - 0.3) { return data.bangles[i]; }
+			// The first size at least as wide as the hand (0.05 mm only absorbs rounding).
+			if (data.bangles[i].mm >= mm - 0.05) { return data.bangles[i]; }
 		}
 		return data.bangles[data.bangles.length - 1];
+	}
+
+	/* Range checks for typed measurements (all in mm). Outside the range the
+	 * tool shows a warning instead of a confident size. */
+	var RANGES = {
+		ring: [11, 26],      // ring inner diameter
+		hand: [100, 300],    // hand circumference for bangles (10–30 cm)
+		wrist: [100, 280]    // wrist circumference (10–28 cm)
+	};
+	function inRange(kind, mm) { return mm >= RANGES[kind][0] && mm <= RANGES[kind][1]; }
+	function rangeWarning(what) {
+		return '<p class="rbs-fit-res bad">That looks outside the normal range for ' + what + '. Check the unit (mm / cm / inch).</p>';
+	}
+	// When the unit select changes, convert the number already typed instead of re-reading it in the new unit.
+	function convertOnUnitChange(input, select, toMm) {
+		var prev = select.value;
+		select.addEventListener('change', function () {
+			var v = parseFloat(input.value);
+			if (v) {
+				var mm = toMm(v, prev);
+				var back = toMm(1, select.value);
+				var nv = mm / back;
+				var dp = nv < 5 ? 2 : 1; // inches need two decimals (0.68 in), mm and cm one
+				input.value = String(Math.round(nv * Math.pow(10, dp)) / Math.pow(10, dp));
+			}
+			prev = select.value;
+		}, true);
 	}
 
 	function approxNote() {
@@ -627,13 +724,13 @@
 				'<div class="rbs-result-top"><span class="rbs-kicker">' + (fromMm ? 'Closest ring size' : 'Your ring size') + '</span>' + picker + '</div>' +
 				'<div class="rbs-big">' + ringIn(r, ringSystem) + '</div>' +
 				'<div class="rbs-sub">= ' + others + ' · ' + fmt(r.mm) + ' mm inside</div>' +
-				resultActions('ring', 'US ' + r.us, 'My ring size is US ' + r.us + ' / UK ' + r.uk + ' / EU ' + r.eu + ' (' + fmt(r.mm) + ' mm inside diameter). Find yours free:') +
+				resultActions('ring', 'US ' + r.us, 'My ring size is US ' + r.us + ' / UK ' + r.uk + ' / EU ' + r.eu + ' / India ' + r.india + ' (' + fmt(r.mm) + ' mm inside diameter). Find yours free:') +
 				'<details class="rbs-more"><summary>All sizes and measurements</summary>' +
 				resultTable([
 					['US / Canada', r.us],
 					['UK / Australia / NZ', r.uk],
 					['EU / ISO (circumference)', r.eu],
-					['India / Japan', r.jp],
+					['India / Pakistan', r.india],
 					['Inner diameter', fmt(r.mm) + ' mm (' + fmt(r.mm / MM_IN, 2) + ' in)'],
 					['Inner circumference', fmt(r.circ) + ' mm']
 				]) + '</details>' +
@@ -645,7 +742,7 @@
 			});
 			wireActions(result, function () { paintSaved(); if (fit) { fit.refresh(); } }, {
 				kind: 'ring', title: 'ring size', big: ringIn(r, ringSystem),
-				rows: [['US / Canada', String(r.us)], ['UK / Australia', r.uk], ['EU / ISO', String(r.eu)], ['India / Japan', String(r.jp)], ['Inside diameter', fmt(r.mm) + ' mm'], ['Inside circumference', fmt(r.circ) + ' mm']]
+				rows: [['US / Canada', String(r.us)], ['UK / Australia', r.uk], ['EU / ISO', String(r.eu)], ['India / Pakistan', String(r.india)], ['Inside diameter', fmt(r.mm) + ' mm'], ['Inside circumference', fmt(r.circ) + ' mm']]
 			});
 			if (fit) { fit.refresh(); }
 		}
@@ -663,13 +760,21 @@
 				range.value = idx; drawMatch(); setStep(root, 3);
 			});
 		});
+		function ringToMm(v, t) { return t === 'c' ? v / Math.PI : (t === 'di' ? v * MM_IN : v); }
+		function clearRing(html) {
+			lastRing = null;
+			result.innerHTML = html || '';
+			if (fit) { fit.refresh(); }
+		}
 		function fromMm() {
 			var v = parseFloat($('.rbs-mm-val', panel).value);
 			var t = $('.rbs-mm-type', panel).value;
-			if (!v) { return; }
-			var d = t === 'c' ? v / Math.PI : (t === 'di' ? v * MM_IN : v);
+			if (isNaN(v)) { clearRing(); return; }
+			var d = ringToMm(v, t);
+			if (!inRange('ring', d)) { clearRing(rangeWarning('a ring (11–26 mm across, 35–82 mm around)')); return; }
 			show(nearestRing(d), true);
 		}
+		convertOnUnitChange($('.rbs-mm-val', panel), $('.rbs-mm-type', panel), ringToMm);
 		$('.rbs-mm-val', panel).addEventListener('input', fromMm);
 		$('.rbs-mm-type', panel).addEventListener('change', fromMm);
 
@@ -767,19 +872,33 @@
 				range.value = idx; drawMatch(); setStep(root, 3);
 			});
 		});
+		function handToMm(v, u) { return u === 'in' ? v * MM_IN : v * 10; }
 		function fromHand() {
 			var v = parseFloat($('.rbs-hand-val', panel).value);
 			var u = $('.rbs-hand-unit', panel).value;
-			if (!v) { return; }
-			var circMm = u === 'in' ? v * MM_IN : v * 10;
+			if (isNaN(v)) { lastBangle = null; result.innerHTML = ''; if (fit) { fit.refresh(); } return; }
+			var circMm = handToMm(v, u);
+			if (!inRange('hand', circMm)) {
+				lastBangle = null;
+				result.innerHTML = rangeWarning('a hand (10–30 cm / 4–12 in around)');
+				if (fit) { fit.refresh(); }
+				return;
+			}
 			var d = circMm / Math.PI;
 			var b = nearestBangleUp(d);
+			var bi = data.bangles.indexOf(b);
+			var lower = bi > 0 ? data.bangles[bi - 1] : null;
+			// Hand only just over the size below: a soft glass chudi can be rolled on, rigid gold cannot.
+			var roll = lower && d - lower.mm <= 1 && d <= b.mm
+				? ' Very close to size ' + lower.label + ': a thin glass chudi can often be rolled on in ' + lower.label + ', but for a rigid gold bangle or kada buy ' + b.label + '.'
+				: '';
 			var top = data.bangles[data.bangles.length - 1];
 			var over = d > top.mm + 0.3
 				? ' That is larger than size ' + top.label + ' (' + fmt(top.mm) + ' mm), the biggest standard size: ask the jeweller for a made-to-order kada or an openable bangle.'
 				: '';
-			show(b, '<p class="rbs-note">Your hand circumference ' + fmt(circMm) + ' mm ≈ ' + fmt(d) + ' mm across. The bangle must be at least this wide inside.' + over + '</p>');
+			show(b, '<p class="rbs-note">Your hand circumference ' + fmt(circMm) + ' mm ≈ ' + fmt(d) + ' mm across. The bangle must be at least this wide inside.' + roll + over + '</p>');
 		}
+		convertOnUnitChange($('.rbs-hand-val', panel), $('.rbs-hand-unit', panel), handToMm);
 		$('.rbs-hand-val', panel).addEventListener('input', fromHand);
 		$('.rbs-hand-unit', panel).addEventListener('change', fromHand);
 
@@ -829,9 +948,16 @@
 			var v = parseFloat($('.rbs-wrist-val', panel).value);
 			var u = $('.rbs-wrist-unit', panel).value;
 			var t = $('.rbs-wrist-type', panel).value;
-			if (!v) { return; }
+			if (t === 'bangle') {
+				// A rigid bangle has to pass over the folded hand, so the wrist cannot size it.
+				result.innerHTML = '<p class="rbs-note"><strong>Rigid bangles are sized by the hand, not the wrist.</strong> A closed bangle has to slide over your folded hand, which is wider than your wrist.</p>' +
+					'<p><a class="rbs-btn" href="' + (data.home || '') + '/bangle-size-calculator/">Use the bangle calculator →</a></p>';
+				return;
+			}
+			if (isNaN(v)) { result.innerHTML = ''; return; }
 			var inch = u === 'in' ? v : v / 2.54;
-			var add = t === 'chain' ? [0.5, 0.75, 1.25] : (t === 'bangle' ? [1.0, 1.25, 1.5] : [0.25, 0.5, 0.75]);
+			if (!inRange('wrist', inch * MM_IN)) { result.innerHTML = rangeWarning('a wrist (10–28 cm / 4–11 in around)'); return; }
+			var add = t === 'chain' ? [0.5, 0.75, 1.25] : [0.25, 0.5, 0.75];
 			function both(x) { return fmt(x, 2) + ' in / ' + fmt(x * 2.54, 1) + ' cm'; }
 			var rows = [
 				['Your wrist', both(inch)],
@@ -839,13 +965,10 @@
 				['Comfortable fit (recommended)', both(inch + add[1])],
 				['Loose fit', both(inch + add[2])]
 			];
-			if (t === 'bangle') {
-				var d = ((inch + add[1]) * MM_IN) / Math.PI;
-				rows.push(['Bangle inner diameter', fmt(d) + ' mm → Indian size ' + nearestBangleUp(d).label]);
-			}
 			result.innerHTML = '<div class="rbs-big">' + both(inch + add[1]) + '</div>' + resultTable(rows) +
 				'<p class="rbs-note">Standard women\'s bracelets are 7 in (17.8 cm); men\'s are 8–8.5 in (20–21.5 cm).</p>';
 		}
+		convertOnUnitChange($('.rbs-wrist-val', panel), $('.rbs-wrist-unit', panel), function (x, unit) { return unit === 'in' ? x * MM_IN : x * 10; });
 		['.rbs-wrist-val', '.rbs-wrist-unit', '.rbs-wrist-type'].forEach(function (s) {
 			$(s, panel).addEventListener('input', calc);
 			$(s, panel).addEventListener('change', calc);

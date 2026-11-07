@@ -165,7 +165,7 @@ function pins() {
 		{ file: 'uk-ring-size-chart', url: '/ring-size-chart/uk/', title: 'UK Ring Size Chart', sub: 'Letters to US sizes and mm',
 			head: ['UK', 'US', 'mm'], rows: pick([4, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 10, 11, 12]).map((r) => [r.uk, r.us, r.mm.toFixed(1)]) },
 		{ file: 'indian-ring-size-chart', url: '/ring-size-chart/india/', title: 'Indian Ring Size Chart', sub: 'Indian sizes to US and mm',
-			head: ['India', 'US', 'mm'], rows: pick([4, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 10, 11, 12]).map((r) => [r.jp, r.us, r.mm.toFixed(1)]) },
+			head: ['India', 'US', 'mm'], rows: pick([4, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 10, 11, 12]).map((r) => [r.india, r.us, r.mm.toFixed(1)]) },
 		{ file: 'average-ring-size', url: '/average-ring-size/', title: 'Average Ring Size', sub: 'Ring finger, women and men',
 			head: ['', 'US', 'UK', 'mm'], rows: [['Women avg', '6–7', 'L½–N½', '16.5–17.3'], ['Women range', '5–8', 'J½–P½', '15.7–18.1'], ['Men avg', '9–10', 'R½–T½', '19.0–19.8'], ['Men range', '8–12', 'P½–X½', '18.1–21.4']], hl: [0, 2],
 			note: 'Averages are a starting point only. Fingers are bigger in the evening and in warm weather, so measure twice.' },

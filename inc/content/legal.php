@@ -40,7 +40,7 @@ function rbs_legal_pages() {
 </ul>
 
 <h2>Where our numbers come from</h2>
-<p>Ring diameters follow ISO 8653, the international standard that defines ring size as the inner circumference in millimetres. US, UK, Indian and Japanese sizes are mapped to those diameters using the conversion tables jewellers use. Indian bangle sizes follow the traditional inch-and-sixteenths system, where 2.6 means 2 6/16 inches across the inside. Screen calibration uses the ISO/IEC 7810 ID-1 card size (85.60 × 53.98 mm) shared by every bank card. The full method, including rounding rules and known limits, is on our <a href="/how-we-measure/">how we measure</a> page.</p>
+<p>Ring diameters follow ISO 8653, the international standard that defines ring size as the inner circumference in millimetres. US, UK and Indian sizes are mapped to those diameters using the conversion tables jewellers use. Indian bangle sizes follow the traditional inch-and-sixteenths system, where 2.6 means 2 6/16 inches across the inside. Screen calibration uses the ISO/IEC 7810 ID-1 card size (85.60 × 53.98 mm) shared by every bank card. The full method, including rounding rules and known limits, is on our <a href="/how-we-measure/">how we measure</a> page.</p>
 
 <h2>Our editorial rules</h2>
 <ul>
@@ -84,8 +84,8 @@ function rbs_legal_pages() {
 <ul>
 <li><strong>Circumference</strong> = diameter × π (US 7: 17.3 × 3.1416 = 54.3 mm).</li>
 <li><strong>EU / ISO size</strong> = circumference rounded to the nearest mm (54).</li>
-<li><strong>Swiss size</strong> = EU size − 40 (14).</li>
-<li><strong>India / Japan size</strong> = (diameter − 13 mm) × 3 + 1, rounded (14). Each step is one third of a millimetre.</li>
+<li><strong>Italian / Spanish / Swiss size</strong> = EU size − 40 (14).</li>
+<li><strong>India / Pakistan size</strong> = inner circumference − 40 mm, rounded (54.3 − 40 = 14). This is the scale Indian jewellers such as Tanishq and BlueStone print (India 22 = 62 mm around = US 10).</li>
 <li><strong>UK / Australian letters</strong> are taken from the standard US-to-UK conversion table, because the letter scale does not follow a single formula.</li>
 </ul>
 <p>The full table is on the <a href="/ring-size-chart/">ring size chart</a> and the <a href="/ring-size-in-mm/">ring size in mm</a> page.</p>

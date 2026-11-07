@@ -92,11 +92,11 @@ HTML
 			'slug'       => 'ring-size-converter',
 			'title'      => 'Ring Size Converter – US, UK, EU, India and mm',
 			'seo_title'  => 'Ring Size Converter: US to UK, EU, India and mm',
-			'seo_desc'   => 'Convert ring sizes between US, UK, EU/ISO, India/Japan and Swiss sizes, or from mm and inches. Instant converter plus a full conversion chart.',
+			'seo_desc'   => 'Convert ring sizes between US, UK, EU/ISO, India and Swiss sizes, or from mm and inches. Instant converter plus a full conversion chart.',
 			'mode'       => null,
 			'menu_order' => 1,
 			'content'    => <<<'HTML'
-<p><strong>Convert a ring size from one country's system to another in one step.</strong> Choose the system you know, pick your size, and the converter shows the same ring in US, UK, EU/ISO, Indian/Japanese and Swiss sizes, with the inner diameter and circumference. For example, US 7 = UK N½ = EU 54 = India 14 = 17.3 mm.</p>
+<p><strong>Convert a ring size from one country's system to another in one step.</strong> Choose the system you know, pick your size, and the converter shows the same ring in US, UK, EU/ISO, Indian and Italian/Swiss sizes, with the inner diameter and circumference. For example, US 7 = UK N½ = EU 54 = India 14 = 17.3 mm.</p>
 
 [rbs_ring_converter]
 
@@ -120,9 +120,10 @@ HTML
 <tr><td>EU 52 to US</td><td>US 6 (51.8 mm around)</td></tr>
 <tr><td>EU 54 to US</td><td>US 7 (54.3 mm around)</td></tr>
 <tr><td>EU 57 to US</td><td>US 8 (56.9 mm around)</td></tr>
-<tr><td>India 12 to US</td><td>US 6 (16.5 mm)</td></tr>
-<tr><td>India 14 to US</td><td>US 7 (17.3 mm)</td></tr>
-<tr><td>India 16 to US</td><td>US 8 (18.1 mm)</td></tr>
+<tr><td>India 12 to US</td><td>US 6 (52 mm around, 16.5 mm)</td></tr>
+<tr><td>India 14 to US</td><td>US 7 (54 mm around, 17.2 mm)</td></tr>
+<tr><td>India 17 to US</td><td>US 8 (57 mm around, 18.1 mm)</td></tr>
+<tr><td>India 22 to US</td><td>US 10 (62 mm around, 19.7 mm)</td></tr>
 </tbody>
 </table>
 
@@ -131,22 +132,22 @@ HTML
 <p>Numbers from about 3 to 15, in half and quarter sizes. Each whole size adds about 0.81 mm of inner diameter (2.55 mm of circumference). Mexico and much of South America use the same scale.</p>
 <h3>UK, Ireland, Australia and New Zealand</h3>
 <p>Letters from A to Z, with half sizes such as N½. Each letter adds about 1.25 mm of circumference (0.4 mm of diameter), roughly half a US size. Sizes above Z are written Z+1, Z+2 and so on.</p>
-<h3>EU and ISO (Germany, France, Italy, Spain, Netherlands)</h3>
+<h3>EU and ISO (Germany, France, Netherlands, Belgium)</h3>
 <p>The inner circumference in millimetres. EU 54 is a ring 54 mm around the inside. Because it is a measurement rather than a code, it is the easiest system to convert from: divide by 3.1416 for the diameter.</p>
-<h3>India, Japan, China and Pakistan</h3>
-<p>Whole numbers from 1 upward. Size 1 is a 13 mm inner diameter and each number adds one third of a millimetre. Indian size 14 is 17.3 mm, the same as US 7. Local jewellers in Pakistan use the same scale; see the <a href="/ring-size-chart/pakistan/">ring size chart for Pakistan</a>.</p>
-<h3>Switzerland</h3>
-<p>The EU circumference minus 40. EU 54 is Swiss 14, EU 57 is Swiss 17. Many Swiss watch and jewellery brands use this scale.</p>
+<h3>India and Pakistan</h3>
+<p>Whole numbers, each one the inner circumference in mm minus 40. Indian size 14 is 54 mm around (17.2 mm across), the same as US 7; size 22 is 62 mm around, US 10. Local jewellers in Pakistan use the same scale; see the <a href="/ring-size-chart/pakistan/">ring size chart for Pakistan</a>.</p>
+<h3>Italy, Spain and Switzerland</h3>
+<p>The EU circumference minus 40. EU 54 is Italian, Spanish or Swiss 14; EU 57 is 17. Many Italian and Swiss jewellery brands use this scale, so an Italian 14 is not EU 14. Germany usually gives the EU number or the inner diameter in mm (German 17 = 17 mm across).</p>
 
 <h2>Why conversions are sometimes off by a quarter size</h2>
-<p>Each system rounds differently. A UK half letter and a US quarter size are both about 0.2 mm of diameter and an Indian number is 0.33 mm, but they do not line up exactly, so one UK size can fall between two US sizes. Brands also differ slightly in how they cut their mandrels. When the converter shows a size between two of yours, or a shop's chart disagrees with this one by a quarter size, trust the diameter in mm: ask the seller for the inner diameter of their size and compare it with a ring you already own, measured with the <a href="/ring-size-calculator/">ring size calculator</a> or the <a href="/">on-screen sizer</a>.</p>
+<p>Each system rounds differently. A UK half letter and a US quarter size are both about 0.2 mm of diameter and an Indian number is about 0.32 mm, but they do not line up exactly, so one UK size can fall between two US sizes. Brands also differ slightly in how they cut their mandrels. When the converter shows a size between two of yours, or a shop's chart disagrees with this one by a quarter size, trust the diameter in mm: ask the seller for the inner diameter of their size and compare it with a ring you already own, measured with the <a href="/ring-size-calculator/">ring size calculator</a> or the <a href="/">on-screen sizer</a>.</p>
 
 <h2>Buying a ring from another country</h2>
 <ul>
 <li><strong>From the US (Amazon, Etsy, US brands):</strong> use the US column. Quarter sizes are common.</li>
 <li><strong>From the UK or Australia:</strong> use the letter column; half letters are standard in UK jewellers.</li>
 <li><strong>From Europe:</strong> use the EU number, which is the circumference in mm.</li>
-<li><strong>From India, Pakistan or the Gulf:</strong> local shops use the India/Japan number; international brands there use US or EU sizes.</li>
+<li><strong>From India, Pakistan or the Gulf:</strong> local shops use the India number; international brands there use US or EU sizes.</li>
 <li><strong>Resizing:</strong> most plain gold and silver bands can be resized one or two sizes. Eternity rings, tungsten and titanium usually cannot, so convert carefully before ordering.</li>
 </ul>
 
@@ -157,7 +158,7 @@ HTML
 				array( 'How do I convert a US ring size to UK?', 'Use the converter or chart: US 6 is UK L½, US 7 is UK N½, US 8 is UK P½, US 9 is UK R½ and US 10 is UK T½. One US size is about two UK letters.' ),
 				array( 'What is a size 7 ring in Europe?', 'US 7 has a 54.3 mm inner circumference, so it is EU 54 (Swiss 14).' ),
 				array( 'Is UK size N the same as US 7?', 'Almost. UK N is about US 6¾ and UK N½ is US 7. If a UK shop only offers whole letters, choose N for a snug fit or O for a looser fit.' ),
-				array( 'What is Indian ring size 12 in US size?', 'Indian size 12 is a 16.5 mm inner diameter, which is US 6 and UK L½.' ),
+				array( 'What is Indian ring size 12 in US size?', 'Indian size 12 is 52 mm around (16.5 mm across), which is US 6 and UK L½.' ),
 				array( 'Are ring sizes the same for men and women?', 'Yes. Ring sizes measure the inside of the ring, so the same chart applies to everyone. Men simply tend to wear larger sizes (US 9–11) than women (US 5–7).' ),
 			),
 		),
@@ -414,9 +415,9 @@ HTML
 <h2>From circumference to the other systems</h2>
 <ul>
 <li><strong>EU / ISO:</strong> the circumference itself, rounded. 54 mm = EU 54.</li>
-<li><strong>Swiss:</strong> circumference minus 40. 54 mm = Swiss 14.</li>
+<li><strong>India / Pakistan, Italy, Spain, Switzerland:</strong> circumference minus 40. 54 mm = size 14.</li>
 <li><strong>US:</strong> divide by 3.1416 for the diameter, then (diameter − 11.63) ÷ 0.8128.</li>
-<li><strong>UK, India and others:</strong> use the <a href="/ring-size-converter/">ring size converter</a>.</li>
+<li><strong>UK and others:</strong> use the <a href="/ring-size-converter/">ring size converter</a>.</li>
 </ul>
 
 [rbs_cta mode="ring"]
