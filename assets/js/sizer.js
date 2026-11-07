@@ -910,7 +910,7 @@
 			var over = d > top.mm + 0.3
 				? ' That is larger than size ' + top.label + ' (' + fmt(top.mm) + ' mm), the biggest standard size: ask the jeweller for a made-to-order kada or an openable bangle.'
 				: '';
-			show(b, '<p class="rbs-note">Your hand circumference ' + fmt(circMm) + ' mm ≈ ' + fmt(d) + ' mm across. The bangle must be at least this wide inside.' + roll + over + '</p>');
+			show(b, '<p class="rbs-note">Your hand circumference ' + fmt(circMm) + ' mm ≈ ' + fmt(d) + ' mm across. The bangle must be at least this wide inside.' + roll + over + ' Hands are not round, so this is an estimate: if you have a bangle that fits, use "Match a bangle I own" for a better result.</p>');
 		}
 		convertOnUnitChange($('.rbs-hand-val', panel), $('.rbs-hand-unit', panel), handToMm);
 		$('.rbs-hand-val', panel).addEventListener('input', fromHand);
