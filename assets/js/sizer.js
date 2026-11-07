@@ -817,6 +817,174 @@
 
 	/* ------------------------------------------------------------- ring */
 
+	/* ------------------------------------------------- bangle from a photo */
+	/* The visitor photographs a bangle lying flat next to a coin, then fits
+	 * one circle to the coin and one to the bangle's inside edge. The coin's
+	 * known diameter turns pixels into mm, so no screen calibration is needed
+	 * and any adult bangle works on any phone. The photo is only drawn on a
+	 * canvas in the browser; it is never uploaded. */
+	function photoMarkup() {
+		var coinOpts = COINS.map(function (c) { return '<option value="' + c.id + '">' + c.name + ' (' + c.mm + ' mm)</option>'; }).join('');
+		return '<div class="rbs-m-photo rbs-hidden">' +
+			'<ol class="rbs-photo-how">' +
+			'<li>Lay a bangle that fits you flat on a plain table or floor. Put a coin next to it, not touching.</li>' +
+			'<li>Hold your phone straight above them, about 40 cm away (zoom in a little so both fill the photo). Keep the phone flat, not tilted.</li>' +
+			'<li>Choose the photo below, then fit the two circles.</li>' +
+			'</ol>' +
+			'<div class="rbs-field"><label>Coin in the photo <select class="rbs-photo-coin">' + coinOpts + '</select></label></div>' +
+			'<label class="rbs-btn rbs-photo-pick">Take or choose a photo<input type="file" accept="image/*" class="rbs-photo-file"></label>' +
+			'<p class="rbs-muted rbs-photo-private">Your photo stays on your device. It is not uploaded anywhere.</p>' +
+			'<div class="rbs-photo-work rbs-hidden">' +
+			'<div class="rbs-methods rbs-photo-tabs">' +
+			'<button type="button" class="rbs-method" data-t="coin" aria-pressed="true">1. Fit the coin</button>' +
+			'<button type="button" class="rbs-method" data-t="bangle" aria-pressed="false">2. Fit the bangle\'s inside edge</button>' +
+			'</div>' +
+			'<p class="rbs-muted rbs-photo-tip"></p>' +
+			'<div class="rbs-photo-stage"><canvas class="rbs-photo-canvas" aria-label="Your photo with the measuring circles"></canvas></div>' +
+			'<div class="rbs-slider-row"><button type="button" class="rbs-step" data-d="-1" aria-label="Smaller circle">−</button>' +
+			'<input type="range" class="rbs-photo-r" min="5" max="2000" step="0.5" value="100" aria-label="Circle size">' +
+			'<button type="button" class="rbs-step" data-d="1" aria-label="Larger circle">+</button></div>' +
+			'<div class="rbs-photo-zoom"><button type="button" class="rbs-btn secondary rbs-photo-zin">Zoom in</button>' +
+			'<button type="button" class="rbs-btn secondary rbs-photo-zout">Zoom out</button></div>' +
+			'</div>' +
+			'</div>';
+	}
+	// box: the .rbs-m-photo element. onMm(mm | null): called with the measured inside diameter.
+	function wirePhoto(box, onMm) {
+		var coinSel = $('.rbs-photo-coin', box);
+		coinSel.value = defaultCoin();
+		var file = $('.rbs-photo-file', box);
+		var work = $('.rbs-photo-work', box);
+		var canvas = $('.rbs-photo-canvas', box);
+		var ctx = canvas.getContext('2d');
+		var range = $('.rbs-photo-r', box);
+		var tip = $('.rbs-photo-tip', box);
+		var img = null, url = null;
+		var circles = { coin: null, bangle: null };
+		var touched = { coin: false, bangle: false };
+		var active = 'coin';
+		var zoom = 1, view = { s: 1, ox: 0, oy: 0 };
+		var TIPS = {
+			coin: 'Drag on the photo to move the gold circle onto the coin. Use the slider until it sits exactly on the coin\'s outer edge.',
+			bangle: 'Now drag the blue circle into the bangle and use the slider until it sits on the <strong>inside</strong> edge of the bangle (the edge that touches your hand).'
+		};
+
+		function coinMm() {
+			for (var i = 0; i < COINS.length; i++) { if (COINS[i].id === coinSel.value) { return COINS[i].mm; } }
+			return COINS[0].mm;
+		}
+		function layout() {
+			if (!img) { return; }
+			var w = canvas.parentNode.clientWidth || 320;
+			var maxH = Math.max(260, Math.round((window.innerHeight || 700) * 0.6));
+			var fitS = Math.min(w / img.naturalWidth, maxH / img.naturalHeight);
+			var cw = Math.round(img.naturalWidth * fitS), ch = Math.round(img.naturalHeight * fitS);
+			var d = window.devicePixelRatio || 1;
+			canvas.style.width = cw + 'px';
+			canvas.style.height = ch + 'px';
+			canvas.width = Math.round(cw * d);
+			canvas.height = Math.round(ch * d);
+			view.s = fitS * zoom;
+			var c = circles[active];
+			// When zoomed, keep the active circle in the middle of the view.
+			view.ox = zoom > 1 ? cw / 2 - c.x * view.s : 0;
+			view.oy = zoom > 1 ? ch / 2 - c.y * view.s : 0;
+			view.ox = Math.min(0, Math.max(cw - img.naturalWidth * view.s, view.ox));
+			view.oy = Math.min(0, Math.max(ch - img.naturalHeight * view.s, view.oy));
+			draw();
+		}
+		function draw() {
+			var d = window.devicePixelRatio || 1;
+			ctx.setTransform(d, 0, 0, d, 0, 0);
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.drawImage(img, view.ox, view.oy, img.naturalWidth * view.s, img.naturalHeight * view.s);
+			['coin', 'bangle'].forEach(function (k) {
+				var c = circles[k];
+				var x = view.ox + c.x * view.s, y = view.oy + c.y * view.s, r = c.r * view.s;
+				ctx.lineWidth = k === active ? 2 : 1.5;
+				ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+				ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.lineWidth += 2; ctx.stroke();
+				ctx.lineWidth -= 2;
+				ctx.strokeStyle = k === 'coin' ? '#b7791f' : '#1d4ed8';
+				ctx.setLineDash(k === active ? [] : [6, 4]);
+				ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+				ctx.setLineDash([]);
+				ctx.beginPath(); ctx.moveTo(x - 5, y); ctx.lineTo(x + 5, y); ctx.moveTo(x, y - 5); ctx.lineTo(x, y + 5); ctx.stroke();
+			});
+		}
+		function result() {
+			if (!img || !touched.bangle) { onMm(null); return; }
+			onMm(circles.bangle.r / circles.coin.r * coinMm());
+		}
+		function setActive(k) {
+			active = k;
+			box.querySelectorAll('.rbs-photo-tabs .rbs-method').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-t') === k ? 'true' : 'false'); });
+			tip.innerHTML = TIPS[k];
+			range.max = Math.round(Math.max(img.naturalWidth, img.naturalHeight) / 2);
+			range.step = Math.max(0.5, Math.round(range.max / 1200 * 2) / 2);
+			range.value = circles[k].r;
+			layout();
+		}
+		function load(f) {
+			if (!f || !/^image\//.test(f.type || 'image/')) { return; }
+			if (url) { URL.revokeObjectURL(url); }
+			url = URL.createObjectURL(f);
+			var im = new Image();
+			im.onload = function () {
+				img = im;
+				var W = img.naturalWidth, H = img.naturalHeight, m = Math.min(W, H);
+				circles.coin = { x: W * 0.78, y: H * 0.5, r: m * 0.08 };
+				circles.bangle = { x: W * 0.4, y: H * 0.5, r: m * 0.25 };
+				touched = { coin: false, bangle: false };
+				zoom = 1;
+				work.classList.remove('rbs-hidden');
+				setActive('coin');
+				result();
+			};
+			im.onerror = function () { tip.textContent = 'That photo could not be opened. Try a JPG or PNG photo.'; work.classList.remove('rbs-hidden'); };
+			im.src = url;
+		}
+		file.addEventListener('change', function () { load(file.files && file.files[0]); });
+		coinSel.addEventListener('change', result);
+		box.querySelectorAll('.rbs-photo-tabs .rbs-method').forEach(function (b) {
+			b.addEventListener('click', function () { setActive(b.getAttribute('data-t')); });
+		});
+		range.addEventListener('input', function () {
+			circles[active].r = parseFloat(range.value); touched[active] = true; draw(); result();
+		});
+		box.querySelectorAll('.rbs-slider-row .rbs-step').forEach(function (b) {
+			b.addEventListener('click', function () {
+				var step = parseFloat(range.step) || 1;
+				circles[active].r = Math.max(parseFloat(range.min), circles[active].r + step * parseInt(b.getAttribute('data-d'), 10));
+				range.value = circles[active].r; touched[active] = true; draw(); result();
+			});
+		});
+		$('.rbs-photo-zin', box).addEventListener('click', function () { zoom = Math.min(8, zoom * 2); layout(); });
+		$('.rbs-photo-zout', box).addEventListener('click', function () { zoom = Math.max(1, zoom / 2); layout(); });
+		// Drag anywhere on the photo to move the active circle.
+		var drag = null;
+		canvas.addEventListener('pointerdown', function (e) {
+			if (!img) { return; }
+			drag = { x: e.clientX, y: e.clientY, cx: circles[active].x, cy: circles[active].y };
+			try { canvas.setPointerCapture(e.pointerId); } catch (er) {}
+			e.preventDefault();
+		});
+		canvas.addEventListener('pointermove', function (e) {
+			if (!drag) { return; }
+			circles[active].x = drag.cx + (e.clientX - drag.x) / view.s;
+			circles[active].y = drag.cy + (e.clientY - drag.y) / view.s;
+			touched[active] = true;
+			draw();
+		});
+		function end() { if (drag) { drag = null; if (zoom > 1) { layout(); } result(); } }
+		canvas.addEventListener('pointerup', end);
+		canvas.addEventListener('pointercancel', end);
+		window.addEventListener('resize', function () { if (img && !box.classList.contains('rbs-hidden')) { layout(); } });
+		return {
+			activate: function () { if (img) { layout(); } result(); }
+		};
+	}
+
 	function renderRing(root, method) {
 		var idx = 8; // US 7
 		var mmId = uid('ring-mm');
@@ -959,6 +1127,7 @@
 			'<div class="rbs-methods">' +
 			'<button type="button" class="rbs-method" data-m="match" aria-pressed="true">Match a bangle I own</button>' +
 			'<button type="button" class="rbs-method" data-m="hand" aria-pressed="false">Measure my hand</button>' +
+			'<button type="button" class="rbs-method" data-m="photo" aria-pressed="false">From a photo</button>' +
 			'</div>' +
 			'<div class="rbs-m-match">' +
 			'<p class="rbs-muted">Place a bangle that fits you on the screen. Move the slider until the circle lines up with its <strong>inside</strong> edge.</p>' +
@@ -972,6 +1141,7 @@
 			'<div class="rbs-field"><label for="' + handId + '">Hand circumference</label><input type="number" step="0.1" min="4" max="30" class="rbs-hand-val" id="' + handId + '" value="8" inputmode="decimal">' +
 			'<select class="rbs-hand-unit" aria-label="Unit"><option value="in">inches</option><option value="cm">cm</option></select></div>' +
 			'</div>' +
+			photoMarkup() +
 			'<div class="rbs-result"></div>' + approxNote();
 
 		var stage = $('.rbs-stage', panel);
@@ -981,9 +1151,11 @@
 		var lastBangle = null;
 		var userSet = false; // only results the visitor chose are counted, not the starting size
 		// extra is only passed by the hand measurement, which does not depend on the screen.
-		function show(b, extra) {
+		// method: 'match' (on screen), 'hand' or 'photo'. Only on-screen matching depends on calibration.
+		function show(b, extra, method) {
+			method = method || (extra === undefined ? 'match' : 'hand');
 			lastBangle = b;
-			var ax = extra === undefined && !calibrated;
+			var ax = method === 'match' && !calibrated;
 			var bangleSizeText = (ax ? 'My approximate bangle size (screen not calibrated) is ' : 'My bangle size is ') + b.label + ' (' + fmt(b.mm) + ' mm inside diameter).';
 			result.innerHTML =
 				'<div class="rbs-result-top"><span class="rbs-kicker">' + (ax ? 'Your bangle size · screen not calibrated' : 'Your bangle size') + '</span></div>' +
@@ -1004,7 +1176,7 @@
 				rows: [['Indian size', b.label], ['Inside diameter', fmt(b.mm) + ' mm'], ['In centimetres', fmt(b.mm / 10, 2) + ' cm'], ['In inches', fmt(b.inch, 3) + ' in'], ['Inside circumference', fmt(b.mm * Math.PI) + ' mm'], ['Typical fit', b.fit]]
 			});
 			wireSendBack(result);
-			if (userSet) { trackResult('bangle', b.label, b.mm, extra === undefined ? 'match' : 'hand', extra === undefined ? (calibrated ? 'yes' : 'no') : 'n/a'); }
+			if (userSet) { trackResult('bangle', b.label, b.mm, method, method === 'match' ? (calibrated ? 'yes' : 'no') : 'n/a'); }
 			if (fit) { fit.refresh(); }
 		}
 		function drawMatch() {
@@ -1052,15 +1224,28 @@
 		$('.rbs-hand-val', panel).addEventListener('input', function () { userSet = true; fromHand(); });
 		$('.rbs-hand-unit', panel).addEventListener('change', fromHand);
 
-		panel.querySelectorAll('.rbs-method').forEach(function (b) {
+		panel.querySelectorAll('.rbs-method[data-m]').forEach(function (b) {
 			b.addEventListener('click', function () {
-				panel.querySelectorAll('.rbs-method').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+				panel.querySelectorAll('.rbs-method[data-m]').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
 				b.setAttribute('aria-pressed', 'true');
 				var m = b.getAttribute('data-m');
 				$('.rbs-m-match', panel).classList.toggle('rbs-hidden', m !== 'match');
 				$('.rbs-m-hand', panel).classList.toggle('rbs-hidden', m !== 'hand');
-				if (m === 'match') { drawMatch(); } else { fromHand(); }
+				$('.rbs-m-photo', panel).classList.toggle('rbs-hidden', m !== 'photo');
+				if (m === 'match') { drawMatch(); } else if (m === 'hand') { fromHand(); } else { photo.activate(); }
 			});
+		});
+		var photo = wirePhoto($('.rbs-m-photo', panel), function (mm) {
+			if (mm === null) { lastBangle = null; result.innerHTML = ''; if (fit) { fit.refresh(); } return; }
+			if (mm < 30 || mm > 90) {
+				lastBangle = null;
+				result.innerHTML = '<p class="rbs-fit-res bad">That gives ' + fmt(mm) + ' mm across, which is outside normal bangle sizes. Check that the coin selected matches the coin in the photo and that each circle sits on the right edge.</p>';
+				if (fit) { fit.refresh(); }
+				return;
+			}
+			userSet = true;
+			var b = nearestBangleUp(mm - 0.8); // within 0.8 mm of a size counts as that size (photo error is about ±1 mm)
+			show(b, '<p class="rbs-note">From your photo the bangle measures about <strong>' + fmt(mm) + ' mm</strong> across the inside. A photo is usually right to within about 1 mm if it was taken from straight above. If the result is between two sizes, measure once more with a new photo.</p>', 'photo');
 		});
 		var fit = null;
 		var paintSaved = wireSaved(panel, 'bangle', function (label) {
