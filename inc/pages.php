@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_PAGES_VERSION', '8' );
+define( 'RBS_PAGES_VERSION', '9' );
 
 require_once RBS_DIR . '/inc/page-content.php';
 require_once RBS_DIR . '/inc/content/legal.php';
@@ -70,11 +70,16 @@ function rbs_sync_pages() {
 	if ( ! function_exists( 'wp_insert_post' ) ) {
 		return;
 	}
-	// Avoid two requests running the sync at the same time.
-	if ( get_transient( 'rbs_pages_lock' ) ) {
+	// Avoid two requests running the sync at the same time. add_option() is an
+	// INSERT on a unique key, so only one request can take the lock (a transient
+	// check-then-set let two requests through and doubled the menu, 0.12.0).
+	$lock = get_option( 'rbs_pages_lock' );
+	if ( $lock && time() - (int) $lock > 120 ) {
+		delete_option( 'rbs_pages_lock' ); // stale lock from a request that died
+	}
+	if ( ! add_option( 'rbs_pages_lock', time(), '', 'no' ) ) {
 		return;
 	}
-	set_transient( 'rbs_pages_lock', 1, 120 );
 
 	$pages = rbs_all_pages();
 	$ids   = array();
@@ -144,7 +149,7 @@ function rbs_sync_pages() {
 	rbs_enable_rank_math_breadcrumbs();
 
 	update_option( 'rbs_pages_version', RBS_PAGES_VERSION );
-	delete_transient( 'rbs_pages_lock' );
+	delete_option( 'rbs_pages_lock' );
 	flush_rewrite_rules( false );
 }
 add_action( 'init', 'rbs_sync_pages', 20 );
