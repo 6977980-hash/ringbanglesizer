@@ -26,7 +26,8 @@ function rbs_nearest_ring( $mm ) {
 	$all  = rbs_ring_sizes();
 	$best = $all[0];
 	foreach ( $all as $r ) {
-		if ( abs( $r['mm'] - $mm ) < abs( $best['mm'] - $mm ) ) {
+		// "<=" with a small margin: a measurement exactly between two sizes gets the larger one.
+		if ( abs( $r['mm'] - $mm ) <= abs( $best['mm'] - $mm ) + 1e-9 ) {
 			$best = $r;
 		}
 	}
@@ -57,14 +58,14 @@ function rbs_ring_converter_shortcode() {
 
 	ob_start();
 	?>
-	<div class="rbs-conv" data-rings="<?php echo esc_attr( $json ); ?>">
+	<div class="rbs-conv" data-rings="<?php echo esc_attr( $json ); ?>" data-uk="<?php echo esc_attr( wp_json_encode( rbs_uk_rows_for_js(), JSON_UNESCAPED_UNICODE ) ); ?>">
 		<div class="rbs-conv-fields">
 			<label>Convert from
 				<select class="rbs-conv-from">
 					<option value="us">US / Canada size</option>
 					<option value="uk">UK / Australia size</option>
 					<option value="eu">EU / ISO size</option>
-					<option value="jp">India / Japan size</option>
+					<option value="india">India / Pakistan size</option>
 					<option value="mm">Inner diameter (mm)</option>
 					<option value="circ">Inner circumference (mm)</option>
 					<option value="in">Inner diameter (inches)</option>
@@ -180,7 +181,9 @@ function rbs_diameter_ranges_shortcode() {
 		$lo = $i > 0 ? ( $all[ $i - 1 ]['mm'] + $r['mm'] ) / 2 : $r['mm'] - 0.2;
 		$hi = $i < $n - 1 ? ( $all[ $i + 1 ]['mm'] + $r['mm'] ) / 2 : $r['mm'] + 0.2;
 		$d  = rbs_ring_derived( $r['mm'] );
-		$html .= '<tr><td>' . esc_html( number_format( $lo, 2 ) . '–' . number_format( $hi, 2 ) . ' mm' ) . '</td><td>' . esc_html( number_format( $lo / 25.4, 3 ) . '–' . number_format( $hi / 25.4, 3 ) ) . '</td><td>' . rbs_us_link( $r['us'] ) . '</td><td>' . esc_html( $r['uk'] ) . '</td><td>' . esc_html( $d['eu'] ) . '</td></tr>';
+		// Bands are half-open [lo, hi): a reading exactly on the midpoint belongs to the larger size.
+		$top = $i < $n - 1 ? $hi - 0.01 : $hi;
+		$html .= '<tr><td>' . esc_html( number_format( $lo, 2 ) . '–' . number_format( $top, 2 ) . ' mm' ) . '</td><td>' . esc_html( number_format( $lo / 25.4, 3 ) . '–' . number_format( $top / 25.4, 3 ) ) . '</td><td>' . rbs_us_link( $r['us'] ) . '</td><td>' . esc_html( $r['uk'] ) . '</td><td>' . esc_html( $d['eu'] ) . '</td></tr>';
 	}
 	return $html . '</tbody></table></div>';
 }

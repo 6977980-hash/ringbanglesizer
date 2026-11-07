@@ -162,32 +162,32 @@ HTML
 			'parent'     => 'ring-chart',
 			'title'      => 'Indian Ring Size Chart – Sizes in mm and US/UK',
 			'seo_title'  => 'Ring Size Chart India: Indian Sizes in mm, US and UK (2026)',
-			'seo_desc'   => 'Indian ring size chart from size 4 to 33 with inner diameter and circumference in mm and the nearest US and UK size. How Indian jewellers measure.',
+			'seo_desc'   => 'Indian ring size chart from size 4 to 35 with inner diameter and circumference in mm and the nearest US and UK size. How Indian jewellers measure.',
 			'mode'       => null,
 			'menu_order' => 4,
 			'content'    => <<<'HTML'
-<p><strong>Indian ring sizes are numbers from about 4 to 33; size 1 is a 13 mm ring and each number adds one third of a millimetre of inner diameter.</strong> Indian size 14 is 17.3 mm across, the same as US 7 and UK N½. Women in India mostly wear sizes 10 to 16 and men 18 to 24. Use the chart below or <a href="/">measure a ring on your phone</a> to get your Indian size in seconds.</p>
+<p><strong>Indian ring sizes are numbers from about 4 to 35, and each number is the ring's inner circumference minus 40 mm.</strong> Indian size 14 is 54 mm around (17.2 mm across), the same as US 7 and UK N½; size 22 is 62 mm around, the same as US 10. Women in India mostly wear sizes 11 to 17 and men 18 to 25. Use the chart below or <a href="/">measure a ring on your phone</a> to get your Indian size in seconds.</p>
 
 <h2>Indian ring size chart</h2>
 [rbs_india_ring_table]
-<p>Indian sizes are finer than US half sizes, so two neighbouring Indian numbers can map to the same US size (for example 18 and 19 are both close to US 8.5–9). When you convert, pick the US or UK size whose diameter is closest to your own ring.</p>
+<p>Indian numbers are finer than US half sizes (one number is 1 mm of circumference, a US half size about 1.3 mm), so two neighbouring Indian numbers can map to the same US size (for example 20 and 21 are both close to US 9–9.5). When you convert, pick the US or UK size whose diameter is closest to your own ring.</p>
 
 <h2>How the Indian ring size scale works</h2>
-<p>India uses the same numeric scale as Japan and China. It is defined by the inner diameter:</p>
+<p>The Indian scale, used by jewellers such as Tanishq and BlueStone and by local shops in Pakistan, is set by the inner circumference:</p>
 <ul>
-<li><strong>Diameter (mm) = 13 + (Indian size − 1) ÷ 3</strong></li>
-<li><strong>Indian size = (diameter − 13) × 3 + 1</strong>, rounded to the nearest whole number</li>
+<li><strong>Indian size = inner circumference (mm) − 40</strong>, rounded to the nearest whole number</li>
+<li><strong>Circumference (mm) = Indian size + 40</strong>, and diameter = circumference ÷ 3.1416</li>
 </ul>
-<p>So size 10 is 16.0 mm, size 16 is 18.0 mm and size 22 is 20.0 mm. Jewellers in India measure fingers with a metal ring-sizer set (a bunch of numbered rings) or a tapered stick called a ring mandrel, both marked with these numbers. A few traditional shops use their own sticks that can differ by one number, so when in doubt ask for the diameter in millimetres.</p>
+<p>So size 8 is 48 mm around (15.3 mm across), size 14 is 54 mm (17.2 mm), size 18 is 58 mm (18.5 mm) and size 22 is 62 mm (19.7–19.8 mm). Italy, Spain and Switzerland number rings the same way. The Japanese scale is different (it adds a size every third of a millimetre of diameter), so do not use a Japanese chart for Indian sizes. Jewellers in India measure fingers with a metal ring-sizer set (a bunch of numbered rings) or a tapered stick called a ring mandrel, both marked with these numbers. A few traditional shops use their own sticks that can differ by one number, so when in doubt ask for the diameter in millimetres.</p>
 
 <h2>Common sizes in India</h2>
 <table class="rbs-table">
 <thead><tr><th>Who</th><th>Typical Indian size</th><th>US</th><th>Diameter</th></tr></thead>
 <tbody>
-<tr><td>Women – ring finger</td><td>10 – 16</td><td>5.5 – 8</td><td>16.0 – 18.0 mm</td></tr>
-<tr><td>Women – most common</td><td>12 – 14</td><td>6 – 7</td><td>16.7 – 17.3 mm</td></tr>
-<tr><td>Men – ring finger</td><td>18 – 24</td><td>8.5 – 11</td><td>18.7 – 20.7 mm</td></tr>
-<tr><td>Men – most common</td><td>19 – 21</td><td>9 – 10</td><td>19.0 – 19.7 mm</td></tr>
+<tr><td>Women – ring finger</td><td>11 – 17</td><td>5.5 – 8</td><td>16.1 – 18.1 mm</td></tr>
+<tr><td>Women – most common</td><td>12 – 14</td><td>6 – 7</td><td>16.5 – 17.3 mm</td></tr>
+<tr><td>Men – ring finger</td><td>18 – 25</td><td>8.5 – 11</td><td>18.5 – 20.6 mm</td></tr>
+<tr><td>Men – most common</td><td>20 – 22</td><td>9 – 10</td><td>19.0 – 19.8 mm</td></tr>
 <tr><td>Toe rings (bichiya)</td><td>usually adjustable</td><td>–</td><td>–</td></tr>
 </tbody>
 </table>
@@ -221,11 +221,11 @@ HTML
 HTML
 			,
 			'faq' => array(
-				array( 'What is ring size 14 in India in mm?', 'Indian size 14 has an inner diameter of about 17.3 mm and an inner circumference of about 54.5 mm. It is the same as US 7 and UK N½.' ),
-				array( 'What is the common ring size for ladies in India?', 'Most women in India wear sizes 12 to 14 on the ring finger (US 6 to 7, 16.7 to 17.3 mm), within an overall range of about 10 to 16.' ),
-				array( 'What is the average ring size for men in India?', 'Most Indian men wear sizes 19 to 21 (US 9 to 10, about 19.0 to 19.7 mm), within a range of about 18 to 24.' ),
-				array( 'Is Indian ring size the same as US size?', 'No. Indian sizes are numbers on the Japanese scale, where each number is one third of a millimetre. Indian 14 is US 7, Indian 16 is about US 8 and Indian 19 is about US 9.' ),
-				array( 'How do I convert Indian ring size to mm?', 'Diameter in mm = 13 + (Indian size − 1) ÷ 3. For example size 16 is 13 + 15 ÷ 3 = 18.0 mm.' ),
+				array( 'What is ring size 14 in India in mm?', 'Indian size 14 has an inner circumference of about 54 mm and an inner diameter of about 17.2 mm. It is the same as US 7 and UK N½.' ),
+				array( 'What is the common ring size for ladies in India?', 'Most women in India wear sizes 12 to 14 on the ring finger (US 6 to 7, 16.5 to 17.3 mm), within an overall range of about 11 to 17.' ),
+				array( 'What is the average ring size for men in India?', 'Most Indian men wear sizes 20 to 22 (US 9 to 10, about 19.0 to 19.8 mm), within a range of about 18 to 25.' ),
+				array( 'Is Indian ring size the same as US size?', 'No. An Indian size is the inner circumference in mm minus 40. Indian 14 is US 7, Indian 17 is about US 8, Indian 20 is about US 9 and Indian 22 is US 10.' ),
+				array( 'How do I convert Indian ring size to mm?', 'Add 40 to get the inner circumference in mm, then divide by 3.1416 for the diameter. For example size 22 is 62 mm around and 19.7 mm across (US 10).' ),
 			),
 		),
 
@@ -245,21 +245,21 @@ HTML
 <table class="rbs-table">
 <thead><tr><th>US</th><th>UK</th><th>EU</th><th>India</th><th>Inner diameter</th><th>Circumference</th></tr></thead>
 <tbody>
-<tr><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>16</td><td>18.1 mm</td><td>56.9 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>17</td><td>18.1 mm</td><td>56.9 mm</td></tr>
 <tr><td>8.5</td><td>Q½</td><td>58</td><td>18</td><td>18.5 mm</td><td>58.1 mm</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-9/">9</a></td><td>R½</td><td>60</td><td>19</td><td>19.0 mm</td><td>59.7 mm</td></tr>
-<tr><td>9.5</td><td>S½</td><td>61</td><td>20</td><td>19.4 mm</td><td>60.9 mm</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-10/">10</a></td><td>T½</td><td>62</td><td>21</td><td>19.8 mm</td><td>62.2 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-9/">9</a></td><td>R½</td><td>60</td><td>20</td><td>19.0 mm</td><td>59.7 mm</td></tr>
+<tr><td>9.5</td><td>S½</td><td>61</td><td>21</td><td>19.4 mm</td><td>60.9 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-10/">10</a></td><td>T½</td><td>62</td><td>22</td><td>19.8 mm</td><td>62.2 mm</td></tr>
 <tr><td>10.5</td><td>U½</td><td>63</td><td>23</td><td>20.2 mm</td><td>63.5 mm</td></tr>
-<tr><td>11</td><td>V½</td><td>65</td><td>24</td><td>20.6 mm</td><td>64.7 mm</td></tr>
-<tr><td>11.5</td><td>W½</td><td>66</td><td>25</td><td>21.0 mm</td><td>66.0 mm</td></tr>
-<tr><td>12</td><td>X½</td><td>67</td><td>26</td><td>21.4 mm</td><td>67.2 mm</td></tr>
-<tr><td>12.5</td><td>Z</td><td>68</td><td>27</td><td>21.8 mm</td><td>68.5 mm</td></tr>
-<tr><td>13</td><td>Z+1</td><td>70</td><td>29</td><td>22.2 mm</td><td>69.7 mm</td></tr>
-<tr><td>13.5</td><td>Z+2</td><td>71</td><td>30</td><td>22.6 mm</td><td>71.0 mm</td></tr>
-<tr><td>14</td><td>Z+3</td><td>72</td><td>31</td><td>23.0 mm</td><td>72.3 mm</td></tr>
-<tr><td>14.5</td><td>Z+4</td><td>74</td><td>32</td><td>23.4 mm</td><td>73.5 mm</td></tr>
-<tr><td>15</td><td>Z+5</td><td>75</td><td>33</td><td>23.8 mm</td><td>74.8 mm</td></tr>
+<tr><td>11</td><td>V½</td><td>65</td><td>25</td><td>20.6 mm</td><td>64.7 mm</td></tr>
+<tr><td>11.5</td><td>W½</td><td>66</td><td>26</td><td>21.0 mm</td><td>66.0 mm</td></tr>
+<tr><td>12</td><td>X½</td><td>67</td><td>27</td><td>21.4 mm</td><td>67.2 mm</td></tr>
+<tr><td>12.5</td><td>Z</td><td>68</td><td>28</td><td>21.8 mm</td><td>68.5 mm</td></tr>
+<tr><td>13</td><td>Z+1</td><td>70</td><td>30</td><td>22.2 mm</td><td>69.7 mm</td></tr>
+<tr><td>13.5</td><td>Z+2</td><td>71</td><td>31</td><td>22.6 mm</td><td>71.0 mm</td></tr>
+<tr><td>14</td><td>Z+3</td><td>72</td><td>32</td><td>23.0 mm</td><td>72.3 mm</td></tr>
+<tr><td>14.5</td><td>Z+4</td><td>74</td><td>34</td><td>23.4 mm</td><td>73.5 mm</td></tr>
+<tr><td>15</td><td>Z+5</td><td>75</td><td>35</td><td>23.8 mm</td><td>74.8 mm</td></tr>
 </tbody>
 </table>
 <p>Smaller sizes (US 3 to 7.5) are in the full <a href="/ring-size-chart/">ring size chart</a>; some men wear them on the little finger.</p>
@@ -332,16 +332,16 @@ HTML
 <tr><td>4</td><td>H</td><td>47</td><td>7</td><td>14.9 mm</td><td>46.8 mm</td></tr>
 <tr><td>4.5</td><td>I</td><td>48</td><td>8</td><td>15.3 mm</td><td>48.1 mm</td></tr>
 <tr><td><a href="/ring-size-in-mm/size-5/">5</a></td><td>J½</td><td>49</td><td>9</td><td>15.7 mm</td><td>49.3 mm</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-5-5/">5.5</a></td><td>K½</td><td>51</td><td>10</td><td>16.1 mm</td><td>50.6 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-5-5/">5.5</a></td><td>K½</td><td>51</td><td>11</td><td>16.1 mm</td><td>50.6 mm</td></tr>
 <tr><td><a href="/ring-size-in-mm/size-6/">6</a></td><td>L½</td><td>52</td><td>12</td><td>16.5 mm</td><td>51.8 mm</td></tr>
 <tr><td><a href="/ring-size-in-mm/size-6-5/">6.5</a></td><td>M½</td><td>53</td><td>13</td><td>16.9 mm</td><td>53.1 mm</td></tr>
 <tr><td><a href="/ring-size-in-mm/size-7/">7</a></td><td>N½</td><td>54</td><td>14</td><td>17.3 mm</td><td>54.3 mm</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-7-5/">7.5</a></td><td>O½</td><td>56</td><td>15</td><td>17.7 mm</td><td>55.6 mm</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>16</td><td>18.1 mm</td><td>56.9 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-7-5/">7.5</a></td><td>O½</td><td>56</td><td>16</td><td>17.7 mm</td><td>55.6 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>17</td><td>18.1 mm</td><td>56.9 mm</td></tr>
 <tr><td>8.5</td><td>Q½</td><td>58</td><td>18</td><td>18.5 mm</td><td>58.1 mm</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-9/">9</a></td><td>R½</td><td>60</td><td>19</td><td>19.0 mm</td><td>59.7 mm</td></tr>
-<tr><td>9.5</td><td>S½</td><td>61</td><td>20</td><td>19.4 mm</td><td>60.9 mm</td></tr>
-<tr><td><a href="/ring-size-in-mm/size-10/">10</a></td><td>T½</td><td>62</td><td>21</td><td>19.8 mm</td><td>62.2 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-9/">9</a></td><td>R½</td><td>60</td><td>20</td><td>19.0 mm</td><td>59.7 mm</td></tr>
+<tr><td>9.5</td><td>S½</td><td>61</td><td>21</td><td>19.4 mm</td><td>60.9 mm</td></tr>
+<tr><td><a href="/ring-size-in-mm/size-10/">10</a></td><td>T½</td><td>62</td><td>22</td><td>19.8 mm</td><td>62.2 mm</td></tr>
 </tbody>
 </table>
 <p>Sizes 3 to 4.5 are mostly used for pinky rings, midi rings (worn above the knuckle) and teenagers. Larger sizes are in the <a href="/ring-size-chart/mens/">men's chart</a> and the full <a href="/ring-size-chart/">ring size chart</a>.</p>
@@ -407,12 +407,12 @@ HTML
 
 <h2>Average ring size in every system</h2>
 <table class="rbs-table">
-<thead><tr><th></th><th>US / Canada</th><th>UK / Australia</th><th>EU / ISO</th><th>India / Japan</th><th>Inner diameter</th></tr></thead>
+<thead><tr><th></th><th>US / Canada</th><th>UK / Australia</th><th>EU / ISO</th><th>India / Pakistan</th><th>Inner diameter</th></tr></thead>
 <tbody>
 <tr><td><strong>Women – average</strong></td><td><a href="/ring-size-in-mm/size-6/">6</a> – <a href="/ring-size-in-mm/size-7/">7</a></td><td>L½ – N½</td><td>52 – 54</td><td>12 – 14</td><td>16.5 – 17.3 mm</td></tr>
-<tr><td>Women – usual range</td><td>5 – 8</td><td>J½ – P½</td><td>49 – 57</td><td>9 – 16</td><td>15.7 – 18.1 mm</td></tr>
-<tr><td><strong>Men – average</strong></td><td><a href="/ring-size-in-mm/size-9/">9</a> – <a href="/ring-size-in-mm/size-10/">10</a></td><td>R½ – T½</td><td>60 – 62</td><td>19 – 21</td><td>19.0 – 19.8 mm</td></tr>
-<tr><td>Men – usual range</td><td>8 – 12</td><td>P½ – X½</td><td>57 – 67</td><td>16 – 26</td><td>18.1 – 21.4 mm</td></tr>
+<tr><td>Women – usual range</td><td>5 – 8</td><td>J½ – P½</td><td>49 – 57</td><td>9 – 17</td><td>15.7 – 18.1 mm</td></tr>
+<tr><td><strong>Men – average</strong></td><td><a href="/ring-size-in-mm/size-9/">9</a> – <a href="/ring-size-in-mm/size-10/">10</a></td><td>R½ – T½</td><td>60 – 62</td><td>20 – 22</td><td>19.0 – 19.8 mm</td></tr>
+<tr><td>Men – usual range</td><td>8 – 12</td><td>P½ – X½</td><td>57 – 67</td><td>17 – 27</td><td>18.1 – 21.4 mm</td></tr>
 </tbody>
 </table>
 <p>No official body publishes a national average, so these figures reflect what jewellers and sizing-kit makers commonly report, and they match the sizes stocked in the largest quantities. The full conversion for every size is in the <a href="/ring-size-chart/">ring size chart</a>.</p>
@@ -434,7 +434,7 @@ HTML
 <ul>
 <li><strong>United States and Canada:</strong> women 6–7, men 9–10. This is why shop sample rings are commonly made in these sizes.</li>
 <li><strong>United Kingdom and Australia:</strong> women L to N, men R to T – the same physical size range.</li>
-<li><strong>India and Pakistan:</strong> women 12–14, men 19–21 on the local number scale (see the <a href="/ring-size-chart/india/">Indian</a> and <a href="/ring-size-chart/pakistan/">Pakistan</a> charts).</li>
+<li><strong>India and Pakistan:</strong> women 12–14, men 20–22 on the local number scale (see the <a href="/ring-size-chart/india/">Indian</a> and <a href="/ring-size-chart/pakistan/">Pakistan</a> charts).</li>
 <li><strong>Europe:</strong> women 52–54, men 60–62 (inner circumference in mm).</li>
 </ul>
 <p>Average body size varies between countries, but the published charts of large jewellers in these regions overlap almost completely, so the same physical range applies.</p>

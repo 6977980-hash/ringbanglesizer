@@ -132,7 +132,7 @@ function rbs_ring_table_shortcode() {
 				<th>US / Canada</th>
 				<th>UK / Australia</th>
 				<th>EU / ISO</th>
-				<th>India / Japan</th>
+				<th>India / Pakistan</th>
 				<th>Diameter (mm)</th>
 				<th>Diameter (in)</th>
 				<th>Circumference (mm)</th>
@@ -144,7 +144,7 @@ function rbs_ring_table_shortcode() {
 				<td><?php echo esc_html( $r['us'] ); ?></td>
 				<td><?php echo esc_html( $r['uk'] ); ?></td>
 				<td><?php echo esc_html( $d['eu'] ); ?></td>
-				<td><?php echo esc_html( $d['jp'] ); ?></td>
+				<td><?php echo esc_html( $d['india'] ); ?></td>
 				<td><?php echo esc_html( number_format( $r['mm'], 1 ) ); ?></td>
 				<td><?php echo esc_html( number_format( $d['inch'], 2 ) ); ?></td>
 				<td><?php echo esc_html( number_format( $d['circ_mm'], 1 ) ); ?></td>
@@ -319,8 +319,8 @@ function rbs_ring_size_shortcode( $atts ) {
 		array( 'Inner circumference', esc_html( number_format( $d['circ_mm'], 1 ) . ' mm = ' . number_format( $d['circ_mm'] / 25.4, 2 ) . ' in' ) ),
 		array( 'UK / Australia', esc_html( $r['uk'] ) ),
 		array( 'EU / ISO / Germany', esc_html( $d['eu'] ) ),
-		array( 'India / Japan / China', esc_html( $d['jp'] ) ),
-		array( 'Switzerland', esc_html( $d['eu'] - 40 ) ),
+		array( 'India / Pakistan', esc_html( $d['india'] ) ),
+		array( 'Italy / Spain / Switzerland', esc_html( $d['eu'] - 40 ) ),
 	);
 	if ( $prev ) {
 		$rows[] = array( 'Half size smaller', '<a href="' . esc_url( rbs_ring_size_url( $prev['us'] ) ) . '">US ' . esc_html( $prev['us'] ) . '</a> (' . esc_html( number_format( $prev['mm'], 1 ) ) . ' mm)' );
@@ -381,15 +381,9 @@ add_shortcode( 'rbs_bangle_cm_table', 'rbs_bangle_cm_table_shortcode' );
  * [rbs_mm_lookup] – measured diameter (every 0.5 mm) → nearest ring size.
  */
 function rbs_mm_lookup_shortcode() {
-	$all  = rbs_ring_sizes();
 	$html = '<div class="rbs-table-wrap"><table class="rbs-table"><thead><tr><th>You measured (mm)</th><th>Circumference (mm)</th><th>Nearest US</th><th>Nearest UK</th><th>EU</th></tr></thead><tbody>';
 	for ( $mm = 14.0; $mm <= 23.01; $mm += 0.5 ) {
-		$best = $all[0];
-		foreach ( $all as $r ) {
-			if ( abs( $r['mm'] - $mm ) < abs( $best['mm'] - $mm ) ) {
-				$best = $r;
-			}
-		}
+		$best = rbs_nearest_ring( $mm );
 		$us = in_array( (float) $best['us'], array_map( 'floatval', rbs_ring_size_page_sizes() ), true )
 			? '<a href="' . esc_url( rbs_ring_size_url( $best['us'] ) ) . '">' . esc_html( $best['us'] ) . '</a>'
 			: esc_html( $best['us'] );

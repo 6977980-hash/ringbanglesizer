@@ -4,7 +4,7 @@
  *
  * [rbs_uk_ring_table]      – UK letters (whole and half) → US, mm, circumference, EU
  * [rbs_us_quarter_table]   – US sizes 3–13 in quarter steps with mm and inches
- * [rbs_india_ring_table]   – Indian / Japanese number sizes → mm, circumference, nearest US/UK
+ * [rbs_india_ring_table]   – Indian / Pakistani number sizes → mm, circumference, nearest US/UK
  * [rbs_embed_code]         – copy-paste iframe code for the widget + live preview
  *
  * Widget endpoint: /embed/ring/, /embed/bangle/, /embed/bracelet/
@@ -97,8 +97,8 @@ add_shortcode( 'rbs_us_quarter_table', 'rbs_us_quarter_table_shortcode' );
 
 function rbs_india_ring_table_shortcode() {
 	$html = '<div class="rbs-table-wrap"><table class="rbs-table"><thead><tr><th>Indian size</th><th>Inner diameter</th><th>Inner circumference</th><th>Nearest US</th><th>Nearest UK</th></tr></thead><tbody>';
-	for ( $n = 4; $n <= 33; $n++ ) {
-		$mm    = 13 + ( $n - 1 ) / 3;
+	for ( $n = 4; $n <= 35; $n++ ) {
+		$mm    = rbs_india_mm( $n );
 		$near  = rbs_nearest_ring( $mm );
 		$html .= '<tr><td><strong>' . esc_html( $n ) . '</strong></td><td>' . esc_html( number_format( $mm, 1 ) ) . ' mm</td><td>' . esc_html( number_format( $mm * M_PI, 1 ) ) . ' mm</td><td>' . rbs_us_link( $near['us'] ) . '</td><td>' . esc_html( $near['uk'] ) . '</td></tr>';
 	}
@@ -143,6 +143,7 @@ add_action( 'template_redirect', function () {
 
 	$data = array(
 		'rings'   => rbs_ring_rows_for_js(),
+		'uk'      => rbs_uk_rows_for_js(),
 		'bangles' => rbs_bangle_sizes(),
 		'home'    => untrailingslashit( home_url() ),
 	);

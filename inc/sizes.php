@@ -5,7 +5,8 @@
  *
  * Ring diameters follow ISO 8653 / common US jeweller charts.
  * UK letters are the usual US→UK mapping (half sizes shown with ½).
- * EU/ISO = inner circumference in mm. Japan/India numeric sizes derived from diameter.
+ * EU/ISO = inner circumference in mm. India (and Pakistan) numbers = inner circumference − 40 mm,
+ * the scale Tanishq and BlueStone print (India 22 = 19.8 mm).
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -77,9 +78,23 @@ function rbs_ring_derived( $mm ) {
 	return array(
 		'circ_mm' => round( $circ, 1 ),
 		'eu'      => (int) round( $circ ),            // EU / ISO size = circumference in mm
-		'jp'      => max( 1, (int) round( ( $mm - 13.0 ) * 3 + 1 ) ), // Japan / India numeric
+		'india'   => rbs_india_size( $mm ),           // India / Pakistan number
 		'inch'    => round( $mm / 25.4, 3 ),
 	);
+}
+
+/**
+ * Indian / Pakistani ring number for an inner diameter: circumference − 40 mm, rounded.
+ */
+function rbs_india_size( $mm ) {
+	return max( 1, (int) round( $mm * M_PI - 40 ) );
+}
+
+/**
+ * Inner diameter (mm) of Indian ring number $n.
+ */
+function rbs_india_mm( $n ) {
+	return ( $n + 40 ) / M_PI;
 }
 
 /**
@@ -95,8 +110,20 @@ function rbs_ring_rows_for_js() {
 			'mm'   => $r['mm'],
 			'circ' => $d['circ_mm'],
 			'eu'   => $d['eu'],
-			'jp'   => $d['jp'],
+			'india' => $d['india'],
 		);
 	}
 	return $rings;
+}
+
+/**
+ * UK letters (whole and half, F … Z) with their inner diameter, for the
+ * "Will it fit?" reader and the converter, so they match the UK chart.
+ */
+function rbs_uk_rows_for_js() {
+	$out = array();
+	foreach ( rbs_uk_ring_rows() as $r ) {
+		$out[] = array( 'uk' => $r['uk'], 'mm' => round( $r['mm'], 2 ) );
+	}
+	return $out;
 }

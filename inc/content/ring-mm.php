@@ -21,41 +21,41 @@ function rbs_ring_mm_pages() {
 			'mode'       => null,
 			'menu_order' => 1,
 			'content'    => '
-<p><strong>Most jewellers in Pakistan size rings with numbers from about 8 to 30, the same scale used in India and Japan, while online shops such as Daraz and international brands usually list US sizes.</strong> A Pakistani size 14 is about US 7 (17.3 mm), and size 19 is about US 9. Use the chart below to convert, or measure a ring on your phone with the <a href="/">online ring sizer</a>.</p>
+<p><strong>Most jewellers in Pakistan size rings with numbers from about 8 to 30, the same scale used in India (the inner circumference in mm minus 40), while online shops such as Daraz and international brands usually list US sizes.</strong> A Pakistani size 14 is about US 7 (17.3 mm), size 20 is about US 9 and size 22 is US 10. Use the chart below to convert, or measure a ring on your phone with the <a href="/">online ring sizer</a>.</p>
 
 <h2>Pakistan ring size chart</h2>
 <table class="rbs-table">
 <thead><tr><th>Local number size</th><th>US / Canada</th><th>UK</th><th>EU</th><th>Inner diameter</th><th>Circumference</th></tr></thead>
 <tbody>
 <tr><td>9</td><td><a href="/ring-size-in-mm/size-5/">5</a></td><td>J½</td><td>49</td><td>15.7 mm</td><td>49.3 mm</td></tr>
-<tr><td>10</td><td><a href="/ring-size-in-mm/size-5-5/">5.5</a></td><td>K½</td><td>51</td><td>16.1 mm</td><td>50.6 mm</td></tr>
+<tr><td>11</td><td><a href="/ring-size-in-mm/size-5-5/">5.5</a></td><td>K½</td><td>51</td><td>16.1 mm</td><td>50.6 mm</td></tr>
 <tr><td>12</td><td><a href="/ring-size-in-mm/size-6/">6</a></td><td>L½</td><td>52</td><td>16.5 mm</td><td>51.8 mm</td></tr>
 <tr><td>13</td><td><a href="/ring-size-in-mm/size-6-5/">6.5</a></td><td>M½</td><td>53</td><td>16.9 mm</td><td>53.1 mm</td></tr>
 <tr><td>14</td><td><a href="/ring-size-in-mm/size-7/">7</a></td><td>N½</td><td>54</td><td>17.3 mm</td><td>54.3 mm</td></tr>
-<tr><td>15</td><td><a href="/ring-size-in-mm/size-7-5/">7.5</a></td><td>O½</td><td>56</td><td>17.7 mm</td><td>55.6 mm</td></tr>
-<tr><td>16</td><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>18.1 mm</td><td>56.9 mm</td></tr>
+<tr><td>16</td><td><a href="/ring-size-in-mm/size-7-5/">7.5</a></td><td>O½</td><td>56</td><td>17.7 mm</td><td>55.6 mm</td></tr>
+<tr><td>17</td><td><a href="/ring-size-in-mm/size-8/">8</a></td><td>P½</td><td>57</td><td>18.1 mm</td><td>56.9 mm</td></tr>
 <tr><td>18</td><td>8.5</td><td>Q½</td><td>58</td><td>18.5 mm</td><td>58.1 mm</td></tr>
-<tr><td>19</td><td><a href="/ring-size-in-mm/size-9/">9</a></td><td>R½</td><td>60</td><td>19.0 mm</td><td>59.7 mm</td></tr>
-<tr><td>20</td><td>9.5</td><td>S½</td><td>61</td><td>19.4 mm</td><td>60.9 mm</td></tr>
-<tr><td>21</td><td><a href="/ring-size-in-mm/size-10/">10</a></td><td>T½</td><td>62</td><td>19.8 mm</td><td>62.2 mm</td></tr>
+<tr><td>20</td><td><a href="/ring-size-in-mm/size-9/">9</a></td><td>R½</td><td>60</td><td>19.0 mm</td><td>59.7 mm</td></tr>
+<tr><td>21</td><td>9.5</td><td>S½</td><td>61</td><td>19.4 mm</td><td>60.9 mm</td></tr>
+<tr><td>22</td><td><a href="/ring-size-in-mm/size-10/">10</a></td><td>T½</td><td>62</td><td>19.8 mm</td><td>62.2 mm</td></tr>
 <tr><td>23</td><td>10.5</td><td>U½</td><td>63</td><td>20.2 mm</td><td>63.5 mm</td></tr>
-<tr><td>24</td><td>11</td><td>V½</td><td>65</td><td>20.6 mm</td><td>64.7 mm</td></tr>
-<tr><td>25</td><td>11.5</td><td>W½</td><td>66</td><td>21.0 mm</td><td>66.0 mm</td></tr>
-<tr><td>26</td><td>12</td><td>X½</td><td>67</td><td>21.4 mm</td><td>67.2 mm</td></tr>
+<tr><td>25</td><td>11</td><td>V½</td><td>65</td><td>20.6 mm</td><td>64.7 mm</td></tr>
+<tr><td>26</td><td>11.5</td><td>W½</td><td>66</td><td>21.0 mm</td><td>66.0 mm</td></tr>
+<tr><td>27</td><td>12</td><td>X½</td><td>67</td><td>21.4 mm</td><td>67.2 mm</td></tr>
 </tbody>
 </table>
-<p>The local number scale starts at 1 for a 13 mm inner diameter and rises by one number for every third of a millimetre, so the numbers are finer than US half sizes. Some numbers (11, 17, 22) fall between two US half sizes; in that case pick the US size whose diameter is closest to your ring.</p>
+<p>The local number is the inner circumference in mm minus 40: size 14 is 54 mm around, size 22 is 62 mm. One number is 1 mm of circumference, a little finer than a US half size, so some numbers (10, 15, 19, 24) fall between two US half sizes; in that case pick the US size whose diameter is closest to your ring.</p>
 
 <h2>How ring sizes are used in Pakistan</h2>
 <ul>
-<li><strong>Local jewellers (sunar) in Lahore, Karachi, Rawalpindi and other cities</strong> mostly use a metal ring sizer stick (ungli ka naap) marked with numbers on the Indian/Japanese scale. Some older shops use their own sticks, which can differ by one number, so always confirm with a diameter in mm.</li>
+<li><strong>Local jewellers (sunar) in Lahore, Karachi, Rawalpindi and other cities</strong> mostly use a metal ring sizer stick (ungli ka naap) marked with numbers on the Indian scale. Some older shops use their own sticks, which can differ by one number, so always confirm with a diameter in mm.</li>
 <li><strong>Daraz and most online stores</strong> list US sizes (6, 7, 8…) and sometimes "free size" adjustable rings.</li>
 <li><strong>Imported brands and UK-based sellers</strong> use UK letters (L, N, P…).</li>
 <li><strong>Gold rings bought in the Gulf</strong> (Dubai, Saudi Arabia) are usually sized in EU numbers or US sizes.</li>
 </ul>
 
 <h2>Typical ring sizes in Pakistan</h2>
-<p>For women, local sizes 12–15 (US 6–7.5) are the most common for the ring finger. Men usually wear 19–23 (US 9–10.5). Engagement rings for brides are often bought a size smaller than everyday rings because hands swell on a hot wedding day and shrink again afterwards; jewellers generally advise buying the exact size and resizing later if needed. These are averages only: measure the actual finger.</p>
+<p>For women, local sizes 12–16 (US 6–7.5) are the most common for the ring finger. Men usually wear 20–23 (US 9–10.5). Engagement rings for brides are often bought a size smaller than everyday rings because hands swell on a hot wedding day and shrink again afterwards; jewellers generally advise buying the exact size and resizing later if needed. These are averages only: measure the actual finger.</p>
 
 <h2>How to find your ring size at home</h2>
 <ol>
@@ -68,11 +68,11 @@ function rbs_ring_mm_pages() {
 [rbs_cta mode="ring"]
 ',
 			'faq' => array(
-				array( 'What ring size system is used in Pakistan?', 'Most local jewellers use a number scale (about 8 to 30) that matches the Indian and Japanese system. Online shops such as Daraz usually list US sizes.' ),
+				array( 'What ring size system is used in Pakistan?', 'Most local jewellers use a number scale (about 8 to 30) that matches the Indian system: the inner circumference in mm minus 40. Online shops such as Daraz usually list US sizes.' ),
 				array( 'What is size 14 ring in Pakistan in US size?', 'Local size 14 is about US 7, an inner diameter of 17.3 mm and UK N½.' ),
-				array( 'What is the common ring size for women in Pakistan?', 'Local sizes 12 to 15 (US 6 to 7.5, 16.5 to 17.7 mm) are the most common for a woman\'s ring finger.' ),
+				array( 'What is the common ring size for women in Pakistan?', 'Local sizes 12 to 16 (US 6 to 7.5, 16.5 to 17.7 mm) are the most common for a woman\'s ring finger.' ),
 				array( 'Can I use my CNIC to calibrate the ring sizer?', 'Yes. The CNIC is the same ID-1 card size as a bank card, 85.6 mm wide, so it works for calibration.' ),
-				array( 'What ring size do men wear in Pakistan?', 'Most men wear local sizes 19 to 23, which is about US 9 to 10.5 (19.0 to 20.2 mm).' ),
+				array( 'What ring size do men wear in Pakistan?', 'Most men wear local sizes 20 to 23, which is about US 9 to 10.5 (19.0 to 20.2 mm).' ),
 			),
 		),
 
@@ -168,7 +168,7 @@ function rbs_ring_mm_pages() {
 			'mode'       => null,
 			'menu_order' => 1,
 			'content'    => '
-<p><strong>A US size 5 ring has an inner diameter of 15.7 mm (0.62 inches) and an inner circumference of 49.3 mm.</strong> It is UK size J½, EU 49 and India/Japan 9. Size 5 is a petite women\'s size. Check whether it fits by matching a ring on screen with the <a href="/">online ring sizer</a>.</p>
+<p><strong>A US size 5 ring has an inner diameter of 15.7 mm (0.62 inches) and an inner circumference of 49.3 mm.</strong> It is UK size J½, EU 49 and India 9. Size 5 is a petite women\'s size. Check whether it fits by matching a ring on screen with the <a href="/">online ring sizer</a>.</p>
 
 [rbs_ring_size us="5"]
 
@@ -190,7 +190,7 @@ function rbs_ring_mm_pages() {
 <p>If your measurement is between 5 and 5.5, a thin band can be bought in size 5 and a wide band in <a href="/ring-size-in-mm/size-5-5/">5.5</a>.</p>
 
 <h2>Size 5 in other countries</h2>
-<p>In the UK, Australia and Ireland a US 5 is J½. In Germany, France and most of Europe it is size 49 (the circumference in mm) and in Switzerland 9. In India, Pakistan and Japan it is number 9. When ordering from a shop in another country, compare the inner diameter rather than the size label: 15.7 mm is the same everywhere.</p>
+<p>In the UK, Australia and Ireland a US 5 is J½. In Germany, France and most of Europe it is size 49 (the circumference in mm) and in Switzerland 9. In India and Pakistan it is number 9. When ordering from a shop in another country, compare the inner diameter rather than the size label: 15.7 mm is the same everywhere.</p>
 
 <h2>Size 5 compared with neighbouring sizes</h2>
 <p>US 4.5 (15.3 mm) is the half size below, and <a href="/ring-size-in-mm/size-5-5/">US 5.5</a> (16.1 mm) the half size above. Each half size changes the diameter by 0.4 mm and the circumference by about 1.3 mm. That is a small difference on paper, but enough to make a ring either spin or stick at the knuckle, so it is worth measuring carefully rather than guessing.</p>
@@ -225,7 +225,7 @@ function rbs_ring_mm_pages() {
 			'mode'       => null,
 			'menu_order' => 2,
 			'content'    => '
-<p><strong>A US size 5.5 ring measures 16.1 mm across the inside (0.63 inches) and 50.6 mm around.</strong> It equals UK K½, EU 51 and India/Japan 10. It is a small women\'s size, half a size above 5. You can confirm your size in 30 seconds with the <a href="/">ring sizer</a>.</p>
+<p><strong>A US size 5.5 ring measures 16.1 mm across the inside (0.63 inches) and 50.6 mm around.</strong> It equals UK K½, EU 51 and India 11. It is a small women\'s size, half a size above 5. You can confirm your size in 30 seconds with the <a href="/">ring sizer</a>.</p>
 
 [rbs_ring_size us="5.5"]
 
@@ -288,7 +288,7 @@ function rbs_ring_mm_pages() {
 			'mode'       => null,
 			'menu_order' => 3,
 			'content'    => '
-<p><strong>A US size 6 ring has an inner diameter of 16.5 mm (0.65 inches) and an inner circumference of 51.8 mm.</strong> It is UK L½, EU 52 and India/Japan 12. Size 6 is one of the most common women\'s ring sizes and the size many jewellers use for sample rings. Find out if you are a 6 with the <a href="/">online ring sizer</a>.</p>
+<p><strong>A US size 6 ring has an inner diameter of 16.5 mm (0.65 inches) and an inner circumference of 51.8 mm.</strong> It is UK L½, EU 52 and India 12. Size 6 is one of the most common women\'s ring sizes and the size many jewellers use for sample rings. Find out if you are a 6 with the <a href="/">online ring sizer</a>.</p>
 
 [rbs_ring_size us="6"]
 
@@ -314,8 +314,8 @@ function rbs_ring_mm_pages() {
 <ul>
 <li>UK / Australia / New Zealand: L½</li>
 <li>Germany / France / EU: 52</li>
-<li>Switzerland: 12</li>
-<li>India / Pakistan / Japan / China: 12</li>
+<li>Italy / Spain / Switzerland: 12</li>
+<li>India / Pakistan: 12</li>
 </ul>
 <p>Some charts list US 6 as UK L and others as L½. The exact value depends on rounding; by diameter, 16.5 mm sits slightly closer to L½.</p>
 
@@ -334,7 +334,7 @@ function rbs_ring_mm_pages() {
 				array( 'What is US size 6 ring in UK?', 'US 6 is UK L½ (some charts round it to L).' ),
 				array( 'Is size 6 ring small or average?', 'Size 6 is an average women\'s ring size; most women wear between 6 and 7.' ),
 				array( 'What is size 6 ring in inches?', '0.65 inches in inner diameter and about 2.04 inches around the inside.' ),
-				array( 'What is a size 6 ring in India?', 'A US 6 ring is about size 12 on the Indian and Japanese scale.' ),
+				array( 'What is a size 6 ring in India?', 'A US 6 ring is size 12 on the Indian scale (about 52 mm around).' ),
 			),
 		),
 
@@ -348,7 +348,7 @@ function rbs_ring_mm_pages() {
 			'mode'       => null,
 			'menu_order' => 4,
 			'content'    => '
-<p><strong>A US size 6.5 ring is 16.9 mm in inner diameter (0.67 inches) and 53.1 mm in inner circumference.</strong> It is UK M½, EU 53 and India/Japan 13. Size 6.5 sits right in the middle of the most common women\'s range. Check your fit with the free <a href="/">online ring sizer</a>.</p>
+<p><strong>A US size 6.5 ring is 16.9 mm in inner diameter (0.67 inches) and 53.1 mm in inner circumference.</strong> It is UK M½, EU 53 and India 13. Size 6.5 sits right in the middle of the most common women\'s range. Check your fit with the free <a href="/">online ring sizer</a>.</p>
 
 [rbs_ring_size us="6.5"]
 
@@ -377,8 +377,8 @@ function rbs_ring_mm_pages() {
 <ul>
 <li>UK and Australia: M½</li>
 <li>EU / ISO: 53</li>
-<li>Switzerland: 13</li>
-<li>India, Pakistan, Japan: 13</li>
+<li>Italy / Spain / Switzerland: 13</li>
+<li>India, Pakistan: 13</li>
 </ul>
 
 <h2>Resizing to or from 6.5</h2>
@@ -410,7 +410,7 @@ function rbs_ring_mm_pages() {
 			'mode'       => null,
 			'menu_order' => 5,
 			'content'    => '
-<p><strong>A US size 7 ring has an inner diameter of 17.3 mm (0.68 inches) and an inner circumference of 54.3 mm.</strong> It is UK N½, EU 54 and India/Japan 14. Size 7 is one of the most common women\'s ring sizes and a common pinky size for men. Measure your ring on screen with the <a href="/">online ring sizer</a> to confirm.</p>
+<p><strong>A US size 7 ring has an inner diameter of 17.3 mm (0.68 inches) and an inner circumference of 54.3 mm.</strong> It is UK N½, EU 54 and India 14. Size 7 is one of the most common women\'s ring sizes and a common pinky size for men. Measure your ring on screen with the <a href="/">online ring sizer</a> to confirm.</p>
 
 [rbs_ring_size us="7"]
 
@@ -437,8 +437,8 @@ function rbs_ring_mm_pages() {
 <tbody>
 <tr><td>UK, Ireland, Australia, NZ</td><td>N½ (some charts say O)</td></tr>
 <tr><td>EU, Germany, France, ISO</td><td>54</td></tr>
-<tr><td>Switzerland</td><td>14</td></tr>
-<tr><td>India, Pakistan, Japan, China</td><td>14</td></tr>
+<tr><td>Italy / Spain / Switzerland</td><td>14</td></tr>
+<tr><td>India, Pakistan</td><td>14</td></tr>
 </tbody>
 </table>
 
@@ -464,7 +464,7 @@ function rbs_ring_mm_pages() {
 				array( 'What is size 7 ring in UK?', 'US 7 is UK N½. Some charts round it to O.' ),
 				array( 'Is ring size 7 big for a woman?', 'No. Size 7 is within the most common women\'s range of 6 to 7.' ),
 				array( 'What is size 7 ring in inches?', 'About 0.68 inches in inner diameter and 2.14 inches around the inside.' ),
-				array( 'What is US size 7 ring in India?', 'About size 14 on the Indian and Japanese scale.' ),
+				array( 'What is US size 7 ring in India?', 'Size 14 on the Indian scale (about 54 mm around).' ),
 			),
 		),
 
@@ -474,11 +474,11 @@ function rbs_ring_mm_pages() {
 			'parent'     => 'ring-mm',
 			'title'      => 'Size 7.5 Ring in mm – Diameter 17.7 mm',
 			'seo_title'  => 'Size 7.5 Ring in mm: 17.7 mm Diameter, UK O½, EU 56',
-			'seo_desc'   => 'A US size 7.5 ring is 17.7 mm in inner diameter and 55.6 mm around. UK O½, EU 56, India 15. Who wears 7.5 and how to measure for it.',
+			'seo_desc'   => 'A US size 7.5 ring is 17.7 mm in inner diameter and 55.6 mm around. UK O½, EU 56, India 16. Who wears 7.5 and how to measure for it.',
 			'mode'       => null,
 			'menu_order' => 6,
 			'content'    => '
-<p><strong>A US size 7.5 ring measures 17.7 mm across the inside (0.70 inches) and 55.6 mm around.</strong> It equals UK O½, EU 56 and India/Japan 15. Size 7.5 is a larger women\'s size and a smaller men\'s size. Use the <a href="/">online ring sizer</a> to see if it is yours.</p>
+<p><strong>A US size 7.5 ring measures 17.7 mm across the inside (0.70 inches) and 55.6 mm around.</strong> It equals UK O½, EU 56 and India 16. Size 7.5 is a larger women\'s size and a smaller men\'s size. Use the <a href="/">online ring sizer</a> to see if it is yours.</p>
 
 [rbs_ring_size us="7.5"]
 
@@ -516,8 +516,8 @@ function rbs_ring_mm_pages() {
 <ul>
 <li>UK / Australia: O½</li>
 <li>EU / ISO: 56 (55.6 mm rounds up)</li>
-<li>Switzerland: 16</li>
-<li>India / Pakistan / Japan: 15</li>
+<li>Italy / Spain / Switzerland: 16</li>
+<li>India / Pakistan: 16</li>
 </ul>
 
 <h2>Buying 7.5</h2>
@@ -545,11 +545,11 @@ function rbs_ring_mm_pages() {
 			'parent'     => 'ring-mm',
 			'title'      => 'Size 8 Ring in mm – Diameter 18.1 mm',
 			'seo_title'  => 'Size 8 Ring in mm: 18.1 mm Diameter, 56.9 mm Circumference',
-			'seo_desc'   => 'A US size 8 ring is 18.1 mm in inner diameter and 56.9 mm around: UK P½, EU 57, India 16. Who wears size 8 and how to measure at home.',
+			'seo_desc'   => 'A US size 8 ring is 18.1 mm in inner diameter and 56.9 mm around: UK P½, EU 57, India 17. Who wears size 8 and how to measure at home.',
 			'mode'       => null,
 			'menu_order' => 7,
 			'content'    => '
-<p><strong>A US size 8 ring has an inner diameter of 18.1 mm (0.71 inches) and an inner circumference of 56.9 mm.</strong> It is UK P½, EU 57 and India/Japan 16. Size 8 is a large women\'s size and a common smaller men\'s size. Check it on screen with the <a href="/">online ring sizer</a>.</p>
+<p><strong>A US size 8 ring has an inner diameter of 18.1 mm (0.71 inches) and an inner circumference of 56.9 mm.</strong> It is UK P½, EU 57 and India 17. Size 8 is a large women\'s size and a common smaller men\'s size. Check it on screen with the <a href="/">online ring sizer</a>.</p>
 
 [rbs_ring_size us="8"]
 
@@ -576,8 +576,8 @@ function rbs_ring_mm_pages() {
 <tbody>
 <tr><td>UK / Australia</td><td>P½</td></tr>
 <tr><td>EU / ISO</td><td>57</td></tr>
-<tr><td>Switzerland</td><td>17</td></tr>
-<tr><td>India / Pakistan / Japan</td><td>16</td></tr>
+<tr><td>Italy / Spain / Switzerland</td><td>17</td></tr>
+<tr><td>India / Pakistan</td><td>17</td></tr>
 <tr><td>Inner diameter</td><td>18.1 mm / 0.71 in</td></tr>
 </tbody>
 </table>
@@ -614,11 +614,11 @@ function rbs_ring_mm_pages() {
 			'parent'     => 'ring-mm',
 			'title'      => 'Size 9 Ring in mm – Diameter 19 mm',
 			'seo_title'  => 'Size 9 Ring in mm: 19.0 mm Diameter, 59.7 mm Circumference',
-			'seo_desc'   => 'A US size 9 ring is 19.0 mm in inner diameter and 59.7 mm around: UK R½, EU 60, India 19. A common men\'s size; how to measure and choose band width.',
+			'seo_desc'   => 'A US size 9 ring is 19.0 mm in inner diameter and 59.7 mm around: UK R½, EU 60, India 20. A common men\'s size; how to measure and choose band width.',
 			'mode'       => null,
 			'menu_order' => 8,
 			'content'    => '
-<p><strong>A US size 9 ring has an inner diameter of 19.0 mm (0.75 inches) and an inner circumference of 59.7 mm.</strong> It is UK R½, EU 60 and India/Japan 19. Size 9 is one of the most common men\'s ring sizes. Measure a ring you own on screen with the <a href="/">online ring sizer</a> to confirm.</p>
+<p><strong>A US size 9 ring has an inner diameter of 19.0 mm (0.75 inches) and an inner circumference of 59.7 mm.</strong> It is UK R½, EU 60 and India 20. Size 9 is one of the most common men\'s ring sizes. Measure a ring you own on screen with the <a href="/">online ring sizer</a> to confirm.</p>
 
 [rbs_ring_size us="9"]
 
@@ -649,8 +649,8 @@ function rbs_ring_mm_pages() {
 <ul>
 <li>UK / Australia: R½</li>
 <li>EU / ISO: 60 (59.7 mm rounded)</li>
-<li>Switzerland: 20</li>
-<li>India / Pakistan / Japan: 19</li>
+<li>Italy / Spain / Switzerland: 20</li>
+<li>India / Pakistan: 20</li>
 </ul>
 
 <h2>9 vs 8 vs 10</h2>
@@ -671,7 +671,7 @@ function rbs_ring_mm_pages() {
 				array( 'What is size 9 ring in UK?', 'US 9 is UK R½.' ),
 				array( 'Is size 9 a common men\'s ring size?', 'Yes. Most men wear between 9 and 10 on the ring finger.' ),
 				array( 'What is size 9 ring in inches?', 'Exactly ¾ inch (0.75 in) in inner diameter and about 2.35 inches around.' ),
-				array( 'What is a size 9 ring in India?', 'About size 19 on the Indian and Japanese scale.' ),
+				array( 'What is a size 9 ring in India?', 'Size 20 on the Indian scale (about 60 mm around).' ),
 			),
 		),
 
@@ -681,11 +681,11 @@ function rbs_ring_mm_pages() {
 			'parent'     => 'ring-mm',
 			'title'      => 'Size 10 Ring in mm – Diameter 19.8 mm',
 			'seo_title'  => 'Size 10 Ring in mm: 19.8 mm Diameter, 62.2 mm Circumference',
-			'seo_desc'   => 'A US size 10 ring is 19.8 mm in inner diameter and 62.2 mm around: UK T½, EU 62, India 21. Who wears size 10 and how to check it at home.',
+			'seo_desc'   => 'A US size 10 ring is 19.8 mm in inner diameter and 62.2 mm around: UK T½, EU 62, India 22. Who wears size 10 and how to check it at home.',
 			'mode'       => null,
 			'menu_order' => 9,
 			'content'    => '
-<p><strong>A US size 10 ring has an inner diameter of 19.8 mm (0.78 inches) and an inner circumference of 62.2 mm.</strong> It is UK T½, EU 62 and India/Japan 21. Size 10 is a common men\'s ring size and the upper end of the average men\'s range. Confirm your size on screen with the <a href="/">online ring sizer</a>.</p>
+<p><strong>A US size 10 ring has an inner diameter of 19.8 mm (0.78 inches) and an inner circumference of 62.2 mm.</strong> It is UK T½, EU 62 and India 22. Size 10 is a common men\'s ring size and the upper end of the average men\'s range. Confirm your size on screen with the <a href="/">online ring sizer</a>.</p>
 
 [rbs_ring_size us="10"]
 
@@ -712,8 +712,8 @@ function rbs_ring_mm_pages() {
 <tbody>
 <tr><td>UK / Australia</td><td>T½</td></tr>
 <tr><td>EU / ISO</td><td>62</td></tr>
-<tr><td>Switzerland</td><td>22</td></tr>
-<tr><td>India / Pakistan / Japan</td><td>21</td></tr>
+<tr><td>Italy / Spain / Switzerland</td><td>22</td></tr>
+<tr><td>India / Pakistan</td><td>22</td></tr>
 <tr><td>Inner diameter</td><td>19.8 mm / 0.78 in</td></tr>
 </tbody>
 </table>
