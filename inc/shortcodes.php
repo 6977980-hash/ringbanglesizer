@@ -58,7 +58,7 @@ function rbs_sizer_shortcode( $atts ) {
 		<div class="rbs-body rbs-pending">
 			<p class="rbs-loading">Loading sizer…</p>
 		</div>
-		<p class="rbs-trust">Free · No sign-up · Works on any phone · Your measurements stay on your device · <a href="<?php echo esc_url( home_url( '/how-we-measure/#5-how-accurate-is-it' ) ); ?>">How accurate is it?</a></p>
+		<p class="rbs-trust">Free · No sign-up · Works on any phone · No photos or personal details needed · <a href="<?php echo esc_url( home_url( '/how-we-measure/#5-how-accurate-is-it' ) ); ?>">How accurate is it?</a></p>
 	</div>
 	<?php
 	if ( $side ) {
