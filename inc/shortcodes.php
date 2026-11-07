@@ -53,7 +53,9 @@ function rbs_sizer_shortcode( $atts ) {
 			<button type="button" class="rbs-tab" data-tab="bangle" role="tab"><?php echo rbs_tab_icon( 'bangle' ); // phpcs:ignore ?>Bangle</button>
 			<button type="button" class="rbs-tab" data-tab="bracelet" role="tab"><?php echo rbs_tab_icon( 'bracelet' ); // phpcs:ignore ?>Bracelet</button>
 		</div>
-		<div class="rbs-body">
+		<?php // Server-rendered steps + reserved body height (rbs-pending, sizer.css) so the tool does not push the page down when sizer.js fills it (audit F-P01). ?>
+		<ol class="rbs-steps<?php echo 'bracelet' === $mode ? ' rbs-hidden' : ''; ?>"><li class="current" aria-current="step">Calibrate</li><li>Match</li><li>Your size</li></ol>
+		<div class="rbs-body rbs-pending">
 			<p class="rbs-loading">Loading sizer…</p>
 		</div>
 		<p class="rbs-trust">Free · No sign-up · Works on any phone · Your measurements stay on your device · <a href="<?php echo esc_url( home_url( '/how-we-measure/#5-how-accurate-is-it' ) ); ?>">How accurate is it?</a></p>

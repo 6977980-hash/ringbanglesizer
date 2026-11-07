@@ -254,6 +254,22 @@
 
 .rbs-hidden { display: none !important; }
 
+/* Reserved height while sizer.js draws the tool (audit F-P01, CLS). Values sit a little under the drawn,
+   uncalibrated height measured on the live site at 320–1920 px, so the class can be dropped without a jump.
+   Re-measure if the tool grows or shrinks a lot. Only when scripts run, so no-JS visitors get no blank box. */
+@media (scripting: enabled) {
+	.rbs[data-mode="ring"] .rbs-pending { min-height: 1750px; }
+	.rbs[data-mode="ring"][data-method="mm"] .rbs-pending { min-height: 1400px; }
+	.rbs[data-mode="bangle"] .rbs-pending { min-height: 2000px; }
+	.rbs[data-mode="bracelet"] .rbs-pending { min-height: 500px; }
+}
+@media (scripting: enabled) and (min-width: 600px) {
+	.rbs[data-mode="ring"] .rbs-pending { min-height: 1600px; }
+	.rbs[data-mode="ring"][data-method="mm"] .rbs-pending { min-height: 1300px; }
+	.rbs[data-mode="bangle"] .rbs-pending { min-height: 1700px; }
+	.rbs[data-mode="bracelet"] .rbs-pending { min-height: 460px; }
+}
+
 .rbs-note {
 	font-size: 13px;
 	color: var(--rbs-muted);
