@@ -101,7 +101,7 @@ HTML
 [rbs_ring_converter]
 
 <h2>Ring size conversion chart</h2>
-<p>The same data as the converter, for every size from US 3 to 15. Diameters follow ISO 8653.</p>
+<p>The same data as the converter, for every size from US 3 to 15. Sizes follow ISO 8653, which defines a ring size by its inner circumference; the inner diameter is shown alongside.</p>
 [rbs_ring_table]
 
 <h2>Most searched conversions</h2>
@@ -215,7 +215,7 @@ HTML
 </ul>
 
 <h2>Prefer not to print?</h2>
-<p>You can do the same thing on your phone: the <a href="/">online ring sizer</a> draws true-size circles after a one-time card calibration. If you already have a measurement, the <a href="/ring-size-calculator/">ring size calculator</a> converts it directly, and the step-by-step guide on <a href="/how-to-measure-ring-size-at-home/">how to measure ring size at home</a> compares every method.</p>
+<p>You can do the same thing on your phone: the <a href="/">online ring sizer</a> draws true-size circles after a one-time card calibration. If you already have a measurement, the <a href="/ring-size-calculator/">ring size calculator</a> converts it directly, and the step-by-step guide on <a href="/how-to-measure-ring-size-at-home/">how to measure ring size at home</a> compares every method. Sizing a bangle too? Use the <a href="/printable-bangle-sizer/">printable bangle sizer</a>.</p>
 HTML
 			,
 			'faq'        => array(

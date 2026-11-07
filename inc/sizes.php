@@ -3,7 +3,8 @@
  * Single source of truth for size data.
  * Used by the PHP table shortcodes (SEO, server-rendered) and passed to sizer.js.
  *
- * Ring diameters follow ISO 8653 / common US jeweller charts.
+ * Inner diameters for each size, matching ISO 8653 (which defines size by inner
+ * circumference) and common US jeweller charts.
  * UK letters are the usual US→UK mapping (half sizes shown with ½).
  * EU/ISO = inner circumference in mm. India (and Pakistan) numbers = inner circumference − 40 mm,
  * the scale Tanishq and BlueStone print (India 22 = 19.8 mm).

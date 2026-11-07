@@ -159,6 +159,7 @@ function rbs_footer_columns() {
 			'/bangle-size-chart/in-cm/'   => 'Bangle size in cm',
 			'/kids-bangle-size-chart/'    => 'Kids bangle sizes',
 			'/how-to-measure-bangle-size/' => 'How to measure bangle size',
+			'/printable-bangle-sizer/'    => 'Printable bangle sizer',
 			'/bracelet-size-calculator/'  => 'Bracelet size calculator',
 			'/wrist-size-chart/'          => 'Wrist size chart',
 		),
@@ -173,7 +174,7 @@ function rbs_footer_columns() {
 	);
 	$html  = '<div class="rbs-footer"><div class="rbs-footer-in">';
 	$html .= '<div class="rbs-fcol rbs-fabout"><a class="rbs-flogo" href="' . esc_url( home_url( '/' ) ) . '">' . rbs_logo_svg( 28 ) . '<span class="rbs-wordmark">Ring Bangle <span>Sizer</span></span></a>';
-	$html .= '<p>Free on-screen sizers for rings, bangles and bracelets. Sizes follow ISO 8653 and the Indian bangle system, and nothing you measure leaves your phone.</p>';
+	$html .= '<p>Free on-screen sizers for rings, bangles and bracelets. Sizes follow ISO 8653 and the Indian bangle system. Sizing runs in your browser: photos, names and calibration stay on your phone, and only the final size is counted anonymously (see our <a href="' . esc_url( home_url( '/privacy-policy/' ) ) . '">privacy policy</a>).</p>';
 	$html .= '<p>Made by <a href="' . esc_url( home_url( '/about/' ) ) . '">' . esc_html( RBS_FOUNDER_NAME ) . '</a> · ' . rbs_email_shortcode() . '</p></div>';
 	foreach ( $cols as $title => $links ) {
 		$html .= '<details class="rbs-fcol" open><summary>' . esc_html( $title ) . '</summary><ul>';
@@ -230,6 +231,7 @@ function rbs_tool_card_info() {
 		'/bangle-size-calculator/'           => array( 'bangle', 'Bangle size calculator', 'Indian sizes 1.10 to 3.4 on screen' ),
 		'/bangle-size-chart/'                => array( 'chart', 'Bangle size chart', 'Diameter in inches, mm and cm' ),
 		'/how-to-measure-bangle-size/'       => array( 'guide', 'Measure bangle size', 'With a string or an old bangle' ),
+		'/printable-bangle-sizer/'           => array( 'print', 'Printable bangle sizer', 'Free PDF, sizes 1.10 to 3.4' ),
 		'/bracelet-size-calculator/'         => array( 'bracelet', 'Bracelet size calculator', 'Length from your wrist size' ),
 		'/wrist-size-chart/'                 => array( 'chart', 'Wrist size chart', 'Bracelet length for every wrist' ),
 	);

@@ -70,7 +70,7 @@ function rbs_page_source_keys( $id ) {
 	if ( $is_bangle ) {
 		$keys[] = 'bangle';
 	}
-	if ( $mode || in_array( $key, array( 'home', 'printable', 'method' ), true ) ) {
+	if ( $mode || in_array( $key, array( 'home', 'printable', 'bangle-printable', 'method' ), true ) ) {
 		$keys[] = 'iso7810';
 	}
 	if ( $keys || in_array( $key, array( 'bracelet', 'wrist-chart' ), true ) ) {
@@ -121,7 +121,7 @@ function rbs_page_citations( $id ) {
  * Which llms.txt section a page belongs to.
  */
 function rbs_llms_section( $key, $p ) {
-	if ( ! empty( $p['mode'] ) || in_array( $key, array( 'ring-calc', 'ring-converter', 'printable' ), true ) ) {
+	if ( ! empty( $p['mode'] ) || in_array( $key, array( 'ring-calc', 'ring-converter', 'printable', 'bangle-printable' ), true ) ) {
 		return 'Tools';
 	}
 	if ( 0 === strpos( $key, 'blog' ) ) {

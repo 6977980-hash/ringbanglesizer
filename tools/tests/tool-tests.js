@@ -113,6 +113,21 @@ function rec(tool, cse, expect, shown, pass) { results.push({ tool, cse, expect,
   { const rows = await page.$$eval('.rbs-g-out tbody tr td:nth-child(2)', t => t.map(r => r.textContent)); rec('Kids growth', 'age 10, now 2.4', '2.4,2.4,2.6,2.6', rows.join(','), rows.join(',') === '2.4,2.4,2.6,2.6'); }
   // coin list
   { const c = await page.$$eval(`${R} .rbs-coin-sel option`, o => o.map(x => x.textContent).join('|')); rec('Calibration', 'UK coin', '10p 24.5 mm, no £1', c.match(/UK[^|]*/)[0], /UK 10p coin – 24.5 mm/.test(c) && !/£1/.test(c)); }
+  // saved sizes per finger
+  await page.click(`${R} .rbs-method[data-m="mm"]`);
+  await page.selectOption(`${R} .rbs-mm-type`, 'd'); await page.fill(`${R} .rbs-mm-val`, '17.3');
+  await page.fill(`${R} .rbs-name`, 'Me');
+  await page.selectOption(`${R} .rbs-finger`, 'L-ring'); await page.click(`${R} .rbs-save`);
+  await page.fill(`${R} .rbs-mm-val`, '18.1');
+  { const f = await page.inputValue(`${R} .rbs-finger`); rec('Saved sizes', 'finger kept on new result', 'R-index → L-ring kept', f, f === 'L-ring'); }
+  await page.selectOption(`${R} .rbs-finger`, 'R-index'); await page.click(`${R} .rbs-save`);
+  await page.selectOption(`${R} .rbs-finger`, ''); await page.click(`${R} .rbs-save`);
+  { const chips = await page.$$eval(`${R} .rbs-chip-show`, c => c.map(x => x.textContent).join(' | '));
+    rec('Saved sizes', '3 fingers for Me', 'Me · US 8 | Me · L ring · US 7 | Me · R index · US 8', chips, chips === 'Me · US 8 | Me · L ring · US 7 | Me · R index · US 8'); }
+  await page.click(`${R} .rbs-chip-x[data-finger="L-ring"]`);
+  { const chips = await page.$$eval(`${R} .rbs-chip-show`, c => c.map(x => x.textContent).join(' | '));
+    rec('Saved sizes', 'forget one finger only', 'Me · US 8 | Me · R index · US 8', chips, chips === 'Me · US 8 | Me · R index · US 8'); }
+  { const b = await page.$(`${B} .rbs-finger`); rec('Saved sizes', 'no finger picker on bangles', 'none', b ? 'shown' : 'none', !b); }
   rec('Console', 'all tools', 'no errors', errors.join(' | ') || 'none', errors.length === 0);
   await browser.close();
   let pass = 0;

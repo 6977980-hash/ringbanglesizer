@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_PAGES_VERSION', '17' );
+define( 'RBS_PAGES_VERSION', '18' );
 
 require_once RBS_DIR . '/inc/page-content.php';
 require_once RBS_DIR . '/inc/content/legal.php';
@@ -198,6 +198,7 @@ function rbs_menu_structure() {
 					array( 'key' => 'bangle-cm', 'label' => 'Bangle Size in cm' ),
 					array( 'key' => 'bangle-sizes', 'label' => 'All Bangle Sizes' ),
 					array( 'key' => 'bangle-measure', 'label' => 'How to Measure' ),
+					array( 'key' => 'bangle-printable', 'label' => 'Printable Bangle Sizer' ),
 					array( 'key' => 'bangle-kids', 'label' => 'Kids Bangle Sizes' ),
 					array( 'key' => 'chudi', 'label' => 'Chudi & Kada Sizes' ),
 				) ),
