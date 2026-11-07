@@ -229,8 +229,11 @@
 		name = String(name || '').trim();
 		var who = !name || name.toLowerCase() === 'me' ? 'My' : name + '\u2019s';
 		g.textBaseline = 'alphabetic';
-		g.fillStyle = '#4b5563'; g.font = '600 52px ' + F;
-		g.fillText(who + ' ' + card.title, 90, 330);
+		var head = who + ' ' + card.title, hs = 52;
+		g.font = '600 ' + hs + 'px ' + F;
+		while (hs > 30 && g.measureText(head).width > W - 180) { hs -= 2; g.font = '600 ' + hs + 'px ' + F; }
+		g.fillStyle = card.title.indexOf('approximate') === 0 ? '#92400e' : '#4b5563';
+		g.fillText(head, 90, 330);
 		g.fillStyle = '#111827'; g.font = '800 ' + (card.big.length > 9 ? 150 : 190) + 'px ' + F;
 		g.fillText(card.big, 84, 520);
 		// rows
@@ -680,6 +683,12 @@
 		}, true);
 	}
 
+	// Unique ids so each <label for> points at its own input, even with two tools on a page.
+	var uidN = 0;
+	function uid(p) { uidN += 1; return 'rbs-' + p + '-' + uidN; }
+	// Uncalibrated + read off the screen = approximate. Typed measurements are never approximate.
+	function approxPre(ax) { return ax ? '<span class="rbs-big-pre">Approximate:</span> ' : ''; }
+
 	function approxNote() {
 		return calibrated ? '' : '<p class="rbs-note rbs-approx">⚠ Screen not calibrated: the circle is approximate. Calibrate above for an exact result.</p>';
 	}
@@ -688,6 +697,7 @@
 
 	function renderRing(root, method) {
 		var idx = 8; // US 7
+		var mmId = uid('ring-mm');
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
 			'<h2 class="rbs-h">Step 2: Find your ring size</h2>' + savedLine() +
@@ -703,8 +713,8 @@
 			'<button type="button" class="rbs-step" data-d="1" aria-label="Larger">+</button></div>' +
 			'</div>' +
 			'<div class="rbs-m-mm rbs-hidden">' +
-			'<div class="rbs-field"><label>Measurement</label><input type="number" step="0.1" min="10" max="80" class="rbs-mm-val" value="17.3">' +
-			'<select class="rbs-mm-type"><option value="d">inner diameter (mm)</option><option value="c">inner circumference (mm)</option><option value="di">inner diameter (inch)</option></select></div>' +
+			'<div class="rbs-field"><label for="' + mmId + '">Measurement</label><input type="number" step="0.1" min="10" max="80" class="rbs-mm-val" id="' + mmId + '" value="17.3" inputmode="decimal">' +
+			'<select class="rbs-mm-type" aria-label="Measurement type"><option value="d">inner diameter (mm)</option><option value="c">inner circumference (mm)</option><option value="di">inner diameter (inch)</option></select></div>' +
 			'</div>' +
 			'<div class="rbs-result"></div>' + approxNote();
 
@@ -720,11 +730,12 @@
 			var picker = '<label class="rbs-sys">Show sizes for <select class="rbs-sys-sel">' +
 				Object.keys(SYSTEMS).map(function (k) { return '<option value="' + k + '"' + (k === ringSystem ? ' selected' : '') + '>' + SYSTEMS[k] + '</option>'; }).join('') +
 				'</select></label>';
+			var ax = !fromMm && !calibrated;
 			result.innerHTML =
-				'<div class="rbs-result-top"><span class="rbs-kicker">' + (fromMm ? 'Closest ring size' : 'Your ring size') + '</span>' + picker + '</div>' +
-				'<div class="rbs-big">' + ringIn(r, ringSystem) + '</div>' +
+				'<div class="rbs-result-top"><span class="rbs-kicker">' + (fromMm ? 'Closest ring size' : (ax ? 'Your ring size · screen not calibrated' : 'Your ring size')) + '</span>' + picker + '</div>' +
+				'<div class="rbs-big">' + approxPre(ax) + ringIn(r, ringSystem) + '</div>' +
 				'<div class="rbs-sub">= ' + others + ' · ' + fmt(r.mm) + ' mm inside</div>' +
-				resultActions('ring', 'US ' + r.us, 'My ring size is US ' + r.us + ' / UK ' + r.uk + ' / EU ' + r.eu + ' / India ' + r.india + ' (' + fmt(r.mm) + ' mm inside diameter). Find yours free:') +
+				resultActions('ring', 'US ' + r.us, (ax ? 'My approximate ring size (screen not calibrated) is US ' : 'My ring size is US ') + r.us + ' / UK ' + r.uk + ' / EU ' + r.eu + ' / India ' + r.india + ' (' + fmt(r.mm) + ' mm inside diameter). Find yours free:') +
 				'<details class="rbs-more"><summary>All sizes and measurements</summary>' +
 				resultTable([
 					['US / Canada', r.us],
@@ -741,7 +752,7 @@
 				show(lastRing, lastFromMm);
 			});
 			wireActions(result, function () { paintSaved(); if (fit) { fit.refresh(); } }, {
-				kind: 'ring', title: 'ring size', big: ringIn(r, ringSystem),
+				kind: 'ring', title: ax ? 'approximate ring size' : 'ring size', big: ringIn(r, ringSystem),
 				rows: [['US / Canada', String(r.us)], ['UK / Australia', r.uk], ['EU / ISO', String(r.eu)], ['India / Pakistan', String(r.india)], ['Inside diameter', fmt(r.mm) + ' mm'], ['Inside circumference', fmt(r.circ) + ' mm']]
 			});
 			if (fit) { fit.refresh(); }
@@ -811,6 +822,7 @@
 
 	function renderBangle(root) {
 		var idx = 6; // 2.6
+		var handId = uid('hand');
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
 			'<h2 class="rbs-h">Step 2: Find your bangle size</h2>' + savedLine() +
@@ -827,8 +839,8 @@
 			'</div>' +
 			'<div class="rbs-m-hand rbs-hidden">' +
 			'<p class="rbs-muted">Tuck your thumb into your palm (as if sliding on a bangle). Wrap a string or tape around the widest part of your hand, over the knuckles. Enter that length.</p>' +
-			'<div class="rbs-field"><label>Hand circumference</label><input type="number" step="0.1" min="4" max="30" class="rbs-hand-val" value="8">' +
-			'<select class="rbs-hand-unit"><option value="in">inches</option><option value="cm">cm</option></select></div>' +
+			'<div class="rbs-field"><label for="' + handId + '">Hand circumference</label><input type="number" step="0.1" min="4" max="30" class="rbs-hand-val" id="' + handId + '" value="8" inputmode="decimal">' +
+			'<select class="rbs-hand-unit" aria-label="Unit"><option value="in">inches</option><option value="cm">cm</option></select></div>' +
 			'</div>' +
 			'<div class="rbs-result"></div>' + approxNote();
 
@@ -837,13 +849,15 @@
 		var result = $('.rbs-result', panel);
 
 		var lastBangle = null;
+		// extra is only passed by the hand measurement, which does not depend on the screen.
 		function show(b, extra) {
 			lastBangle = b;
+			var ax = extra === undefined && !calibrated;
 			result.innerHTML =
-				'<div class="rbs-result-top"><span class="rbs-kicker">Your bangle size</span></div>' +
-				'<div class="rbs-big">Size ' + b.label + '</div>' +
+				'<div class="rbs-result-top"><span class="rbs-kicker">' + (ax ? 'Your bangle size · screen not calibrated' : 'Your bangle size') + '</span></div>' +
+				'<div class="rbs-big">' + approxPre(ax) + 'Size ' + b.label + '</div>' +
 				'<div class="rbs-sub">= ' + fmt(b.mm) + ' mm (' + fmt(b.inch, 3) + ' in) inside · ' + b.fit + '</div>' +
-				resultActions('bangle', 'Size ' + b.label, 'My bangle size is ' + b.label + ' (' + fmt(b.mm) + ' mm inside diameter). Find yours free:') +
+				resultActions('bangle', 'Size ' + b.label, (ax ? 'My approximate bangle size (screen not calibrated) is ' : 'My bangle size is ') + b.label + ' (' + fmt(b.mm) + ' mm inside diameter). Find yours free:') +
 				'<details class="rbs-more"><summary>All measurements</summary>' +
 				resultTable([
 					['Indian bangle size', b.label],
@@ -853,7 +867,7 @@
 				]) + '</details>' + (extra || '') +
 				'<p class="rbs-note">Adult bangle sizes step by 2/16 inch (about 3.2 mm). If you are between sizes, choose the larger one for a bangle that slides over the hand.</p>';
 			wireActions(result, function () { paintSaved(); if (fit) { fit.refresh(); } }, {
-				kind: 'bangle', title: 'bangle size', big: 'Size ' + b.label,
+				kind: 'bangle', title: ax ? 'approximate bangle size' : 'bangle size', big: 'Size ' + b.label,
 				rows: [['Indian size', b.label], ['Inside diameter', fmt(b.mm) + ' mm'], ['In centimetres', fmt(b.mm / 10, 2) + ' cm'], ['In inches', fmt(b.inch, 3) + ' in'], ['Inside circumference', fmt(b.mm * Math.PI) + ' mm'], ['Typical fit', b.fit]]
 			});
 			if (fit) { fit.refresh(); }
@@ -933,13 +947,14 @@
 	/* --------------------------------------------------------- bracelet */
 
 	function renderBracelet(root) {
+		var wristId = uid('wrist'), typeId = uid('wrist-type');
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
 			'<h2 class="rbs-h">Find your bracelet size</h2>' +
 			'<p class="rbs-muted">Wrap a string or tape snugly around your wrist just below the wrist bone, then measure it.</p>' +
-			'<div class="rbs-field"><label>Wrist circumference</label><input type="number" step="0.1" min="3" max="30" class="rbs-wrist-val" value="6.5">' +
-			'<select class="rbs-wrist-unit"><option value="in">inches</option><option value="cm">cm</option></select></div>' +
-			'<div class="rbs-field"><label>Bracelet type</label><select class="rbs-wrist-type">' +
+			'<div class="rbs-field"><label for="' + wristId + '">Wrist circumference</label><input type="number" step="0.1" min="3" max="30" class="rbs-wrist-val" id="' + wristId + '" value="6.5" inputmode="decimal">' +
+			'<select class="rbs-wrist-unit" aria-label="Unit"><option value="in">inches</option><option value="cm">cm</option></select></div>' +
+			'<div class="rbs-field"><label for="' + typeId + '">Bracelet type</label><select class="rbs-wrist-type" id="' + typeId + '">' +
 			'<option value="chain">Chain / link bracelet</option><option value="bangle">Rigid bangle bracelet</option><option value="cuff">Open cuff</option></select></div>' +
 			'<div class="rbs-result"></div>';
 		var result = $('.rbs-result', panel);

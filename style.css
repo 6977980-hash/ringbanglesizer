@@ -5,7 +5,7 @@ Description:  GeneratePress child theme for ringbanglesizer.com. Adds the on-scr
 Author:       Ring Bangle Sizer
 Author URI:   https://ringbanglesizer.com
 Template:     generatepress
-Version:      0.14.0
+Version:      0.15.0
 Requires at least: 6.4
 Requires PHP: 7.4
 License:      GNU General Public License v2 or later
@@ -43,7 +43,9 @@ Text Domain:  ringbanglesizer
 
 /* Breadcrumbs */
 .rbs-crumbs { font-size: 14px; color: #6b7280; margin: 0 0 12px; }
-.rbs-crumbs a { color: #1d4ed8; text-decoration: none; }
+.rbs-crumbs a { color: #1d4ed8; text-decoration: underline; text-underline-offset: 2px; }
+/* Links inside running text are underlined, not told apart by colour only (WCAG 1.4.1). Classed links (buttons, cards) keep their own style. */
+:where(.entry-content) :where(p, li, td, dd, figcaption) a:where(:not([class])) { text-decoration: underline; text-underline-offset: 2px; }
 .rbs-crumbs .sep { margin: 0 4px; }
 .separate-containers .rbs-crumbs { padding: 0 40px 4px; }
 @media (max-width: 768px) {
@@ -98,7 +100,7 @@ h1.entry-title,
 .rbs-author-pic { flex: 0 0 64px; width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--rbs-gold); }
 .rbs-author-initials { display: flex; align-items: center; justify-content: center; background: #fff; color: var(--rbs-gold-text); font-weight: 800; font-size: 22px; letter-spacing: .02em; }
 .rbs-author-name { font-size: 16px; color: #111827; }
-.rbs-author-meta { font-size: 13px; color: #6b7280; }
+.rbs-author-meta { font-size: 13px; color: #4b5563; } /* 7:1 on --rbs-gold-bg (was #6b7280, 4.4:1) */
 .rbs-author-in { font-weight: 600; }
 @media (max-width: 480px) {
 	.rbs-author { padding: 14px; gap: 12px; }
