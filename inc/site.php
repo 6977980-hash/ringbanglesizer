@@ -157,11 +157,19 @@ function rbs_footer_columns() {
 		'Bangle & bracelet tools' => array(
 			'/bangle-size-calculator/'    => 'Bangle size calculator',
 			'/bangle-size-chart/'         => 'Bangle size chart',
-			'/bangle-size-chart-in-cm/'   => 'Bangle size in cm',
+			'/bangle-size-chart/in-cm/'   => 'Bangle size in cm',
 			'/kids-bangle-size-chart/'    => 'Kids bangle sizes',
 			'/how-to-measure-bangle-size/' => 'How to measure bangle size',
 			'/bracelet-size-calculator/'  => 'Bracelet size calculator',
 			'/wrist-size-chart/'          => 'Wrist size chart',
+		),
+		'Ring size by country'    => array(
+			'/ring-size-chart/us/'       => 'US ring size chart',
+			'/ring-size-chart/uk/'       => 'UK ring size chart',
+			'/ring-size-chart/india/'    => 'Indian ring size chart',
+			'/ring-size-chart/pakistan/' => 'Pakistan ring size chart',
+			'/ring-size-chart/mens/'     => 'Men\'s ring sizes',
+			'/ring-size-chart/womens/'   => 'Women\'s ring sizes',
 		),
 	);
 	$html  = '<div class="rbs-footer"><div class="rbs-footer-in">';
@@ -534,6 +542,36 @@ add_filter( 'wp_sitemaps_posts_query_args', function ( $args, $post_type ) {
 	);
 	return $args;
 }, 10, 2 );
+
+/**
+ * Old or mistyped paths that once appeared in links: 301 to the real page (F-S01).
+ */
+add_action( 'template_redirect', function () {
+	if ( ! is_404() ) {
+		return;
+	}
+	$map  = array(
+		'bangle-size-chart-in-cm' => '/bangle-size-chart/in-cm/',
+	);
+	$path = trim( (string) wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH ), '/' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	if ( isset( $map[ $path ] ) ) {
+		wp_safe_redirect( home_url( $map[ $path ] ), 301 );
+		exit;
+	}
+}, 1 );
+
+/**
+ * No blog posts or comments, so the feeds are empty: drop the head links (F-S03)
+ * and send any feed request to the home page.
+ */
+remove_action( 'wp_head', 'feed_links', 2 );
+remove_action( 'wp_head', 'feed_links_extra', 3 );
+add_action( 'template_redirect', function () {
+	if ( is_feed() ) {
+		wp_safe_redirect( home_url( '/' ), 301 );
+		exit;
+	}
+}, 1 );
 
 /**
  * Author archives are thin and expose the login name: send them home.
