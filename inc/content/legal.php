@@ -40,7 +40,7 @@ function rbs_legal_pages() {
 </ul>
 
 <h2>Where our numbers come from</h2>
-<p>Ring diameters follow ISO 8653, the international standard that defines ring size as the inner circumference in millimetres. US, UK and Indian sizes are mapped to those diameters using the conversion tables jewellers use. Indian bangle sizes follow the traditional inch-and-sixteenths system, where 2.6 means 2 6/16 inches across the inside. Screen calibration uses the ISO/IEC 7810 ID-1 card size (85.60 × 53.98 mm) shared by every bank card. The full method, including rounding rules and known limits, is on our <a href="/how-we-measure/">how we measure</a> page.</p>
+<p>Ring sizes follow ISO 8653, the international standard that defines ring size as the inner circumference in millimetres. We store the matching inner diameter for each size, and US, UK and Indian sizes are mapped to it using the conversion tables jewellers use. Indian bangle sizes follow the traditional inch-and-sixteenths system, where 2.6 means 2 6/16 inches across the inside. Screen calibration uses the ISO/IEC 7810 ID-1 card size (85.60 × 53.98 mm) shared by every bank card. The full method, including rounding rules and known limits, is on our <a href="/how-we-measure/">how we measure</a> page.</p>
 
 <h2>Our editorial rules</h2>
 <ul>

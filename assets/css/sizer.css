@@ -430,6 +430,7 @@
 .rbs-save-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; margin: 12px 0 0; }
 .rbs-name-label { display: flex; flex-direction: column; font-size: 13px; color: var(--rbs-muted); gap: 2px; }
 .rbs-name { width: 150px; padding: 8px 10px; font-size: 16px; border: 1px solid #cbd5e1; border-radius: 8px; }
+.rbs-finger { padding: 8px 6px; font-size: 16px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: inherit; max-width: 100%; }
 .rbs-saved { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 8px; }
 .rbs-saved:empty { display: none; }
 .rbs-saved-t { font-weight: 600; }

@@ -102,15 +102,46 @@
 		}
 		return list;
 	}
-	function savePerson(name, kind, label) {
+	// Rings can be saved per finger ("L-ring" = left ring finger), so one person
+	// can keep a size for each finger. Older entries simply have no finger.
+	var FINGERS = ['thumb', 'index', 'middle', 'ring', 'little'];
+	function fingerText(f, short) {
+		var m = /^([LR])-(\w+)$/.exec(f || '');
+		if (!m || FINGERS.indexOf(m[2]) < 0) { return ''; }
+		if (short) { return m[1] + ' ' + m[2]; }
+		return (m[1] === 'L' ? 'Left ' : 'Right ') + m[2] + (m[2] === 'thumb' ? '' : ' finger');
+	}
+	function fingerSelect(sel) {
+		var o = '<option value="">Any finger</option>';
+		[['L', 'Left hand'], ['R', 'Right hand']].forEach(function (h) {
+			o += '<optgroup label="' + h[1] + '">' + FINGERS.map(function (f) {
+				var v = h[0] + '-' + f;
+				return '<option value="' + v + '"' + (v === sel ? ' selected' : '') + '>' + fingerText(v) + '</option>';
+			}).join('') + '</optgroup>';
+		});
+		return o;
+	}
+	// "Me · L ring" for chips and lists.
+	function personTag(x) { return x.name + (x.finger ? ' · ' + fingerText(x.finger, true) : ''); }
+	function savePerson(name, kind, label, finger) {
 		name = String(name || '').trim().slice(0, 24) || 'Me';
-		var list = people().filter(function (x) { return !(x.kind === kind && x.name.toLowerCase() === name.toLowerCase()); });
-		list.push({ name: name, kind: kind, label: label, date: new Date().toISOString().slice(0, 10) });
+		finger = kind === 'ring' && fingerText(finger) ? finger : '';
+		var list = people().filter(function (x) { return !(x.kind === kind && x.name.toLowerCase() === name.toLowerCase() && (x.finger || '') === finger); });
+		var entry = { name: name, kind: kind, label: label, date: new Date().toISOString().slice(0, 10) };
+		if (finger) { entry.finger = finger; }
+		list.push(entry);
+		// Same person together (in order of first save), fingers in hand order (left thumb … right little).
+		var first = {};
+		list.forEach(function (x, i) { var k = x.kind + '|' + x.name.toLowerCase(); if (!(k in first)) { first[k] = i; } });
+		var rank = function (x) { return x.finger ? (x.finger[0] === 'L' ? 0 : 5) + FINGERS.indexOf(x.finger.slice(2)) : -1; };
+		list = list.map(function (x, i) { return { x: x, g: first[x.kind + '|' + x.name.toLowerCase()], f: rank(x), i: i }; })
+			.sort(function (a, b) { return a.g - b.g || a.f - b.f || a.i - b.i; })
+			.map(function (o) { return o.x; });
 		store(PEOPLE_KEY, JSON.stringify(list));
 		return name;
 	}
-	function removePerson(name, kind) {
-		store(PEOPLE_KEY, JSON.stringify(people().filter(function (x) { return !(x.kind === kind && x.name === name); })));
+	function removePerson(name, kind, finger) {
+		store(PEOPLE_KEY, JSON.stringify(people().filter(function (x) { return !(x.kind === kind && x.name === name && (x.finger || '') === (finger || '')); })));
 	}
 	function escHtml(t) {
 		return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
@@ -126,12 +157,14 @@
 
 	// Save / share / chart buttons under a result.
 	var lastName = 'Me';
+	var lastFinger = '';
 	function resultActions(kind, label, shareText) {
 		// Absolute links: inside the embeddable widget a relative link would point at the host site.
 		var home = data.home || '';
 		var chart = home + (kind === 'bangle' ? '/bangle-size-chart/' : '/ring-size-chart/');
 		return '<div class="rbs-save-row">' +
 			'<label class="rbs-name-label">Whose size? <input type="text" class="rbs-name" maxlength="24" value="' + escHtml(lastName) + '" autocomplete="off"></label>' +
+			(kind === 'ring' ? '<label class="rbs-name-label">Which finger? <select class="rbs-finger">' + fingerSelect(lastFinger) + '</select></label>' : '') +
 			'<button type="button" class="rbs-btn rbs-save" data-kind="' + kind + '" data-label="' + label + '">Save</button>' +
 			'</div>' +
 			'<div class="rbs-actions">' +
@@ -146,18 +179,29 @@
 	function wireActions(box, onSaved, card) {
 		var save = $('.rbs-save', box);
 		var nameIn = $('.rbs-name', box);
+		var fingerIn = $('.rbs-finger', box);
 		if (nameIn) { nameIn.addEventListener('input', function () { lastName = nameIn.value; }); }
+		if (fingerIn) {
+			fingerIn.addEventListener('change', function () {
+				lastFinger = fingerIn.value;
+				if (save) { save.textContent = 'Save'; }
+			});
+		}
 		if (save) {
 			save.addEventListener('click', function () {
 				trackAction('save', save.getAttribute('data-kind'));
-				var who = savePerson(nameIn ? nameIn.value : 'Me', save.getAttribute('data-kind'), save.getAttribute('data-label'));
+				var who = savePerson(nameIn ? nameIn.value : 'Me', save.getAttribute('data-kind'), save.getAttribute('data-label'), fingerIn ? fingerIn.value : '');
 				save.textContent = 'Saved ✓';
 				if (onSaved) { onSaved(who); }
 			});
 		}
 		var cardBtn = $('.rbs-card-btn', box);
 		if (cardBtn && card) {
-			cardBtn.addEventListener('click', function () { trackAction('card', card.kind); sizeCard(card, nameIn ? nameIn.value : ''); });
+			cardBtn.addEventListener('click', function () {
+				trackAction('card', card.kind);
+				var f = fingerIn ? fingerText(fingerIn.value) : '';
+				sizeCard(f ? { kind: card.kind, title: card.title, big: card.big, rows: [['Finger', f]].concat(card.rows) } : card, nameIn ? nameIn.value : '');
+			});
 		}
 		var share = $('.rbs-share', box);
 		if (share) {
@@ -310,8 +354,8 @@
 			var list = people().filter(function (x) { return x.kind === kind; });
 			if (!list.length) { box.innerHTML = ''; return; }
 			box.innerHTML = '<span class="rbs-saved-t">Saved sizes:</span> ' + list.map(function (x) {
-				return '<span class="rbs-chip"><button type="button" class="rbs-chip-show" data-label="' + escHtml(x.label) + '">' + escHtml(x.name) + ' · ' + escHtml(x.label.replace('Size ', '')) + '</button>' +
-					'<button type="button" class="rbs-chip-x" data-name="' + escHtml(x.name) + '" aria-label="Forget ' + escHtml(x.name) + '">×</button></span>';
+				return '<span class="rbs-chip"><button type="button" class="rbs-chip-show" data-label="' + escHtml(x.label) + '">' + escHtml(personTag(x)) + ' · ' + escHtml(x.label.replace('Size ', '')) + '</button>' +
+					'<button type="button" class="rbs-chip-x" data-name="' + escHtml(x.name) + '" data-finger="' + escHtml(x.finger || '') + '" aria-label="Forget ' + escHtml(personTag(x)) + '">×</button></span>';
 			}).join(' ');
 			box.querySelectorAll('.rbs-chip-show').forEach(function (b) {
 				b.addEventListener('click', function () {
@@ -320,7 +364,7 @@
 				});
 			});
 			box.querySelectorAll('.rbs-chip-x').forEach(function (b) {
-				b.addEventListener('click', function () { removePerson(b.getAttribute('data-name'), kind); paint(); });
+				b.addEventListener('click', function () { removePerson(b.getAttribute('data-name'), kind, b.getAttribute('data-finger')); paint(); });
 			});
 		}
 		paint();
@@ -566,7 +610,7 @@
 			var keep = who.value;
 			var list = people().filter(function (x) { return x.kind === kind; });
 			who.innerHTML = '<option value="">the size above</option>' + list.map(function (x) {
-				return '<option value="' + escHtml(x.label) + '">' + escHtml(x.name) + ' (' + escHtml(x.label.replace('Size ', '')) + ')</option>';
+				return '<option value="' + escHtml(x.label) + '">' + escHtml(personTag(x)) + ' (' + escHtml(x.label.replace('Size ', '')) + ')</option>';
 			}).join('');
 			if (keep) { who.value = keep; }
 		}

@@ -82,7 +82,7 @@ function rbs_side_guide( $mode ) {
 		'ring'     => array(
 			'Hold any bank card on the screen and match the outline once. No card? Use a coin.',
 			'Lay a ring that fits flat on the circle and match its <strong>inside</strong> edge.',
-			'Read your size, then tap Save so this device remembers it.',
+			'Read your size, then tap Save so this device remembers it. Pick a finger to keep a size for each one.',
 		),
 		'bangle'   => array(
 			'Calibrate once with a bank card or a coin.',

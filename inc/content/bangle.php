@@ -586,6 +586,9 @@ function rbs_bangle_pages() {
 </ol>
 <p>This is as accurate as a ruler and avoids misreading the scale. It works on most phones; for bangles larger than 2.8 a tablet or laptop screen is easier.</p>
 
+<h2>Prefer paper? Print a bangle sizer</h2>
+<p>Print the free <a href="/printable-bangle-sizer/">printable bangle sizer</a> at 100%, check the 50 mm line with a ruler, then lay your bangle on the true-size circles for sizes 1.10 to 3.4. The sheet also has a string scale for your hand, so you can skip the division by 3.14.</p>
+
 <h2>Common mistakes</h2>
 <ul>
 <li><strong>Measuring the wrist.</strong> Wrist size is for bracelets. A bangle must pass the hand, which is 3–5 cm larger.</li>
@@ -751,6 +754,84 @@ function rbs_bangle_pages() {
 				array( 'What is 2.6 kada size in mm?', 'A 2.6 kada has an inner diameter of 60.3 mm (2⅜ inches).' ),
 				array( 'Should a kada be bigger than a bangle?', 'For a thick or wide kada, yes, usually one size bigger, because it cannot be rolled over the knuckles like a thin bangle.' ),
 				array( 'What size chooda should a bride buy?', 'The bride\'s exact bangle size. A rigid chooda must pass over the hand, so a smaller size can crack or hurt. Measure a few weeks before the wedding.' ),
+			),
+		),
+
+		/* -------------------------------------------------- PRINTABLE BANGLE SIZER */
+		'bangle-printable' => array(
+			'slug'       => 'printable-bangle-sizer',
+			'title'      => 'Printable Bangle Sizer – Free PDF with True-Size Circles',
+			'seo_title'  => 'Printable Bangle Sizer: Free PDF (A4 and US Letter)',
+			'seo_desc'   => 'Free printable bangle sizer PDF: true-size circles for Indian bangle sizes 1.10 to 3.4, a hand string scale and a 50 mm check line. A4 and US Letter.',
+			'mode'       => null,
+			'menu_order' => 13,
+			'content'    => <<<'HTML'
+<p><strong>Print one page, check the scale, and find your bangle size on paper.</strong> The free PDF has true-size circles for every Indian bangle size from 2.2 to 3.4 (plus kids sizes 1.10 to 2.0), a string scale for measuring your hand, and a 50 mm check line with a bank-card box so you can confirm it printed at the right size. Choose US Letter or A4 to match your paper.</p>
+
+[rbs_printable_sizer type="bangle"]
+
+<p class="rbs-muted">The preview shows sizes 2.2 to 2.12 in millimetres. Screens are not true size, so measure on the printed sheet or use the <a href="/bangle-size-calculator/">on-screen bangle sizer</a>, which is calibrated with a bank card.</p>
+
+<h2>Step 1: Print it at the right size</h2>
+<p>A printable sizer only works if the printer does not shrink the page. Most printers default to "Fit to page", which scales everything down by 3–6%. On a bangle that is 2–4 mm, which is a whole bangle size.</p>
+<ul>
+<li><strong>Chrome or Edge:</strong> open the PDF, press Print, open "More settings" and set Scale to <em>Default</em> or <em>100</em>, not "Fit to printable area".</li>
+<li><strong>Adobe Acrobat Reader:</strong> under Page Size &amp; Handling choose <em>Actual size</em>.</li>
+<li><strong>Mac Preview:</strong> set Scale to 100% and untick "Scale to fit".</li>
+<li><strong>Phone:</strong> printing straight from a phone often scales the page. If the check line is not 50 mm, print from a computer instead.</li>
+</ul>
+
+<h2>Step 2: Check the scale</h2>
+<p>Put a ruler on the line at the top of the sheet. It must be exactly 50 mm (5 cm) long. Then lay a bank card, debit card or ID card in the dashed box: these cards are 85.6 × 54 mm worldwide, so the card should fit the outline exactly. If the line is short or the card overhangs the box, reprint at 100%. Do not try to correct it by eye.</p>
+
+<h2>Step 3: Find your size</h2>
+<h3>With a bangle that fits (most accurate)</h3>
+<ol>
+<li>Lay the bangle flat on the large set of circles, centred on the small cross.</li>
+<li>Find the circle that sits exactly on the <em>inside</em> edge of the bangle. Ignore the outside edge and the width of the metal.</li>
+<li>If the inside edge falls between two circles, choose the larger size.</li>
+<li>For a child's bangle, use the smaller set of circles on the right (1.10 to 2.0).</li>
+</ol>
+<p>The sizes are the Indian and Pakistani inch-and-sixteenths sizes used by almost every bangle shop: 2.6 means 2 6/16 inches (60.3 mm) across the inside. The sheet also lists the inside diameter of every size in mm, so you can check a bangle with a ruler too.</p>
+
+<h3>With a string around your hand (estimate)</h3>
+<ol>
+<li>Tuck your thumb into your palm, the way your hand folds when you slide on a bangle.</li>
+<li>Wrap a string or thread around the widest part of the hand, over the knuckles, snug but not tight. Mark where it meets.</li>
+<li>Fold the string in half and lay it on the scale at the bottom of the sheet, starting from 0.</li>
+<li>Read the first bangle size mark at or after the end of the folded string. That is the smallest bangle that should pass over your hand.</li>
+</ol>
+<p>The scale works because a bangle has to be at least as wide as your hand's circumference divided by π (3.14). Folding the string in half keeps the scale short enough for one sheet. Hands are not round and soft tissue squeezes, so this method is an estimate. A bangle that already fits you, matched on the circles, gives a better answer.</p>
+
+<h2>Glass, gold or kada: which size?</h2>
+<ul>
+<li><strong>Rigid gold, silver, glass or lac bangles:</strong> your exact size from the circles. They cannot open, so they must pass over the hand. Glass and lac bangles are often made 0.5–1 mm small, so if you are between two circles, take the larger one.</li>
+<li><strong>Openable kangan with a screw or hinge:</strong> can be one size smaller, because it does not have to pass over the hand.</li>
+<li><strong>Wide or heavy kada:</strong> go one size larger than your thin-bangle size.</li>
+<li><strong>Bridal chooda:</strong> the bride's exact size, never smaller. Measure a few weeks before the wedding. Our <a href="/blog/bangle-size-for-wedding/">bridal bangle size guide</a> has the details.</li>
+</ul>
+
+<h2>How accurate is a printable bangle sizer?</h2>
+<p>The circles in the PDF are vector lines drawn to 0.01 mm, so the limit is your printer and your eye. A correctly scaled print is usually within about 0.5 mm, well inside the 3.2 mm step between bangle sizes. Matching a bangle on the circles is more reliable than the string method. For a second opinion without paper, use the <a href="/bangle-size-calculator/">bangle size calculator</a>.</p>
+
+<h2>Common mistakes</h2>
+<ul>
+<li><strong>Measuring the outside of the bangle.</strong> Only the inside edge matters.</li>
+<li><strong>Skipping the scale check.</strong> A 5% shrink is hard to see but changes the result by a full size.</li>
+<li><strong>Measuring the wrist instead of the hand.</strong> A closed bangle must pass over the folded hand, which is wider than the wrist.</li>
+<li><strong>Pulling the string too tight.</strong> Keep it snug, like a bangle sliding on.</li>
+</ul>
+
+<h2>Prefer not to print?</h2>
+<p>The <a href="/bangle-size-calculator/">online bangle sizer</a> draws the same true-size circles on your phone after a one-time card calibration, and it can also size a bangle from a photo. The <a href="/bangle-size-chart/">bangle size chart</a> lists every size in mm, cm and inches, and <a href="/how-to-measure-bangle-size/">how to measure bangle size</a> compares every method. Need a ring size too? Use the <a href="/printable-ring-sizer/">printable ring sizer</a>.</p>
+HTML
+			,
+			'faq'        => array(
+				array( 'How do I check my printable bangle sizer is the right size?', 'Print at 100% or "Actual size" and measure the check line with a ruler: it must be exactly 50 mm. A bank or ID card should also fit the dashed card outline exactly.' ),
+				array( 'Can I print the bangle sizer on A4 paper?', 'Yes. Download the A4 version. The circles are the same size on both versions; only the page layout changes.' ),
+				array( 'Which bangle sizes are on the sheet?', 'Indian and Pakistani sizes 2.2 to 3.4 for adults and 1.10 to 2.0 for children, with the inside diameter of each in mm.' ),
+				array( 'Can I find my bangle size without a bangle?', 'Yes, with the string scale: wrap a string around your folded hand, fold it in half and read the size on the scale. It is an estimate, so matching a bangle that fits is more accurate.' ),
+				array( 'Is a printable bangle sizer accurate?', 'When printed at 100% it is usually within about 0.5 mm, much less than the 3.2 mm step between bangle sizes. Always check the 50 mm line first.' ),
 			),
 		),
 	);

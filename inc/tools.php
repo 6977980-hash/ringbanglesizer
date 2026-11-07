@@ -5,7 +5,7 @@
  * [rbs_ring_converter]          – US/UK/EU/India/mm converter (small JS, server table as fallback)
  * [rbs_circ_lookup]             – finger circumference (mm) → ring size
  * [rbs_inch_lookup]             – ring inner diameter (inches) → ring size
- * [rbs_printable_sizer]         – PDF download buttons + true-size circle preview
+ * [rbs_printable_sizer]         – PDF download buttons + true-size circle preview (type="bangle" for bangles)
  * [rbs_wrist_table]             – wrist size → bracelet lengths
  * [rbs_diameter_ranges]         – diameter band (mm / in) → ring size
  */
@@ -112,7 +112,11 @@ add_shortcode( 'rbs_inch_lookup', 'rbs_inch_lookup_shortcode' );
 
 /* ------------------------------------------------------------ printable */
 
-function rbs_printable_sizer_shortcode() {
+function rbs_printable_sizer_shortcode( $atts = array() ) {
+	$atts = shortcode_atts( array( 'type' => 'ring' ), $atts, 'rbs_printable_sizer' );
+	if ( 'bangle' === $atts['type'] ) {
+		return rbs_printable_bangle_sizer();
+	}
 	$a4     = RBS_URI . '/assets/printable/ring-sizer-a4.pdf';
 	$letter = RBS_URI . '/assets/printable/ring-sizer-letter.pdf';
 
@@ -133,6 +137,13 @@ function rbs_printable_sizer_shortcode() {
 	}
 	$svg .= '</svg>';
 
+	return rbs_printable_box( $letter, $a4, $svg );
+}
+
+/**
+ * Download buttons + preview, shared by the ring and bangle printables.
+ */
+function rbs_printable_box( $letter, $a4, $svg ) {
 	return '<div class="rbs-printable">'
 		. '<p class="rbs-printable-buttons">'
 		. '<a class="button" href="' . esc_url( $letter ) . '" download>Download PDF – US Letter</a> '
@@ -141,6 +152,40 @@ function rbs_printable_sizer_shortcode() {
 		. '<p class="rbs-muted">One page, free, no sign-up. Print at <strong>100% / Actual size</strong>.</p>'
 		. '<div class="rbs-table-wrap">' . $svg . '</div>'
 		. '</div>';
+}
+
+/**
+ * Printable bangle sizer: PDF buttons + a preview of the concentric adult
+ * circles (2.2 to 2.12) drawn in mm, the same as on the printed sheet.
+ */
+function rbs_printable_bangle_sizer() {
+	$a4     = RBS_URI . '/assets/printable/bangle-sizer-a4.pdf';
+	$letter = RBS_URI . '/assets/printable/bangle-sizer-letter.pdf';
+	$rows   = array();
+	foreach ( rbs_bangle_sizes() as $b ) {
+		if ( $b['inch'] >= 2.1 && $b['inch'] <= 2.8 ) {
+			$rows[] = $b;
+		}
+	}
+	$max  = end( $rows )['mm'];
+	$size = ceil( $max + 6 );
+	$c    = $size / 2;
+	$svg  = '<svg class="rbs-print-preview" width="' . $size . 'mm" height="' . $size . 'mm" viewBox="0 0 ' . $size . ' ' . $size . '" role="img" aria-label="Concentric bangle size circles for Indian sizes 2.2 to 2.12">';
+	$n    = count( $rows );
+	foreach ( $rows as $i => $b ) {
+		$col  = 0 === $i % 2 ? '#1d4ed8' : '#111827';
+		$r    = $b['mm'] / 2;
+		$svg .= '<circle cx="' . $c . '" cy="' . $c . '" r="' . $r . '" fill="none" stroke="' . $col . '" stroke-width="0.3"/>';
+		$a    = deg2rad( 90 - ( $i + 0.5 ) * 180 / $n );
+		$lx   = round( $c + cos( $a ) * $r, 2 );
+		$ly   = round( $c - sin( $a ) * $r, 2 );
+		$svg .= '<rect x="' . ( $lx - 2.6 ) . '" y="' . ( $ly - 1.4 ) . '" width="5.2" height="2.8" fill="#fff"/>';
+		$svg .= '<text x="' . $lx . '" y="' . ( $ly + 0.9 ) . '" text-anchor="middle" font-size="2.6" font-weight="700" font-family="sans-serif" fill="' . $col . '">' . esc_html( $b['label'] ) . '</text>';
+	}
+	$svg .= '<path d="M' . ( $c - 3 ) . ' ' . $c . 'h6M' . $c . ' ' . ( $c - 3 ) . 'v6" stroke="#6b7280" stroke-width="0.25"/>';
+	$svg .= '</svg>';
+
+	return rbs_printable_box( $letter, $a4, $svg );
 }
 add_shortcode( 'rbs_printable_sizer', 'rbs_printable_sizer_shortcode' );
 

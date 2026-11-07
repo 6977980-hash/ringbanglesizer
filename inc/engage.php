@@ -150,7 +150,8 @@ add_action( 'generate_after_header', function () {
 			var r = v.replace(/^US\s*/, '');
 			url = c.r.indexOf(r) > -1 ? '/ring-size-in-mm/size-' + r.replace('.', '-') + '/' : '/ring-size-chart/';
 		}
-		return '<a href="' + c.h + url + '"><strong>' + esc(p.name || 'Me') + '</strong> ' + esc(v) + '</a>';
+		var f = /^[LR]-[a-z]+$/.test(p.finger || '') ? ' (' + p.finger.replace('-', ' ') + ')' : '';
+		return '<a href="' + c.h + url + '"><strong>' + esc((p.name || 'Me') + f) + '</strong> ' + esc(v) + '</a>';
 	});
 	box.innerHTML = '<span>Your saved sizes:</span> ' + items.join(' · ') + '<button type="button" aria-label="Hide saved sizes">×</button>';
 	box.hidden = false;

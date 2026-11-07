@@ -45,7 +45,7 @@ function rbs_core_pages() {
 </ul>
 
 <h2>Ring size conversion chart</h2>
-<p>All sizes below are standard ISO 8653 inner diameters. Use this chart when a shop lists sizes in a different system.</p>
+<p>ISO 8653 defines a ring size by its inner circumference in mm. The chart below gives each size with its matching inner diameter and circumference. Use it when a shop lists sizes in a different system.</p>
 [rbs_ring_table]
 
 <h2>Other free sizing tools</h2>
@@ -55,7 +55,7 @@ function rbs_core_pages() {
 <li><a href="/ring-size-chart/">Full ring size chart</a> with US, UK, EU and India columns</li>
 <li><a href="/ring-size-calculator/">Ring size calculator</a> – from a measurement in mm or inches</li>
 <li><a href="/ring-size-converter/">Ring size converter</a> – US, UK, EU and India sizes</li>
-<li><a href="/printable-ring-sizer/">Printable ring sizer</a> – free PDF</li>
+<li><a href="/printable-ring-sizer/">Printable ring sizer</a> and <a href="/printable-bangle-sizer/">printable bangle sizer</a> – free PDFs</li>
 <li><a href="/how-to-measure-ring-size-at-home/">How to measure ring size at home</a></li>
 </ul>
 ',
@@ -119,6 +119,7 @@ function rbs_core_pages() {
 <li><a href="/">Ring sizer</a> – measure a ring on your phone screen</li>
 <li><a href="/bracelet-size-calculator/">Bracelet size calculator</a></li>
 <li><a href="/bangle-size-chart/">Bangle size chart</a> and <a href="/how-to-measure-bangle-size/">how to measure bangle size</a></li>
+<li><a href="/printable-bangle-sizer/">Printable bangle sizer</a> – free PDF with true-size circles</li>
 </ul>
 ',
 			'faq' => array(
@@ -240,7 +241,7 @@ function rbs_core_pages() {
 			'seo_desc'  => 'Complete ring size chart with US, UK, EU/ISO and Indian sizes, inner diameter in mm and inches, and circumference. Convert any ring size instantly.',
 			'mode'      => null,
 			'content'   => '
-<p><strong>Every ring size system in one chart.</strong> Find your size in one column and read across for the others: US 7 is UK N½, EU 54, India 14 and 17.3 mm inside diameter. Diameters follow the ISO 8653 standard used by jewellers worldwide. Don\'t know your size yet? <a href="/">Measure a ring on your screen</a> or use the <a href="/ring-size-calculator/">ring size calculator</a>.</p>
+<p><strong>Every ring size system in one chart.</strong> Find your size in one column and read across for the others: US 7 is UK N½, EU 54, India 14 and 17.3 mm inside diameter. Sizes follow the ISO 8653 standard used by jewellers worldwide, which defines a ring size by its inner circumference; the inner diameter is listed next to it. Don\'t know your size yet? <a href="/">Measure a ring on your screen</a> or use the <a href="/ring-size-calculator/">ring size calculator</a>.</p>
 
 [rbs_ring_table]
 
