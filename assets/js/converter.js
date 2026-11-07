@@ -104,10 +104,10 @@
 			out.innerHTML =
 				'<div class="rbs-conv-big">US ' + esc(r.us) + ' = UK ' + esc(r.uk) + ' = EU ' + esc(r.eu) + '</div>' +
 				'<table class="rbs-table rbs-kv"><tbody>' +
-				'<tr><th scope="row">US / Canada</th><td>' + us + '</td></tr>' +
-				'<tr><th scope="row">UK / Australia / NZ</th><td>' + esc(r.uk) + '</td></tr>' +
+				'<tr><th scope="row"><a href="/ring-size-chart/us/">US / Canada</a></th><td>' + us + '</td></tr>' +
+				'<tr><th scope="row"><a href="/ring-size-chart/uk/">UK / Australia / NZ</a></th><td>' + esc(r.uk) + '</td></tr>' +
 				'<tr><th scope="row">EU / ISO / Germany / France</th><td>' + esc(r.eu) + '</td></tr>' +
-				'<tr><th scope="row">India / Pakistan</th><td>' + esc(r.india) + '</td></tr>' +
+				'<tr><th scope="row"><a href="/ring-size-chart/india/">India</a> / <a href="/ring-size-chart/pakistan/">Pakistan</a></th><td>' + esc(r.india) + '</td></tr>' +
 				'<tr><th scope="row">Italy / Spain / Switzerland</th><td>' + esc(r.eu - 40) + '</td></tr>' +
 				'<tr><th scope="row">Inner diameter</th><td>' + fmt(r.mm) + ' mm (' + fmt(r.mm / 25.4, 3) + ' in)</td></tr>' +
 				'<tr><th scope="row">Inner circumference</th><td>' + fmt(r.circ) + ' mm (' + fmt(r.circ / 25.4, 2) + ' in)</td></tr>' +

@@ -790,8 +790,8 @@ HTML
 			'slug'       => 'find-ring-size-secretly',
 			'parent'     => 'blog',
 			'title'      => 'How to Find Out Someone\'s Ring Size Secretly (and Their Bangle Size)',
-			'seo_title'  => 'How to Find Out Someone\'s Ring Size Secretly: 8 Ways That Work',
-			'seo_desc'   => 'Planning a surprise proposal or gift? 8 ways to find someone\'s ring or bangle size without asking: borrow a ring, trace it, ask a friend, and what to do if you guess.',
+			'seo_title'  => 'Find Someone\'s Ring Size Secretly: 8 Ways That Work',
+			'seo_desc'   => 'Planning a surprise proposal or gift? 8 ways to find someone\'s ring or bangle size without asking: borrow a ring, trace it, ask a friend.',
 			'mode'       => null,
 			'menu_order' => 4,
 			'content'    => <<<'HTML'

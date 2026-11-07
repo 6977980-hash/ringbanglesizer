@@ -5,7 +5,7 @@ Description:  GeneratePress child theme for ringbanglesizer.com. Adds the on-scr
 Author:       Ring Bangle Sizer
 Author URI:   https://ringbanglesizer.com
 Template:     generatepress
-Version:      0.12.1
+Version:      0.13.0
 Requires at least: 6.4
 Requires PHP: 7.4
 License:      GNU General Public License v2 or later
@@ -105,9 +105,9 @@ h1.entry-title,
 	.rbs-author-pic { flex-basis: 48px; width: 48px; height: 48px; font-size: 17px; }
 }
 
-/* Footer columns (about · ring tools · bangle tools) */
+/* Footer columns (about · ring tools · bangle tools · country charts) */
 .rbs-footer { background: #fafaf7; border-top: 3px solid var(--rbs-gold); }
-.rbs-footer-in { max-width: 1200px; margin: 0 auto; padding: 32px 40px 8px; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 28px; font-size: 15px; }
+.rbs-footer-in { max-width: 1200px; margin: 0 auto; padding: 32px 40px 8px; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 28px; font-size: 15px; }
 .rbs-fcol p { margin: 0 0 10px; color: #4b5563; font-size: 14px; }
 .rbs-flogo { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 10px; text-decoration: none; font-size: 18px; }
 .rbs-fcol summary { list-style: none; font-weight: 700; color: #111827; margin: 0 0 10px; pointer-events: none; }
@@ -117,6 +117,9 @@ h1.entry-title,
 .rbs-fcol a { color: #1f2937; text-decoration: none; }
 .rbs-fcol a:hover, .rbs-fcol a:focus { color: var(--rbs-blue); text-decoration: underline; }
 .rbs-fabout a { color: var(--rbs-blue); }
+@media (min-width: 768px) and (max-width: 1024px) {
+	.rbs-footer-in { grid-template-columns: 1fr 1fr; padding: 28px 28px 8px; }
+}
 @media (max-width: 767px) {
 	.rbs-footer-in { grid-template-columns: 1fr; gap: 0; padding: 24px 20px 4px; }
 	.rbs-fabout { padding-bottom: 12px; }
