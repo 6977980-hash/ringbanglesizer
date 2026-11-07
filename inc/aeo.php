@@ -213,6 +213,10 @@ function rbs_llms_txt() {
  * after each theme release and is re-checked twice a day in case it was overwritten.
  */
 function rbs_write_llms_txt() {
+	// Only from the real domain: Hostinger's temporary *.hostingersite.com host would put its URLs in the file.
+	if ( 'ringbanglesizer.com' !== wp_parse_url( home_url(), PHP_URL_HOST ) ) {
+		return;
+	}
 	$file = ABSPATH . 'llms.txt';
 	$body = rbs_llms_txt();
 	if ( false !== @file_put_contents( $file, $body ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
@@ -221,11 +225,14 @@ function rbs_write_llms_txt() {
 }
 
 add_action( 'init', function () {
+	if ( 'ringbanglesizer.com' !== wp_parse_url( home_url(), PHP_URL_HOST ) ) {
+		return;
+	}
 	$due = get_option( 'rbs_llms_version' ) !== RBS_VERSION . '/' . RBS_PAGES_VERSION;
 	if ( ! $due && ! get_transient( 'rbs_llms_checked' ) ) {
 		set_transient( 'rbs_llms_checked', 1, 12 * HOUR_IN_SECONDS );
 		$cur = @file_get_contents( ABSPATH . 'llms.txt' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
-		$due = false === $cur || false === strpos( $cur, RBS_LLMS_MARKER );
+		$due = false === $cur || false === strpos( $cur, RBS_LLMS_MARKER ) || false !== strpos( $cur, 'hostingersite.com' );
 	}
 	if ( $due ) {
 		// After the page sync (init 20) and after the response is sent.
