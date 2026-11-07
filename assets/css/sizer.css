@@ -84,18 +84,67 @@
 	display: flex;
 	justify-content: center;
 }
+/* Calibration card: looks like a plain bank card (no number, name or logo), drawn at
+   true size. --rbs-r (set by sizer.js) scales the corner to the real ISO 3.18 mm radius.
+   A thin solid edge is easier to line up than a thick dashed one, and crop marks just
+   outside each corner continue the card's edges. */
 .rbs-card {
+	--rbs-edge: 2px;
+	--rbs-mark: #b45309;
+	position: relative;
 	flex-shrink: 0; /* true size: never squeeze to fit */
-	border: 3px dashed var(--rbs-blue);
-	border-radius: 10px;
+	border: var(--rbs-edge) solid var(--rbs-blue);
+	border-radius: var(--rbs-r, 12px);
+	background:
+		radial-gradient(120% 90% at 100% 0%, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0) 60%),
+		linear-gradient(135deg, #dbeafe 0%, #eef2ff 45%, #fdf3d4 100%);
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .6);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--rbs-blue);
+	color: var(--rbs-blue-dark);
 	font-size: 13px;
 	font-weight: 600;
 	text-align: center;
 	padding: 6px;
+}
+/* chip: 11 × 9 mm, about 10 mm from the left and 19 mm from the top edge */
+.rbs-card::before {
+	content: "";
+	position: absolute;
+	left: 12%;
+	top: 35%;
+	width: 13%;
+	height: 17%;
+	border-radius: 18%;
+	border: 1px solid #a16207;
+	background:
+		linear-gradient(90deg, transparent 32%, rgba(120, 72, 0, .45) 32%, rgba(120, 72, 0, .45) 35%, transparent 35%, transparent 65%, rgba(120, 72, 0, .45) 65%, rgba(120, 72, 0, .45) 68%, transparent 68%),
+		linear-gradient(180deg, transparent 47%, rgba(120, 72, 0, .45) 47%, rgba(120, 72, 0, .45) 53%, transparent 53%),
+		linear-gradient(135deg, #fde68a, #d4a017 55%, #f5d76e);
+	pointer-events: none;
+}
+/* upright card (phones): the same card turned a quarter clockwise */
+.rbs-card.upright::before { left: auto; right: 35%; top: 12%; width: 17%; height: 13%; }
+/* crop marks on the line of each edge, outside the corners */
+.rbs-card::after {
+	content: "";
+	position: absolute;
+	inset: calc(-12px - var(--rbs-edge));
+	pointer-events: none;
+	background:
+		linear-gradient(var(--rbs-mark), var(--rbs-mark)) left 0 top 12px / 9px var(--rbs-edge) no-repeat,
+		linear-gradient(var(--rbs-mark), var(--rbs-mark)) left 12px top 0 / var(--rbs-edge) 9px no-repeat,
+		linear-gradient(var(--rbs-mark), var(--rbs-mark)) right 0 top 12px / 9px var(--rbs-edge) no-repeat,
+		linear-gradient(var(--rbs-mark), var(--rbs-mark)) right 12px top 0 / var(--rbs-edge) 9px no-repeat,
+		linear-gradient(var(--rbs-mark), var(--rbs-mark)) left 0 bottom 12px / 9px var(--rbs-edge) no-repeat,
+		linear-gradient(var(--rbs-mark), var(--rbs-mark)) left 12px bottom 0 / var(--rbs-edge) 9px no-repeat,
+		linear-gradient(var(--rbs-mark), var(--rbs-mark)) right 0 bottom 12px / 9px var(--rbs-edge) no-repeat,
+		linear-gradient(var(--rbs-mark), var(--rbs-mark)) right 12px bottom 0 / var(--rbs-edge) 9px no-repeat;
+}
+@media (forced-colors: active) {
+	.rbs-card { border-color: CanvasText; }
+	.rbs-card::before, .rbs-card::after { display: none; }
 }
 
 /* sliders */
@@ -368,7 +417,14 @@
 .rbs-cal-mode { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 8px; }
 .rbs .rbs-coin-toggle { padding: 4px 0; font-size: 14px; font-weight: 600; color: var(--rbs-blue); }
 .rbs-coin-sel { padding: 6px 8px; font-size: 15px; border: 1px solid #bfdbfe; border-radius: 6px; background: #fff; max-width: 100%; }
-.rbs-card.coin { border-radius: 50%; padding: 0; font-size: 14px; }
+.rbs-card.coin {
+	border-radius: 50%;
+	padding: 0;
+	font-size: 14px;
+	background: radial-gradient(circle at 35% 30%, #ffffff 0%, #eef2f7 35%, #cbd5e1 100%);
+}
+.rbs-card.coin::before,
+.rbs-card.coin::after { display: none; }
 
 /* saved sizes for the family */
 .rbs-save-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; margin: 12px 0 0; }

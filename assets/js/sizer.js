@@ -6,6 +6,7 @@
 
 	var CARD_MM = 85.6;                 // ISO/IEC 7810 ID-1 width
 	var CARD_SHORT_MM = 53.98;          // ISO/IEC 7810 ID-1 height
+	var CARD_RADIUS_MM = 3.18;          // ISO/IEC 7810 ID-1 corner radius
 	// CSS px per mm if never calibrated. Desktop monitors are close to 96 CSS px/inch (~3.78);
 	// phones are much denser (most are 5.8–6.4 CSS px/mm), so a narrow screen starts at 6.
 	var NARROW = Math.min(window.innerWidth || 1024, (window.screen && window.screen.width) || 1024) < 600;
@@ -534,7 +535,7 @@
 			if (coin) {
 				if (upright !== 'coin') {
 					upright = 'coin';
-					help.innerHTML = 'Lay a <strong>' + coin.name + '</strong> flat on the screen inside the circle. Drag the slider until the dashed circle is exactly the size of the coin.';
+					help.innerHTML = 'Lay a <strong>' + coin.name + '</strong> flat on the screen inside the circle. Drag the slider until the circle is exactly the size of the coin.';
 					card.textContent = coin.short;
 					card.classList.add('coin');
 					card.classList.remove('upright');
@@ -553,8 +554,8 @@
 			if (isUpright !== upright) {
 				upright = isUpright;
 				help.innerHTML = upright
-					? 'Hold any credit, debit or ID card <strong>upright</strong> against the screen. Drag the slider until the dashed outline is exactly as wide as the card\'s <strong>short side</strong>.'
-					: 'Hold any credit, debit or ID card against the screen. Drag the slider until the dashed outline is exactly the width of the card.';
+					? 'Hold any credit, debit or ID card <strong>upright</strong> against the screen. Drag the slider until the drawn card is exactly as wide as your card\'s <strong>short side</strong>.'
+					: 'Hold any credit, debit or ID card against the screen. Drag the slider until the drawn card is exactly the width of your card.';
 				card.textContent = upright ? 'Match the card\'s short side' : 'Match the card width';
 				card.classList.toggle('upright', upright);
 				$('.rbs-art-wrap', panel).innerHTML = cardArt(upright);
@@ -563,6 +564,7 @@
 			var h = ppm * (upright ? CARD_MM : CARD_SHORT_MM);
 			card.style.width = w + 'px';
 			card.style.height = h + 'px';
+			card.style.setProperty('--rbs-r', (ppm * CARD_RADIUS_MM) + 'px');
 			range.setAttribute('aria-valuetext', fmt(ppm * 25.4, 0) + ' pixels per inch');
 		}
 		range.addEventListener('input', function () { ppm = parseFloat(range.value); draw(); });

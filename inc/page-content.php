@@ -26,7 +26,7 @@ function rbs_core_pages() {
 
 <h2>How to measure your ring size on screen</h2>
 <ol>
-<li><strong>Calibrate.</strong> Hold a credit, debit or ID card on the screen and drag the slider until the dashed outline matches the card. On a phone, hold the card upright and match its short side (53.98 mm); on a computer, match its long side (85.6 mm). Every bank card is the same size, so this tells the tool the real size of your screen. You only do this once.</li>
+<li><strong>Calibrate.</strong> Hold a credit, debit or ID card on the screen and drag the slider until the card drawn on screen matches your card. On a phone, hold the card upright and match its short side (53.98 mm); on a computer, match its long side (85.6 mm). Every bank card is the same size, so this tells the tool the real size of your screen. You only do this once.</li>
 <li><strong>Match a ring.</strong> Put a ring that fits the right finger flat on the screen. Move the size slider until the blue circle lines up with the <em>inside</em> edge of the ring. Not the outside: the inside edge is what sits on your finger.</li>
 <li><strong>Read your size.</strong> The result shows US, UK/Australian, EU/ISO, Indian/Pakistani sizes plus the inner diameter and circumference in mm.</li>
 </ol>
