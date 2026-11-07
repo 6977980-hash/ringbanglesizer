@@ -594,6 +594,29 @@ add_action( 'wp_head', function () {
 }, 1 );
 
 /**
+ * Google Tag Manager (container GTM-55J58VQK). The loader script is async,
+ * so it does not block rendering; the noscript iframe goes right after <body>.
+ * Skipped in the Customizer preview so editing does not send fake hits.
+ */
+define( 'RBS_GTM_ID', 'GTM-55J58VQK' );
+
+add_action( 'wp_head', function () {
+	if ( is_customize_preview() ) {
+		return;
+	}
+	echo "<!-- Google Tag Manager -->\n";
+	echo "<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','" . esc_js( RBS_GTM_ID ) . "');</script>\n";
+	echo "<!-- End Google Tag Manager -->\n";
+}, 2 );
+
+add_action( 'wp_body_open', function () {
+	if ( is_customize_preview() ) {
+		return;
+	}
+	echo '<!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=' . esc_attr( RBS_GTM_ID ) . '" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->' . "\n";
+}, 1 );
+
+/**
  * Favicon from the theme while no Site Icon is set in WP admin
  * (avoids the /favicon.ico 404 and gives Google a search-result icon).
  */
