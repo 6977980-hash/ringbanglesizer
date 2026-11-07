@@ -619,14 +619,21 @@ add_action( 'wp_body_open', function () {
 /**
  * Favicon from the theme while no Site Icon is set in WP admin
  * (avoids the /favicon.ico 404 and gives Google a search-result icon).
+ * Each URL carries ?v=<file time> so browsers drop a cached old icon as soon
+ * as the file changes (the host caches images for 7 days).
  */
 add_action( 'wp_head', function () {
 	if ( has_site_icon() ) {
 		return;
 	}
-	echo '<link rel="icon" href="' . esc_url( RBS_URI . '/assets/img/icon.svg' ) . '" type="image/svg+xml">' . "\n";
-	echo '<link rel="icon" href="' . esc_url( RBS_URI . '/assets/img/icon-32.png' ) . '" sizes="32x32" type="image/png">' . "\n";
-	echo '<link rel="apple-touch-icon" href="' . esc_url( RBS_URI . '/assets/img/apple-touch-icon.png' ) . '">' . "\n";
+	$icon = function ( $file ) {
+		$path = RBS_DIR . '/assets/img/' . $file;
+		$ver  = file_exists( $path ) ? filemtime( $path ) : RBS_VERSION;
+		return esc_url( RBS_URI . '/assets/img/' . $file . '?v=' . $ver );
+	};
+	echo '<link rel="icon" href="' . $icon( 'icon.svg' ) . '" type="image/svg+xml">' . "\n";
+	echo '<link rel="icon" href="' . $icon( 'icon-32.png' ) . '" sizes="32x32" type="image/png">' . "\n";
+	echo '<link rel="apple-touch-icon" href="' . $icon( 'apple-touch-icon.png' ) . '">' . "\n";
 }, 3 );
 
 /**
