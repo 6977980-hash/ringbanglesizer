@@ -93,6 +93,13 @@ function rbs_core_pages() {
 <li>Wrap a string or soft tape around the widest part of your hand, over the knuckles, and note the length.</li>
 <li>Enter it in inches or cm. The calculator converts it to a diameter and rounds <em>up</em> to the next bangle size so it will pass over your hand.</li>
 </ol>
+<h3>Method 3: From a photo (works for any bangle on any phone)</h3>
+<ol>
+<li>Lay a bangle that fits you flat on a plain table, with a coin next to it (an Indian ₹10, Pakistani Rs 10, US quarter, UK 10p or €2 coin).</li>
+<li>Take a photo from straight above, about 40 cm away, with the phone held flat.</li>
+<li>Tap <strong>From a photo</strong>, choose the photo, fit the gold circle to the coin and the blue circle to the bangle\'s inside edge. The coin\'s known size turns the photo into millimetres, so no card calibration is needed.</li>
+</ol>
+<p>The photo is only shown in your browser and is never uploaded.</p>
 
 <h2>What do bangle sizes like 2.4 and 2.6 mean?</h2>
 <p>Indian bangle sizes are the inner diameter in inches and sixteenths. "2.4" means 2 and 4/16 inch (2.25 in, 57.2 mm). "2.6" is 2 and 6/16 inch (2.375 in, 60.3 mm). Sizes step by 2/16 inch, so each size is about 3.2 mm wider than the last. The most common adult sizes are 2.4 and 2.6; 2.8 and 2.10 are for larger hands, and 2.2 and below for petite wrists, teens and children.</p>

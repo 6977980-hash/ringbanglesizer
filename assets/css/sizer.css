@@ -485,3 +485,17 @@
 .rbs-sendback { margin: 10px 0 4px; }
 .rbs-send-back { width: 100%; max-width: 420px; font-size: 16px; }
 .rbs-asked { margin: 0 0 10px; padding: 10px 12px; border-radius: 10px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; font-size: 15px; }
+
+/* Bangle size from a photo */
+.rbs-photo-how { margin: 0 0 10px 1.2em; padding: 0; font-size: 14px; color: #374151; }
+.rbs-photo-how li { margin: 2px 0; }
+.rbs-photo-pick { position: relative; display: inline-block; cursor: pointer; overflow: hidden; }
+.rbs-photo-file { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.rbs-photo-pick:focus-within { outline: 3px solid #93c5fd; outline-offset: 2px; }
+.rbs-photo-private { margin: 6px 0 10px; font-size: 13px; }
+.rbs-photo-tabs { margin-top: 6px; }
+.rbs-photo-tip { min-height: 2.6em; }
+.rbs-photo-stage { display: flex; justify-content: center; background: var(--rbs-bg); border-radius: 10px; overflow: hidden; }
+.rbs-photo-canvas { display: block; max-width: 100%; touch-action: none; cursor: grab; }
+.rbs-photo-canvas:active { cursor: grabbing; }
+.rbs-photo-zoom { display: flex; gap: 8px; justify-content: center; margin: 6px 0 4px; }
