@@ -9,7 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'RBS_SITE_NAME', 'Ring Bangle Sizer' );
-define( 'RBS_EDITOR_NAME', 'Ring Bangle Sizer Editorial Team' );
 define( 'RBS_CONTACT_EMAIL', 'contact@ringbanglesizer.com' );
 define( 'RBS_FOUNDER_NAME', 'Ali Ahmad' );
 define( 'RBS_FOUNDER_URL', 'https://www.linkedin.com/in/ali-ahmad-chaudhry-12777486/' );
@@ -330,15 +329,6 @@ function rbs_org_entity() {
 		$org['sameAs'] = rbs_same_as();
 	}
 	return $org;
-}
-
-function rbs_editor_entity() {
-	return array(
-		'@type'    => 'Organization',
-		'name'     => RBS_EDITOR_NAME,
-		'url'      => home_url( '/about/' ),
-		'parentOrganization' => array( '@id' => home_url( '/#organization' ) ),
-	);
 }
 
 /**
