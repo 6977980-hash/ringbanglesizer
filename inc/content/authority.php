@@ -30,7 +30,7 @@ function rbs_authority_pages() {
 <p>The same letter scale is used in Australia, New Zealand, Ireland and South Africa, so this chart works for shops in those countries too. Sizes below F are children's sizes; sizes above Z are written Z+1, Z+2 and so on, and are listed in the full <a href="/ring-size-chart/">ring size chart</a>.</p>
 
 <h2>How UK ring sizes work</h2>
-<p>The UK scale was standardised in British Standard BS 6820, which defines each letter by the inside circumference of the ring. One full letter adds about 1.25 mm of circumference (0.4 mm of diameter), and a half letter adds about 0.6 mm. That makes UK sizes slightly finer than US half sizes, which is why British jewellers often quote a half letter (for example "M and a half") where an American shop would only offer 6.5.</p>
+<p>The UK scale was standardised in British Standard BS 6820:1987. That standard has since been withdrawn, but jewellers still use its letter scale and now measure rings per BS EN ISO 8653. Each letter is defined by the inside circumference of the ring. One full letter adds about 1.25 mm of circumference (0.4 mm of diameter), and a half letter adds about 0.6 mm. That makes UK sizes slightly finer than US half sizes, which is why British jewellers often quote a half letter (for example "M and a half") where an American shop would only offer 6.5.</p>
 <p>A few practical points:</p>
 <ul>
 <li><strong>Letters skip nothing.</strong> Unlike some old continental scales, every letter from A to Z is used, including I and Q.</li>
@@ -166,7 +166,7 @@ HTML
 			'mode'       => null,
 			'menu_order' => 4,
 			'content'    => <<<'HTML'
-<p><strong>Indian ring sizes are numbers from about 4 to 35, and each number is the ring's inner circumference minus 40 mm.</strong> Indian size 14 is 54 mm around (17.2 mm across), the same as US 7 and UK N½; size 22 is 62 mm around, the same as US 10. Women in India mostly wear sizes 11 to 17 and men 18 to 25. Use the chart below or <a href="/">measure a ring on your phone</a> to get your Indian size in seconds.</p>
+<p><strong>Indian ring sizes are numbers from about 4 to 35, and each number is the ring's inner circumference minus 40 mm.</strong> Indian size 14 is 54 mm around (17.2 mm across), the same as US 7 and UK N½; size 22 is 62 mm around, the same as US 10. Most women in India wear sizes 12 to 14 and most men 20 to 22. Use the chart below or <a href="/">measure a ring on your phone</a> to get your Indian size in seconds.</p>
 
 <h2>Indian ring size chart</h2>
 [rbs_india_ring_table]
@@ -203,7 +203,7 @@ HTML
 
 <h2>Measure your Indian ring size at home</h2>
 <ol>
-<li><strong>With the online sizer:</strong> open the <a href="/">ring sizer</a>, calibrate with any bank card, PAN card or Aadhaar PVC card (all are the standard 85.6 mm card size), then match a ring that fits. The result shows the Indian number with US, UK and mm.</li>
+<li><strong>With the online sizer:</strong> open the <a href="/">ring sizer</a>, calibrate with any bank card, PAN card or Aadhaar PVC card (all are the standard ID-1 card size; on a phone hold the card upright and match its short side, on a computer match its long side), then match a ring that fits. The result shows the Indian number with US, UK and mm.</li>
 <li><strong>With a thread:</strong> wrap a cotton thread around the base of the finger, mark it, and measure the length in mm. Divide by 3.14 to get the diameter and find it in the chart.</li>
 <li><strong>With a ring and scale:</strong> measure the inside of a ring that fits, edge to edge, in mm.</li>
 </ol>
@@ -278,7 +278,7 @@ HTML
 <p>For a comfort-fit band, some brands advise going down a quarter instead. Always check the brand's own sizing note, and try a sizer of the same width if you can.</p>
 
 <h2>Signet rings and pinky rings</h2>
-<p>Signet rings are traditionally worn on the little finger of the non-dominant hand. A man's little finger is usually 1½ to 2½ sizes smaller than his ring finger, so a man who wears a US 10 wedding band typically needs a US 7.5 to 8.5 signet ring. Because signet rings are heavy on top, they should fit snugly enough not to spin.</p>
+<p>Signet rings are traditionally worn on the little finger of the non-dominant hand. A man's little finger is usually about 1½ to 2 sizes smaller than his ring finger, so a man who wears a US 10 wedding band typically needs a US 8 to 8.5 signet ring. Because signet rings are heavy on top, they should fit snugly enough not to spin.</p>
 
 <h2>Materials that cannot be resized</h2>
 <p>Many popular men's rings are made from tungsten carbide, titanium, ceramic, carbon fibre or stainless steel. These cannot be resized like gold or silver, so if the size is wrong the only fix is an exchange. Measure twice, and measure late in the day when fingers are at their largest. Our guide <a href="/blog/resize-a-ring/">can you resize a ring?</a> lists which metals can be changed and by how much.</p>
@@ -306,7 +306,7 @@ HTML
 				array( 'What is the average ring size for men?', 'Most men wear US 9 to 10 (UK R½ to T½, 19.0 to 19.8 mm inner diameter). The overall range for men is about US 8 to 12.' ),
 				array( 'Is size 10 a big ring size for a man?', 'No. US 10 (19.8 mm, UK T½, EU 62) is right in the middle of the usual men\'s range and is one of the most common wedding band sizes.' ),
 				array( 'Should a men\'s wedding band be a size bigger?', 'Not a full size. For bands 6 mm and wider, go up about a quarter to a half size from your measured size; for comfort-fit bands follow the brand\'s advice.' ),
-				array( 'What size is a men\'s pinky ring?', 'The little finger is usually 1½ to 2½ sizes smaller than the ring finger, so a man with a US 10 ring finger typically wears about US 7.5 to 8.5 on the pinky.' ),
+				array( 'What size is a men\'s pinky ring?', 'The little finger is usually about 1½ to 2 sizes smaller than the ring finger, so a man with a US 10 ring finger typically wears about US 8 to 8.5 on the pinky.' ),
 				array( 'Can tungsten rings be resized?', 'No. Tungsten carbide is too hard to cut and solder, so a tungsten ring in the wrong size has to be exchanged.' ),
 			),
 		),
@@ -633,9 +633,9 @@ HTML
 <tbody>
 <tr><td>16.0 – 17.0 cm (6.3 – 6.7 in)</td><td><a href="/bangle-size/2-2/">2.2</a></td><td>54.0 mm</td></tr>
 <tr><td>17.0 – 18.0 cm (6.7 – 7.1 in)</td><td><a href="/bangle-size/2-4/">2.4</a></td><td>57.2 mm</td></tr>
-<tr><td>18.0 – 18.9 cm (7.1 – 7.4 in)</td><td><a href="/bangle-size/2-6/">2.6</a></td><td>60.3 mm</td></tr>
-<tr><td>18.9 – 19.9 cm (7.4 – 7.8 in)</td><td><a href="/bangle-size/2-8/">2.8</a></td><td>63.5 mm</td></tr>
-<tr><td>19.9 – 20.9 cm (7.8 – 8.2 in)</td><td><a href="/bangle-size/2-10/">2.10</a></td><td>66.7 mm</td></tr>
+<tr><td>18.0 – 18.9 cm (7.1 – 7.5 in)</td><td><a href="/bangle-size/2-6/">2.6</a></td><td>60.3 mm</td></tr>
+<tr><td>18.9 – 19.9 cm (7.5 – 7.9 in)</td><td><a href="/bangle-size/2-8/">2.8</a></td><td>63.5 mm</td></tr>
+<tr><td>19.9 – 21.0 cm (7.9 – 8.2 in)</td><td><a href="/bangle-size/2-10/">2.10</a></td><td>66.7 mm</td></tr>
 </tbody>
 </table>
 <p>The fastest check is a bangle she already wears comfortably: place it on the calibrated screen of the <a href="/bangle-size-calculator/">bangle sizer</a> and read the size. Ask her family discreetly if it is a surprise.</p>
@@ -656,7 +656,7 @@ HTML
 
 <h2>Chooda size: what to know</h2>
 <p>A traditional chooda is a set of matching bangles worn on both forearms from the wedding day, often for weeks or months. Because the whole stack has to pass over the hand at once, family members usually help the bride put it on during the chooda ceremony, using a little oil or a thin plastic bag over the hand. That is why a chooda is bought in the bride's normal bangle size, not one size up "to be safe": a loose chooda slides down and knocks against the hand. If she is between two sizes, choose the larger one only if the smaller one does not pass her hand at all.</p>
-<p>Some brides choose a chooda one size smaller than their usual glass bangles so it stays higher on the forearm. This works only if the set is put on with help and she is happy to keep it on, because it will be hard to take off.</p>
+<p>Do not buy a rigid glass or lac chooda one size smaller to make it sit higher on the forearm. It still has to pass over the hand, and a set that is too small can crack while being rolled on or hurt her hand. Only an openable gold kangan with a screw or hinge can be one size smaller.</p>
 
 <h2>Common mistakes</h2>
 <ul>
@@ -900,7 +900,7 @@ HTML
 <ul>
 <li>Screen calibration with a bank card, so circles show at true size on any phone, tablet or laptop.</li>
 <li>Ring sizes in US, UK, EU, Indian and mm, with "match a ring" and "type a measurement" methods.</li>
-<li>Indian bangle sizes (2.2 to 2.12) from a bangle or a hand measurement.</li>
+<li>Indian bangle sizes (baby 1.10 to men's kada 3.4) from a bangle or a hand measurement.</li>
 <li>Bracelet lengths from a wrist measurement.</li>
 <li>A light page (one small script, no frameworks) that works on mobile.</li>
 </ul>
@@ -929,7 +929,7 @@ HTML
 				array( 'Is the ring sizer widget free?', 'Yes. It is free for personal and commercial websites. We only ask you to keep the small credit line inside the widget.' ),
 				array( 'Does the widget work on mobile?', 'Yes. It is designed for phones first: visitors calibrate with a bank card and then place their ring on the screen.' ),
 				array( 'Does the widget use cookies or track visitors?', 'No. It sets no cookies and loads no analytics. Only the screen calibration is saved in the visitor\'s own browser.' ),
-				array( 'Can I embed the bangle size calculator?', 'Yes. Use the bangle embed code on this page; it shows Indian bangle sizes 2.2 to 2.12 with mm and inches.' ),
+				array( 'Can I embed the bangle size calculator?', 'Yes. Use the bangle embed code on this page; it shows Indian bangle sizes from 1.10 to 3.4 with mm and inches.' ),
 			),
 		),
 	);

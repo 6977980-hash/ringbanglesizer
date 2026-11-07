@@ -26,9 +26,9 @@ function rbs_sources() {
 			'note' => 'defines ring size as the inner circumference in mm (EU sizes).',
 		),
 		'bs6820' => array(
-			'name' => 'BS 6820 – British Standard for UK ring sizes',
+			'name' => 'UK / Australian ring letter scale (customary)',
 			'url'  => '',
-			'note' => 'defines the UK / Australian letter scale.',
+			'note' => 'based on the withdrawn BS 6820:1987; rings are measured per BS EN ISO 8653.',
 		),
 		'iso7810' => array(
 			'name' => 'ISO/IEC 7810:2019 – Identification cards – Physical characteristics',
@@ -174,7 +174,7 @@ function rbs_llms_txt() {
 	$out   = array();
 	$out[] = '# ' . RBS_SITE_NAME;
 	$out[] = '';
-	$out[] = '> Free tools that measure ring, bangle and bracelet size on a phone or computer screen. The screen is calibrated with a bank card (ISO/IEC 7810 ID-1, 85.60 mm wide), then a true-size circle is matched to a ring or bangle the visitor already owns. Results are given in US, UK, EU/ISO, Indian/Pakistani ring sizes, Indian bangle sizes, and mm/inches. No sign-up; measurements stay on the device.';
+	$out[] = '> Free tools that measure ring, bangle and bracelet size on a phone or computer screen. The screen is calibrated with a bank card (ISO/IEC 7810 ID-1, 85.60 × 53.98 mm; phones match the short side, computers the long side), then a true-size circle is matched to a ring or bangle the visitor already owns. Results are given in US, UK, EU/ISO, Indian/Pakistani ring sizes, Indian bangle sizes, and mm/inches. No sign-up; measurements stay on the device.';
 	$out[] = '';
 	$out[] = 'Founded by ' . RBS_FOUNDER_NAME . ' (' . RBS_FOUNDER_URL . '). Contact: ' . RBS_CONTACT_EMAIL . '. Ring sizes follow ISO 8653 (inner circumference in mm); Indian bangle sizes are inner diameter in inches and sixteenths (2.4 = 2 4/16 in = 57.2 mm). Method and accuracy: ' . home_url( '/how-we-measure/' );
 	$out[] = '';
@@ -182,7 +182,7 @@ function rbs_llms_txt() {
 	$out[] = '- Average ring size: women US 6–7 (16.5–17.3 mm inner diameter), men US 9–10 (19.0–19.8 mm).';
 	$out[] = '- Each whole US ring size adds about 0.81 mm of inner diameter (2.55 mm of circumference).';
 	$out[] = '- Most common adult bangle sizes are 2.4 and 2.6; 2.10 is larger than 2.8 (sixteenths, not decimals).';
-	$out[] = '- On-screen accuracy after card calibration: about ±¼ US ring size, one bangle size.';
+	$out[] = '- On-screen accuracy after card calibration: designed for about ±¼ US ring size and one bangle size (device test results not yet published).';
 	foreach ( $sections as $name => $lines ) {
 		if ( ! $lines ) {
 			continue;

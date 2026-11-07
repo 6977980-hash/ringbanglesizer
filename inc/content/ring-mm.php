@@ -55,11 +55,11 @@ function rbs_ring_mm_pages() {
 </ul>
 
 <h2>Typical ring sizes in Pakistan</h2>
-<p>For women, local sizes 12–16 (US 6–7.5) are the most common for the ring finger. Men usually wear 20–23 (US 9–10.5). Engagement rings for brides are often bought a size smaller than everyday rings because hands swell on a hot wedding day and shrink again afterwards; jewellers generally advise buying the exact size and resizing later if needed. These are averages only: measure the actual finger.</p>
+<p>Most women wear local sizes 12 to 14 (US 6 to 7) on the ring finger, and most men 20 to 22 (US 9 to 10). Hands swell on a hot wedding day and shrink again afterwards, so measure on a normal day at room temperature, not on the wedding day itself. Jewellers generally advise buying the exact size and resizing later if needed. These are averages only: measure the actual finger.</p>
 
 <h2>How to find your ring size at home</h2>
 <ol>
-<li><strong>On your phone:</strong> open the <a href="/">ring sizer</a>, calibrate with any bank card or CNIC (both are 85.6 mm wide), place a ring that fits on the screen and read the local number, US, UK and mm.</li>
+<li><strong>On your phone:</strong> open the <a href="/">ring sizer</a>, calibrate with any bank card or CNIC (both are the standard ID-1 card size; on a phone hold the card upright and match its short side), place a ring that fits on the screen and read the local number, US, UK and mm.</li>
 <li><strong>With a thread:</strong> wrap a thread around the base of the finger, mark it, measure the length in mm and find it in the circumference column.</li>
 <li><strong>With a ruler:</strong> measure the inside diameter of a ring that fits and match it in the diameter column.</li>
 </ol>
@@ -70,8 +70,8 @@ function rbs_ring_mm_pages() {
 			'faq' => array(
 				array( 'What ring size system is used in Pakistan?', 'Most local jewellers use a number scale (about 8 to 30) that matches the Indian system: the inner circumference in mm minus 40. Online shops such as Daraz usually list US sizes.' ),
 				array( 'What is size 14 ring in Pakistan in US size?', 'Local size 14 is about US 7, an inner diameter of 17.3 mm and UK N½.' ),
-				array( 'What is the common ring size for women in Pakistan?', 'Local sizes 12 to 16 (US 6 to 7.5, 16.5 to 17.7 mm) are the most common for a woman\'s ring finger.' ),
-				array( 'Can I use my CNIC to calibrate the ring sizer?', 'Yes. The CNIC is the same ID-1 card size as a bank card, 85.6 mm wide, so it works for calibration.' ),
+				array( 'What is the common ring size for women in Pakistan?', 'Most women wear local sizes 12 to 14 (US 6 to 7, 16.5 to 17.3 mm) on the ring finger.' ),
+				array( 'Can I use my CNIC to calibrate the ring sizer?', 'Yes. The CNIC is the same ID-1 card size as a bank card (85.6 × 54 mm), so it works for calibration. On a phone, hold it upright and match its short side.' ),
 				array( 'What ring size do men wear in Pakistan?', 'Most men wear local sizes 20 to 23, which is about US 9 to 10.5 (19.0 to 20.2 mm).' ),
 			),
 		),

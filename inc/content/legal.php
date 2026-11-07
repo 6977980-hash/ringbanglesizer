@@ -34,7 +34,7 @@ function rbs_legal_pages() {
 <h2>What you will find here</h2>
 <ul>
 <li><a href="/">Online ring sizer</a> – match a ring on your screen and read US, UK, EU, Indian and mm sizes.</li>
-<li><a href="/bangle-size-calculator/">Bangle size calculator</a> – Indian sizes 2.2 to 2.12 from a bangle you own or a hand measurement.</li>
+<li><a href="/bangle-size-calculator/">Bangle size calculator</a> – Indian sizes 1.10 to 3.4 from a bangle you own or a hand measurement.</li>
 <li><a href="/bracelet-size-calculator/">Bracelet size calculator</a> – chain, bangle and cuff lengths from your wrist size.</li>
 <li>Size charts and single-size guides such as <a href="/bangle-size/2-6/">bangle size 2.6</a> and <a href="/ring-size-in-mm/size-7/">ring size 7 in mm</a>.</li>
 </ul>
@@ -44,7 +44,7 @@ function rbs_legal_pages() {
 
 <h2>Our editorial rules</h2>
 <ul>
-<li>Every page is written and checked by the Ring Bangle Sizer Editorial Team. We do not publish auto-generated size pages.</li>
+<li>Every page is written by founder Ali Ahmad and checked against the standards listed in its sources box. We do not publish auto-generated size pages.</li>
 <li>Numbers on the page are produced from one shared data file, so a chart and a size guide can never disagree.</li>
 <li>When a size is a judgement call (for example a hand between two bangle sizes) we say so and explain both options.</li>
 <li>We correct mistakes quickly. If you spot one, <a href="/contact/">tell us</a> and we will fix it and update the date on the page.</li>
@@ -76,8 +76,8 @@ function rbs_legal_pages() {
 <p><strong>This page explains exactly how our sizers turn a circle on your screen into a ring or bangle size,</strong> which standards the numbers come from, and how accurate you can expect the result to be.</p>
 
 <h2>1. Screen calibration</h2>
-<p>Screens have different pixel densities, so a circle drawn "50 pixels wide" is a different real size on every phone. To draw true-size circles we need the number of pixels per millimetre on your screen. Every credit, debit and ID card is made to the ISO/IEC 7810 ID-1 standard: 85.60 mm wide and 53.98 mm tall. When you drag the slider until the outline matches your card, the tool divides the outline width in pixels by 85.60 and stores the result in your browser (local storage key <code>rbs_ppm_v1</code>). Nothing is sent to our server.</p>
-<p>Without calibration the tool falls back to the CSS standard of 96 pixels per inch (3.78 px/mm) and marks the result as approximate, because most phones do not report their real screen size to the browser.</p>
+<p>Screens have different pixel densities, so a circle drawn "50 pixels wide" is a different real size on every phone. To draw true-size circles we need the number of pixels per millimetre on your screen. Every credit, debit and ID card is made to the ISO/IEC 7810 ID-1 standard: 85.60 mm wide and 53.98 mm tall. On a computer you match the card\'s long side, so the tool divides the outline width in pixels by 85.60. Phone screens are narrower than a card, so on any screen narrower than 480 CSS pixels the card is held upright and you match its short side; the tool then divides by 53.98. You can also calibrate with a coin of known diameter (for example a ₹10 coin is 27 mm), but a card is more accurate because it is larger. The result is stored in your browser (local storage key <code>rbs_ppm_v1</code>). Nothing is sent to our server.</p>
+<p>Without calibration the tool starts from a guess and marks every result as approximate, because browsers do not report the real screen size. On narrow screens (phones) the guess is 6 CSS pixels per mm, which is close to most current phones; on wider screens it is the CSS standard of 96 pixels per inch (3.78 px/mm). Either guess can be off by a size or more, so calibrate before you rely on the number.</p>
 
 <h2>2. Ring sizes</h2>
 <p>ISO 8653 defines a ring size as the inner circumference in millimetres. We store the inner diameter for each US size from 3 to 15 in half steps (for example US 7 = 17.3 mm) and calculate everything else from it:</p>
@@ -98,10 +98,10 @@ function rbs_legal_pages() {
 <p>Bracelet length = wrist circumference + an ease allowance that depends on the style: ½ to 1¼ inch for chain bracelets, ¼ to ¾ inch for open cuffs. The allowances match the ranges most jewellers publish for snug, comfortable and loose fits.</p>
 
 <h2>5. How accurate is it?</h2>
-<p>After calibration the circle is drawn to the nearest pixel. On a typical phone (about 16 pixels per mm) that is better than 0.1 mm, far finer than the 0.4 mm between half ring sizes or the 3.2 mm between bangle sizes. In practice the limit is lining the ring up by eye. Our guidance is therefore:</p>
+<p>After calibration the circle is drawn to the nearest physical pixel. On a typical phone (about 16 physical pixels per mm) that is better than 0.1 mm, far finer than the 0.4 mm between half ring sizes or the 3.2 mm between bangle sizes. In practice the limit is how well the card and the ring are lined up by eye. The tool is therefore <strong>designed for</strong> the following accuracy; we will replace these design targets with measured results once the test in section 6 is published:</p>
 <ul>
-<li><strong>Rings:</strong> expect ±¼ US size. Measure twice, with two rings if you can.</li>
-<li><strong>Bangles:</strong> the result is reliable to one size; if you are between sizes, choose the larger for a rigid bangle.</li>
+<li><strong>Rings:</strong> designed to land within about ±¼ US size of a caliper measurement. Measure twice, with two rings if you can.</li>
+<li><strong>Bangles:</strong> designed to be right to one size; if you are between sizes, choose the larger for a rigid bangle.</li>
 </ul>
 
 <h2>6. Real-world accuracy test</h2>
@@ -116,9 +116,9 @@ function rbs_legal_pages() {
 <p>Found a problem? Please <a href="/contact/">contact us</a>.</p>
 ',
 			'faq' => array(
-				array( 'Why do I need a credit card to calibrate?', 'All bank cards are exactly 85.60 mm wide, so matching one on the screen tells the tool how many pixels make a millimetre on your device. You can use any ID-1 card, including a library card or ID card.' ),
+				array( 'Why do I need a credit card to calibrate?', 'All bank cards are the same ID-1 size, 85.60 × 53.98 mm, so matching one on the screen tells the tool how many pixels make a millimetre on your device. On a phone, hold the card upright and match its short side; on a computer, match its long side. You can use any ID-1 card, including a library card or ID card.' ),
 				array( 'Is my calibration or measurement uploaded?', 'No. The calibration number is stored only in your browser and the sizing happens on your device. No measurements are sent to our server.' ),
-				array( 'How accurate is an on-screen ring sizer?', 'After calibration the circle is accurate to about 0.1 mm. Lining up the ring by eye limits the result to about a quarter US size, similar to a plastic sizer set.' ),
+				array( 'How accurate is an on-screen ring sizer?', 'After calibration the circle is drawn to about 0.1 mm. Lining up the ring by eye is the real limit, so the tool is designed to land within about a quarter US size. Our device test results will be published on this page; until then, confirm expensive purchases with a jeweller.' ),
 				array( 'Which standard do you use for ring sizes?', 'ISO 8653, which defines ring size as the inner circumference in millimetres. Other systems are converted from the inner diameter.' ),
 			),
 		),
@@ -292,7 +292,7 @@ function rbs_legal_pages() {
 <h2>Sizes are estimates</h2>
 <p>The ring, bangle and bracelet sizes shown by our tools, charts and guides are <strong>estimates</strong> intended to help you choose a size. They are not a professional fitting. Accuracy depends on:</p>
 <ul>
-<li>calibrating the screen correctly with a standard 85.60 mm card, and calibrating again if you change zoom or device;</li>
+<li>calibrating the screen correctly with a standard ID-1 card (on a phone, match the card\'s short side; on a computer, its long side), and calibrating again if you change zoom or device;</li>
 <li>how precisely you line up a ring or bangle with the circle on screen;</li>
 <li>the accuracy of any hand, finger or wrist measurement you enter;</li>
 <li>the band width, profile and material of the piece (wide or comfort-fit rings, and thick kadas, fit tighter);</li>

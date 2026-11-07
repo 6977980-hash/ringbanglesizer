@@ -734,7 +734,7 @@
 					['Inner diameter', fmt(r.mm) + ' mm (' + fmt(r.mm / MM_IN, 2) + ' in)'],
 					['Inner circumference', fmt(r.circ) + ' mm']
 				]) + '</details>' +
-				'<p class="rbs-note">Ring sizes are accurate to about ±¼ size. Fingers swell in heat and in the evening; measure at room temperature.</p>';
+				'<p class="rbs-note">After calibration the sizer is designed to be within about ±¼ size. Fingers swell in heat and in the evening; measure at room temperature.</p>';
 			$('.rbs-sys-sel', result).addEventListener('change', function (e) {
 				ringSystem = e.target.value;
 				store(SYSTEM_KEY, ringSystem);
