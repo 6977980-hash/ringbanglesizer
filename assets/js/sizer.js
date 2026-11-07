@@ -174,16 +174,16 @@
 		}
 	}
 
-	/* Analytics. Anonymous events for Google Analytics (loaded by Tag
-	 * Manager): the size a visitor settled on, how it was measured and whether
-	 * the screen was calibrated, plus which result buttons were used. Used for
-	 * aggregate size statistics. Names typed in the tool are never sent. */
+	/* Analytics. Anonymous events for Google Analytics: the size a visitor
+	 * settled on, how it was measured and whether the screen was calibrated,
+	 * plus which result buttons were used. Used for aggregate size statistics.
+	 * Names typed in the tool are never sent. The GA4 Google tag is loaded by
+	 * Tag Manager, and it reads gtag-style commands from the dataLayer, so no
+	 * extra GTM tag is needed. Without GA (blocked, embed) this does nothing. */
 	function track(ev, params) {
 		try {
-			var o = { event: ev };
-			Object.keys(params || {}).forEach(function (k) { o[k] = params[k]; });
 			window.dataLayer = window.dataLayer || [];
-			window.dataLayer.push(o);
+			(function () { window.dataLayer.push(arguments); })('event', ev, params || {});
 		} catch (e) {}
 	}
 	// A result counts once the visitor has stopped changing it for a few seconds.
