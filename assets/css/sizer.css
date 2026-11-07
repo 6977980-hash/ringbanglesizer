@@ -471,3 +471,17 @@
 /* "Sizing someone else?" link under a result */
 .rbs-gift { margin: 4px 0 0; font-size: 14px; }
 .rbs-gift a { color: var(--rbs-blue); font-weight: 600; text-decoration: none; }
+
+/* Ask someone for their size (WhatsApp link) */
+.rbs-ask { margin: 14px 0 4px; padding: 10px 12px; border: 1px solid #bbf7d0; border-radius: 10px; background: #f0fdf4; }
+.rbs-ask summary { cursor: pointer; font-size: 15px; font-weight: 600; color: #166534; }
+.rbs-ask[open] summary { margin-bottom: 6px; }
+.rbs-ask .rbs-field input { max-width: 240px; }
+.rbs-ask-out { margin: 6px 0 0; font-size: 14px; }
+.rbs-ask-link { width: 100%; max-width: 420px; font-size: 13px; padding: 6px 8px; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; }
+.rbs-ask-msg { display: block; margin-top: 4px; color: #166534; font-weight: 600; }
+.rbs .rbs-ask-wa, .rbs .rbs-send-back { background: #15803d; border-color: #15803d; color: #fff; }
+.rbs .rbs-ask-wa:hover, .rbs .rbs-send-back:hover { background: #166534; border-color: #166534; color: #fff; }
+.rbs-sendback { margin: 10px 0 4px; }
+.rbs-send-back { width: 100%; max-width: 420px; font-size: 16px; }
+.rbs-asked { margin: 0 0 10px; padding: 10px 12px; border-radius: 10px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; font-size: 15px; }

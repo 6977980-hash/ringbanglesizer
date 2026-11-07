@@ -149,6 +149,7 @@
 		if (nameIn) { nameIn.addEventListener('input', function () { lastName = nameIn.value; }); }
 		if (save) {
 			save.addEventListener('click', function () {
+				trackAction('save', save.getAttribute('data-kind'));
 				var who = savePerson(nameIn ? nameIn.value : 'Me', save.getAttribute('data-kind'), save.getAttribute('data-label'));
 				save.textContent = 'Saved ✓';
 				if (onSaved) { onSaved(who); }
@@ -156,12 +157,13 @@
 		}
 		var cardBtn = $('.rbs-card-btn', box);
 		if (cardBtn && card) {
-			cardBtn.addEventListener('click', function () { sizeCard(card, nameIn ? nameIn.value : ''); });
+			cardBtn.addEventListener('click', function () { trackAction('card', card.kind); sizeCard(card, nameIn ? nameIn.value : ''); });
 		}
 		var share = $('.rbs-share', box);
 		if (share) {
 			share.addEventListener('click', function () {
 				var text = share.getAttribute('data-text');
+				if (card) { trackAction('share', card.kind); }
 				var url = location.origin + location.pathname;
 				if (navigator.share) {
 					navigator.share({ title: document.title, text: text, url: url }).catch(function () {});
@@ -170,6 +172,124 @@
 				}
 			});
 		}
+	}
+
+	/* Analytics. Anonymous events for Google Analytics: the size a visitor
+	 * settled on, how it was measured and whether the screen was calibrated,
+	 * plus which result buttons were used. Used for aggregate size statistics.
+	 * Names typed in the tool are never sent. The GA4 Google tag is loaded by
+	 * Tag Manager, and it reads gtag-style commands from the dataLayer, so no
+	 * extra GTM tag is needed. Without GA (blocked, embed) this does nothing. */
+	function track(ev, params) {
+		try {
+			window.dataLayer = window.dataLayer || [];
+			(function () { window.dataLayer.push(arguments); })('event', ev, params || {});
+		} catch (e) {}
+	}
+	// A result counts once the visitor has stopped changing it for a few seconds.
+	var resultTimer = null, lastTracked = '';
+	// cal: 'yes' / 'no' for on-screen matching, 'n/a' for typed measurements.
+	function trackResult(kind, size, mm, method, cal) {
+		clearTimeout(resultTimer);
+		resultTimer = setTimeout(function () {
+			var key = kind + '|' + size;
+			if (key === lastTracked) { return; }
+			lastTracked = key;
+			track('rbs_size_result', { rbs_kind: kind, rbs_size: size, rbs_mm: Math.round(mm * 10) / 10, rbs_method: method, rbs_calibrated: cal });
+		}, 6000);
+	}
+	function trackAction(action, kind) { track('rbs_size_action', { rbs_action: action, rbs_kind: kind }); }
+
+	/* "Ask for a size": someone buying for another person sends a link on
+	 * WhatsApp; the page opened from it (?ask=Name) greets the receiver and
+	 * offers a button to send the size straight back. Nothing is stored. */
+	function cleanName(n) { return String(n).replace(/[\u0000-\u001f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 24); }
+	var askName = (function () {
+		var m = /[?&]ask=([^&#]*)/.exec(location.search);
+		if (!m) { return ''; }
+		var n = '';
+		try { n = decodeURIComponent(m[1].replace(/\+/g, ' ')); } catch (e) { return ''; }
+		return cleanName(n);
+	})();
+	var ASK_NAME_KEY = 'rbs_ask_name_v1';
+	function siteHome() { return data.home || location.origin; }
+	function askUrl(kind, name) {
+		return siteHome() + (kind === 'bangle' ? '/bangle-size-calculator/' : '/') + '?ask=' + encodeURIComponent(name);
+	}
+	function openWhatsApp(text) {
+		window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
+	}
+	// Under a result when the page was opened from an ask link.
+	// measured: false while the result still shows the starting size, so nobody sends a size they never measured.
+	function sendBackButton(kind, sizeText, measured) {
+		if (!askName) { return ''; }
+		if (!measured) {
+			return '<p class="rbs-sendback rbs-muted">Match your ' + kind + ' (or enter its size) first. The button to send your size to ' + escHtml(askName) + ' appears here.</p>';
+		}
+		var text = sizeText + ' Measured free on ' + siteHome() + '/';
+		return '<div class="rbs-sendback"><button type="button" class="rbs-btn rbs-send-back" data-kind="' + kind + '" data-text="' + escHtml(text) + '">' +
+			'Send my size to ' + escHtml(askName) + ' on WhatsApp</button></div>';
+	}
+	function wireSendBack(box) {
+		var b = $('.rbs-send-back', box);
+		if (!b) { return; }
+		b.addEventListener('click', function () {
+			trackAction('send_back', b.getAttribute('data-kind'));
+			openWhatsApp(b.getAttribute('data-text'));
+		});
+	}
+	// Box under the result: build an ask link for someone else (drawn once per panel).
+	function askBox(kind) {
+		var what = kind === 'bangle' ? 'bangle' : 'ring';
+		var id = uid('ask');
+		var b = el('details', { 'class': 'rbs-ask' });
+		b.innerHTML =
+			'<summary>Buying for someone else? Ask for their ' + what + ' size on WhatsApp</summary>' +
+			'<p class="rbs-muted">They get a link, measure on their own phone in about 2 minutes and send their size straight back to you. No sign-up for either of you.</p>' +
+			'<div class="rbs-field"><label for="' + id + '">Your name (shown to them)</label><input type="text" class="rbs-ask-name" id="' + id + '" maxlength="24" autocomplete="given-name"></div>' +
+			'<div class="rbs-actions"><button type="button" class="rbs-btn rbs-ask-wa">Send on WhatsApp</button>' +
+			'<button type="button" class="rbs-btn secondary rbs-ask-copy">Copy link</button></div>' +
+			'<p class="rbs-ask-out rbs-hidden"><input type="text" class="rbs-ask-link" readonly aria-label="Your ask link"> <span class="rbs-ask-msg" role="status"></span></p>';
+		var nameIn = $('.rbs-ask-name', b);
+		nameIn.value = load(ASK_NAME_KEY) || '';
+		var out = $('.rbs-ask-out', b), linkIn = $('.rbs-ask-link', b), msg = $('.rbs-ask-msg', b);
+		function link() {
+			var n = cleanName(nameIn.value);
+			if (!n) {
+				msg.textContent = 'Type your name first so they know who is asking.';
+				out.classList.remove('rbs-hidden');
+				linkIn.classList.add('rbs-hidden');
+				nameIn.focus();
+				return '';
+			}
+			store(ASK_NAME_KEY, n);
+			var u = askUrl(kind, n);
+			linkIn.value = u;
+			linkIn.classList.remove('rbs-hidden');
+			out.classList.remove('rbs-hidden');
+			msg.textContent = '';
+			return u;
+		}
+		$('.rbs-ask-wa', b).addEventListener('click', function () {
+			var u = link();
+			if (!u) { return; }
+			var n = cleanName(nameIn.value);
+			trackAction('ask_create', kind);
+			openWhatsApp('Hi, it\'s ' + n + '! What is your ' + what + ' size? You can measure it free on your phone in about 2 minutes here, then tap the button at the end to send it back to me: ' + u);
+		});
+		$('.rbs-ask-copy', b).addEventListener('click', function () {
+			var u = link();
+			if (!u) { return; }
+			trackAction('ask_copy', kind);
+			function done() { msg.textContent = 'Link copied.'; }
+			if (navigator.clipboard && navigator.clipboard.writeText) {
+				navigator.clipboard.writeText(u).then(done, function () { linkIn.select(); msg.textContent = 'Select the link and copy it.'; });
+			} else {
+				linkIn.select();
+				try { document.execCommand('copy'); done(); } catch (e) { msg.textContent = 'Select the link and copy it.'; }
+			}
+		});
+		return b;
 	}
 
 	// Small drawing: a card held against a phone (upright) or a laptop screen.
@@ -725,6 +845,7 @@
 		var result = $('.rbs-result', panel);
 
 		var lastRing = null, lastFromMm = false;
+		var userSet = false; // only results the visitor chose are counted, not the starting size
 		function show(r, fromMm) {
 			lastRing = r; lastFromMm = fromMm;
 			var others = ['us', 'uk', 'eu', 'in'].filter(function (k) { return k !== ringSystem; })
@@ -733,11 +854,13 @@
 				Object.keys(SYSTEMS).map(function (k) { return '<option value="' + k + '"' + (k === ringSystem ? ' selected' : '') + '>' + SYSTEMS[k] + '</option>'; }).join('') +
 				'</select></label>';
 			var ax = !fromMm && !calibrated;
+			var ringSizeText = (ax ? 'My approximate ring size (screen not calibrated) is US ' : 'My ring size is US ') + r.us + ' / UK ' + r.uk + ' / EU ' + r.eu + ' / India ' + r.india + ' (' + fmt(r.mm) + ' mm inside diameter).';
 			result.innerHTML =
 				'<div class="rbs-result-top"><span class="rbs-kicker">' + (fromMm ? 'Closest ring size' : (ax ? 'Your ring size · screen not calibrated' : 'Your ring size')) + '</span>' + picker + '</div>' +
 				'<div class="rbs-big">' + approxPre(ax) + ringIn(r, ringSystem) + '</div>' +
 				'<div class="rbs-sub">= ' + others + ' · ' + fmt(r.mm) + ' mm inside</div>' +
-				resultActions('ring', 'US ' + r.us, (ax ? 'My approximate ring size (screen not calibrated) is US ' : 'My ring size is US ') + r.us + ' / UK ' + r.uk + ' / EU ' + r.eu + ' / India ' + r.india + ' (' + fmt(r.mm) + ' mm inside diameter). Find yours free:') +
+				sendBackButton('ring', ringSizeText, userSet) +
+				resultActions('ring', 'US ' + r.us, ringSizeText + ' Find yours free:') +
 				'<details class="rbs-more"><summary>All sizes and measurements</summary>' +
 				resultTable([
 					['US / Canada', r.us],
@@ -757,6 +880,8 @@
 				kind: 'ring', title: ax ? 'approximate ring size' : 'ring size', big: ringIn(r, ringSystem),
 				rows: [['US / Canada', String(r.us)], ['UK / Australia', r.uk], ['EU / ISO', String(r.eu)], ['India / Pakistan', String(r.india)], ['Inside diameter', fmt(r.mm) + ' mm'], ['Inside circumference', fmt(r.circ) + ' mm']]
 			});
+			wireSendBack(result);
+			if (userSet) { trackResult('ring', 'US ' + r.us, r.mm, fromMm ? 'mm' : 'match', fromMm ? 'n/a' : (calibrated ? 'yes' : 'no')); }
 			if (fit) { fit.refresh(); }
 		}
 		function drawMatch() {
@@ -766,9 +891,10 @@
 			range.setAttribute('aria-valuetext', 'US ' + r.us + ', UK ' + r.uk + ', ' + fmt(r.mm) + ' mm');
 			show(r, false);
 		}
-		range.addEventListener('input', function () { idx = parseInt(range.value, 10); drawMatch(); setStep(root, 3); });
+		range.addEventListener('input', function () { userSet = true; idx = parseInt(range.value, 10); drawMatch(); setStep(root, 3); });
 		panel.querySelectorAll('.rbs-m-match .rbs-step').forEach(function (b) {
 			b.addEventListener('click', function () {
+				userSet = true;
 				idx = Math.min(data.rings.length - 1, Math.max(0, idx + parseInt(b.getAttribute('data-d'), 10)));
 				range.value = idx; drawMatch(); setStep(root, 3);
 			});
@@ -788,7 +914,7 @@
 			show(nearestRing(d), true);
 		}
 		convertOnUnitChange($('.rbs-mm-val', panel), $('.rbs-mm-type', panel), ringToMm);
-		$('.rbs-mm-val', panel).addEventListener('input', fromMm);
+		$('.rbs-mm-val', panel).addEventListener('input', function () { userSet = true; fromMm(); });
 		$('.rbs-mm-type', panel).addEventListener('change', fromMm);
 
 		panel.querySelectorAll('.rbs-method').forEach(function (b) {
@@ -807,9 +933,11 @@
 			for (var i = 0; i < data.rings.length; i++) { if ('US ' + data.rings[i].us === label) { return i; } }
 			return -1;
 		}, function (i) {
+			userSet = true;
 			idx = i; range.value = i;
 			$('.rbs-method[data-m="match"]', panel).click();
 		});
+		panel.insertBefore(askBox('ring'), $('.rbs-result', panel).nextSibling);
 		root.appendChild(panel);
 		fit = renderFit(root, 'ring', function () { return lastRing ? { label: 'US ' + lastRing.us, mm: lastRing.mm } : null; });
 		drawMatch();
@@ -851,15 +979,18 @@
 		var result = $('.rbs-result', panel);
 
 		var lastBangle = null;
+		var userSet = false; // only results the visitor chose are counted, not the starting size
 		// extra is only passed by the hand measurement, which does not depend on the screen.
 		function show(b, extra) {
 			lastBangle = b;
 			var ax = extra === undefined && !calibrated;
+			var bangleSizeText = (ax ? 'My approximate bangle size (screen not calibrated) is ' : 'My bangle size is ') + b.label + ' (' + fmt(b.mm) + ' mm inside diameter).';
 			result.innerHTML =
 				'<div class="rbs-result-top"><span class="rbs-kicker">' + (ax ? 'Your bangle size · screen not calibrated' : 'Your bangle size') + '</span></div>' +
 				'<div class="rbs-big">' + approxPre(ax) + 'Size ' + b.label + '</div>' +
 				'<div class="rbs-sub">= ' + fmt(b.mm) + ' mm (' + fmt(b.inch, 3) + ' in) inside · ' + b.fit + '</div>' +
-				resultActions('bangle', 'Size ' + b.label, (ax ? 'My approximate bangle size (screen not calibrated) is ' : 'My bangle size is ') + b.label + ' (' + fmt(b.mm) + ' mm inside diameter). Find yours free:') +
+				sendBackButton('bangle', bangleSizeText, userSet) +
+				resultActions('bangle', 'Size ' + b.label, bangleSizeText + ' Find yours free:') +
 				'<details class="rbs-more"><summary>All measurements</summary>' +
 				resultTable([
 					['Indian bangle size', b.label],
@@ -872,6 +1003,8 @@
 				kind: 'bangle', title: ax ? 'approximate bangle size' : 'bangle size', big: 'Size ' + b.label,
 				rows: [['Indian size', b.label], ['Inside diameter', fmt(b.mm) + ' mm'], ['In centimetres', fmt(b.mm / 10, 2) + ' cm'], ['In inches', fmt(b.inch, 3) + ' in'], ['Inside circumference', fmt(b.mm * Math.PI) + ' mm'], ['Typical fit', b.fit]]
 			});
+			wireSendBack(result);
+			if (userSet) { trackResult('bangle', b.label, b.mm, extra === undefined ? 'match' : 'hand', extra === undefined ? (calibrated ? 'yes' : 'no') : 'n/a'); }
 			if (fit) { fit.refresh(); }
 		}
 		function drawMatch() {
@@ -881,9 +1014,10 @@
 			range.setAttribute('aria-valuetext', 'Size ' + b.label + ', ' + fmt(b.mm) + ' mm');
 			show(b);
 		}
-		range.addEventListener('input', function () { idx = parseInt(range.value, 10); drawMatch(); setStep(root, 3); });
+		range.addEventListener('input', function () { userSet = true; idx = parseInt(range.value, 10); drawMatch(); setStep(root, 3); });
 		panel.querySelectorAll('.rbs-m-match .rbs-step').forEach(function (b) {
 			b.addEventListener('click', function () {
+				userSet = true;
 				idx = Math.min(data.bangles.length - 1, Math.max(0, idx + parseInt(b.getAttribute('data-d'), 10)));
 				range.value = idx; drawMatch(); setStep(root, 3);
 			});
@@ -915,7 +1049,7 @@
 			show(b, '<p class="rbs-note">Your hand circumference ' + fmt(circMm) + ' mm ≈ ' + fmt(d) + ' mm across. The bangle must be at least this wide inside.' + roll + over + ' Hands are not round, so this is an estimate: if you have a bangle that fits, use "Match a bangle I own" for a better result.</p>');
 		}
 		convertOnUnitChange($('.rbs-hand-val', panel), $('.rbs-hand-unit', panel), handToMm);
-		$('.rbs-hand-val', panel).addEventListener('input', fromHand);
+		$('.rbs-hand-val', panel).addEventListener('input', function () { userSet = true; fromHand(); });
 		$('.rbs-hand-unit', panel).addEventListener('change', fromHand);
 
 		panel.querySelectorAll('.rbs-method').forEach(function (b) {
@@ -933,10 +1067,11 @@
 			for (var i = 0; i < data.bangles.length; i++) { if ('Size ' + data.bangles[i].label === label) { return i; } }
 			return -1;
 		}, function (i) {
+			userSet = true;
 			idx = i; range.value = i;
 			$('.rbs-method[data-m="match"]', panel).click();
 		});
-
+		panel.insertBefore(askBox('bangle'), $('.rbs-result', panel).nextSibling);
 		root.appendChild(panel);
 		fit = renderFit(root, 'bangle', function () { return lastBangle ? { label: 'Size ' + lastBangle.label, mm: lastBangle.mm } : null; });
 		drawMatch();
@@ -1028,6 +1163,12 @@
 		tabs.forEach(function (t) {
 			t.addEventListener('click', function () { mount(t.getAttribute('data-tab')); });
 		});
+		if (askName && mode !== 'bracelet') {
+			var what = mode === 'bangle' ? 'bangle' : 'ring';
+			steps.parentNode.insertBefore(el('p', { 'class': 'rbs-asked', role: 'note' },
+				'<strong>' + escHtml(askName) + ' asked for your ' + what + ' size.</strong> Follow the 3 steps below, then tap <em>Send my size to ' + escHtml(askName) + '</em> under your result.'), steps);
+			track('rbs_ask_landing', { rbs_kind: what });
+		}
 		mount(mode);
 		body.classList.remove('rbs-pending'); // reserved height no longer needed once the tool is drawn
 		onScale(function () { redraw(); });
