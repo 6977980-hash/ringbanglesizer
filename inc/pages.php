@@ -102,7 +102,11 @@ function rbs_sync_pages() {
 			'comment_status' => 'closed',
 			'ping_status'    => 'closed',
 		);
-		if ( $existing ) {
+		// Only touch pages whose source changed, so "Updated" dates and dateModified stay honest.
+		$hash = md5( wp_json_encode( array( $p['title'], $p['slug'], $content, $parent_id, $postarr['menu_order'] ) ) );
+		if ( $existing && 'publish' === $existing->post_status && get_post_meta( $existing->ID, 'rbs_src_hash', true ) === $hash ) {
+			$id = $existing->ID;
+		} elseif ( $existing ) {
 			$postarr['ID'] = $existing->ID;
 			$id            = wp_update_post( $postarr, true );
 		} else {
@@ -112,6 +116,7 @@ function rbs_sync_pages() {
 			continue;
 		}
 		$ids[ $key ] = $id;
+		update_post_meta( $id, 'rbs_src_hash', $hash );
 
 		update_post_meta( $id, 'rbs_key', $key );
 		update_post_meta( $id, 'rbs_faq', $p['faq'] );
