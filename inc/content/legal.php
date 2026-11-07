@@ -165,7 +165,7 @@ function rbs_legal_pages() {
 			'author_box' => false,
 			'menu_order' => 60,
 			'content'    => '
-<p><em>Last updated: ' . $updated . '</em></p>
+<p><em>Last updated: November 7, 2026</em></p>
 <p>This privacy policy explains what information ringbanglesizer.com ("Ring Bangle Sizer", "we", "us") collects when you use the website, how it is used and the choices you have.</p>
 
 <h2>1. The sizing tools run on your device</h2>
@@ -174,8 +174,15 @@ function rbs_legal_pages() {
 <h2>2. Information collected automatically</h2>
 <p>Like almost every website, our hosting provider and content delivery network receive technical data when your browser requests a page: IP address, browser type, device type, referring page, the page requested and the date and time. This data is kept in server logs for security, to prevent abuse and to fix errors, and is deleted on a rolling basis. Our CDN may set a strictly necessary security cookie to tell real visitors from bots.</p>
 
-<h2>3. Analytics</h2>
-<p>We may use Google Analytics to understand which pages and tools are used, so we can improve them. Analytics collects information such as pages viewed, time on page, approximate location (country/city) and device type, using cookies or similar identifiers. Where the law requires it, analytics cookies are only set after you give consent in our cookie banner. You can opt out with the <a href="https://tools.google.com/dlpage/gaoptout" rel="nofollow noopener" target="_blank">Google Analytics opt-out browser add-on</a>.</p>
+<h2>3. Analytics (Google Analytics and Google Tag Manager)</h2>
+<p>We use Google Analytics 4, a web analytics service provided by Google LLC / Google Ireland Limited, to understand which pages and tools are used, so we can improve them. Google Analytics is loaded through Google Tag Manager, a Google tool that loads tags such as Google Analytics on our pages. Tag Manager itself does not set cookies or store personal data, but it does load scripts from Google\'s servers, so Google receives your IP address and browser details in that request.</p>
+<p>Google Analytics collects information such as the pages you view, how long you stay, the links and tools you use, the page that referred you, approximate location (country and city), and device, browser and operating system. It uses first-party cookies (<code>_ga</code> and <code>_ga_&lt;ID&gt;</code>, which last up to 2 years) to tell new visitors from returning ones. Google Analytics 4 does not log or store IP addresses; they are used only briefly to estimate location and then discarded. We do not send your name, e-mail address or any sizing measurements to Google Analytics, and we do not use it to identify you personally. Google keeps the data for a limited retention period set in our account (at most 14 months) and processes it under its own <a href="https://policies.google.com/privacy" rel="nofollow noopener" target="_blank">privacy policy</a>; see also <a href="https://policies.google.com/technologies/partner-sites" rel="nofollow noopener" target="_blank">how Google uses data from sites that use its services</a>.</p>
+<p>How to opt out of Google Analytics:</p>
+<ul>
+<li>Install the <a href="https://tools.google.com/dlpage/gaoptout" rel="nofollow noopener" target="_blank">Google Analytics opt-out browser add-on</a>.</li>
+<li>Block or delete cookies for this site in your browser settings, or use your browser\'s tracking protection or a content blocker. The sizing tools keep working without cookies.</li>
+</ul>
+<p>We do not show a cookie consent banner at the moment, because we do not run advertising yet. Before we show ads, we will add a consent tool so that visitors in the European Economic Area, the UK and Switzerland can accept or refuse analytics and advertising cookies, and this policy will be updated.</p>
 
 <h2>4. Advertising</h2>
 <p>This website may display advertising served by Google AdSense or other advertising partners.</p>
@@ -185,20 +192,19 @@ function rbs_legal_pages() {
 <li>You may opt out of personalised advertising by visiting <a href="https://adssettings.google.com" rel="nofollow noopener" target="_blank">Google Ads Settings</a>. You can also opt out of some third-party vendors\' use of cookies for personalised advertising at <a href="https://www.aboutads.info/choices/" rel="nofollow noopener" target="_blank">www.aboutads.info</a> or, in the EU/UK, <a href="https://www.youronlinechoices.eu/" rel="nofollow noopener" target="_blank">www.youronlinechoices.eu</a>.</li>
 <li>Learn how Google uses information from sites that use its services: <a href="https://policies.google.com/technologies/partner-sites" rel="nofollow noopener" target="_blank">policies.google.com/technologies/partner-sites</a>.</li>
 </ul>
-<p>Visitors in the European Economic Area, the UK and Switzerland are asked for consent through a certified consent management platform before personalised ads or non-essential cookies are used. If you do not consent, any ads shown are non-personalised.</p>
+<p>No ads are shown on the site at the moment. If we start showing ads, visitors in the European Economic Area, the UK and Switzerland will be asked for consent through a certified consent management platform before personalised ads are used. If you do not consent, any ads shown will be non-personalised.</p>
 
 <h2>5. Cookies and local storage</h2>
 <table class="rbs-table">
 <thead><tr><th>Name / type</th><th>Purpose</th><th>Category</th></tr></thead>
 <tbody>
 <tr><td><code>rbs_ppm_v1</code> (local storage)</td><td>Remembers your screen calibration</td><td>Functional, stays on your device</td></tr>
-<tr><td>Consent cookie</td><td>Remembers your cookie choices</td><td>Strictly necessary</td></tr>
 <tr><td>CDN security cookie</td><td>Bot and abuse protection</td><td>Strictly necessary</td></tr>
-<tr><td>Analytics cookies (e.g. <code>_ga</code>)</td><td>Visitor statistics</td><td>Analytics, consent where required</td></tr>
-<tr><td>Advertising cookies (e.g. Google)</td><td>Showing and measuring ads</td><td>Marketing, consent where required</td></tr>
+<tr><td><code>_ga</code>, <code>_ga_&lt;ID&gt;</code> (Google Analytics, up to 2 years)</td><td>Visitor statistics: tells new and returning visitors apart</td><td>Analytics</td></tr>
+<tr><td>Advertising cookies (e.g. Google)</td><td>Showing and measuring ads (only once ads are added)</td><td>Marketing, with consent where required</td></tr>
 </tbody>
 </table>
-<p>You can change your consent choices at any time with the cookie settings link, and you can block or delete cookies in your browser settings.</p>
+<p>You can block or delete cookies at any time in your browser settings. When we add a consent tool, it will also include a link to change your choices.</p>
 
 <h2>6. Contact form and e-mail</h2>
 <p>If you contact us, we receive your name, e-mail address and message. We use them only to reply and keep the conversation for up to 24 months, unless you ask us to delete it sooner. We do not add you to any mailing list.</p>
@@ -207,7 +213,7 @@ function rbs_legal_pages() {
 <p>Some pages may contain links to shops. If a link is an affiliate link, the shop may use a cookie to record that you came from our site so we can earn a commission. See our <a href="/affiliate-disclosure/">affiliate disclosure</a>.</p>
 
 <h2>8. Legal bases and your rights</h2>
-<p>If you are in the EEA, UK or Switzerland, we process data on the basis of our legitimate interest in running and securing the website, and on your consent for analytics and personalised advertising. You have the right to access, correct or delete your personal data, to object to or restrict processing, to data portability, to withdraw consent at any time, and to complain to your local data protection authority.</p>
+<p>If you are in the EEA, UK or Switzerland, we process data on the basis of our legitimate interest in running, securing and improving the website (including analytics, which you can opt out of as described in section 3), and on your consent for personalised advertising once ads are added. You have the right to access, correct or delete your personal data, to object to or restrict processing, to data portability, to withdraw consent at any time, and to complain to your local data protection authority.</p>
 <p>If you are a California resident, you have the right to know what personal information is collected, to request deletion, to correct it, and to opt out of the "sale" or "sharing" of personal information for cross-context behavioural advertising. We do not sell personal information for money. To exercise any right, contact us using the details below.</p>
 
 <h2>9. Children</h2>
