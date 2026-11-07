@@ -241,7 +241,7 @@ HTML
 <table class="rbs-table">
 <thead><tr><th>Method</th><th>You need</th><th>Typical accuracy</th><th>Best for</th></tr></thead>
 <tbody>
-<tr><td>1. On-screen sizer</td><td>Phone + bank card + a ring</td><td>About ±¼ size (designed for)</td><td>Fastest, no tools</td></tr>
+<tr><td>1. On-screen sizer</td><td>Phone + bank card (or a coin) + a ring</td><td>About ±¼ size (designed for)</td><td>Fastest, no tools</td></tr>
 <tr><td>2. Ring + ruler or caliper</td><td>A ring + mm ruler</td><td>±½ size (ruler), ±¼ (caliper)</td><td>When you have a ruler</td></tr>
 <tr><td>3. Paper strip or string</td><td>Paper / thread + ruler</td><td>±½ size</td><td>No ring that fits</td></tr>
 <tr><td>4. Printable sizer</td><td>Printer + ruler</td><td>±½ size</td><td>Measuring away from a screen</td></tr>
@@ -252,11 +252,12 @@ HTML
 <h2>Method 1: On your phone screen</h2>
 <ol>
 <li>Open the <a href="/">ring sizer</a> on your phone.</li>
-<li>Hold any bank, debit or ID card against the screen and drag the slider until the outline matches the card. On a phone, hold the card upright and match its short side (53.98 mm); on a computer, match its long side (85.6 mm). All these cards are the same size, so this tells the tool the true size of your screen.</li>
+<li>Hold any bank, debit or ID card against the screen and drag the slider until the outline matches the card. On a phone, hold the card upright and match its short side (53.98 mm); on a computer, match its long side (85.6 mm). All these cards are the same size, so this tells the tool the true size of your screen. No card? Tap <strong>No card? Use a coin</strong> and match a ₹10, Rs 10, quarter, 10p or €2 coin (a card is more accurate).</li>
 <li>Lay a ring that fits the right finger flat on the screen and adjust the circle until it lines up with the <em>inside</em> edge.</li>
 <li>Read your US, UK, EU, Indian size and the diameter in mm.</li>
 </ol>
 <p><em>Example:</em> the circle matches the ring at 17.7 mm, so the size is US 7.5 / UK O½.</p>
+<p>Tap <strong>Save</strong> to keep the size on your phone for each person and finger, and use <strong>Will it fit?</strong> to check a size a shop lists before you order.</p>
 
 <h2>Method 2: Measure a ring with a ruler</h2>
 <ol>

@@ -33,8 +33,11 @@ function rbs_legal_pages() {
 
 <h2>What you will find here</h2>
 <ul>
-<li><a href="/">Online ring sizer</a> – match a ring on your screen and read US, UK, EU, Indian and mm sizes.</li>
-<li><a href="/bangle-size-calculator/">Bangle size calculator</a> – Indian sizes 1.10 to 3.4 from a bangle you own or a hand measurement.</li>
+<li><a href="/">Online ring sizer</a> – match a ring on your screen (calibrated with a card or a coin) and read US, UK, EU, Indian and mm sizes.</li>
+<li><a href="/bangle-size-calculator/">Bangle size calculator</a> – Indian sizes 1.10 to 3.4 from a bangle on your screen, a photo of it next to a coin, or a hand measurement.</li>
+<li>Every result can be checked against a shop size (<strong>Will it fit?</strong>), saved per person and finger on your device, downloaded as a size card, or requested from someone else with a WhatsApp link.</li>
+<li><a href="/printable-ring-sizer/">Printable ring sizer</a> and <a href="/printable-bangle-sizer/">printable bangle sizer</a> – free PDFs with true-size circles.</li>
+<li><a href="/ring-size-converter/">Ring size converter</a> and <a href="/ring-sizer-widget/">a free sizer widget</a> for jewellery shops and blogs.</li>
 <li><a href="/bracelet-size-calculator/">Bracelet size calculator</a> – chain, bangle and cuff lengths from your wrist size.</li>
 <li>Size charts and single-size guides such as <a href="/bangle-size/2-6/">bangle size 2.6</a> and <a href="/ring-size-in-mm/size-7/">ring size 7 in mm</a>.</li>
 </ul>
@@ -89,10 +92,14 @@ function rbs_legal_pages() {
 <li><strong>UK / Australian letters</strong> are taken from the standard US-to-UK conversion table, because the letter scale does not follow a single formula.</li>
 </ul>
 <p>The full table is on the <a href="/ring-size-chart/">ring size chart</a> and the <a href="/ring-size-in-mm/">ring size in mm</a> page.</p>
+<p><strong>Will it fit? (rings).</strong> When you type a size a shop lists, the tool turns it into an inner diameter with the same rules (UK letters from the table, EU as circumference, Italian/Swiss and Indian as circumference − 40 mm, Japanese as 13 mm + ⅓ mm per size, US by the table above) and compares it with the size you measured. Within 0.2 mm counts as the same size; up to 0.6 mm bigger or smaller is shown as about half a size loose or tight; anything more is shown as whole sizes too big or too small. A bare number with no country is read as the system you picked in the result, and the tool says so.</p>
 
 <h2>3. Bangle sizes</h2>
 <p>Indian and Pakistani bangle sizes are written as inches and sixteenths of an inch of inner diameter. "2.4" means 2 + 4/16 = 2.25 inches; "2.10" means 2 + 10/16 = 2.625 inches. We convert to millimetres with 1 inch = 25.4 mm, so 2.4 = 57.2 mm and 2.10 = 66.7 mm. Adult sizes step by 2/16 inch (3.2 mm).</p>
 <p>For the hand method, the calculator divides your hand circumference (measured over the knuckles with the thumb tucked in) by π to get the smallest opening your hand can pass through, then picks the <em>first bangle size that is at least that wide</em>. Rounding up is deliberate: a rigid bangle that is 1 mm too small will not go on at all. Hands are not round and soft tissue squeezes, so the hand method is an estimate. Matching a bangle that already fits is the more accurate method, and the calculator offers it first.</p>
+<p><strong>From a photo.</strong> For bangles too big for a phone screen, you photograph the bangle lying flat next to a coin of known diameter (India ₹10 27 mm, Pakistan Rs 10 25.5 mm, US quarter 24.26 mm, UK 10p 24.5 mm, €2 25.75 mm) and fit one circle to the coin and one to the inside of the bangle. The coin circle tells the tool how many photo pixels make a millimetre, so the bangle diameter = bangle circle ÷ coin circle × coin diameter. No screen calibration is used. The main errors are a tilted phone (circles become ovals) and a coin that does not lie on the same surface as the bangle, so we ask for a photo taken flat from about 40 cm. We expect about ±1 mm, so a result within 0.8 mm above a standard size is given as that size. The photo is drawn in your browser only and is never uploaded.</p>
+<p><strong>Will it fit? (bangles).</strong> A shop size typed as 2.6, 2-6, 2/6, 2⅜ in, 60 mm or a circumference is turned into an inner diameter (Indian notation is inches + sixteenths). Compared with your size, a bangle from 0.5 mm smaller to 1.8 mm larger should fit; up to 4 mm larger is loose; up to 2 mm smaller is tight and may not pass the knuckles; beyond that it is too big or too small.</p>
+<p><strong>Kids growth estimate.</strong> The estimate on the <a href="/kids-bangle-size-chart/">kids bangle size chart</a> uses the typical inner diameter for each age from that chart (for example 41.3 mm at 1 year, 50.8 mm at 7 years, 54.0 mm at 10 years). It adds the typical growth for the next one to three years to the size that fits your child now and rounds up to a bangle size. Children grow at very different rates, so it is a planning guide, not a measurement.</p>
 
 <h2>4. Bracelet lengths</h2>
 <p>Bracelet length = wrist circumference + an ease allowance that depends on the style: ½ to 1¼ inch for chain bracelets, ¼ to ¾ inch for open cuffs. The allowances match the ranges most jewellers publish for snug, comfortable and loose fits.</p>
@@ -102,6 +109,8 @@ function rbs_legal_pages() {
 <ul>
 <li><strong>Rings:</strong> designed to land within about ±¼ US size of a caliper measurement. Measure twice, with two rings if you can.</li>
 <li><strong>Bangles:</strong> designed to be right to one size; if you are between sizes, choose the larger for a rigid bangle.</li>
+<li><strong>Coin calibration:</strong> a coin is smaller than a card, so the same 0.5 mm matching error is a larger share of it. Expect a little less accuracy than with a card; use a card when you have one.</li>
+<li><strong>Bangles from a photo:</strong> about ±1 mm when the photo is taken flat, which keeps the result within one bangle size.
 </ul>
 
 <h2>6. Real-world accuracy test</h2>
@@ -119,6 +128,7 @@ function rbs_legal_pages() {
 				array( 'Why do I need a credit card to calibrate?', 'All bank cards are the same ID-1 size, 85.60 × 53.98 mm, so matching one on the screen tells the tool how many pixels make a millimetre on your device. On a phone, hold the card upright and match its short side; on a computer, match its long side. You can use any ID-1 card, including a library card or ID card.' ),
 				array( 'Is my calibration or measurement uploaded?', 'No photos, names or calibration values ever leave your device, and the sizing happens in your browser. Once you settle on a result, the size it shows (for example US 7 or bangle 2.6) is counted anonymously in Google Analytics, so we can see which sizes people need. Names you type are never sent.' ),
 				array( 'How accurate is an on-screen ring sizer?', 'After calibration the circle is drawn to about 0.1 mm. Lining up the ring by eye is the real limit, so the tool is designed to land within about a quarter US size. Our device test results will be published on this page; until then, confirm expensive purchases with a jeweller.' ),
+				array( 'Can I measure a bangle from a photo?', 'Yes. Photograph the bangle flat next to a ₹10, Rs 10, quarter, 10p or €2 coin and fit the two circles in the bangle size calculator. The coin sets the scale, so no card is needed. Expect about ±1 mm; the photo never leaves your device.' ),
 				array( 'Which standard do you use for ring sizes?', 'ISO 8653, which defines ring size as the inner circumference in millimetres. Other systems are converted from the inner diameter.' ),
 			),
 		),

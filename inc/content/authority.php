@@ -638,7 +638,7 @@ HTML
 <tr><td>19.9 – 21.0 cm (7.9 – 8.2 in)</td><td><a href="/bangle-size/2-10/">2.10</a></td><td>66.7 mm</td></tr>
 </tbody>
 </table>
-<p>The fastest check is a bangle she already wears comfortably: place it on the calibrated screen of the <a href="/bangle-size-calculator/">bangle sizer</a> and read the size. Ask her family discreetly if it is a surprise.</p>
+<p>The fastest check is a bangle she already wears comfortably: place it on the calibrated screen of the <a href="/bangle-size-calculator/">bangle sizer</a> and read the size. Bridal bangles of 2.6 and up are often wider than a phone screen; then use <strong>From a photo</strong> in the same sizer (photograph the bangle flat next to a ₹10, Rs 10 or other listed coin). Bride in another city? Send her an ask link from the sizer on WhatsApp: she measures on her own phone and sends the size back. Ask her family discreetly if it is a surprise.</p>
 
 <h2>Step 2: choose the size for each type of bangle</h2>
 <table class="rbs-table">
@@ -668,7 +668,7 @@ HTML
 </ul>
 
 <h2>Bangles for the bridal party</h2>
-<p>Mothers, sisters and friends often wear matching sets. Collect everyone's size with the calculator link before ordering; most adult women fall between 2.2 and 2.8. Girls under 12 need children's sizes from the <a href="/kids-bangle-size-chart/">kids bangle size chart</a>. Men wearing a kada at the wedding usually need 2.10 to 2.14; the <a href="/chudi-size-chart/">chudi and kada size chart</a> has the details.</p>
+<p>Mothers, sisters and friends often wear matching sets. Collect everyone's size before ordering: send each of them an ask link from the <a href="/bangle-size-calculator/">bangle size calculator</a> on WhatsApp and their sizes come back to you, or save them in the sizer under each name; most adult women fall between 2.2 and 2.8. Girls under 12 need children's sizes from the <a href="/kids-bangle-size-chart/">kids bangle size chart</a>. Men wearing a kada at the wedding usually need 2.10 to 2.14; the <a href="/chudi-size-chart/">chudi and kada size chart</a> has the details.</p>
 
 <h2>Buying online from abroad</h2>
 <p>Shops outside India and Pakistan may list bangles by inner diameter in mm or inches, or as S / M / L. Convert using the inner diameter: 2.4 is 57.2 mm (2¼ in), 2.6 is 60.3 mm (2⅜ in) and 2.8 is 63.5 mm (2½ in). Our <a href="/bangle-size-chart/in-cm/">bangle size in cm</a> page lists every size.</p>
@@ -830,6 +830,7 @@ HTML
 
 <h2>4. Ask a friend or family member</h2>
 <p>Their best friend, sister or mother may know the size, or can find out naturally: trying on rings together in a shop, or "I'm ordering a ring online, what size are you?". Ask them to keep it quiet, and ask for the system too (US 6 and UK 6 are not the same size; see the <a href="/ring-size-converter/">ring size converter</a>).</p>
+<p>If it does not have to be a surprise (a birthday gift, a ring for a parent, or bangles for a sister abroad), just ask: open the <a href="/">ring sizer</a> or <a href="/bangle-size-calculator/">bangle sizer</a>, tap <strong>Buying for someone else?</strong> and send the link on WhatsApp. They measure on their own phone and send their size straight back to you.</p>
 
 <h2>5. Look for clues</h2>
 <ul>
@@ -851,7 +852,7 @@ HTML
 <h2>Buying bangles as a surprise</h2>
 <p>Bangles have no clasp, so the size has to pass over the hand. Guessing is riskier than with rings.</p>
 <ol>
-<li><strong>Borrow a bangle she wears</strong> and measure across the inside edge in mm, or lay it on the <a href="/bangle-size-calculator/">bangle size calculator</a>. 57 mm is size 2.4, 60 mm is 2.6, 63.5 mm is 2.8.</li>
+<li><strong>Borrow a bangle she wears</strong> and measure across the inside edge in mm, or lay it on the <a href="/bangle-size-calculator/">bangle size calculator</a>. 57 mm is size 2.4, 60 mm is 2.6, 63.5 mm is 2.8. Only a minute with it? Take a quick photo of it flat next to a coin and measure it later with <strong>From a photo</strong>.</li>
 <li><strong>Glass and metal differ:</strong> if the borrowed bangle is glass, a metal or gold one in the same number may feel slightly larger. Match the material if you can.</li>
 <li><strong>Ask her mother or sister.</strong> Bangle sizes are often shared in the family, especially for weddings.</li>
 <li><strong>If you must guess:</strong> 2.4 and 2.6 are the most common adult women's sizes. Between two sizes, choose the larger one: a slightly loose bangle can be worn, a small one cannot be put on.</li>
@@ -861,7 +862,8 @@ HTML
 <h2>Once you have a number</h2>
 <ul>
 <li>Check it in the <a href="/ring-size-chart/">ring size chart</a> or <a href="/bangle-size-chart/">bangle size chart</a> and convert it to the system the shop uses.</li>
-<li>Save it on your phone in the sizer as "Partner" or "Ammi". It stays on your device only, and you can download it as a size card.</li>
+<li>Save it on your phone in the sizer as "Partner" or "Ammi", with the finger it is for. It stays on your device only, and you can download it as a size card.</li>
+<li>Check the shop's size before you pay: type it into <strong>Will it fit?</strong> under the result (for example UK N or EU 54) to see if it matches.</li>
 <li>Ask the shop about free resizing or exchange before you pay.</li>
 </ul>
 
@@ -898,9 +900,11 @@ HTML
 
 <h2>What your visitors get</h2>
 <ul>
-<li>Screen calibration with a bank card, so circles show at true size on any phone, tablet or laptop.</li>
+<li>Screen calibration with a bank card, or a coin when no card is at hand, so circles show at true size on any phone, tablet or laptop.</li>
 <li>Ring sizes in US, UK, EU, Indian and mm, with "match a ring" and "type a measurement" methods.</li>
-<li>Indian bangle sizes (baby 1.10 to men's kada 3.4) from a bangle or a hand measurement.</li>
+<li>Indian bangle sizes (baby 1.10 to men's kada 3.4) from a bangle on screen, a photo of the bangle next to a coin, or a hand measurement.</li>
+<li>A <strong>Will it fit?</strong> check that compares the size your shop lists with the visitor's measured size.</li>
+<li>Saved sizes per person and finger, a downloadable size card, and a WhatsApp link to ask someone else for their size.</li>
 <li>Bracelet lengths from a wrist measurement.</li>
 <li>A light page (one small script, no frameworks) that works on mobile.</li>
 </ul>
@@ -919,7 +923,7 @@ HTML
 </ul>
 
 <h2>Privacy</h2>
-<p>The widget runs entirely in your visitor's browser. It sets no cookies, loads no analytics or ads, and sends nothing to our server beyond the normal requests that load the widget page and its script. The screen calibration is stored in the browser's local storage for that visitor only, so they do not have to calibrate twice. Details are in our <a href="/privacy-policy/">privacy policy</a>.</p>
+<p>The widget runs entirely in your visitor's browser. It sets no cookies, loads no analytics or ads, and sends nothing to our server beyond the normal requests that load the widget page and its script. The screen calibration, and any sizes the visitor chooses to save, are stored in the browser's local storage for that visitor only. A photo used for the bangle photo method is only drawn in the browser and is never uploaded. Details are in our <a href="/privacy-policy/">privacy policy</a>.</p>
 
 <h2>Can't embed?</h2>
 <p>Some platforms (for example Etsy listings and most marketplaces) do not allow iframes. In that case, link to the tool instead: <a href="/">ringbanglesizer.com</a> for rings, <a href="/bangle-size-calculator/">the bangle size calculator</a> or the <a href="/printable-ring-sizer/">printable ring sizer</a>. Questions or a custom size range for your shop? <a href="/contact/">Contact us</a>.</p>

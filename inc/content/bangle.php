@@ -161,11 +161,12 @@ function rbs_bangle_pages() {
 <li><strong>Thick or wide designs (over 8 mm):</strong> go one size up, as explained on the <a href="/chudi-size-chart/">chudi and kada size chart</a>.</li>
 </ul>
 
-<h2>Three ways to find your size</h2>
+<h2>Four ways to find your size</h2>
 <ol>
 <li><strong>On screen:</strong> place a bangle you own on your phone in the <a href="/bangle-size-calculator/">online bangle sizer</a> and match the circle.</li>
+<li><strong>From a photo:</strong> bangle too big for your phone? Photograph it next to a coin and use <strong>From a photo</strong> in the same sizer.</li>
 <li><strong>With a ruler:</strong> measure the inside diameter of a bangle that fits, in mm, and pick the nearest size above.</li>
-<li><strong>With a thread:</strong> measure around your folded hand and find your range in the table. Step-by-step photos-free instructions are in <a href="/how-to-measure-bangle-size/">how to measure bangle size</a>.</li>
+<li><strong>With a thread:</strong> measure around your folded hand and find your range in the table. Step-by-step instructions for every method are in <a href="/how-to-measure-bangle-size/">how to measure bangle size</a>.</li>
 </ol>
 
 <h2>Average bangle size by group</h2>
@@ -545,13 +546,13 @@ function rbs_bangle_pages() {
 		/* ------------------------------------------------- HOW TO MEASURE */
 		'bangle-measure' => array(
 			'slug'       => 'how-to-measure-bangle-size',
-			'title'      => 'How to Measure Bangle Size at Home – 4 Easy Methods',
-			'seo_title'  => 'How to Measure Bangle Size at Home (4 Easy Methods)',
-			'seo_desc'   => 'How to measure bangle size at home with a bangle, a thread, your hand width or your phone screen. Step-by-step with worked examples and a size chart.',
+			'title'      => 'How to Measure Bangle Size at Home – 5 Easy Methods',
+			'seo_title'  => 'How to Measure Bangle Size at Home (5 Easy Methods)',
+			'seo_desc'   => 'How to measure bangle size at home with a bangle, a thread, your hand width, your phone screen or a photo next to a coin. Step by step, with worked examples.',
 			'mode'       => null,
 			'menu_order' => 10,
 			'content'    => '
-<p><strong>The easiest way to measure your bangle size at home is to measure the inside diameter of a bangle that already fits you.</strong> No bangle? Measure around your folded hand with a thread, divide by 3.14 and pick the next size up. Or let the <a href="/bangle-size-calculator/">bangle size calculator</a> do the maths, either from a bangle on your screen or from your hand measurement.</p>
+<p><strong>The easiest way to measure your bangle size at home is to measure the inside diameter of a bangle that already fits you.</strong> No bangle? Measure around your folded hand with a thread, divide by 3.14 and pick the next size up. Or let the <a href="/bangle-size-calculator/">bangle size calculator</a> do the maths, from a bangle on your screen, a photo of your bangle next to a coin, or your hand measurement.</p>
 
 <h2>What you are actually measuring</h2>
 <p>A rigid bangle has no clasp, so it has to slide over your hand. The size that matters is therefore not your wrist but the widest part of your <em>folded</em> hand: thumb tucked into the palm, fingers pressed together, the way you naturally squeeze your hand when putting on a bangle. Indian bangle sizes describe the inside diameter in inches and sixteenths (2.4 = 2 4/16 in = 57.2 mm), so every method below ends with a diameter.</p>
@@ -580,11 +581,20 @@ function rbs_bangle_pages() {
 <h2>Method 4: On your phone screen</h2>
 <ol>
 <li>Open the <a href="/bangle-size-calculator/">online bangle sizer</a>.</li>
-<li>Calibrate once by matching a bank card to the outline (on a phone, hold the card upright and match its short side; on a computer, match its long side).</li>
+<li>Calibrate once by matching a bank card to the outline (on a phone, hold the card upright and match its short side; on a computer, match its long side). No card? Tap <strong>No card? Use a coin</strong> and match a ₹10, Rs 10, quarter, 10p or €2 coin instead.</li>
 <li>Place your bangle flat on the screen and move the slider until the circle meets the inside edge.</li>
 <li>Read the size in Indian sizes, mm, cm and inches.</li>
 </ol>
-<p>This is as accurate as a ruler and avoids misreading the scale. It works on most phones; for bangles larger than 2.8 a tablet or laptop screen is easier.</p>
+<p>This is as accurate as a ruler and avoids misreading the scale. Most phone screens are about 65–70 mm wide, so bangles up to about 2.6 fit on them. For a 2.8 or larger bangle, use a tablet or laptop, or Method 5.</p>
+
+<h2>Method 5: From a photo (any bangle, any phone)</h2>
+<ol>
+<li>Lay the bangle flat on a plain table and put a coin right next to it: an Indian ₹10, Pakistani Rs 10, US quarter, UK 10p or €2 coin.</li>
+<li>Hold your phone flat, straight above them, about 40 cm away, and take a photo. Do not tilt the phone: a tilted photo squashes circles into ovals.</li>
+<li>In the <a href="/bangle-size-calculator/">bangle size calculator</a>, tap <strong>From a photo</strong>, pick the coin you used and choose the photo.</li>
+<li>Fit the gold circle to the outer edge of the coin, then the blue circle to the <strong>inside</strong> edge of the bangle. Zoom in for a precise fit.</li>
+</ol>
+<p>The coin has a known size, so it tells the tool how many pixels make a millimetre in your photo. No card calibration is needed and the bangle can be any size. Expect about ±1 mm, which is still within one bangle size. The photo is only shown in your browser and is never uploaded.</p>
 
 <h2>Prefer paper? Print a bangle sizer</h2>
 <p>Print the free <a href="/printable-bangle-sizer/">printable bangle sizer</a> at 100%, check the 50 mm line with a ruler, then lay your bangle on the true-size circles for sizes 1.10 to 3.4. The sheet also has a string scale for your hand, so you can skip the division by 3.14.</p>
@@ -595,6 +605,7 @@ function rbs_bangle_pages() {
 <li><strong>Measuring the outside of the bangle.</strong> Always the inside edge.</li>
 <li><strong>Measuring with an open hand.</strong> Spread fingers add 1–2 cm; fold your hand as when wearing.</li>
 <li><strong>Rounding down.</strong> Between two sizes, a rigid bangle must be the larger one.</li>
+<li><strong>Photo from an angle, or coin on a different surface.</strong> Keep the phone flat above the bangle and the coin on the same table, right next to it.</li>
 <li><strong>Measuring when cold.</strong> Hands are smaller in the morning and in winter; measure in the evening at room temperature.</li>
 </ul>
 
@@ -618,6 +629,7 @@ function rbs_bangle_pages() {
 				array( 'How do I measure my bangle size at home?', 'Measure the inside diameter of a bangle that fits you, in mm, and match it to the chart. Without a bangle, measure around your folded hand with a thread, divide by 3.14 and choose the next size up.' ),
 				array( 'How do I measure bangle size with a thread?', 'Tuck your thumb into your palm, wrap the thread around the widest part of the hand over the knuckles, mark it and measure the length in cm. 17–18 cm is size 2.4, 18–18.9 cm is 2.6, 18.9–19.9 cm is 2.8.' ),
 				array( 'Can I measure bangle size by hand width?', 'Only roughly. The hand squeezes into an oval, so its flat width is larger than the bangle you need. Use a thread around the folded hand for a reliable result.' ),
+				array( 'Can I measure my bangle size from a photo?', 'Yes. Lay the bangle flat next to a ₹10, Rs 10, quarter, 10p or €2 coin, take a photo from straight above, then fit one circle to the coin and one to the inside of the bangle in the bangle size calculator. The coin sets the scale, so no card is needed. The photo stays on your phone.' ),
 				array( 'Is bangle size measured inside or outside?', 'Inside. Bangle sizes are the inner diameter, because that is the opening your hand passes through.' ),
 				array( 'Should I measure my wrist for a bangle?', 'No. Wrist size is for bracelets with a clasp. A rigid bangle must pass over the hand, so measure the folded hand.' ),
 			),

@@ -58,7 +58,7 @@ function rbs_sizer_shortcode( $atts ) {
 		<div class="rbs-body rbs-pending">
 			<p class="rbs-loading">Loading sizer…</p>
 		</div>
-		<p class="rbs-trust">Free · No sign-up · Works on any phone · No photos or personal details needed · <a href="<?php echo esc_url( home_url( '/how-we-measure/#5-how-accurate-is-it' ) ); ?>">How accurate is it?</a></p>
+		<p class="rbs-trust">Free · No sign-up · Works on any phone · Photos and names stay on your device · <a href="<?php echo esc_url( home_url( '/how-we-measure/#5-how-accurate-is-it' ) ); ?>">How accurate is it?</a></p>
 	</div>
 	<?php
 	if ( $side ) {
@@ -86,7 +86,7 @@ function rbs_side_guide( $mode ) {
 		),
 		'bangle'   => array(
 			'Calibrate once with a bank card or a coin.',
-			'Lay a bangle that fits flat on the circle and match its <strong>inside</strong> edge. No bangle? Enter your hand size.',
+			'Lay a bangle that fits flat on the circle and match its <strong>inside</strong> edge. Too big for the screen? Use From a photo. No bangle? Enter your hand size.',
 			'Read your Indian size, then tap Save.',
 		),
 		'bracelet' => array(

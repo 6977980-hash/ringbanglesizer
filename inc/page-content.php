@@ -26,12 +26,19 @@ function rbs_core_pages() {
 
 <h2>How to measure your ring size on screen</h2>
 <ol>
-<li><strong>Calibrate.</strong> Hold a credit, debit or ID card on the screen and drag the slider until the card drawn on screen matches your card. On a phone, hold the card upright and match its short side (53.98 mm); on a computer, match its long side (85.6 mm). Every bank card is the same size, so this tells the tool the real size of your screen. You only do this once.</li>
+<li><strong>Calibrate.</strong> Hold a credit, debit or ID card on the screen and drag the slider until the card drawn on screen matches your card. On a phone, hold the card upright and match its short side (53.98 mm); on a computer, match its long side (85.6 mm). Every bank card is the same size, so this tells the tool the real size of your screen. You only do this once. No card? Tap <strong>No card? Use a coin</strong> and match a coin instead (a card is more accurate).</li>
 <li><strong>Match a ring.</strong> Put a ring that fits the right finger flat on the screen. Move the size slider until the blue circle lines up with the <em>inside</em> edge of the ring. Not the outside: the inside edge is what sits on your finger.</li>
 <li><strong>Read your size.</strong> The result shows US, UK/Australian, EU/ISO, Indian/Pakistani sizes plus the inner diameter and circumference in mm.</li>
 </ol>
 [rbs_diagram name="ring-inner"]
 <p>No ring to hand? Switch to <strong>"I know the diameter / circumference"</strong> and type a measurement from a tape, string or vernier, in mm or inches.</p>
+
+<h2>After you have your size</h2>
+<ul>
+<li><strong>Will it fit?</strong> Type the size a shop lists (US 7, UK N, EU 54, India 14, 17.3 mm) to see if that ring will fit you.</li>
+<li><strong>Save</strong> sizes for each person and finger on this device, or download a <strong>size card</strong> to send to a jeweller.</li>
+<li><strong>Buying for someone else?</strong> Send them an ask link on WhatsApp. They measure on their own phone and send their size straight back to you. For a surprise, see <a href="/blog/find-ring-size-secretly/">how to find a ring size secretly</a>.</li>
+</ul>
 
 <h2>How accurate is an on-screen ring sizer?</h2>
 <p>After calibration the circle is drawn to within about 0.1 mm, which is finer than the 0.4 mm gap between half sizes. The real limit is how well you line the ring up, so hold the phone flat, use good light and check with a second ring if you have one. The tool is designed to land within about ±¼ size; see <a href="/how-we-measure/">how we measure</a> for the method and its limits.</p>
@@ -64,6 +71,7 @@ function rbs_core_pages() {
 				array( 'What is the average ring size for women and men?', 'In the US and UK the most common women\'s ring size is 6–7 (UK L–N, 16.5–17.3 mm). The most common men\'s size is 9–10 (UK R–T, 19–19.8 mm).' ),
 				array( 'Can I measure my ring size on my phone?', 'Yes. After calibrating with a credit card the circle on screen is drawn at true size, so a ring placed on the phone can be matched to within about a quarter size.' ),
 				array( 'What is ring size 7 in mm?', 'US size 7 has an inner diameter of 17.3 mm and a circumference of 54.3 mm. It is UK size N½ and EU size 54.' ),
+				array( 'Can someone send me their ring size from their own phone?', 'Yes. Under any result, open <strong>Buying for someone else?</strong>, type your name and send the link on WhatsApp. They measure a ring on their own phone and tap one button to send the size back to you. Nothing is stored on our side.' ),
 				array( 'Is UK ring size the same as US?', 'No. UK and Australian sizes use letters, US and Canadian sizes use numbers. US 7 is about UK N½–O; use the converter above for any size.' ),
 			),
 		),
@@ -73,17 +81,17 @@ function rbs_core_pages() {
 			'slug'      => 'bangle-size-calculator',
 			'title'     => 'Bangle Size Calculator – Find Your Bangle Size Online',
 			'seo_title' => 'Bangle Size Calculator – Find Your Bangle Size Online',
-			'seo_desc'  => 'Free bangle size calculator. Match a bangle on your screen or enter your hand size to get your Indian bangle size with diameter in mm, cm and inches.',
+			'seo_desc'  => 'Free bangle size calculator. Match a bangle on screen, use a photo of it next to a coin, or enter your hand size. Indian sizes with mm, cm and inches.',
 			'mode'      => 'bangle',
 			'content'   => '
-<p><strong>Find your bangle size in under a minute.</strong> Either place a bangle that fits you on the screen and match the circle, or measure around your hand and let the calculator pick the size. Results are given in Indian sizes (2.2, 2.4, 2.6, 2.8, 2.10 …) with the inner diameter in mm, cm and inches.</p>
+<p><strong>Find your bangle size in under a minute.</strong> Place a bangle that fits you on the screen and match the circle, photograph it next to a coin if it is too big for your phone, or measure around your hand and let the calculator pick the size. Results are given in Indian sizes (2.2, 2.4, 2.6, 2.8, 2.10 …) with the inner diameter in mm, cm and inches.</p>
 
 [rbs_sizer mode="bangle"]
 
 <h2>How to measure your bangle size</h2>
 <h3>Method 1: Match a bangle you own</h3>
 <ol>
-<li>Calibrate the screen with any bank card (one-time step).</li>
+<li>Calibrate the screen with any bank card (one-time step). No card? Use a coin.</li>
 <li>Place a bangle that slides on comfortably flat on the screen.</li>
 <li>Move the slider until the circle lines up with the inside edge of the bangle. That is your size.</li>
 </ol>
@@ -100,6 +108,13 @@ function rbs_core_pages() {
 <li>Tap <strong>From a photo</strong>, choose the photo, fit the gold circle to the coin and the blue circle to the bangle\'s inside edge. The coin\'s known size turns the photo into millimetres, so no card calibration is needed.</li>
 </ol>
 <p>The photo is only shown in your browser and is never uploaded.</p>
+
+<h2>After you have your size</h2>
+<ul>
+<li><strong>Will it fit?</strong> Type the size a shop lists (2-6, 2⅜ in, 60 mm) to see if it will be tight, right or loose for you.</li>
+<li><strong>Save</strong> sizes for yourself and your family on this device, or download a <strong>size card</strong> to send to a jeweller.</li>
+<li><strong>Buying for someone else?</strong> Send them an ask link on WhatsApp. They measure on their own phone and send their size straight back to you.</li>
+</ul>
 
 <h2>What do bangle sizes like 2.4 and 2.6 mean?</h2>
 <p>Indian bangle sizes are the inner diameter in inches and sixteenths. "2.4" means 2 and 4/16 inch (2.25 in, 57.2 mm). "2.6" is 2 and 6/16 inch (2.375 in, 60.3 mm). Sizes step by 2/16 inch, so each size is about 3.2 mm wider than the last. The most common adult sizes are 2.4 and 2.6; 2.8 and 2.10 are for larger hands, and 2.2 and below for petite wrists, teens and children.</p>
@@ -128,6 +143,8 @@ function rbs_core_pages() {
 				array( 'What is 2.10 bangle size?', 'Size 2.10 means 2 and 10/16 inch, an inner diameter of 2.625 inches (66.7 mm, 6.67 cm). It is an extra-large adult size.' ),
 				array( 'How do I know my bangle size without a bangle?', 'Fold your thumb into your palm and measure around the widest part of your hand with a string. Divide the length by 3.14 to get the diameter, then pick the next bangle size up from the chart, or enter the measurement in the calculator above.' ),
 				array( 'What is the most common bangle size?', 'In India and Pakistan sizes 2.4 and 2.6 are the most common for adult women. Ready-made bangle sets are usually stocked in 2.2 to 2.8.' ),
+				array( 'My bangle is bigger than my phone screen. What can I do?', 'Use <strong>From a photo</strong>: lay the bangle flat next to a ₹10, Rs 10, quarter, 10p or €2 coin, take a photo from straight above and fit the two circles. The coin sets the scale, so it works for any bangle size, and the photo is never uploaded.' ),
+				array( 'Can I check if a shop\'s bangle size will fit me?', 'Yes. After you find your size, type the size the shop lists (for example 2-6, 2⅜ in or 60 mm) into <strong>Will it fit?</strong> under the result. It reads Indian, inch and mm sizes and tells you if the bangle will be tight, right or loose.' ),
 			),
 		),
 
