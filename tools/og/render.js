@@ -150,7 +150,7 @@ function pins() {
 	const pick = (list) => R.filter((r) => list.includes(r.us));
 	return [
 		{ file: 'bangle-size-chart', url: '/bangle-size-chart/', title: 'Bangle Size Chart', sub: 'Indian bangle sizes with inner diameter',
-			head: ['Size', 'Inches', 'mm', 'Fits'], rows: adult.map((b) => [b.label, frac[b.inch], b.mm.toFixed(1), b.fit.replace(' (most common)', ' ★')]),
+			head: ['Size', 'Inches', 'mm', 'Fits'], rows: adult.map((b) => [b.label, frac[b.inch], b.mm.toFixed(1), b.fit + (b.label === '2.4' || b.label === '2.6' ? ' ★' : '')]),
 			hl: [1, 2], note: '★ 2.4 and 2.6 are the most common adult sizes. Measure the inside of a bangle that fits you, wall to wall.' },
 		{ file: 'kids-bangle-size-chart', url: '/kids-bangle-size-chart/', title: 'Kids Bangle Size Chart', sub: 'Baby to teen, by age',
 			head: ['Size', 'mm', 'Age'], rows: kids.map((b) => [b.label, `${b.mm.toFixed(1)} mm`, b.fit]),

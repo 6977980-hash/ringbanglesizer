@@ -66,7 +66,7 @@ function rec(tool, cse, expect, shown, pass) { results.push({ tool, cse, expect,
     await page.fill(`${B} .rbs-hand-val`, String(v));
     return (await page.textContent(`${B} .rbs-result`)).replace(/\s+/g, ' ');
   }
-  for (const [v, u, exp] of [[18.4,'cm','Size 2.6'],[19.0,'cm','Size 2.8'],[7,'in','Size 2.4'],[7.1,'in','Size 2.6']]) {
+  for (const [v, u, exp] of [[18.4,'cm','Size 2.6'],[19.0,'cm','Size 2.8'],[7,'in','Size 2.4'],[7.1,'in','Size 2.6'],[17.9,'cm','Size 2.4'],[18.0,'cm','Size 2.6'],[16.9,'cm','Size 2.2'],[21.9,'cm','Size 2.12'],[22.0,'cm','Size 2.14'],[6.6,'in','Size 2.2'],[6.7,'in','Size 2.4'],[8.2,'in','Size 2.10'],[8.3,'in','Size 2.12']]) {
     await hand(v, u); const b = await big(B); rec('Bangle hand', `${v} ${u}`, exp, b, b === exp);
   }
   { const o = await hand(19.0, 'cm'); rec('Bangle hand', '19.0 cm chudi note', 'note: thin chudi 2.6, rigid 2.8', /chudi.*2\.6.*2\.8/.test(o) ? 'note shown' : 'missing', /chudi.*2\.6.*2\.8/.test(o)); }

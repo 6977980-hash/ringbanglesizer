@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RBS_PAGES_VERSION', '20' );
+define( 'RBS_PAGES_VERSION', '21' );
 
 require_once RBS_DIR . '/inc/page-content.php';
 require_once RBS_DIR . '/inc/content/legal.php';
@@ -33,7 +33,17 @@ require_once RBS_DIR . '/inc/content/authority.php';
  * All pages, keyed by a stable key. Parents are listed before their children.
  */
 function rbs_all_pages() {
-	return array_merge( rbs_core_pages(), rbs_legal_pages(), rbs_bangle_pages(), rbs_ring_mm_pages(), rbs_ring_tool_pages(), rbs_authority_pages() );
+	$pages  = array_merge( rbs_core_pages(), rbs_legal_pages(), rbs_bangle_pages(), rbs_ring_mm_pages(), rbs_ring_tool_pages(), rbs_authority_pages() );
+	$tokens = rbs_content_tokens();
+	foreach ( $pages as $key => $p ) {
+		$pages[ $key ]['content'] = strtr( $p['content'], $tokens );
+		if ( ! empty( $p['faq'] ) ) {
+			foreach ( $p['faq'] as $i => $qa ) {
+				$pages[ $key ]['faq'][ $i ] = array( strtr( $qa[0], $tokens ), strtr( $qa[1], $tokens ) );
+			}
+		}
+	}
+	return $pages;
 }
 
 /**

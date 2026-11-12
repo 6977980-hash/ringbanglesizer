@@ -277,14 +277,14 @@ function rbs_bangle_size_shortcode( $atts ) {
 	$prev     = $idx > 0 ? $all[ $idx - 1 ] : null;
 	$next     = isset( $all[ $idx + 1 ] ) ? $all[ $idx + 1 ] : null;
 	$circ     = $b['mm'] * M_PI;
-	$hand_min = $prev ? $prev['mm'] * M_PI : 0;
+	$hand     = rbs_bangle_hand_range( $b['label'] );
 	$rows     = array(
 		array( 'Indian bangle size', esc_html( $b['label'] ) ),
 		array( 'Inner diameter (inches)', esc_html( rbs_bangle_fraction( $b['label'] ) . ' = ' . number_format( $b['inch'], 3 ) . ' in' ) ),
 		array( 'Inner diameter (mm)', esc_html( number_format( $b['mm'], 1 ) . ' mm' ) ),
 		array( 'Inner diameter (cm)', esc_html( number_format( $b['mm'] / 10, 2 ) . ' cm' ) ),
 		array( 'Inner circumference', esc_html( number_format( $circ, 1 ) . ' mm = ' . number_format( $circ / 10, 1 ) . ' cm = ' . number_format( $circ / 25.4, 2 ) . ' in' ) ),
-		array( 'Fits a hand circumference of', esc_html( ( $prev ? 'over ' . number_format( $hand_min / 10, 1 ) . ' cm up to ' : 'up to ' ) . number_format( $circ / 10, 1 ) . ' cm (' . ( $prev ? number_format( $hand_min / 25.4, 2 ) . '–' : 'up to ' ) . number_format( $circ / 25.4, 2 ) . ' in)' ) ),
+		array( 'Fits a hand circumference of', esc_html( ( null !== $hand['min_cm'] ? number_format( $hand['min_cm'], 1 ) . '–' : 'up to ' ) . number_format( $hand['max_cm'], 1 ) . ' cm (' . ( null !== $hand['min_in'] ? number_format( $hand['min_in'], 1 ) . '–' : 'up to ' ) . number_format( $hand['max_in'], 1 ) . ' in)' ) ),
 		array( 'Typical wearer', esc_html( $b['fit'] ) ),
 	);
 	if ( $prev ) {

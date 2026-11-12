@@ -22,10 +22,10 @@ function rbs_authority_pages() {
 			'mode'       => null,
 			'menu_order' => 2,
 			'content'    => <<<'HTML'
-<p><strong>UK ring sizes are letters: each letter is about 0.4 mm of inner diameter, and half letters sit in between.</strong> The most common sizes are L to N for women (16.3–17.1 mm) and R to T for men (18.8–19.6 mm). UK N½ equals US 7, EU 54 and 17.3 mm. Find your letter below, or <a href="/">measure a ring on your phone screen</a> and read the UK size directly.</p>
+<p><strong>UK ring sizes are letters: each letter is about 0.4 mm of inner diameter, and half letters sit in between.</strong> The most common sizes are {{avg_w_uk}} for women and {{avg_m_uk}} for men. UK N½ equals US 7, EU 54 and 17.3 mm. Find your letter below, or <a href="/">measure a ring on your phone screen</a> and read the UK size directly.</p>
 
 <h2>UK ring size chart</h2>
-<p>Half letters (J½, K½ …) line up exactly with US half and whole sizes. Whole letters fall between two US sizes, so their US column shows a quarter size such as 6¼.</p>
+<p>From J½ up, half letters (J½, K½ …) line up exactly with US half and whole sizes. Whole letters fall between two US sizes, so their US column shows a quarter size such as 6¼. Below J½ the chart follows the usual US-to-UK charts (US 3 = F, US 4 = H), so the smallest sizes are whole letters and the steps from I to J and J to J½ are only about 0.2 mm.</p>
 [rbs_uk_ring_table]
 <p>The same letter scale is used in Australia, New Zealand, Ireland and South Africa, so this chart works for shops in those countries too. Sizes below F are children's sizes; sizes above Z are written Z+1, Z+2 and so on, and are listed in the full <a href="/ring-size-chart/">ring size chart</a>.</p>
 
@@ -46,7 +46,7 @@ function rbs_authority_pages() {
 <tr><td>L – M</td><td>5¾ – 6¼</td><td>Slim ring fingers; very common for women</td></tr>
 <tr><td>N – O</td><td>6¾ – 7¼</td><td>The middle of the women's range</td></tr>
 <tr><td>P – Q</td><td>7¾ – 8¼</td><td>Larger women's fingers, smaller men's</td></tr>
-<tr><td>R – T</td><td>8¾ – 9¾</td><td>The most common men's wedding band sizes</td></tr>
+<tr><td>R – T</td><td>8¾ – 9¾</td><td>Common men's wedding band sizes</td></tr>
 <tr><td>U – W</td><td>10¼ – 11¼</td><td>Larger men's fingers, thumb rings</td></tr>
 <tr><td>X – Z</td><td>11¾ – 12½</td><td>Large hands, signet rings for the little finger of big hands</td></tr>
 </tbody>
@@ -77,8 +77,8 @@ HTML
 			,
 			'faq' => array(
 				array( 'What is UK ring size N in US size?', 'UK N is about US 6¾ (17.1 mm inner diameter). UK N½ is exactly US 7 (17.3 mm, EU 54).' ),
-				array( 'What is the most common ring size for women in the UK?', 'Most women in the UK wear between L and N, which is about US 5¾ to 6¾ and 16.3 to 17.1 mm inner diameter.' ),
-				array( 'What is the average men\'s ring size in the UK?', 'Most men wear between R and T, about US 8¾ to 9¾ and 18.8 to 19.6 mm inner diameter.' ),
+				array( 'What is the most common ring size for women in the UK?', 'Most women in the UK wear {{avg_w_uk}}. The mm figures are the ring\'s inner diameter.' ),
+				array( 'What is the average men\'s ring size in the UK?', 'Most men in the UK wear {{avg_m_uk}}. The mm figures are the ring\'s inner diameter.' ),
 				array( 'How big is one UK ring size?', 'One full UK letter adds about 1.25 mm of inner circumference, or about 0.4 mm of diameter. A half letter is about 0.6 mm of circumference.' ),
 				array( 'What comes after Z in UK ring sizes?', 'Sizes above Z are written Z+1, Z+2, Z+3 and so on. Z+1 is about US 13 (22.2 mm) and Z+3 is about US 14 (23.0 mm).' ),
 			),
@@ -166,7 +166,7 @@ HTML
 			'mode'       => null,
 			'menu_order' => 4,
 			'content'    => <<<'HTML'
-<p><strong>Indian ring sizes are numbers from about 4 to 35, and each number is the ring's inner circumference minus 40 mm.</strong> Indian size 14 is 54 mm around (17.2 mm across), the same as US 7 and UK N½; size 22 is 62 mm around, the same as US 10. Most women in India wear sizes 12 to 14 and most men 20 to 22. Use the chart below or <a href="/">measure a ring on your phone</a> to get your Indian size in seconds.</p>
+<p><strong>Indian ring sizes are numbers from about 4 to 35, and each number is the ring's inner circumference minus 40 mm.</strong> Indian size 14 is 54 mm around (17.2 mm across; US 7 is 17.3 mm), the same size as US 7 and UK N½; size 22 is 62 mm around, the same as US 10. Most women in India wear sizes 12 to 14 and most men 20 to 22. Use the chart below or <a href="/">measure a ring on your phone</a> to get your Indian size in seconds.</p>
 
 <h2>Indian ring size chart</h2>
 [rbs_india_ring_table]
@@ -221,7 +221,7 @@ HTML
 HTML
 			,
 			'faq' => array(
-				array( 'What is ring size 14 in India in mm?', 'Indian size 14 has an inner circumference of about 54 mm and an inner diameter of about 17.2 mm. It is the same as US 7 and UK N½.' ),
+				array( 'What is ring size 14 in India in mm?', 'Indian size 14 has an inner circumference of about 54 mm and an inner diameter of about 17.2 mm (US 7 is listed as 17.3 mm; the 0.1 mm is rounding). It is the same size as US 7 and UK N½.' ),
 				array( 'What is the common ring size for ladies in India?', 'Most women in India wear sizes 12 to 14 on the ring finger (US 6 to 7, 16.5 to 17.3 mm), within an overall range of about 11 to 17.' ),
 				array( 'What is the average ring size for men in India?', 'Most Indian men wear sizes 20 to 22 (US 9 to 10, about 19.0 to 19.8 mm), within a range of about 18 to 25.' ),
 				array( 'Is Indian ring size the same as US size?', 'No. An Indian size is the inner circumference in mm minus 40. Indian 14 is US 7, Indian 17 is about US 8, Indian 20 is about US 9 and Indian 22 is US 10.' ),
@@ -433,7 +433,7 @@ HTML
 <h2>Average by region</h2>
 <ul>
 <li><strong>United States and Canada:</strong> women 6–7, men 9–10. This is why shop sample rings are commonly made in these sizes.</li>
-<li><strong>United Kingdom and Australia:</strong> women L to N, men R to T – the same physical size range.</li>
+<li><strong>United Kingdom and Australia:</strong> women L½ to N½, men R½ to T½ – the same physical size range.</li>
 <li><strong>India and Pakistan:</strong> women 12–14, men 20–22 on the local number scale (see the <a href="/ring-size-chart/india/">Indian</a> and <a href="/ring-size-chart/pakistan/">Pakistan</a> charts).</li>
 <li><strong>Europe:</strong> women 52–54, men 60–62 (inner circumference in mm).</li>
 </ul>
@@ -631,11 +631,11 @@ HTML
 <table class="rbs-table">
 <thead><tr><th>Hand circumference (thumb folded)</th><th>Bangle size</th><th>Inner diameter</th></tr></thead>
 <tbody>
-<tr><td>16.0 – 17.0 cm (6.3 – 6.7 in)</td><td><a href="/bangle-size/2-2/">2.2</a></td><td>54.0 mm</td></tr>
-<tr><td>17.0 – 18.0 cm (6.7 – 7.1 in)</td><td><a href="/bangle-size/2-4/">2.4</a></td><td>57.2 mm</td></tr>
-<tr><td>18.0 – 18.9 cm (7.1 – 7.5 in)</td><td><a href="/bangle-size/2-6/">2.6</a></td><td>60.3 mm</td></tr>
-<tr><td>18.9 – 19.9 cm (7.5 – 7.9 in)</td><td><a href="/bangle-size/2-8/">2.8</a></td><td>63.5 mm</td></tr>
-<tr><td>19.9 – 21.0 cm (7.9 – 8.2 in)</td><td><a href="/bangle-size/2-10/">2.10</a></td><td>66.7 mm</td></tr>
+<tr><td>16.0 – 16.9 cm (6.3 – 6.6 in)</td><td><a href="/bangle-size/2-2/">2.2</a></td><td>54.0 mm</td></tr>
+<tr><td>17.0 – 17.9 cm (6.7 – 7.0 in)</td><td><a href="/bangle-size/2-4/">2.4</a></td><td>57.2 mm</td></tr>
+<tr><td>18.0 – 18.9 cm (7.1 – 7.4 in)</td><td><a href="/bangle-size/2-6/">2.6</a></td><td>60.3 mm</td></tr>
+<tr><td>19.0 – 19.9 cm (7.5 – 7.8 in)</td><td><a href="/bangle-size/2-8/">2.8</a></td><td>63.5 mm</td></tr>
+<tr><td>20.0 – 20.9 cm (7.9 – 8.2 in)</td><td><a href="/bangle-size/2-10/">2.10</a></td><td>66.7 mm</td></tr>
 </tbody>
 </table>
 <p>The fastest check is a bangle she already wears comfortably: place it on the calibrated screen of the <a href="/bangle-size-calculator/">bangle sizer</a> and read the size. Bridal bangles of 2.6 and up are often wider than a phone screen; then use <strong>From a photo</strong> in the same sizer (photograph the bangle flat next to a ₹10, Rs 10 or other listed coin). Bride in another city? Send her an ask link from the sizer on WhatsApp: she measures on her own phone and sends the size back. Ask her family discreetly if it is a surprise.</p>
@@ -882,7 +882,7 @@ HTML
 				array( 'How can I find out my girlfriend\'s ring size without her knowing?', 'Borrow a ring she wears on the same finger and measure its inside diameter on your phone with an on-screen ring sizer or with a ruler. If you cannot borrow one, ask a close friend or family member, or trace the inside of a ring on paper.' ),
 				array( 'What if the ring I borrowed is from a different finger?', 'Adjust it: the ring finger is usually about half a size smaller than the middle finger on the same hand, and 1½ to 2 sizes larger than the little finger. The dominant hand is often a quarter to half size larger.' ),
 				array( 'Should I size up or down if I am not sure?', 'Size up. A slightly loose ring can be worn on another finger until it is resized, and making a ring smaller is easier and cheaper than making it larger.' ),
-				array( 'What is the most common ring size for a woman?', 'US 6 to 7 (UK L½ to N½, about 16.5 to 17.3 mm inner diameter). Most women wear between US 5 and 8.' ),
+				array( 'What is the most common ring size for a woman?', '{{avg_w}}, measured as inner diameter. Most women wear between US 5 and 8.' ),
 				array( 'Can a jeweller tell the ring size from a photo?', 'Roughly, if the ring is photographed flat next to a coin or ruler so the jeweller can scale it. A direct measurement of the inside diameter is more accurate.' ),
 			),
 		),

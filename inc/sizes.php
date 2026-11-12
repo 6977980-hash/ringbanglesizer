@@ -60,7 +60,7 @@ function rbs_bangle_sizes() {
 		array( 'label' => '2.0',  'inch' => 2.0,   'mm' => 50.8, 'fit' => 'Child (4–7 yr)' ),
 		array( 'label' => '2.2',  'inch' => 2.125, 'mm' => 54.0, 'fit' => 'Petite / teen' ),
 		array( 'label' => '2.4',  'inch' => 2.25,  'mm' => 57.2, 'fit' => 'Small' ),
-		array( 'label' => '2.6',  'inch' => 2.375, 'mm' => 60.3, 'fit' => 'Medium (most common)' ),
+		array( 'label' => '2.6',  'inch' => 2.375, 'mm' => 60.3, 'fit' => 'Medium' ),
 		array( 'label' => '2.8',  'inch' => 2.5,   'mm' => 63.5, 'fit' => 'Large' ),
 		array( 'label' => '2.10', 'inch' => 2.625, 'mm' => 66.7, 'fit' => 'Extra large' ),
 		array( 'label' => '2.12', 'inch' => 2.75,  'mm' => 69.9, 'fit' => 'XXL' ),
@@ -69,6 +69,67 @@ function rbs_bangle_sizes() {
 		array( 'label' => '3.2',  'inch' => 3.125, 'mm' => 79.4, 'fit' => 'Large men\'s kada' ),
 		array( 'label' => '3.4',  'inch' => 3.25,  'mm' => 82.6, 'fit' => 'Extra-large men\'s kada' ),
 	);
+}
+
+/**
+ * The "most common ring size" ranges, built from the size table so every page
+ * quotes the same letters and mm (women US 6–7, men US 9–10).
+ */
+function rbs_avg_ring_range( $who ) {
+	list( $lo, $hi ) = 'men' === $who ? array( 9, 10 ) : array( 6, 7 );
+	$rows = array();
+	foreach ( rbs_ring_sizes() as $r ) {
+		$rows[ (string) $r['us'] ] = $r;
+	}
+	$a = $rows[ (string) $lo ];
+	$b = $rows[ (string) $hi ];
+	return array(
+		'us' => 'US ' . $lo . ' to ' . $hi,
+		'uk' => $a['uk'] . ' to ' . $b['uk'],
+		'mm' => number_format( $a['mm'], 1 ) . ' to ' . number_format( $b['mm'], 1 ) . ' mm',
+	);
+}
+
+/**
+ * Tokens page content may use; replaced in rbs_all_pages() before pages are synced,
+ * so the numbers come from the size table and cannot drift between pages.
+ *
+ * @return array<string, string>
+ */
+function rbs_content_tokens() {
+	$w = rbs_avg_ring_range( 'women' );
+	$m = rbs_avg_ring_range( 'men' );
+	return array(
+		'{{avg_w}}'    => $w['us'] . ' (UK ' . $w['uk'] . ', ' . $w['mm'] . ')',
+		'{{avg_m}}'    => $m['us'] . ' (UK ' . $m['uk'] . ', ' . $m['mm'] . ')',
+		'{{avg_w_uk}}' => $w['uk'] . ' (' . $w['us'] . ', ' . $w['mm'] . ')',
+		'{{avg_m_uk}}' => $m['uk'] . ' (' . $m['us'] . ', ' . $m['mm'] . ')',
+	);
+}
+
+/**
+ * Hand circumference range one bangle size fits, at 0.1 cm / 0.1 in steps.
+ * Same rule as the calculator (sizer.js nearestBangleUp): the first size whose
+ * inner diameter is at least hand / π (0.05 mm absorbs rounding). The upper
+ * bound is floored so a typed value on the edge gives this size, not the next.
+ *
+ * @return array{min_cm:?float, max_cm:float, min_in:?float, max_in:float}|null
+ */
+function rbs_bangle_hand_range( $label ) {
+	$prev_up = null;
+	foreach ( rbs_bangle_sizes() as $b ) {
+		$up = ( $b['mm'] + 0.05 ) * M_PI; // mm of hand circumference.
+		if ( $b['label'] === $label ) {
+			return array(
+				'min_cm' => null === $prev_up ? null : ( floor( $prev_up ) + 1 ) / 10,
+				'max_cm' => floor( $up ) / 10,
+				'min_in' => null === $prev_up ? null : ( floor( $prev_up / 2.54 ) + 1 ) / 10,
+				'max_in' => floor( $up / 2.54 ) / 10,
+			);
+		}
+		$prev_up = $up;
+	}
+	return null;
 }
 
 /**

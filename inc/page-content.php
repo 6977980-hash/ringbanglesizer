@@ -68,11 +68,11 @@ function rbs_core_pages() {
 ',
 			'faq' => array(
 				array( 'How do I find my ring size at home?', 'Use an on-screen sizer like the one above: calibrate with a bank card, then match a ring you already own to the circle. Alternatively wrap a thin strip of paper around the base of your finger, mark where it overlaps, measure the length in mm and look it up in the circumference column of the chart.' ),
-				array( 'What is the average ring size for women and men?', 'In the US and UK the most common women\'s ring size is 6–7 (UK L–N, 16.5–17.3 mm). The most common men\'s size is 9–10 (UK R–T, 19–19.8 mm).' ),
+				array( 'What is the average ring size for women and men?', 'In the US and UK the most common women\'s ring sizes are {{avg_w}}. The most common men\'s sizes are {{avg_m}}.' ),
 				array( 'Can I measure my ring size on my phone?', 'Yes. After calibrating with a credit card the circle on screen is drawn at true size, so a ring placed on the phone can be matched to within about a quarter size.' ),
 				array( 'What is ring size 7 in mm?', 'US size 7 has an inner diameter of 17.3 mm and a circumference of 54.3 mm. It is UK size N½ and EU size 54.' ),
 				array( 'Can someone send me their ring size from their own phone?', 'Yes. Under any result, open <strong>Buying for someone else?</strong>, type your name and send the link on WhatsApp. They measure a ring on their own phone and tap one button to send the size back to you. Nothing is stored on our side.' ),
-				array( 'Is UK ring size the same as US?', 'No. UK and Australian sizes use letters, US and Canadian sizes use numbers. US 7 is about UK N½–O; use the converter above for any size.' ),
+				array( 'Is UK ring size the same as US?', 'No. UK and Australian sizes use letters, US and Canadian sizes use numbers. US 7 is UK N½; use the converter above for any size.' ),
 			),
 		),
 
@@ -358,8 +358,8 @@ function rbs_core_pages() {
 				array( 'What is ring size 8 in mm?', 'US size 8 is 18.1 mm inner diameter (56.9 mm circumference), UK P½, EU 57.' ),
 				array( 'What is a 17 mm ring size?', 'A 17.0 mm inner diameter is closest to US 6.5 (16.9 mm), just under US 7 (17.3 mm). If you are between the two, or the band is wide, choose US 7 / UK N½.' ),
 				array( 'How do I convert UK ring size to US?', 'Use the chart: UK L½ is US 6, UK N½ is US 7, UK P½ is US 8, UK R½ is US 9, UK T½ is US 10.' ),
-				array( 'What is the most common ring size for women?', 'US 6 to 7 (UK L½ to N½, 16.5 to 17.3 mm) is the most common range for a woman\'s ring finger.' ),
-				array( 'What is the most common ring size for men?', 'US 9 to 10 (UK R½ to T½, 19.0 to 19.8 mm) is the most common range for men.' ),
+				array( 'What is the most common ring size for women?', '{{avg_w}} is the most common range for a woman\'s ring finger.' ),
+				array( 'What is the most common ring size for men?', '{{avg_m}} is the most common range for men.' ),
 			),
 		),
 
@@ -385,11 +385,11 @@ function rbs_core_pages() {
 
 <h2>Which bangle size should I buy?</h2>
 <ul>
-<li><strong><a href="/bangle-size/2-2/">2.2</a>:</strong> petite adults, teenagers; hand circumference 16.0–17.0 cm.</li>
-<li><strong><a href="/bangle-size/2-4/">2.4</a>:</strong> small adult hands, 17.0–18.0 cm; the most sold size.</li>
-<li><strong><a href="/bangle-size/2-6/">2.6</a>:</strong> medium adult hands, 18.0–18.9 cm; the second most sold size.</li>
-<li><strong><a href="/bangle-size/2-8/">2.8</a>:</strong> large hands, 18.9–19.9 cm.</li>
-<li><strong><a href="/bangle-size/2-10/">2.10</a> and <a href="/bangle-size/2-12/">2.12</a>:</strong> extra-large hands (19.9–22.0 cm), men\'s kada or a loose fit.</li>
+<li><strong><a href="/bangle-size/2-2/">2.2</a>:</strong> petite adults, teenagers; hand circumference 16.0–16.9 cm.</li>
+<li><strong><a href="/bangle-size/2-4/">2.4</a>:</strong> small adult hands, 17.0–17.9 cm; with 2.6, one of the two most common adult sizes.</li>
+<li><strong><a href="/bangle-size/2-6/">2.6</a>:</strong> medium adult hands, 18.0–18.9 cm; with 2.4, one of the two most common adult sizes.</li>
+<li><strong><a href="/bangle-size/2-8/">2.8</a>:</strong> large hands, 19.0–19.9 cm.</li>
+<li><strong><a href="/bangle-size/2-10/">2.10</a> and <a href="/bangle-size/2-12/">2.12</a>:</strong> extra-large hands (20.0–21.9 cm), men\'s kada or a loose fit.</li>
 <li><strong>Below 2.0:</strong> babies and children; see the <a href="/kids-bangle-size-chart/">kids bangle size chart</a>.</li>
 </ul>
 
@@ -418,13 +418,13 @@ function rbs_core_pages() {
 <table class="rbs-table">
 <thead><tr><th>Hand circumference (thumb folded in)</th><th>In inches</th><th>Bangle size</th></tr></thead>
 <tbody>
-<tr><td>15.0 – 16.0 cm</td><td>5.9 – 6.3 in</td><td>2.0</td></tr>
-<tr><td>16.0 – 17.0 cm</td><td>6.3 – 6.7 in</td><td>2.2</td></tr>
-<tr><td>17.0 – 18.0 cm</td><td>6.7 – 7.1 in</td><td>2.4</td></tr>
-<tr><td>18.0 – 18.9 cm</td><td>7.1 – 7.5 in</td><td>2.6</td></tr>
-<tr><td>18.9 – 19.9 cm</td><td>7.5 – 7.9 in</td><td>2.8</td></tr>
-<tr><td>19.9 – 21.0 cm</td><td>7.9 – 8.2 in</td><td>2.10</td></tr>
-<tr><td>21.0 – 22.0 cm</td><td>8.2 – 8.6 in</td><td>2.12</td></tr>
+<tr><td>15.0 – 15.9 cm</td><td>5.9 – 6.2 in</td><td>2.0</td></tr>
+<tr><td>16.0 – 16.9 cm</td><td>6.3 – 6.6 in</td><td>2.2</td></tr>
+<tr><td>17.0 – 17.9 cm</td><td>6.7 – 7.0 in</td><td>2.4</td></tr>
+<tr><td>18.0 – 18.9 cm</td><td>7.1 – 7.4 in</td><td>2.6</td></tr>
+<tr><td>19.0 – 19.9 cm</td><td>7.5 – 7.8 in</td><td>2.8</td></tr>
+<tr><td>20.0 – 20.9 cm</td><td>7.9 – 8.2 in</td><td>2.10</td></tr>
+<tr><td>21.0 – 21.9 cm</td><td>8.3 – 8.6 in</td><td>2.12</td></tr>
 </tbody>
 </table>
 <p>If the tape reads exactly on a boundary, take the larger size; a bangle that is 1 mm too small will not go on at all. The step-by-step method is in <a href="/how-to-measure-bangle-size/">how to measure bangle size</a>.</p>

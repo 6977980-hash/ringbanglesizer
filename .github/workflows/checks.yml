@@ -25,3 +25,5 @@ jobs:
         run: npm install --no-save --no-package-lock playwright@1.48.2 && npx playwright install --with-deps chromium
       - name: Tool tests
         run: php tools/tests/build-harness.php && node tools/tests/tool-tests.js
+      - name: Content checks
+        run: php tools/tests/content-tests.php
