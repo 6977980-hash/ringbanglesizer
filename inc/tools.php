@@ -69,6 +69,7 @@ function rbs_ring_converter_shortcode() {
 					<option value="mm">Inner diameter (mm)</option>
 					<option value="circ">Inner circumference (mm)</option>
 					<option value="in">Inner diameter (inches)</option>
+					<option value="cin">Inner circumference (inches)</option>
 				</select>
 			</label>
 			<label>Size

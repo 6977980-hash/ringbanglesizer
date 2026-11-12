@@ -63,12 +63,12 @@
 
 		function fillSizes() {
 			var sys = from.value;
-			var numeric = sys === 'mm' || sys === 'circ' || sys === 'in';
+			var numeric = sys === 'mm' || sys === 'circ' || sys === 'in' || sys === 'cin';
 			size.hidden = numeric;
 			num.hidden = !numeric;
 			if (numeric) {
-				num.step = sys === 'in' ? '0.01' : '0.1';
-				num.value = sys === 'mm' ? '17.3' : (sys === 'circ' ? '54.3' : '0.68');
+				num.step = sys === 'in' || sys === 'cin' ? '0.01' : '0.1';
+				num.value = { mm: '17.3', circ: '54.3', 'in': '0.68', cin: '2.14' }[sys];
 				return;
 			}
 			size.innerHTML = sizeList(sys).map(function (x) {
@@ -79,10 +79,11 @@
 		function show() {
 			var sys = from.value;
 			var r, note = '';
-			if (sys === 'mm' || sys === 'circ' || sys === 'in') {
+			if (sys === 'mm' || sys === 'circ' || sys === 'in' || sys === 'cin') {
 				var v = parseFloat(num.value);
 				if (!v || v <= 0) { out.innerHTML = ''; return; }
-				var mm = sys === 'mm' ? v : (sys === 'circ' ? v / Math.PI : v * 25.4);
+				// cin: inner circumference in inches (a paper strip read on an inch ruler).
+				var mm = sys === 'mm' ? v : (sys === 'circ' ? v / Math.PI : (sys === 'cin' ? v * 25.4 / Math.PI : v * 25.4));
 				r = nearest(mm);
 				note = '<p class="rbs-conv-note">Your measurement is ' + fmt(mm) + ' mm across. Closest standard size shown';
 				if (Math.abs(r.mm - mm) > 0.2) {

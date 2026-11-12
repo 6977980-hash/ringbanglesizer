@@ -46,7 +46,8 @@ function rec(tool, cse, expect, shown, pass) { results.push({ tool, cse, expect,
     ['EU 54','Fits',/^Fits/], ['7 1/2','US 7.5 (17.7)',/US 7½ \(17\.7/], ['N½','17.3 Fits',/UK N½ \(17\.3 mm\).*|^Fits/],
     ['IT 14','Fits ~17.2',/^Fits.*Italy \/ Spain \/ Switzerland 14 \(54\.0 mm around, 17\.2/], ['ES 14','Fits',/^Fits.*17\.2/], ['CH 14','Fits',/^Fits.*17\.2/], ['Swiss 14','Fits',/^Fits/],
     ['DE 17','17.0 mm',/German 17 \(17\.0 mm/], ['17.3','17.3 mm Fits',/^Fits.*17\.3 mm inner diameter/], ['6 3/4','US 6.75',/US 6¾/], ['6¾','US 6.75',/US 6¾/], ['6.75','US 6.75',/US 6¾/],
-    ['India 22','vs US 7: India 22 = 19.7 mm',/India 22 \(62\.0 mm around, 19\.7/], ['UK I','15.3 mm',/UK I \(15\.3 mm\)/], ['14','US 14 (US visitor)',/US 14 /],
+    ['India 22','vs US 7: India 22 = 19.7 mm',/India 22 \(62\.0 mm around, 19\.7/], ['UK I','15.3 mm',/UK I \(15\.3 mm\)/], ['14','asks US 14 or India 14 (US visitor)',/^Is that US 14 \(23\.0 mm\) or India\/Pakistan 14 \(17\.2 mm\)\?/],
+    ['US 14','Too big',/^Too big/], ['India 14','Fits vs US 7',/^Fits: within about ¼ size.*India 14/], ['17.3','same size',/^Fits: same size/], ['17.5 mm','within ¼',/^Fits: within about ¼ size/],
   ]) { const o = await fit(R, v); rec('Will it fit (ring)', v, exp, o.slice(0, 140), re.test(o)); }
   // India 22 vs a US 10 ring: pick US 10 in mm mode
   await page.fill(`${R} .rbs-mm-val`, '19.8');
@@ -128,7 +129,77 @@ function rec(tool, cse, expect, shown, pass) { results.push({ tool, cse, expect,
   { const chips = await page.$$eval(`${R} .rbs-chip-show`, c => c.map(x => x.textContent).join(' | '));
     rec('Saved sizes', 'forget one finger only', 'Me · US 8 | Me · R index · US 8', chips, chips === 'Me · US 8 | Me · R index · US 8'); }
   { const b = await page.$(`${B} .rbs-finger`); rec('Saved sizes', 'no finger picker on bangles', 'none', b ? 'shown' : 'none', !b); }
+  // --- audit 2026-11-12 phase 1 ---
+  // F-T14: bare 14 → two buttons that re-run the check
+  await page.click(`${R} .rbs-method[data-m="mm"]`);
+  await page.selectOption(`${R} .rbs-mm-type`, 'd'); await page.fill(`${R} .rbs-mm-val`, '17.3');
+  await fit(R, '14');
+  { const n = (await page.$$(`${R} .rbs-fit-pick`)).length; rec('Will it fit (ring)', 'bare 14 buttons', '2 buttons', String(n), n === 2); }
+  await page.click(`${R} .rbs-fit-pick[data-v="India 14"]`);
+  { const o = (await page.textContent(`${R} .rbs-fit-out`)).replace(/\s+/g, ' ').trim(); rec('Will it fit (ring)', 'bare 14 → India button', 'Fits US 7', o.slice(0, 80), /^Fits/.test(o) && /India 14/.test(o)); }
+  await fit(R, '14'); await page.click(`${R} .rbs-fit-pick[data-v="US 14"]`);
+  { const o = (await page.textContent(`${R} .rbs-fit-out`)).replace(/\s+/g, ' ').trim(); rec('Will it fit (ring)', 'bare 14 → US button', 'Too big', o.slice(0, 60), /^Too big/.test(o)); }
+  { const o = await fit(R, '18'); rec('Will it fit (ring)', 'bare 18 (outside 8–16)', 'India 18, no question', o.slice(0, 80), /India 18/.test(o) && !/Is that/.test(o)); }
+  await fit(R, '');
+  // F-T12: outside the chart → warning, no size
+  for (const [v, t, re] of [[12,'d',/smaller than the sizes on our chart \(US 3 to US 15\).*about US ½.*Kids/],[25,'d',/larger than the sizes on our chart.*about US 16½/],[40,'c',/smaller than.*about US 1½/]]) {
+    const out = await ringMm(v, t); const b = await big(R);
+    rec('Ring mm', `${t} ${v} outside chart`, 'chart warning, no size', b || out.slice(0, 90), !b && re.test(out));
+  }
+  for (const [v, exp] of [[14.1,'US 3'],[23.8,'US 15']]) { await ringMm(v, 'd'); const b = await big(R); rec('Ring mm', `d ${v} chart end`, exp, b, b === exp); }
+  // F-T15: inch circumference
+  { await ringMm(2.14, 'ci'); const b = await big(R); rec('Ring mm', 'ci 2.14 in around', 'US 7', b, b === 'US 7'); }
+  await page.selectOption(`${R} .rbs-mm-type`, 'd'); await page.fill(`${R} .rbs-mm-val`, '17.3'); await page.selectOption(`${R} .rbs-mm-type`, 'ci');
+  { const v = await page.inputValue(`${R} .rbs-mm-val`); rec('Ring mm', 'unit d→ci converts 17.3', '2.14', v, v === '2.14'); }
+  await page.selectOption('#c .rbs-conv-from', 'cin');
+  { const v = await page.inputValue('#c .rbs-conv-num'); const o = (await page.textContent('#c .rbs-conv-out')).trim(); rec('Converter', 'inch circumference default 2.14', 'US 7', v + ' / ' + o.slice(0, 12), v === '2.14' && /^US 7 =/.test(o)); }
+  // F-T16: typed ring result has no calibration warning
+  await ringMm(17.3, 'd');
+  { const vis = !(await page.$eval(`${R} .rbs-approx`, e => e.classList.contains('rbs-hidden'))); const o = await page.textContent(`${R} .rbs-result`); rec('Ring mm', 'typed: no calibration notes', 'approx hidden, no ±¼ line', `approx ${vis ? 'shown' : 'hidden'}, ±¼ ${/After calibration/.test(o) ? 'shown' : 'hidden'}`, !vis && !/After calibration/.test(o)); }
+  await page.click(`${R} .rbs-method[data-m="match"]`);
+  { const vis = !(await page.$eval(`${R} .rbs-approx`, e => e.classList.contains('rbs-hidden'))); const o = await page.textContent(`${R} .rbs-result`); rec('Ring match', 'match: calibration notes', 'approx + ±¼ shown', `approx ${vis ? 'shown' : 'hidden'}`, vis && /After calibration/.test(o)); }
+  await page.click(`${B} .rbs-method[data-m="hand"]`);
+  { const vis = !(await page.$eval(`${B} .rbs-approx`, e => e.classList.contains('rbs-hidden'))); rec('Bangle hand', 'typed: no calibration warning', 'hidden', vis ? 'shown' : 'hidden', !vis); }
+  // F-T19: unit hint per tool + decimal comma
+  { const o = await hand(4, 'cm'); rec('Bangle hand', '4 cm unit hint', 'cm / inch', o.slice(0, 100), /Check the unit \(cm \/ inch\)/.test(o)); }
+  { const o = await hand(184, 'cm'); rec('Bangle hand', '184 cm (comma lost)', 'dot hint', o.slice(0, 120), /Use a dot for decimals/.test(o)); }
+  await page.click(`${R} .rbs-method[data-m="mm"]`);
+  { const o = await ringMm(173, 'd'); rec('Ring mm', '173 mm (comma lost)', 'mm / inch + dot hint', o.slice(0, 160), /Check the unit \(mm \/ inch\)/.test(o) && /Use a dot for decimals \(17\.3\)/.test(o)); }
+  await page.fill(`${R} .rbs-mm-val`, ''); await page.focus(`${R} .rbs-mm-val`); await page.keyboard.type('17,3');
+  { const o = (await page.textContent(`${R} .rbs-result`)).replace(/\s+/g, ' '); const b = await big(R); rec('Ring mm', 'typed 17,3', 'dot hint, no size', b || o.slice(0, 80), !b && /Use a dot for decimals/.test(o)); }
+  // F-L01: ask link uses #ask=
+  await page.click(`${R} details.rbs-ask summary`);
+  await page.fill(`${R} .rbs-ask-name`, 'Test Name');
+  await page.click(`${R} .rbs-ask-copy`);
+  { const v = await page.inputValue(`${R} .rbs-ask-link`); rec('Ask link', 'link format', 'https://ringbanglesizer.com/#ask=Test%20Name', v, v === 'https://ringbanglesizer.com/#ask=Test%20Name'); }
+  // F-T11: photo result needs the coin fitted first
+  await page.click(`${B} .rbs-method[data-m="photo"]`);
+  const png = Buffer.from(await page.evaluate(() => { const c = document.createElement('canvas'); c.width = 800; c.height = 600; const g = c.getContext('2d'); g.fillStyle = '#ddd'; g.fillRect(0, 0, 800, 600); return c.toDataURL('image/png').split(',')[1]; }), 'base64');
+  await page.setInputFiles(`${B} .rbs-photo-file`, { name: 'p.png', mimeType: 'image/png', buffer: png });
+  await page.waitForSelector(`${B} .rbs-photo-work:not(.rbs-hidden)`);
+  await page.click(`${B} .rbs-photo-tabs [data-t="bangle"]`);
+  await page.click(`${B} .rbs-m-photo .rbs-step[data-d="1"]`);
+  { const o = (await page.textContent(`${B} .rbs-result`)).replace(/\s+/g, ' '); const b = await big(B); rec('Bangle photo', 'only bangle circle moved', 'no size, fit coin first', b || o.slice(0, 80), !b && /Fit the gold circle to the coin first/.test(o)); }
+  await page.click(`${B} .rbs-photo-tabs [data-t="coin"]`);
+  await page.click(`${B} .rbs-m-photo .rbs-step[data-d="1"]`);
+  { const b = await big(B); rec('Bangle photo', 'coin + bangle fitted', 'a size', b, /^Size /.test(b)); }
   rec('Console', 'all tools', 'no errors', errors.join(' | ') || 'none', errors.length === 0);
+  // F-T18: India visitor → hand in cm, 20
+  {
+    const ctx = await browser.newContext({ locale: 'en-IN' });
+    const p2 = await ctx.newPage();
+    p2.on('pageerror', e => errors.push(String(e)));
+    await p2.goto('file://' + path.join(__dirname, 'tool.html'));
+    const u = await p2.inputValue(`${B} .rbs-hand-unit`), v = await p2.inputValue(`${B} .rbs-hand-val`);
+    rec('Bangle hand', 'en-IN default unit', 'cm / 20', u + ' / ' + v, u === 'cm' && v === '20');
+    // F-L01: ask landing from #ask= and from sessionStorage (where the head script moves ?ask=)
+    await p2.goto('file://' + path.join(__dirname, 'tool.html') + '?x=1#ask=Test');
+    { const t = await p2.textContent(`${R} .rbs-asked`).catch(() => ''); rec('Ask link', 'landing #ask=Test', 'greeting', t.slice(0, 40), /Test asked for your ring size/.test(t)); }
+    await p2.evaluate(() => { sessionStorage.setItem('rbs_ask_landing_name', 'Ayesha'); });
+    await p2.goto('file://' + path.join(__dirname, 'tool.html'));
+    { const t = await p2.textContent(`${R} .rbs-asked`).catch(() => ''); rec('Ask link', 'landing from sessionStorage', 'greeting', t.slice(0, 40), /Ayesha asked for your ring size/.test(t)); }
+    await ctx.close();
+  }
   await browser.close();
   let pass = 0;
   for (const r of results) { if (r.pass) pass++; console.log(`${r.pass ? 'PASS' : 'FAIL'} | ${r.tool} | ${r.cse} | expected: ${r.expect} | shown: ${r.shown}`); }

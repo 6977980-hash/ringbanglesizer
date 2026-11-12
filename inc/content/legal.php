@@ -175,11 +175,11 @@ function rbs_legal_pages() {
 			'author_box' => false,
 			'menu_order' => 60,
 			'content'    => '
-<p><em>Last updated: November 7, 2026</em></p>
+<p><em>Last updated: November 12, 2026</em></p>
 <p>This privacy policy explains what information ringbanglesizer.com ("Ring Bangle Sizer", "we", "us") collects when you use the website, how it is used and the choices you have.</p>
 
 <h2>1. The sizing tools run on your device</h2>
-<p>The ring, bangle and bracelet sizers work in your browser. The screen calibration value (a single number, pixels per millimetre) is saved in your browser\'s local storage under the key <code>rbs_ppm_v1</code> so you do not have to calibrate again. Sizes you choose to save, with the name you type for them, are kept only in local storage (<code>rbs_people_v1</code>), and the name you type for a WhatsApp "ask for a size" link is remembered there too (<code>rbs_ask_name_v1</code>). None of these are sent to us. A photo you choose for the bangle photo method is only drawn in your browser and is never uploaded. You can delete them at any time by clearing your browser\'s site data.</p>
+<p>The ring, bangle and bracelet sizers work in your browser. The screen calibration value (a single number, pixels per millimetre) is saved in your browser\'s local storage under the key <code>rbs_ppm_v1</code> so you do not have to calibrate again. Sizes you choose to save, with the name you type for them, are kept only in local storage (<code>rbs_people_v1</code>), and the name you type for a WhatsApp "ask for a size" link is remembered there too (<code>rbs_ask_name_v1</code>). An ask link carries your name after the "#" (for example <code>/#ask=Ayesha</code>), a part of the address that browsers do not send to us or to Google Analytics; when the link is opened, the page moves the name into the browser\'s session storage (<code>rbs_ask_landing_name</code>, cleared when the tab is closed) and removes it from the address before Google Analytics loads. Older links that put the name after "?ask=" are handled the same way. None of these are sent to us. A photo you choose for the bangle photo method is only drawn in your browser and is never uploaded. You can delete them at any time by clearing your browser\'s site data.</p>
 <p>To learn which sizes people need, the sizer sends an anonymous event to Google Analytics (see section 3) when you settle on a result: the size shown (for example "US 7" or "2.6"), its inside diameter in mm, how it was measured (matched on screen, typed, from the hand or from a photo) and whether the screen was calibrated. It also records which result buttons were used (save, size card, share, ask link). Names and anything else you type are never included. We may publish totals from these events, such as the most common sizes by country; we never publish anything about an individual visitor.</p>
 
 <h2>2. Information collected automatically</h2>
@@ -211,6 +211,7 @@ function rbs_legal_pages() {
 <tbody>
 <tr><td><code>rbs_ppm_v1</code> (local storage)</td><td>Remembers your screen calibration</td><td>Functional, stays on your device</td></tr>
 <tr><td><code>rbs_people_v1</code>, <code>rbs_ask_name_v1</code> (local storage)</td><td>Sizes you saved and your name for ask links</td><td>Functional, stays on your device</td></tr>
+<tr><td><code>rbs_ask_landing_name</code> (session storage)</td><td>The name from an ask link you opened, for the greeting and the "send my size" button</td><td>Functional, stays on your device, cleared when the tab closes</td></tr>
 <tr><td>CDN security cookie</td><td>Bot and abuse protection</td><td>Strictly necessary</td></tr>
 <tr><td><code>_ga</code>, <code>_ga_&lt;ID&gt;</code> (Google Analytics, up to 2 years)</td><td>Visitor statistics: tells new and returning visitors apart</td><td>Analytics</td></tr>
 <tr><td>Advertising cookies (e.g. Google)</td><td>Showing and measuring ads (only once ads are added)</td><td>Marketing, with consent where required</td></tr>
