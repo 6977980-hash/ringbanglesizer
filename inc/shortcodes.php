@@ -2,7 +2,8 @@
 /**
  * Shortcodes.
  *
- * [rbs_sizer mode="ring|bangle|bracelet" method="mm" name="…"] – the interactive tool
+ * [rbs_sizer mode="ring|bangle|bracelet" method="mm" name="…" system="us|uk|eu|in"] – the interactive tool
+ *   (system: ring sizes shown first when the visitor has not picked a system yet)
  *   method="mm" opens the ring tool on "I know the diameter / circumference";
  *   name overrides the WebApplication name in the schema.
  * [rbs_ring_table]                           – server-rendered ring conversion chart
@@ -26,9 +27,10 @@ function rbs_tool_url( $mode ) {
 /* ---------------------------------------------------------------- tool */
 
 function rbs_sizer_shortcode( $atts ) {
-	$atts   = shortcode_atts( array( 'mode' => 'ring', 'method' => '', 'name' => '', 'side' => '1' ), $atts, 'rbs_sizer' );
+	$atts   = shortcode_atts( array( 'mode' => 'ring', 'method' => '', 'name' => '', 'side' => '1', 'system' => '' ), $atts, 'rbs_sizer' );
 	$mode   = in_array( $atts['mode'], array( 'ring', 'bangle', 'bracelet' ), true ) ? $atts['mode'] : 'ring';
 	$method = 'mm' === $atts['method'] ? 'mm' : '';
+	$system = in_array( $atts['system'], array( 'us', 'uk', 'eu', 'in' ), true ) ? $atts['system'] : '';
 
 	wp_enqueue_style( 'rbs-sizer' );
 	wp_enqueue_script( 'rbs-sizer' );
@@ -46,7 +48,7 @@ function rbs_sizer_shortcode( $atts ) {
 		echo '<div class="rbs-layout">';
 	}
 	?>
-	<div class="rbs" data-mode="<?php echo esc_attr( $mode ); ?>"<?php echo $method ? ' data-method="' . esc_attr( $method ) . '"' : ''; ?>>
+	<div class="rbs" data-mode="<?php echo esc_attr( $mode ); ?>"<?php echo $method ? ' data-method="' . esc_attr( $method ) . '"' : ''; ?><?php echo $system ? ' data-system="' . esc_attr( $system ) . '"' : ''; ?>>
 		<noscript><p><strong>This tool needs JavaScript.</strong> Use the size chart below instead.</p></noscript>
 		<div class="rbs-tabs" role="tablist">
 			<button type="button" class="rbs-tab" data-tab="ring" role="tab"><?php echo rbs_tab_icon( 'ring' ); // phpcs:ignore ?>Ring</button>

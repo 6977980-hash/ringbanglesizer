@@ -245,20 +245,30 @@
 	function trackAction(action, kind) { track('rbs_size_action', { rbs_action: action, rbs_kind: kind }); }
 
 	/* "Ask for a size": someone buying for another person sends a link on
-	 * WhatsApp; the page opened from it (?ask=Name) greets the receiver and
-	 * offers a button to send the size straight back. Nothing is stored. */
+	 * WhatsApp; the page opened from it (/#ask=Name) greets the receiver and
+	 * offers a button to send the size straight back. The name sits after the
+	 * "#", which browsers never send to the server. Older links used ?ask=Name.
+	 * A small script in <head> (inc/site.php, runs before Tag Manager) moves
+	 * either form into sessionStorage (rbs_ask_landing_name) and takes it out
+	 * of the address bar, so the name never reaches Google Analytics. */
 	function cleanName(n) { return String(n).replace(/[\u0000-\u001f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 24); }
-	var askName = (function () {
-		var m = /[?&]ask=([^&#]*)/.exec(location.search);
+	var ASK_LANDING_KEY = 'rbs_ask_landing_name';
+	function askFrom(str, re) {
+		var m = re.exec(str || '');
 		if (!m) { return ''; }
-		var n = '';
-		try { n = decodeURIComponent(m[1].replace(/\+/g, ' ')); } catch (e) { return ''; }
-		return cleanName(n);
+		try { return cleanName(decodeURIComponent(m[1].replace(/\+/g, ' '))); } catch (e) { return ''; }
+	}
+	var askName = (function () {
+		var n = askFrom(location.hash, /[#&]ask=([^&]*)/);
+		if (n) { return n; }
+		try { n = cleanName(sessionStorage.getItem(ASK_LANDING_KEY) || ''); } catch (e) { n = ''; }
+		if (n) { return n; }
+		return askFrom(location.search, /[?&]ask=([^&#]*)/);
 	})();
 	var ASK_NAME_KEY = 'rbs_ask_name_v1';
 	function siteHome() { return data.home || location.origin; }
 	function askUrl(kind, name) {
-		return siteHome() + (kind === 'bangle' ? '/bangle-size-calculator/' : '/') + '?ask=' + encodeURIComponent(name);
+		return siteHome() + (kind === 'bangle' ? '/bangle-size-calculator/' : '/') + '#ask=' + encodeURIComponent(name);
 	}
 	function openWhatsApp(text) {
 		window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
@@ -518,6 +528,11 @@
 				return { mm: n, text: fmt(n) + ' mm inner diameter' };
 			}
 			// A bare number is read in the system the visitor picked in the result, then by its range.
+			// A whole 8–16 is a real US size and a real India/Pakistan size (US 14 = 23.0 mm,
+			// India 14 = 17.2 mm), so unless the visitor reads India sizes, ask which one it is.
+			if (ringSystem !== 'in' && ringSystem !== 'eu' && frac === 0 && n >= 8 && n <= 16) {
+				return { ask: n, us: ringMmFromUs(n), india: (n + 40) / Math.PI };
+			}
 			if (ringSystem === 'in' && frac === 0 && n <= 40) { sys = 'in'; }
 			else if (ringSystem === 'eu' && frac === 0 && n <= 35) { sys = 'it'; }
 			else { sys = n <= 16 ? 'us' : (n < 38 ? 'in' : 'eu'); }
@@ -585,7 +600,8 @@
 			// one US size is about 0.8 mm of diameter
 			var sizes = Math.max(1, Math.round(Math.abs(d) / 0.4) / 2);
 			var n = String(sizes).replace('.5', '½') + ' size' + (sizes === 1 ? '' : 's');
-			if (Math.abs(d) <= 0.2) { return ['ok', 'Fits: same size.']; }
+			if (Math.abs(d) <= 0.05) { return ['ok', 'Fits: same size.']; }
+			if (Math.abs(d) <= 0.2) { return ['ok', 'Fits: within about ¼ size.']; }
 			if (d > 0 && d <= 0.6) { return ['warn', 'A little loose (about ½ size bigger). Fine for wide bands or a big knuckle.']; }
 			if (d < 0 && d >= -0.6) { return ['warn', 'A little tight (about ½ size smaller). Pick the next size up if you can.']; }
 			return ['bad', d > 0 ? 'Too big: about ' + n + ' larger.' : 'Too small: about ' + n + ' smaller.'];
@@ -618,6 +634,16 @@
 			var shop = (kind === 'ring' ? parseRing : parseBangle)(input.value);
 			if (!input.value.trim()) { out.innerHTML = ''; return; }
 			if (!shop) { out.innerHTML = '<p class="rbs-fit-res bad">Could not read that size. Try ' + eg + '.</p>'; return; }
+			if (shop.ask) {
+				// Bare "14": US 14 and India 14 are very different rings, so the visitor picks.
+				out.innerHTML = '<p class="rbs-fit-res warn"><strong>Is that US ' + shop.ask + ' (' + fmt(shop.us) + ' mm) or India/Pakistan ' + shop.ask + ' (' + fmt(shop.india) + ' mm)?</strong></p>' +
+					'<div class="rbs-actions"><button type="button" class="rbs-btn secondary rbs-fit-pick" data-v="US ' + shop.ask + '">US ' + shop.ask + '</button>' +
+					'<button type="button" class="rbs-btn secondary rbs-fit-pick" data-v="India ' + shop.ask + '">India / Pakistan ' + shop.ask + '</button></div>';
+				out.querySelectorAll('.rbs-fit-pick').forEach(function (b) {
+					b.addEventListener('click', function () { input.value = b.getAttribute('data-v'); check(); input.focus(); });
+				});
+				return;
+			}
 			var mine = who.value
 				? (kind === 'ring' ? ringByLabel(who.value) : bangleByLabel(who.value))
 				: getCurrent();
@@ -830,8 +856,19 @@
 		wrist: [100, 280]    // wrist circumference (10–28 cm)
 	};
 	function inRange(kind, mm) { return mm >= RANGES[kind][0] && mm <= RANGES[kind][1]; }
-	function rangeWarning(what) {
-		return '<p class="rbs-fit-res bad">That looks outside the normal range for ' + what + '. Check the unit (mm / cm / inch).</p>';
+	// units: the units this tool offers ("mm / inch" for rings, "cm / inch" for hand and wrist).
+	// comma: the number looks like a decimal comma went wrong (17,3 read as 173); eg: a sample decimal.
+	function rangeWarning(what, units, comma, eg) {
+		return '<p class="rbs-fit-res bad">That looks outside the normal range for ' + what + '. Check the unit (' + units + ').' +
+			(comma ? ' Use a dot for decimals (' + eg + ').' : '') + '</p>';
+	}
+	function commaWarning(eg) {
+		return '<p class="rbs-fit-res bad">Could not read that number. Use a dot for decimals (' + eg + ').</p>';
+	}
+	// A number field cannot read "17,3" (badInput, the value is empty); some browsers read it as 173.
+	function badNumber(input) { return !!(input.validity && input.validity.badInput); }
+	function looksLikeComma(input, kind, mm) {
+		return /,/.test(input.value) || (!inRange(kind, mm) && inRange(kind, mm / 10));
 	}
 	// When the unit select changes, convert the number already typed instead of re-reading it in the new unit.
 	function convertOnUnitChange(input, select, toMm) {
@@ -956,8 +993,13 @@
 				ctx.beginPath(); ctx.moveTo(x - 5, y); ctx.lineTo(x + 5, y); ctx.moveTo(x, y - 5); ctx.lineTo(x, y + 5); ctx.stroke();
 			});
 		}
+		// No size until both circles were fitted: the coin circle sets the scale.
 		function result() {
-			if (!img || !touched.bangle) { onMm(null); return; }
+			if (!img) { onMm(null); return; }
+			if (!touched.coin || !touched.bangle) {
+				onMm(null, touched.coin || touched.bangle ? 'Fit the gold circle to the coin first (step 1), then the blue circle to the bangle.' : '');
+				return;
+			}
 			onMm(circles.bangle.r / circles.coin.r * coinMm());
 		}
 		function setActive(k) {
@@ -1048,7 +1090,7 @@
 			'</div>' +
 			'<div class="rbs-m-mm rbs-hidden">' +
 			'<div class="rbs-field"><label for="' + mmId + '">Measurement</label><input type="number" step="0.1" min="10" max="80" class="rbs-mm-val" id="' + mmId + '" value="17.3" inputmode="decimal">' +
-			'<select class="rbs-mm-type" aria-label="Measurement type"><option value="d">inner diameter (mm)</option><option value="c">inner circumference (mm)</option><option value="di">inner diameter (inch)</option></select></div>' +
+			'<select class="rbs-mm-type" aria-label="Measurement type"><option value="d">inner diameter (mm)</option><option value="c">inner circumference (mm)</option><option value="di">inner diameter (inch)</option><option value="ci">inner circumference (inch)</option></select></div>' +
 			'</div>' +
 			'<div class="rbs-result"></div>' + approxNote();
 
@@ -1082,7 +1124,7 @@
 					['Inner diameter', fmt(r.mm) + ' mm (' + fmt(r.mm / MM_IN, 2) + ' in)'],
 					['Inner circumference', fmt(r.circ) + ' mm']
 				]) + '</details>' +
-				'<p class="rbs-note">After calibration the sizer is designed to be within about ±¼ size. Fingers swell in heat and in the evening; measure at room temperature.</p>';
+				'<p class="rbs-note">' + (fromMm ? '' : 'After calibration the sizer is designed to be within about ±¼ size. ') + 'Fingers swell in heat and in the evening; measure at room temperature.</p>';
 			$('.rbs-sys-sel', result).addEventListener('change', function (e) {
 				ringSystem = e.target.value;
 				store(SYSTEM_KEY, ringSystem);
@@ -1111,18 +1153,29 @@
 				range.value = idx; drawMatch(); setStep(root, 3);
 			});
 		});
-		function ringToMm(v, t) { return t === 'c' ? v / Math.PI : (t === 'di' ? v * MM_IN : v); }
+		function ringToMm(v, t) { return t === 'c' ? v / Math.PI : (t === 'di' ? v * MM_IN : (t === 'ci' ? v * MM_IN / Math.PI : v)); }
 		function clearRing(html) {
 			lastRing = null;
 			result.innerHTML = html || '';
 			if (fit) { fit.refresh(); }
 		}
 		function fromMm() {
-			var v = parseFloat($('.rbs-mm-val', panel).value);
+			var input = $('.rbs-mm-val', panel);
+			var v = parseFloat(input.value);
 			var t = $('.rbs-mm-type', panel).value;
-			if (isNaN(v)) { clearRing(); return; }
+			if (isNaN(v)) { clearRing(badNumber(input) ? commaWarning('17.3') : ''); return; }
 			var d = ringToMm(v, t);
-			if (!inRange('ring', d)) { clearRing(rangeWarning('a ring (11–26 mm across, 35–82 mm around)')); return; }
+			if (!inRange('ring', d)) { clearRing(rangeWarning('a ring (11–26 mm or 0.43–1.02 in across, 35–82 mm or 1.4–3.2 in around)', 'mm / inch', looksLikeComma(input, 'ring', d), '17.3')); return; }
+			// Outside the chart (US 3 to US 15): an estimate and the jeweller, not the "closest" end of the chart.
+			var lo = data.rings[0], hi = data.rings[data.rings.length - 1];
+			if (d < lo.mm - 0.4 || d > hi.mm + 0.4) {
+				var small = d < lo.mm;
+				var x = Math.round((small ? lo.us + (d - lo.mm) / 0.81 : hi.us + (d - hi.mm) / 0.81) * 2) / 2;
+				var about = x < 0.5 ? 'below US ½' : 'about US ' + (Math.floor(x) || '') + (x % 1 ? '½' : '');
+				clearRing('<p class="rbs-fit-res warn">That is ' + (small ? 'smaller' : 'larger') + ' than the sizes on our chart (US ' + lo.us + ' to US ' + hi.us + '). ' + fmt(d) + ' mm across is ' + about + '. ' +
+					(small ? 'Kids\', midi and knuckle rings use these sizes; ask the jeweller.' : 'Sizes this large are usually made to order; ask the jeweller.') + '</p>');
+				return;
+			}
 			show(nearestRing(d), true);
 		}
 		convertOnUnitChange($('.rbs-mm-val', panel), $('.rbs-mm-type', panel), ringToMm);
@@ -1136,6 +1189,9 @@
 				var m = b.getAttribute('data-m');
 				$('.rbs-m-match', panel).classList.toggle('rbs-hidden', m !== 'match');
 				$('.rbs-m-mm', panel).classList.toggle('rbs-hidden', m !== 'mm');
+				// The "screen not calibrated" warning is about matching on screen only, not typed sizes.
+				var ap = $('.rbs-approx', panel);
+				if (ap) { ap.classList.toggle('rbs-hidden', m !== 'match'); }
 				if (m === 'match') { drawMatch(); } else { fromMm(); }
 			});
 		});
@@ -1165,6 +1221,8 @@
 	function renderBangle(root) {
 		var idx = 6; // 2.6
 		var handId = uid('hand');
+		// India and Pakistan measure hands in cm; elsewhere a tape in inches is more common.
+		var handCm = guessSystem() === 'in' || defaultCoin() === 'pk10';
 		var panel = el('div', { 'class': 'rbs-panel' });
 		panel.innerHTML =
 			'<h2 class="rbs-h">Step 2: Find your bangle size</h2>' + savedLine() +
@@ -1182,8 +1240,8 @@
 			'</div>' +
 			'<div class="rbs-m-hand rbs-hidden">' +
 			'<p class="rbs-muted">Tuck your thumb into your palm (as if sliding on a bangle). Wrap a string or tape around the widest part of your hand, over the knuckles. Enter that length.</p>' +
-			'<div class="rbs-field"><label for="' + handId + '">Hand circumference</label><input type="number" step="0.1" min="4" max="30" class="rbs-hand-val" id="' + handId + '" value="8" inputmode="decimal">' +
-			'<select class="rbs-hand-unit" aria-label="Unit"><option value="in">inches</option><option value="cm">cm</option></select></div>' +
+			'<div class="rbs-field"><label for="' + handId + '">Hand circumference</label><input type="number" step="0.1" min="4" max="30" class="rbs-hand-val" id="' + handId + '" value="' + (handCm ? '20' : '8') + '" inputmode="decimal">' +
+			'<select class="rbs-hand-unit" aria-label="Unit"><option value="in">inches</option><option value="cm"' + (handCm ? ' selected' : '') + '>cm</option></select></div>' +
 			'</div>' +
 			photoMarkup() +
 			'<div class="rbs-result"></div>' + approxNote();
@@ -1240,13 +1298,14 @@
 		});
 		function handToMm(v, u) { return u === 'in' ? v * MM_IN : v * 10; }
 		function fromHand() {
-			var v = parseFloat($('.rbs-hand-val', panel).value);
+			var input = $('.rbs-hand-val', panel);
+			var v = parseFloat(input.value);
 			var u = $('.rbs-hand-unit', panel).value;
-			if (isNaN(v)) { lastBangle = null; result.innerHTML = ''; if (fit) { fit.refresh(); } return; }
+			if (isNaN(v)) { lastBangle = null; result.innerHTML = badNumber(input) ? commaWarning('18.4') : ''; if (fit) { fit.refresh(); } return; }
 			var circMm = handToMm(v, u);
 			if (!inRange('hand', circMm)) {
 				lastBangle = null;
-				result.innerHTML = rangeWarning('a hand (10–30 cm / 4–12 in around)');
+				result.innerHTML = rangeWarning('a hand (10–30 cm / 4–12 in around)', 'cm / inch', looksLikeComma(input, 'hand', circMm), '18.4');
 				if (fit) { fit.refresh(); }
 				return;
 			}
@@ -1276,11 +1335,13 @@
 				$('.rbs-m-match', panel).classList.toggle('rbs-hidden', m !== 'match');
 				$('.rbs-m-hand', panel).classList.toggle('rbs-hidden', m !== 'hand');
 				$('.rbs-m-photo', panel).classList.toggle('rbs-hidden', m !== 'photo');
+				var ap = $('.rbs-approx', panel);
+				if (ap) { ap.classList.toggle('rbs-hidden', m !== 'match'); }
 				if (m === 'match') { drawMatch(); } else if (m === 'hand') { fromHand(); } else { photo.activate(); }
 			});
 		});
-		var photo = wirePhoto($('.rbs-m-photo', panel), function (mm) {
-			if (mm === null) { lastBangle = null; result.innerHTML = ''; if (fit) { fit.refresh(); } return; }
+		var photo = wirePhoto($('.rbs-m-photo', panel), function (mm, hint) {
+			if (mm === null) { lastBangle = null; result.innerHTML = hint ? '<p class="rbs-fit-res warn">' + hint + '</p>' : ''; if (fit) { fit.refresh(); } return; }
 			if (mm < 30 || mm > 90) {
 				lastBangle = null;
 				result.innerHTML = '<p class="rbs-fit-res bad">That gives ' + fmt(mm) + ' mm across, which is outside normal bangle sizes. Check that the coin selected matches the coin in the photo and that each circle sits on the right edge.</p>';
@@ -1335,9 +1396,10 @@
 					'<p><a class="rbs-btn" href="' + (data.home || '') + '/bangle-size-calculator/">Use the bangle calculator →</a></p>';
 				return;
 			}
-			if (isNaN(v)) { result.innerHTML = ''; return; }
+			var input = $('.rbs-wrist-val', panel);
+			if (isNaN(v)) { result.innerHTML = badNumber(input) ? commaWarning('16.5') : ''; return; }
 			var inch = u === 'in' ? v : v / 2.54;
-			if (!inRange('wrist', inch * MM_IN)) { result.innerHTML = rangeWarning('a wrist (10–28 cm / 4–11 in around)'); return; }
+			if (!inRange('wrist', inch * MM_IN)) { result.innerHTML = rangeWarning('a wrist (10–28 cm / 4–11 in around)', 'cm / inch', looksLikeComma(input, 'wrist', inch * MM_IN), '16.5'); return; }
 			var add = t === 'chain' ? [0.5, 0.75, 1.25] : [0.25, 0.5, 0.75];
 			function both(x) { return fmt(x, 2) + ' in / ' + fmt(x * 2.54, 1) + ' cm'; }
 			var rows = [
@@ -1363,6 +1425,9 @@
 
 	function init(container) {
 		var mode = container.getAttribute('data-mode') || 'ring';
+		// [rbs_sizer system="in"]: a page for India/Pakistan visitors starts in India sizes unless the visitor picked a system.
+		var sys0 = container.getAttribute('data-system');
+		if (sys0 && SYSTEMS[sys0] && !load(SYSTEM_KEY)) { ringSystem = sys0; }
 		var method = container.getAttribute('data-method') || '';
 		var body = $('.rbs-body', container);
 		var tabs = container.querySelectorAll('.rbs-tab');

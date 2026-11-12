@@ -586,6 +586,18 @@ add_action( 'wp_head', function () {
 }, 1 );
 
 /**
+ * Ask links ("ask for a size", sizer.js) carry the asker's name. New links put
+ * it after "#" (/#ask=Name); older ones used ?ask=Name. This runs before Tag
+ * Manager loads (priority 1, GTM is 2): it moves the name into sessionStorage
+ * (rbs_ask_landing_name, read by sizer.js) and removes it from the address bar
+ * with history.replaceState, so Google Analytics never sees it in the page URL
+ * (audit 2026-11-12 F-L01). Other query parameters and hash parts are kept.
+ */
+add_action( 'wp_head', function () {
+	echo "<script>(function(){var l=location;if(!/[?&#]ask=/.test(l.search+l.hash))return;try{var u=new URL(l.href),p=u.searchParams,n=p.get('ask'),h=u.hash.replace(/^#/,''),hp=new URLSearchParams(h);if(hp.has('ask')){n=n||hp.get('ask');hp.delete('ask');h=hp.toString();}p.delete('ask');n=String(n||'').replace(/[\\u0000-\\u001f<>]/g,'').replace(/\\s+/g,' ').trim().slice(0,24);if(n){try{sessionStorage.setItem('rbs_ask_landing_name',n);}catch(e){}}var q=p.toString();history.replaceState(history.state,'',u.pathname+(q?'?'+q:'')+(h?'#'+h:''));}catch(e){}})();</script>\n";
+}, 1 );
+
+/**
  * Google Tag Manager (container GTM-55J58VQK). The loader script is async,
  * so it does not block rendering; the noscript iframe goes right after <body>.
  * Skipped in the Customizer preview so editing does not send fake hits.
