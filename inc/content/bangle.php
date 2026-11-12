@@ -21,7 +21,7 @@ function rbs_bangle_pages() {
 			'mode'       => null,
 			'menu_order' => 1,
 			'content'    => '
-<p><strong>In India, bangle size is the inner diameter in inches and sixteenths.</strong> A "2.6" bangle is 2 6/16 inches (60.3 mm) across the inside. The most sold sizes for women are 2.4 and 2.6; 2.8 and 2.10 suit larger hands. Check yours in a minute with our <a href="/bangle-size-calculator/">bangle size calculator</a>.</p>
+<p><strong>In India, bangle size is the inner diameter in inches and sixteenths.</strong> A "2.6" bangle is 2 6/16 inches (60.3 mm) across the inside. 2.4 and 2.6 are the two most common adult sizes; 2.8 and 2.10 suit larger hands. Check yours in a minute with our <a href="/bangle-size-calculator/">bangle size calculator</a>.</p>
 
 <h2>Indian bangle size chart with shop notation</h2>
 <p>Jewellers, glass bangle sellers and online shops write the same size in different ways. This chart shows every common way of writing each size so you can match a listing on Amazon, Flipkart, Meesho, Myntra or a local shop.</p>
@@ -139,12 +139,12 @@ function rbs_bangle_pages() {
 <table class="rbs-table">
 <thead><tr><th>Size</th><th>Diameter</th><th>Fits hand around knuckles</th><th>Typical wearer</th></tr></thead>
 <tbody>
-<tr><td><a href="/bangle-size/2-2/">Bangle size 2.2</a></td><td>54.0 mm</td><td>16.0–17.0 cm</td><td>Teens, petite adults</td></tr>
-<tr><td><a href="/bangle-size/2-4/">Bangle size 2.4</a></td><td>57.2 mm</td><td>17.0–18.0 cm</td><td>Small adult hands</td></tr>
+<tr><td><a href="/bangle-size/2-2/">Bangle size 2.2</a></td><td>54.0 mm</td><td>16.0–16.9 cm</td><td>Teens, petite adults</td></tr>
+<tr><td><a href="/bangle-size/2-4/">Bangle size 2.4</a></td><td>57.2 mm</td><td>17.0–17.9 cm</td><td>Small adult hands</td></tr>
 <tr><td><a href="/bangle-size/2-6/">Bangle size 2.6</a></td><td>60.3 mm</td><td>18.0–18.9 cm</td><td>Medium adult hands</td></tr>
-<tr><td><a href="/bangle-size/2-8/">Bangle size 2.8</a></td><td>63.5 mm</td><td>18.9–19.9 cm</td><td>Large hands</td></tr>
-<tr><td><a href="/bangle-size/2-10/">Bangle size 2.10</a></td><td>66.7 mm</td><td>19.9–21.0 cm</td><td>Extra large, men</td></tr>
-<tr><td><a href="/bangle-size/2-12/">Bangle size 2.12</a></td><td>69.9 mm</td><td>21.0–22.0 cm</td><td>Men\'s kada</td></tr>
+<tr><td><a href="/bangle-size/2-8/">Bangle size 2.8</a></td><td>63.5 mm</td><td>19.0–19.9 cm</td><td>Large hands</td></tr>
+<tr><td><a href="/bangle-size/2-10/">Bangle size 2.10</a></td><td>66.7 mm</td><td>20.0–20.9 cm</td><td>Extra large, men</td></tr>
+<tr><td><a href="/bangle-size/2-12/">Bangle size 2.12</a></td><td>69.9 mm</td><td>21.0–21.9 cm</td><td>Men\'s kada</td></tr>
 </tbody>
 </table>
 <p>Smaller sizes for babies and children are on the <a href="/kids-bangle-size-chart/">kids bangle size chart</a>.</p>
@@ -218,7 +218,7 @@ function rbs_bangle_pages() {
 <tbody>
 <tr><td>2.0</td><td>50.8 mm</td><td>3.2 mm smaller – child size (4–7 years)</td></tr>
 <tr><td><strong>2.2</strong></td><td><strong>54.0 mm</strong></td><td>—</td></tr>
-<tr><td><a href="/bangle-size/2-4/">2.4</a></td><td>57.2 mm</td><td>3.2 mm larger – the most common adult size</td></tr>
+<tr><td><a href="/bangle-size/2-4/">2.4</a></td><td>57.2 mm</td><td>3.2 mm larger – with 2.6, one of the two most common adult sizes</td></tr>
 </tbody>
 </table>
 
@@ -226,7 +226,7 @@ function rbs_bangle_pages() {
 <ol>
 <li>Fold your thumb into your palm and press your fingers together, the way you do when sliding on a bangle.</li>
 <li>Wrap a thread around the widest point, across the knuckles, and mark it.</li>
-<li>Measure the thread. 16.0–17.0 cm means 2.2. Under 16.0 cm means 2.0; over 17.0 cm means 2.4 or larger.</li>
+<li>Measure the thread. 16.0–16.9 cm means 2.2. Under 16.0 cm means 2.0; 17.0 cm or more means 2.4 or larger.</li>
 </ol>
 <p>If you already own a bangle that fits, put it on your phone screen in the <a href="/bangle-size-calculator/">online bangle sizer</a> instead; it shows the size directly, with no maths.</p>
 
@@ -246,7 +246,7 @@ function rbs_bangle_pages() {
 				array( 'What is 2.2 bangle size in inches?', '2 2/16 inches, which is 2⅛ or 2.125 inches across the inside.' ),
 				array( 'What age is 2.2 bangle size for?', 'Size 2.2 usually fits girls from about 10 to 15 years old and adult women with very small hands.' ),
 				array( 'Is 2.2 bangle size small?', 'Yes. It is the smallest adult bangle size. Most adult women wear 2.4 or 2.6.' ),
-				array( 'What hand size fits a 2.2 bangle?', 'A folded hand measuring about 16.0 to 17.0 cm (6.3 to 6.7 inches) around the knuckles.' ),
+				array( 'What hand size fits a 2.2 bangle?', 'A folded hand measuring about 16.0 to 16.9 cm (6.3 to 6.6 inches) around the knuckles.' ),
 			),
 		),
 
@@ -265,7 +265,7 @@ function rbs_bangle_pages() {
 [rbs_bangle_size size="2.4"]
 
 <h2>Who usually wears 2.4?</h2>
-<p>A 2.4 bangle slides over a folded hand of about 17.0 to 18.0 cm (6.7 to 7.1 inches) around the knuckles. That covers a large share of adult women, which is why 2.4 and 2.6 are the sizes stocked most in bangle shops. You are likely a 2.4 if:</p>
+<p>A 2.4 bangle slides over a folded hand of about 17.0 to 17.9 cm (6.7 to 7.0 inches) around the knuckles. That covers a large share of adult women, which is why 2.4 and 2.6 are the sizes stocked most in bangle shops. You are likely a 2.4 if:</p>
 <ul>
 <li>your ring size is around US 5–6.5 (UK J–M);</li>
 <li>standard "small" or "medium" bracelets fit you comfortably;</li>
@@ -276,7 +276,7 @@ function rbs_bangle_pages() {
 <p>This is the most common sizing question we get. The two sizes are only 3.1 mm apart in diameter, about 1 cm around the inside. Use these rules:</p>
 <ul>
 <li>If your hand measurement is under 17.8 cm, buy 2.4.</li>
-<li>If it is 17.8–18.0 cm, you are at the top of 2.4. Choose 2.4 for openable bangles and glass sets, <a href="/bangle-size/2-6/">2.6</a> for rigid gold or silver bangles you will put on and take off daily.</li>
+<li>If it is 17.5–17.9 cm, you are at the top of 2.4. Choose 2.4 for openable bangles and glass sets, <a href="/bangle-size/2-6/">2.6</a> for rigid gold or silver bangles you will put on and take off daily.</li>
 <li>Over 18.0 cm, 2.4 will not pass your knuckles: buy 2.6.</li>
 </ul>
 <p>For a size down, see <a href="/bangle-size/2-2/">bangle size 2.2</a>.</p>
@@ -297,7 +297,7 @@ function rbs_bangle_pages() {
 				array( 'What is 2.4 bangle size in mm?', '57.2 mm inner diameter, and 179.7 mm inner circumference.' ),
 				array( 'What is 2.4 bangle size in inches?', '2 4/16 inches, which is 2¼ or 2.25 inches across the inside.' ),
 				array( 'Is 2.4 bangle size small or medium?', 'Size 2.4 is a small adult size. It is one of the two most common women\'s sizes, along with 2.6 (medium).' ),
-				array( 'What hand size fits a 2.4 bangle?', 'A folded hand measuring about 17.0 to 18.0 cm (6.7 to 7.1 inches) around the knuckles.' ),
+				array( 'What hand size fits a 2.4 bangle?', 'A folded hand measuring about 17.0 to 17.9 cm (6.7 to 7.0 inches) around the knuckles.' ),
 			),
 		),
 
@@ -311,12 +311,12 @@ function rbs_bangle_pages() {
 			'mode'       => null,
 			'menu_order' => 3,
 			'content'    => '
-<p><strong>Bangle size 2.6 is 2 6/16 inches (2⅜ in) across the inside, which is 60.3 mm or 6.03 cm.</strong> It is the medium adult size and, together with 2.4, the most sold bangle size in India and Pakistan. Check if 2.6 fits you with the free <a href="/bangle-size-calculator/">bangle size calculator</a>.</p>
+<p><strong>Bangle size 2.6 is 2 6/16 inches (2⅜ in) across the inside, which is 60.3 mm or 6.03 cm.</strong> It is the medium adult size and, together with 2.4, one of the two most common adult sizes in India and Pakistan. Check if 2.6 fits you with the free <a href="/bangle-size-calculator/">bangle size calculator</a>.</p>
 
 [rbs_bangle_size size="2.6"]
 
 <h2>Who is a 2.6?</h2>
-<p>A 2.6 bangle clears a folded hand of about 18.0 to 18.9 cm (7.1 to 7.5 inches) around the knuckles. That is the average adult woman\'s hand in South Asia, and many women with medium frames wear 2.6 for gold and 2.4 for glass. Signs you are a 2.6:</p>
+<p>A 2.6 bangle clears a folded hand of about 18.0 to 18.9 cm (7.1 to 7.4 inches) around the knuckles. That is the average adult woman\'s hand in South Asia, and many women with medium frames wear 2.6 for gold and 2.4 for glass. Signs you are a 2.6:</p>
 <ul>
 <li>2.4 bangles need soap or a lot of squeezing to go on;</li>
 <li>your ring size is around US 6.5–7.5 (UK M½–O½);</li>
@@ -363,7 +363,7 @@ function rbs_bangle_pages() {
 				array( 'What is 2.6 bangle size in mm?', '60.3 mm across the inside, and about 189.4 mm around.' ),
 				array( 'What is 2.6 bangle size in inches?', '2 6/16 inches, which is 2⅜ or 2.375 inches in inner diameter.' ),
 				array( 'Is 2.6 a medium bangle size?', 'Yes. 2.6 is the medium adult size and one of the two most common women\'s sizes, with 2.4.' ),
-				array( 'What hand size fits a 2.6 bangle?', 'A folded hand of about 18.0 to 18.9 cm (7.1 to 7.5 inches) around the knuckles.' ),
+				array( 'What hand size fits a 2.6 bangle?', 'A folded hand of about 18.0 to 18.9 cm (7.1 to 7.4 inches) around the knuckles.' ),
 			),
 		),
 
@@ -382,7 +382,7 @@ function rbs_bangle_pages() {
 [rbs_bangle_size size="2.8"]
 
 <h2>Who wears size 2.8?</h2>
-<p>A 2.8 bangle passes over a folded hand of about 18.9 to 19.9 cm (7.5 to 7.9 inches) around the knuckles. Typical 2.8 wearers are:</p>
+<p>A 2.8 bangle passes over a folded hand of about 19.0 to 19.9 cm (7.5 to 7.8 inches) around the knuckles. Typical 2.8 wearers are:</p>
 <ul>
 <li>women with larger hands or prominent knuckles, often with a ring size of US 7.5–9;</li>
 <li>women who wear 2.6 for openable bangles but need 2.8 for rigid gold or silver;</li>
@@ -399,7 +399,7 @@ function rbs_bangle_pages() {
 <h2>How to measure for 2.8</h2>
 <ol>
 <li>Measure a bangle you own across the inside: 6.3–6.4 cm (2½ in) is a 2.8.</li>
-<li>Or measure around your folded hand: 18.9–19.9 cm means 2.8.</li>
+<li>Or measure around your folded hand: 19.0–19.9 cm means 2.8.</li>
 <li>Or place your bangle on your phone with the <a href="/bangle-size-calculator/">online bangle sizer</a> and read the size.</li>
 </ol>
 <p>If your hand is over 19.9 cm, buy 2.10 for rigid bangles. Right at 19.9 cm a 2.8 will only just pass, so try one on if you can. For openable kadas and bangles with a screw or hinge, 2.8 will still close comfortably around the wrist.</p>
@@ -421,7 +421,7 @@ function rbs_bangle_pages() {
 				array( 'What is 2.8 bangle size in mm?', '63.5 mm across the inside and 199.5 mm around.' ),
 				array( 'What is 2.8 bangle size in inches?', 'Exactly 2½ inches (2 8/16 in) in inner diameter.' ),
 				array( 'Is 2.8 a large bangle size?', 'Yes. 2.8 is the large adult women\'s size. Most women wear 2.4 or 2.6.' ),
-				array( 'What hand size fits a 2.8 bangle?', 'A folded hand of about 18.9 to 19.9 cm (7.5 to 7.9 inches) around the knuckles.' ),
+				array( 'What hand size fits a 2.8 bangle?', 'A folded hand of about 19.0 to 19.9 cm (7.5 to 7.8 inches) around the knuckles.' ),
 			),
 		),
 
@@ -443,7 +443,7 @@ function rbs_bangle_pages() {
 <p>Bangle sizes are not decimals. The number after the dot counts sixteenths of an inch, so the scale goes 2.6 (6/16), 2.8 (8/16), 2.10 (10/16), 2.12 (12/16). Reading 2.10 as "2.1" would make it look smaller than 2.2, which is a common and expensive mistake when ordering online. A true 2.1 size does not exist; if a listing shows it, ask whether they mean 2.10 and confirm the diameter is about 66–67 mm.</p>
 
 <h2>Who wears 2.10?</h2>
-<p>A 2.10 bangle passes over a folded hand of about 19.9 to 21.0 cm (7.9 to 8.2 inches). That suits:</p>
+<p>A 2.10 bangle passes over a folded hand of about 20.0 to 20.9 cm (7.9 to 8.2 inches). That suits:</p>
 <ul>
 <li>men with average hands wearing a kada or a gold bangle;</li>
 <li>women with large hands, long fingers or prominent knuckles;</li>
@@ -493,7 +493,7 @@ function rbs_bangle_pages() {
 [rbs_bangle_size size="2.12"]
 
 <h2>Who needs a 2.12?</h2>
-<p>A 2.12 bangle passes over a folded hand of about 21.0 to 22.0 cm (8.2 to 8.6 inches) around the knuckles. Common 2.12 wearers:</p>
+<p>A 2.12 bangle passes over a folded hand of about 21.0 to 21.9 cm (8.3 to 8.6 inches) around the knuckles. Common 2.12 wearers:</p>
 <ul>
 <li>men with average-to-large hands, especially for thick or heavy kadas;</li>
 <li>men who wear 2.10 for thin bangles but need extra room for a wide kada;</li>
@@ -504,12 +504,12 @@ function rbs_bangle_pages() {
 <table class="rbs-table">
 <thead><tr><th>Size</th><th>Diameter</th><th>Hand range</th><th>Typical choice</th></tr></thead>
 <tbody>
-<tr><td><a href="/bangle-size/2-10/">2.10</a></td><td>66.7 mm</td><td>19.9–21.0 cm</td><td>Slim to average men</td></tr>
-<tr><td><strong>2.12</strong></td><td><strong>69.9 mm</strong></td><td><strong>21.0–22.0 cm</strong></td><td><strong>Average to large men</strong></td></tr>
+<tr><td><a href="/bangle-size/2-10/">2.10</a></td><td>66.7 mm</td><td>20.0–20.9 cm</td><td>Slim to average men</td></tr>
+<tr><td><strong>2.12</strong></td><td><strong>69.9 mm</strong></td><td><strong>21.0–21.9 cm</strong></td><td><strong>Average to large men</strong></td></tr>
 <tr><td>2.14</td><td>73.0 mm</td><td>22.0–22.9 cm</td><td>Large hands, heavy kada</td></tr>
-<tr><td>3.0</td><td>76.2 mm</td><td>22.9–23.9 cm</td><td>Very large hands</td></tr>
-<tr><td>3.2</td><td>79.4 mm</td><td>23.9–24.9 cm</td><td>Very large hands, heavy kada</td></tr>
-<tr><td>3.4</td><td>82.6 mm</td><td>24.9–25.9 cm</td><td>Largest stock size, often made to order</td></tr>
+<tr><td>3.0</td><td>76.2 mm</td><td>23.0–23.9 cm</td><td>Very large hands</td></tr>
+<tr><td>3.2</td><td>79.4 mm</td><td>24.0–24.9 cm</td><td>Very large hands, heavy kada</td></tr>
+<tr><td>3.4</td><td>82.6 mm</td><td>25.0–25.9 cm</td><td>Largest stock size, often made to order</td></tr>
 </tbody>
 </table>
 
@@ -519,7 +519,7 @@ function rbs_bangle_pages() {
 <h2>Measuring for 2.12</h2>
 <ol>
 <li>Measure your current kada across the inside with a ruler. 6.9–7.0 cm is a 2.12.</li>
-<li>Or measure around your folded hand with a thread: 21.0–22.0 cm is 2.12.</li>
+<li>Or measure around your folded hand with a thread: 21.0–21.9 cm is 2.12.</li>
 <li>Or calibrate your phone and match the kada on screen with the <a href="/bangle-size-calculator/">bangle sizer</a>.</li>
 </ol>
 
@@ -538,7 +538,7 @@ function rbs_bangle_pages() {
 				array( 'What is 2.12 bangle size in cm?', 'Size 2.12 is 6.99 cm (about 7 cm) in inner diameter and about 21.96 cm around the inside.' ),
 				array( 'What is 2.12 bangle size in inches?', '2 12/16 inches, which is 2¾ or 2.75 inches across the inside.' ),
 				array( 'Is 2.12 bangle size for men?', 'Mostly yes. 2.12 is a common men\'s kada size, especially for thick or heavy kadas.' ),
-				array( 'What hand size fits a 2.12 bangle?', 'A folded hand measuring about 21.0 to 22.0 cm (8.2 to 8.6 inches) around the knuckles.' ),
+				array( 'What hand size fits a 2.12 bangle?', 'A folded hand measuring about 21.0 to 21.9 cm (8.3 to 8.6 inches) around the knuckles.' ),
 				array( 'What comes after 2.12 bangle size?', 'Size 2.14 (73.0 mm), then 3.0 (76.2 mm). Large men\'s kadas also come in 3.2 (79.4 mm) and 3.4 (82.6 mm).' ),
 			),
 		),
@@ -613,12 +613,12 @@ function rbs_bangle_pages() {
 <table class="rbs-table">
 <thead><tr><th>Hand around knuckles</th><th>Bangle size</th></tr></thead>
 <tbody>
-<tr><td>16.0–17.0 cm (6.3–6.7 in)</td><td><a href="/bangle-size/2-2/">2.2</a></td></tr>
-<tr><td>17.0–18.0 cm (6.7–7.1 in)</td><td><a href="/bangle-size/2-4/">2.4</a></td></tr>
-<tr><td>18.0–18.9 cm (7.1–7.5 in)</td><td><a href="/bangle-size/2-6/">2.6</a></td></tr>
-<tr><td>18.9–19.9 cm (7.5–7.9 in)</td><td><a href="/bangle-size/2-8/">2.8</a></td></tr>
-<tr><td>19.9–21.0 cm (7.9–8.2 in)</td><td><a href="/bangle-size/2-10/">2.10</a></td></tr>
-<tr><td>21.0–22.0 cm (8.2–8.6 in)</td><td><a href="/bangle-size/2-12/">2.12</a></td></tr>
+<tr><td>16.0–16.9 cm (6.3–6.6 in)</td><td><a href="/bangle-size/2-2/">2.2</a></td></tr>
+<tr><td>17.0–17.9 cm (6.7–7.0 in)</td><td><a href="/bangle-size/2-4/">2.4</a></td></tr>
+<tr><td>18.0–18.9 cm (7.1–7.4 in)</td><td><a href="/bangle-size/2-6/">2.6</a></td></tr>
+<tr><td>19.0–19.9 cm (7.5–7.8 in)</td><td><a href="/bangle-size/2-8/">2.8</a></td></tr>
+<tr><td>20.0–20.9 cm (7.9–8.2 in)</td><td><a href="/bangle-size/2-10/">2.10</a></td></tr>
+<tr><td>21.0–21.9 cm (8.3–8.6 in)</td><td><a href="/bangle-size/2-12/">2.12</a></td></tr>
 </tbody>
 </table>
 <p>Measuring a child? See the <a href="/kids-bangle-size-chart/">kids bangle size chart</a>.</p>
@@ -627,7 +627,7 @@ function rbs_bangle_pages() {
 ',
 			'faq' => array(
 				array( 'How do I measure my bangle size at home?', 'Measure the inside diameter of a bangle that fits you, in mm, and match it to the chart. Without a bangle, measure around your folded hand with a thread, divide by 3.14 and choose the next size up.' ),
-				array( 'How do I measure bangle size with a thread?', 'Tuck your thumb into your palm, wrap the thread around the widest part of the hand over the knuckles, mark it and measure the length in cm. 17–18 cm is size 2.4, 18–18.9 cm is 2.6, 18.9–19.9 cm is 2.8.' ),
+				array( 'How do I measure bangle size with a thread?', 'Tuck your thumb into your palm, wrap the thread around the widest part of the hand over the knuckles, mark it and measure the length in cm. 17–18 cm is size 2.4, 18–18.9 cm is 2.6, 19.0–19.9 cm is 2.8.' ),
 				array( 'Can I measure bangle size by hand width?', 'Only roughly. The hand squeezes into an oval, so its flat width is larger than the bangle you need. Use a thread around the folded hand for a reliable result.' ),
 				array( 'Can I measure my bangle size from a photo?', 'Yes. Lay the bangle flat next to a ₹10, Rs 10, quarter, 10p or €2 coin, take a photo from straight above, then fit one circle to the coin and one to the inside of the bangle in the bangle size calculator. The coin sets the scale, so no card is needed. The photo stays on your phone.' ),
 				array( 'Is bangle size measured inside or outside?', 'Inside. Bangle sizes are the inner diameter, because that is the opening your hand passes through.' ),
@@ -732,9 +732,9 @@ function rbs_bangle_pages() {
 <thead><tr><th>Hand around knuckles</th><th>Thin kada (under 6 mm)</th><th>Wide or heavy kada (8 mm+)</th></tr></thead>
 <tbody>
 <tr><td>18.0–18.9 cm</td><td>2.6</td><td>2.8</td></tr>
-<tr><td>18.9–19.9 cm</td><td>2.8</td><td>2.10</td></tr>
-<tr><td>19.9–21.0 cm</td><td>2.10</td><td>2.12</td></tr>
-<tr><td>21.0–22.0 cm</td><td><a href="/bangle-size/2-12/">2.12</a></td><td>2.14</td></tr>
+<tr><td>19.0–19.9 cm</td><td>2.8</td><td>2.10</td></tr>
+<tr><td>20.0–20.9 cm</td><td>2.10</td><td>2.12</td></tr>
+<tr><td>21.0–21.9 cm</td><td><a href="/bangle-size/2-12/">2.12</a></td><td>2.14</td></tr>
 <tr><td>22.0–22.9 cm</td><td>2.14</td><td>3.0</td></tr>
 </tbody>
 </table>

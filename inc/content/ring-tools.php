@@ -135,7 +135,7 @@ HTML
 <h3>EU and ISO (Germany, France, Netherlands, Belgium)</h3>
 <p>The inner circumference in millimetres. EU 54 is a ring 54 mm around the inside. Because it is a measurement rather than a code, it is the easiest system to convert from: divide by 3.1416 for the diameter.</p>
 <h3>India and Pakistan</h3>
-<p>Whole numbers, each one the inner circumference in mm minus 40. Indian size 14 is 54 mm around (17.2 mm across), the same as US 7; size 22 is 62 mm around, US 10. Local jewellers in Pakistan use the same scale; see the <a href="/ring-size-chart/pakistan/">ring size chart for Pakistan</a>.</p>
+<p>Whole numbers, each one the inner circumference in mm minus 40. Indian size 14 is 54 mm around (17.2 mm across; US 7 is 17.3 mm), the same size as US 7; size 22 is 62 mm around, US 10. Local jewellers in Pakistan use the same scale; see the <a href="/ring-size-chart/pakistan/">ring size chart for Pakistan</a>.</p>
 <h3>Italy, Spain and Switzerland</h3>
 <p>The EU circumference minus 40. EU 54 is Italian, Spanish or Swiss 14; EU 57 is 17. Many Italian and Swiss jewellery brands use this scale, so an Italian 14 is not EU 14. Germany usually gives the EU number or the inner diameter in mm (German 17 = 17 mm across).</p>
 
