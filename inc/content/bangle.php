@@ -430,8 +430,8 @@ function rbs_bangle_pages() {
 			'slug'       => '2-10',
 			'parent'     => 'bangle-sizes',
 			'title'      => 'Bangle Size 2.10 – Diameter in mm, cm and Inches',
-			'seo_title'  => '2.10 Bangle Size: 66.7 mm (6.67 cm) Diameter Explained',
-			'seo_desc'   => '2.10 bangle size is 2 10/16 (2⅝) inches, 66.7 mm or 6.67 cm inner diameter. Why 2.10 is bigger than 2.8, who it fits, and men\'s kada sizing.',
+			'seo_title'  => '2.10 Bangle Size = 66.7 mm (6.67 cm, 2⅝ in) Inside',
+			'seo_desc'   => '2.10 bangle size is 66.7 mm (6.67 cm, 2⅝ in) across the inside. It is bigger than 2.8, fits a folded hand of 20.0 to 20.9 cm and is the usual men\'s kada size.',
 			'mode'       => null,
 			'menu_order' => 5,
 			'content'    => '
