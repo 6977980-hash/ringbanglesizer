@@ -80,8 +80,8 @@ function rbs_core_pages() {
 		'bangle' => array(
 			'slug'      => 'bangle-size-calculator',
 			'title'     => 'Bangle Size Calculator – Find Your Bangle Size Online',
-			'seo_title' => 'Bangle Size Calculator – Find Your Bangle Size Online',
-			'seo_desc'  => 'Free bangle size calculator. Match a bangle on screen, use a photo of it next to a coin, or enter your hand size. Indian sizes with mm, cm and inches.',
+			'seo_title' => 'Bangle Size Calculator: Measure Online or on Your Phone',
+			'seo_desc'  => 'Free online bangle size calculator. Measure on your phone: match a bangle on screen, use a coin photo, or enter your hand size. Indian sizes in mm and cm.',
 			'mode'      => 'bangle',
 			'content'   => '
 <p><strong>Find your bangle size in under a minute.</strong> Place a bangle that fits you on the screen and match the circle, photograph it next to a coin if it is too big for your phone, or measure around your hand and let the calculator pick the size. Results are given in Indian sizes (2.2, 2.4, 2.6, 2.8, 2.10 …) with the inner diameter in mm, cm and inches.</p>
